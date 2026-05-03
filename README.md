@@ -1,4 +1,4 @@
-Modelo de Política de Privacidade
+
 Política de Privacidade – PowerTech Industrial
 
 Esta política de privacidade descreve como o aplicativo PowerTech lida com suas informações.
