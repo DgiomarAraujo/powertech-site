@@ -1,25 +1,14 @@
-# powertech-site
+Modelo de Política de Privacidade
+Política de Privacidade – PowerTech Industrial
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>PowerTech Industrial</title>
-    <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: auto; }
-        h1 { color: #0056b3; }
-    </style>
-</head>
-<body>
-    <h1>PowerTech Industrial</h1>
-    <p>Soluções em engenharia elétrica e industrial.</p>
-    
-    <hr>
-    
-    <h2>Política de Privacidade - App PowerTech</h2>
-    <p>O aplicativo PowerTech foi desenvolvido para realizar cálculos elétricos e técnicos. 
-       Respeitamos sua privacidade e informamos que o aplicativo não coleta, armazena ou compartilha nenhum dado pessoal do usuário.</p>
-    
-    <p>Contato: dgiomararaujo@gmail.com</p>
-</body>
-</html>
+Esta política de privacidade descreve como o aplicativo PowerTech lida com suas informações.
+
+Coleta de Informações: O aplicativo PowerTech foi projetado para realizar cálculos técnicos, como corrente de motores e consumo de energia. Informamos que não coletamos, armazenamos ou compartilhamos nenhum dado pessoal, localização ou informações identificáveis dos usuários.
+
+Uso de Dados: Todos os cálculos são realizados localmente no seu dispositivo. Nenhuma informação inserida no aplicativo é enviada para servidores externos ou terceiros.
+
+Permissões: O aplicativo solicita apenas as permissões básicas necessárias para o funcionamento da interface e execução das ferramentas de cálculo.
+
+Segurança: Como não coletamos dados, não há risco de vazamento de informações pessoais através deste aplicativo.
+
+Contato: Para dúvidas sobre esta política, entre em contato pelo e-mail: powertechfloriano@gmail.com.
