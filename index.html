@@ -3,38 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PowerTech Industrial | Engenharia e Tecnologia Avançada</title>
+    <title>PowerTech Industrial | Engenharia, Automação e Energia Solar</title>
     <style>
-        :root { --primary-blue: #003366; --accent-blue: #0056b3; --intelbras-green: #00a859; --light-bg: #f8f9fa; --text-dark: #333; }
+        :root { --primary-blue: #003366; --accent-blue: #0056b3; --success-green: #25d366; --light-bg: #f4f7f9; --text-dark: #333; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: var(--text-dark); line-height: 1.6; background-color: var(--light-bg); }
         
-        header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); color: white; padding: 100px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); }
+        header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); color: white; padding: 110px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); }
         header h1 { margin: 0; font-size: 3.5em; text-transform: uppercase; letter-spacing: 3px; }
+        header p { font-size: 1.2em; opacity: 0.9; }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
         h2 { color: var(--primary-blue); font-size: 2.2em; border-left: 8px solid var(--accent-blue); padding-left: 15px; margin-bottom: 40px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 4px solid transparent; }
-        .card h3 { color: var(--accent-blue); margin-top: 0; font-size: 1.5em; }
-        .card ul { padding-left: 20px; color: #555; list-style-type: square; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 4px solid transparent; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--accent-blue); }
+        .card h3 { color: var(--accent-blue); margin-top: 0; font-size: 1.4em; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .card ul { padding-left: 20px; color: #555; font-size: 0.95em; }
         .card li { margin-bottom: 8px; }
 
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; display: flex; align-items: center; gap: 10px; }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--success-green); color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; display: flex; align-items: center; gap: 10px; }
 
-        .contato-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; margin-top: 60px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-        
+        .form-section { background: white; padding: 45px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px; }
         form { display: flex; flex-direction: column; gap: 15px; }
-        input, textarea { padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1em; width: 100%; box-sizing: border-box; }
-        button { background: var(--accent-blue); color: white; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1em; }
+        input, textarea, select { padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 1em; width: 100%; box-sizing: border-box; }
+        button { background: var(--accent-blue); color: white; padding: 18px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.3s; }
+        button:hover { background: var(--primary-blue); }
 
-        footer { text-align: center; padding: 40px; background: #222; color: #bbb; margin-top: 80px; }
+        footer { text-align: center; padding: 50px; background: #1a1a1a; color: #999; margin-top: 80px; }
+        footer a { color: #fff; text-decoration: none; }
     </style>
 </head>
 <body>
 
 <a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank">
-    <span>Fale no WhatsApp</span>
+    <span>WhatsApp: (89) 98104-9318</span>
 </a>
 
 <header>
@@ -43,89 +46,127 @@
 </header>
 
 <div class="container">
-    <h2>Soluções Avançadas PowerTech</h2>
+    <h2>Soluções em Engenharia e Tecnologia</h2>
     
     <div class="grid">
-        <!-- Segurança Inteligente Intelbras -->
+        <!-- Proteção e Aterramento -->
         <div class="card">
-            <h3>Segurança e CFTV (Ecossistema Intelbras)</h3>
-            <p>Implementamos o que há de mais moderno em monitoramento com tecnologia Intelbras:</p>
+            <h3>SPDA e Aterramento</h3>
+            <p>Segurança máxima contra descargas atmosféricas e surtos:</p>
             <ul>
-                <li>Câmeras IP com Inteligência Artificial e Reconhecimento Facial.</li>
-                <li>Sistemas Colorvu para imagens coloridas 24h em total escuridão.</li>
-                <li>Gravadores NVD/MHDX com análise de vídeo inteligente (IVS).</li>
-                <li>Integração total via app Intelbras Guardian e ISIC Lite.</li>
-            </ul>
-        </div>
-
-        <!-- Eletromobilidade -->
-        <div class="card">
-            <h3>Carregamento Elétrico</h3>
-            <p>Infraestrutura completa para o futuro da mobilidade:</p>
-            <ul>
-                <li>Instalação de Estações de Recarga (Wallbox) residenciais e comerciais.</li>
-                <li>Projetos de infraestrutura elétrica para condomínios e empresas.</li>
-                <li>Consultoria de demanda para carregamento de veículos híbridos e elétricos.</li>
-            </ul>
-        </div>
-
-        <!-- Consultoria Técnica -->
-        <div class="card">
-            <h3>Consultoria Técnica Especializada</h3>
-            <p>Suporte de engenharia para decisões estratégicas:</p>
-            <ul>
-                <li>Cálculos de demanda de carga e análise de fatura de energia.</li>
-                <li>Projetos de adequação às normas NBR e eficiência energética.</li>
-                <li>Laudos técnicos e vistorias de instalações elétricas industriais.</li>
+                <li>Instalação e manutenção de sistemas de SPDA (Para-raios).</li>
+                <li>Sistemas de aterramento com medição de precisão via <strong>Terrômetro Hikari</strong>.</li>
+                <li>Laudos técnicos de resistência de terra e continuidade.</li>
+                <li>Proteção de equipamentos sensíveis contra surtos elétricos.</li>
             </ul>
         </div>
 
         <!-- Energia Solar -->
         <div class="card">
             <h3>Sistemas de Energia Solar</h3>
-            <p>Máxima autossuficiência e economia:</p>
+            <p>Engenharia fotovoltaica de alto rendimento:</p>
             <ul>
-                <li>Sistemas On-Grid, Off-Grid e Bombeamento Solar especializado.</li>
-                <li>Dimensionamento preciso para alta performance fotovoltaica.</li>
+                <li>Sistemas On-Grid (Redução de custos com a rede).</li>
+                <li>Sistemas Off-Grid (Autonomia total via baterias).</li>
+                <li>Bombeamento Solar para agronegócio e indústria.</li>
             </ul>
         </div>
 
-        <!-- Automação -->
+        <!-- Eletromobilidade e Consultoria -->
         <div class="card">
-            <h3>Automação e Redes</h3>
-            <p>Ambientes inteligentes e conectividade estável:</p>
+            <h3>Carregamento e Consultoria</h3>
+            <p>Preparando sua infraestrutura para o futuro:</p>
             <ul>
-                <li>Integração com <strong>Alexa</strong> e <strong>Google Home</strong> via Zigbee/Z-Wave.</li>
-                <li>Montagem técnica de racks e cabeamento estruturado de TI.</li>
+                <li>Instalação de carregadores elétricos (Wallbox).</li>
+                <li>Consultoria técnica para eficiência energética.</li>
+                <li>Análise de demanda de carga e correção de fator de potência.</li>
+            </ul>
+        </div>
+
+        <!-- Segurança Intelbras -->
+        <div class="card">
+            <h3>CFTV e Segurança (Intelbras)</h3>
+            <p>Monitoramento inteligente de última geração:</p>
+            <ul>
+                <li>Câmeras Colorvu (imagens coloridas 24h) e IA.</li>
+                <li>Reconhecimento facial e leitura de placas.</li>
+                <li>Integração total via aplicativos Intelbras Guardian.</li>
+            </ul>
+        </div>
+
+        <!-- Automação e Redes -->
+        <div class="card">
+            <h3>Automação e TI Inteligente</h3>
+            <p>Conectividade e controle na palma da mão:</p>
+            <ul>
+                <li>Integração Alexa e Google Home via Zigbee e Z-Wave.</li>
+                <li>Cabeamento estruturado e montagem técnica de Racks.</li>
+                <li>Redes Wi-Fi de alta performance para empresas e residências.</li>
+            </ul>
+        </div>
+
+        <!-- Industrial -->
+        <div class="card">
+            <h3>Elétrica e Painéis Industriais</h3>
+            <p>Potência e controle para sua produção:</p>
+            <ul>
+                <li>Montagem de painéis elétricos e banco de capacitores.</li>
+                <li>Manutenção técnica de motores e infraestrutura pesada.</li>
+                <li>Instalações residenciais, comerciais e industriais (NBR).</li>
             </ul>
         </div>
     </div>
 
+    <!-- Diferenciais Técnicos -->
+    <h2 style="margin-top: 80px;">Diferenciais PowerTech</h2>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div style="background: #eef4ff; padding: 20px; border-radius: 10px; text-align: center;">
+            <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Ferramental Premium</strong>
+            Uso rigoroso de ferramentas <strong>DeWalt, Bosch e Stanley</strong> para garantir acabamento e precisão técnica superior.
+        </div>
+        <div style="background: #eef4ff; padding: 20px; border-radius: 10px; text-align: center;">
+            <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Normas Técnicas</strong>
+            Execução de projetos em estrita conformidade com as normas NBR, garantindo a legalidade e segurança da obra.
+        </div>
+        <div style="background: #eef4ff; padding: 20px; border-radius: 10px; text-align: center;">
+            <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Suporte Local</strong>
+            Presença consolidada em Floriano - PI, com agilidade no atendimento e consultoria presencial especializada.
+        </div>
+    </div>
+
+    <!-- Central de Atendimento -->
     <h2 style="margin-top: 80px;">Central de Atendimento</h2>
-    <div class="contato-wrapper">
-        <div class="contato-info">
+    <div class="form-section">
+        <div class="info">
             <h3>PowerTech Industrial</h3>
-            <p><strong>📍 Localização:</strong> Floriano - Piauí</p>
+            <p>Fale diretamente com nossa equipe técnica para orçamentos e vistorias.</p>
+            <p><strong>📍 Local:</strong> Floriano - Piauí</p>
+            <p><strong>🏢 CNPJ:</strong> 59.613.165/0001-81</p>
             <p><strong>📞 WhatsApp:</strong> (89) 98104-9318</p>
             <p><strong>📧 E-mail:</strong> powertechfloriano@gmail.com</p>
-            <p><strong>🏢 CNPJ:</strong> 59.613.165/0001-81</p>
         </div>
 
-        <div id="contato">
-            <form action="https://formsubmit.co/powertechfloriano@gmail.com" method="POST">
-                <input type="text" name="nome" placeholder="Seu Nome Completo" required>
-                <input type="email" name="email" placeholder="Seu E-mail" required>
-                <input type="tel" name="telefone" placeholder="Telefone" required>
-                <textarea name="mensagem" placeholder="Como podemos ajudar no seu projeto?" required></textarea>
-                <input type="hidden" name="_next" value="https://dgiomararaujo.github.io/site-da-powertech/">
-                <button type="submit">Enviar Solicitação</button>
-            </form>
-        </div>
+        <form action="https://formsubmit.co/powertechfloriano@gmail.com" method="POST">
+            <input type="text" name="nome" placeholder="Seu Nome Completo" required>
+            <input type="email" name="email" placeholder="Seu Melhor E-mail" required>
+            <select name="servico">
+                <option value="">Selecione o serviço de interesse</option>
+                <option value="Solar">Energia Solar (On/Off/Bombeamento)</option>
+                <option value="Automação">Automação e Smart Home</option>
+                <option value="SPDA">SPDA e Aterramento Técnico</option>
+                <option value="Industrial">Elétrica Industrial e Painéis</option>
+                <option value="Segurança">CFTV e Segurança Intelbras</option>
+                <option value="Outro">Outros Serviços / Consultoria</option>
+            </select>
+            <textarea name="mensagem" placeholder="Descreva seu projeto ou dúvida técnica..." required></textarea>
+            <input type="hidden" name="_next" value="https://dgiomararaujo.github.io/site-da-powertech/">
+            <button type="submit">Enviar Solicitação Técnica</button>
+        </form>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 PowerTech Industrial | Responsável: Dgiomar Cassemiro Araujo</p>
+    <p>&copy; 2026 PowerTech Industrial | Responsável Técnico: Dgiomar Cassemiro Araujo</p>
     <p><a href="privacidade.html">Política de Privacidade</a></p>
 </footer>
 
