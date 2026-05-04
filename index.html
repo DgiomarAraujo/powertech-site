@@ -3,60 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PowerTech Industrial | Engenharia Elétrica</title>
+    <title>PowerTech Industrial | Engenharia e Soluções Integradas</title>
     <style>
-        /* Estilo Corporativo Blue Palette */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: #333; line-height: 1.6; }
-        header { background: #0056b3; color: white; padding: 60px 20px; text-align: center; }
-        .container { max-width: 1000px; margin: auto; padding: 20px; }
-        h1 { margin: 0; font-size: 2.5em; }
-        .servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
-        .card { background: #f4f7f9; padding: 20px; border-radius: 8px; border-top: 5px solid #0056b3; }
-        .card h3 { color: #0056b3; }
-        .contato { background: #0056b3; color: white; padding: 40px 20px; text-align: center; margin-top: 40px; border-radius: 8px; }
-        footer { text-align: center; padding: 20px; font-size: 0.9em; color: #666; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; color: #333; line-height: 1.6; background-color: #f4f7f9; }
+        header { background: #003366; color: white; padding: 80px 20px; text-align: center; }
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+        h1 { margin: 0; font-size: 3em; letter-spacing: 2px; }
+        h2 { color: #003366; border-bottom: 3px solid #0056b3; display: inline-block; padding-bottom: 5px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
+        .setor { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 6px solid #0056b3; }
+        .setor h3 { color: #0056b3; margin-top: 0; }
+        .contato-sessao { background: #003366; color: white; padding: 50px; text-align: center; border-radius: 15px; margin-top: 50px; }
+        footer { text-align: center; padding: 30px; font-size: 0.9em; color: #777; }
         a { color: #0056b3; text-decoration: none; }
-        .btn-privacidade { color: #666; font-size: 0.8em; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>PowerTech Industrial</h1>
-    <p>Soluções em Engenharia Elétrica e Industrial em Floriano - PI</p>
+    <p>Tecnologia e Excelência em Engenharia Elétrica e Automação</p>
 </header>
 
 <div class="container">
-    <section>
-        <h2>Nossos Serviços</h2>
-        <div class="servicos">
-            <div class="card">
-                <h3>Sistemas Solares</h3>
-                <p>Projetos e cálculos de eficiência para geração de energia fotovoltaica com tecnologia de ponta.</p>
-            </div>
-            <div class="card">
-                <h3>Automação Industrial</h3>
-                <p>Manutenção e instalação de motores, painéis elétricos e infraestrutura de alta performance.</p>
-            </div>
-            <div class="card">
-                <h3>Consultoria Técnica</h3>
-                <p>Cálculos de demanda de energia e adequação às normas técnicas (NBR).</p>
-            </div>
+    <h2>Nossas Soluções</h2>
+    
+    <div class="grid">
+        <!-- Setor Elétrico -->
+        <div class="setor">
+            <h3>Instalações Elétricas</h3>
+            <p>A <strong>PowerTech</strong> realiza projetos e execuções em elétrica residencial, comercial e industrial. Atuamos desde a infraestrutura básica até sistemas complexos de alta demanda, garantindo segurança e conformidade com as normas técnicas vigentes.</p>
         </div>
-    </section>
 
-    <div class="contato">
-        <h2>Solicite um Orçamento</h2>
-        <p>Atendimento especializado para indústrias e comércios.</p>
-        <p><strong>E-mail:</strong> powertechfloriano@gmail.com</p>
+        <!-- Setor Industrial -->
+        <div class="setor">
+            <h3>Automação Industrial</h3>
+            <p>Especialistas na criação e montagem de painéis elétricos customizados e bancos de capacitores para correção de fator de potência, otimizando o consumo de energia e a performance de máquinas industriais.</p>
+        </div>
+
+        <!-- Setor Solar -->
+        <div class="setor">
+            <h3>Energia Solar</h3>
+            <p>Soluções completas em energia fotovoltaica nos sistemas On-Grid (conectado à rede), Off-Grid (autônomo) e sistemas especializados de bombeamento solar para áreas rurais e industriais.</p>
+        </div>
+
+        <!-- Automação Inteligente -->
+        <div class="setor">
+            <h3>Automação e Smart Home</h3>
+            <p>Integração inteligente utilizando protocolos Zigbee e Z-Wave. A <strong>PowerTech</strong> conecta seu imóvel à Alexa e Google Home, além de gerenciar redes Wi-Fi de alta performance para controle total de iluminação e dispositivos.</p>
+        </div>
+
+        <!-- Infraestrutura de Redes -->
+        <div class="setor">
+            <h3>Infraestrutura de TI</h3>
+            <p>Projetos de cabeamento estruturado e montagem técnica de racks, garantindo uma rede de dados estável, organizada e pronta para expansões futuras em ambientes corporativos.</p>
+        </div>
+
+        <!-- Segurança Eletrônica -->
+        <div class="setor">
+            <h3>Segurança e CFTV</h3>
+            <p>Implementação de sistemas de monitoramento por vídeo (CFTV) de alta definição, focando na proteção patrimonial com acesso remoto e inteligência de monitoramento.</p>
+        </div>
+    </div>
+
+    <div class="contato-sessao">
+        <h2>Pronto para elevar o nível do seu projeto?</h2>
+        <p>A PowerTech Industrial entrega engenharia de precisão em Floriano e região.</p>
+        <p><strong>Contato:</strong> powertechfloriano@gmail.com</p>
     </div>
 </div>
 
 <footer>
-    <footer>
-        <p>&copy; 2026 PowerTech Industrial - Responsável: Dgiomar Cassemiro Araujo</p>
-        <p><a href="privacidade.html" class="btn-privacidade">Política de Privacidade</a></p>
-    </footer>
+    <p>&copy; 2026 PowerTech Industrial | Responsável Técnico: Dgiomar Cassemiro Araujo</p>
+    <p><a href="privacidade.html">Política de Privacidade</a></p>
+</footer>
 
 </body>
 </html>
