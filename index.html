@@ -3,78 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PowerTech Industrial | Engenharia e Soluções Integradas</title>
+    <title>PowerTech Industrial | Engenharia, Automação e Energia Solar</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; color: #333; line-height: 1.6; background-color: #f4f7f9; }
-        header { background: #003366; color: white; padding: 80px 20px; text-align: center; }
-        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
-        h1 { margin: 0; font-size: 3em; letter-spacing: 2px; }
-        h2 { color: #003366; border-bottom: 3px solid #0056b3; display: inline-block; padding-bottom: 5px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
-        .setor { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 6px solid #0056b3; }
-        .setor h3 { color: #0056b3; margin-top: 0; }
-        .contato-sessao { background: #003366; color: white; padding: 50px; text-align: center; border-radius: 15px; margin-top: 50px; }
-        footer { text-align: center; padding: 30px; font-size: 0.9em; color: #777; }
-        a { color: #0056b3; text-decoration: none; }
+        :root { --primary-blue: #003366; --accent-blue: #0056b3; --light-bg: #f8f9fa; --text-dark: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: var(--text-dark); line-height: 1.6; background-color: var(--light-bg); }
+        
+        /* Cabeçalho Profissional */
+        header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); color: white; padding: 100px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); }
+        header h1 { margin: 0; font-size: 3.5em; text-transform: uppercase; letter-spacing: 3px; }
+        header p { font-size: 1.2em; opacity: 0.9; margin-top: 10px; }
+
+        .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
+        h2 { color: var(--primary-blue); font-size: 2.2em; border-left: 8px solid var(--accent-blue); padding-left: 15px; margin-bottom: 40px; }
+
+        /* Grade de Serviços */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-bottom: 4px solid transparent; }
+        .card:hover { transform: translateY(-10px); border-bottom: 4px solid var(--accent-blue); }
+        .card h3 { color: var(--accent-blue); margin-top: 0; font-size: 1.5em; }
+        .card ul { padding-left: 20px; color: #555; }
+        .card li { margin-bottom: 8px; }
+
+        /* Seção de Contato e Formulário */
+        .contato-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; margin-top: 60px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .contato-info h3 { color: var(--primary-blue); }
+        
+        form { display: flex; flex-direction: column; gap: 15px; }
+        input, textarea { padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1em; width: 100%; box-sizing: border-box; }
+        textarea { height: 120px; resize: vertical; }
+        button { background: var(--accent-blue); color: white; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1.1em; }
+        button:hover { background: var(--primary-blue); }
+
+        footer { text-align: center; padding: 40px; background: #222; color: #bbb; margin-top: 80px; }
+        footer a { color: #fff; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>PowerTech Industrial</h1>
-    <p>Tecnologia e Excelência em Engenharia Elétrica e Automação</p>
+    <p>Engenharia de Precisão e Soluções Tecnológicas Inteligentes</p>
 </header>
 
 <div class="container">
-    <h2>Nossas Soluções</h2>
+    <h2>Especialidades da PowerTech</h2>
     
     <div class="grid">
-        <!-- Setor Elétrico -->
-        <div class="setor">
-            <h3>Instalações Elétricas</h3>
-            <p>A <strong>PowerTech</strong> realiza projetos e execuções em elétrica residencial, comercial e industrial. Atuamos desde a infraestrutura básica até sistemas complexos de alta demanda, garantindo segurança e conformidade com as normas técnicas vigentes.</p>
+        <!-- Elétrica Industrial e Comercial -->
+        <div class="card">
+            <h3>Engenharia Elétrica</h3>
+            <p>A <strong>PowerTech</strong> entrega infraestrutura robusta para todos os segmentos:</p>
+            <ul>
+                <li>Instalações residenciais, comerciais e industriais de alta complexidade.</li>
+                <li>Montagem de painéis elétricos customizados (QGBT).</li>
+                <li>Banco de capacitores para correção do fator de potência e economia na conta de energia.</li>
+                <li>Manutenção preventiva em motores e sistemas de proteção.</li>
+            </ul>
         </div>
 
-        <!-- Setor Industrial -->
-        <div class="setor">
-            <h3>Automação Industrial</h3>
-            <p>Especialistas na criação e montagem de painéis elétricos customizados e bancos de capacitores para correção de fator de potência, otimizando o consumo de energia e a performance de máquinas industriais.</p>
+        <!-- Energia Solar Completa -->
+        <div class="card">
+            <h3>Sistemas de Energia Solar</h3>
+            <p>Dominamos as tecnologias fotovoltaicas para máxima autossuficiência:</p>
+            <ul>
+                <li><strong>On-Grid:</strong> Conexão com a rede elétrica para redução imediata de custos.</li>
+                <li><strong>Off-Grid:</strong> Sistemas com baterias para locais sem acesso à rede pública.</li>
+                <li><strong>Bombeamento Solar:</strong> Soluções eficientes para irrigação e pecuária.</li>
+            </ul>
         </div>
 
-        <!-- Setor Solar -->
-        <div class="setor">
-            <h3>Energia Solar</h3>
-            <p>Soluções completas em energia fotovoltaica nos sistemas On-Grid (conectado à rede), Off-Grid (autônomo) e sistemas especializados de bombeamento solar para áreas rurais e industriais.</p>
+        <!-- Automação e Smart Home -->
+        <div class="card">
+            <h3>Automação e Integração</h3>
+            <p>A <strong>PowerTech</strong> transforma ambientes em espaços inteligentes:</p>
+            <ul>
+                <li>Integração total com <strong>Alexa</strong> e <strong>Google Home</strong>.</li>
+                <li>Protocolos avançados <strong>Zigbee</strong> e <strong>Z-Wave</strong> para estabilidade de rede.</li>
+                <li>Controle de iluminação, climatização e dispositivos Wi-Fi via smartphone.</li>
+            </ul>
         </div>
 
-        <!-- Automação Inteligente -->
-        <div class="setor">
-            <h3>Automação e Smart Home</h3>
-            <p>Integração inteligente utilizando protocolos Zigbee e Z-Wave. A <strong>PowerTech</strong> conecta seu imóvel à Alexa e Google Home, além de gerenciar redes Wi-Fi de alta performance para controle total de iluminação e dispositivos.</p>
-        </div>
-
-        <!-- Infraestrutura de Redes -->
-        <div class="setor">
-            <h3>Infraestrutura de TI</h3>
-            <p>Projetos de cabeamento estruturado e montagem técnica de racks, garantindo uma rede de dados estável, organizada e pronta para expansões futuras em ambientes corporativos.</p>
-        </div>
-
-        <!-- Segurança Eletrônica -->
-        <div class="setor">
-            <h3>Segurança e CFTV</h3>
-            <p>Implementação de sistemas de monitoramento por vídeo (CFTV) de alta definição, focando na proteção patrimonial com acesso remoto e inteligência de monitoramento.</p>
+        <!-- Infraestrutura de Redes e CFTV -->
+        <div class="card">
+            <h3>TI e Segurança Eletrônica</h3>
+            <p>Segurança e conectividade para empresas e residências:</p>
+            <ul>
+                <li>Cabeamento estruturado com certificação e organização de dados.</li>
+                <li>Montagem técnica de Racks de rede e servidores.</li>
+                <li>Monitoramento por vídeo (CFTV) em alta definição com acesso remoto.</li>
+            </ul>
         </div>
     </div>
 
-    <div class="contato-sessao">
-        <h2>Pronto para elevar o nível do seu projeto?</h2>
-        <p>A PowerTech Industrial entrega engenharia de precisão em Floriano e região.</p>
-        <p><strong>Contato:</strong> powertechfloriano@gmail.com</p>
+    <h2 style="margin-top: 80px;">Central de Atendimento ao Cliente</h2>
+    <div class="contato-wrapper">
+        <div class="contato-info">
+            <h3>Fale com a PowerTech</h3>
+            <p>Dúvidas técnicas, orçamentos ou consultoria? Nossa equipe está pronta para responder.</p>
+            <p><strong>📍 Localização:</strong> Floriano - Piauí</p>
+            <p><strong>📧 E-mail:</strong> powertechfloriano@gmail.com</p>
+        </div>
+
+        <!-- Formulário de Contato -->
+        <div id="contato">
+            <form action="https://formsubmit.co/powertechfloriano@gmail.com" method="POST">
+                <input type="text" name="nome" placeholder="Seu Nome Completo" required>
+                <input type="email" name="email" placeholder="Seu Melhor E-mail" required>
+                <input type="tel" name="telefone" placeholder="Telefone / WhatsApp" required>
+                <textarea name="mensagem" placeholder="Descreva sua dúvida ou o projeto que deseja realizar..." required></textarea>
+                
+                <!-- Campos extras para o formulário funcionar melhor -->
+                <input type="hidden" name="_next" value="https://dgiomararaujo.github.io/site-da-powertech/">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <button type="submit">Enviar Mensagem agora</button>
+            </form>
+        </div>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 PowerTech Industrial | Responsável Técnico: Dgiomar Cassemiro Araujo</p>
+    <p>&copy; 2026 PowerTech Industrial | Responsável: Dgiomar Cassemiro Araujo</p>
     <p><a href="privacidade.html">Política de Privacidade</a></p>
 </footer>
 
