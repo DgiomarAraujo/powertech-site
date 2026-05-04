@@ -3,120 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PowerTech Industrial | Engenharia, Automação e Energia Solar</title>
+    <title>PowerTech Industrial | Engenharia e Tecnologia Avançada</title>
     <style>
-        :root { --primary-blue: #003366; --accent-blue: #0056b3; --light-bg: #f8f9fa; --text-dark: #333; }
+        :root { --primary-blue: #003366; --accent-blue: #0056b3; --intelbras-green: #00a859; --light-bg: #f8f9fa; --text-dark: #333; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: var(--text-dark); line-height: 1.6; background-color: var(--light-bg); }
         
-        /* Cabeçalho Profissional */
         header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); color: white; padding: 100px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); }
         header h1 { margin: 0; font-size: 3.5em; text-transform: uppercase; letter-spacing: 3px; }
-        header p { font-size: 1.2em; opacity: 0.9; margin-top: 10px; }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
         h2 { color: var(--primary-blue); font-size: 2.2em; border-left: 8px solid var(--accent-blue); padding-left: 15px; margin-bottom: 40px; }
 
-        /* Grade de Serviços */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-bottom: 4px solid transparent; }
-        .card:hover { transform: translateY(-10px); border-bottom: 4px solid var(--accent-blue); }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 4px solid transparent; }
         .card h3 { color: var(--accent-blue); margin-top: 0; font-size: 1.5em; }
-        .card ul { padding-left: 20px; color: #555; }
+        .card ul { padding-left: 20px; color: #555; list-style-type: square; }
         .card li { margin-bottom: 8px; }
 
-        /* Seção de Contato e Formulário */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; display: flex; align-items: center; gap: 10px; }
+
         .contato-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; margin-top: 60px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-        .contato-info h3 { color: var(--primary-blue); }
         
         form { display: flex; flex-direction: column; gap: 15px; }
         input, textarea { padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1em; width: 100%; box-sizing: border-box; }
-        textarea { height: 120px; resize: vertical; }
-        button { background: var(--accent-blue); color: white; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1.1em; }
-        button:hover { background: var(--primary-blue); }
+        button { background: var(--accent-blue); color: white; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1em; }
 
         footer { text-align: center; padding: 40px; background: #222; color: #bbb; margin-top: 80px; }
-        footer a { color: #fff; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
+<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank">
+    <span>Fale no WhatsApp</span>
+</a>
+
 <header>
     <h1>PowerTech Industrial</h1>
-    <p>Engenharia de Precisão e Soluções Tecnológicas Inteligentes</p>
+    <p>Engenharia de Precisão | CNPJ: 59.613.165/0001-81</p>
 </header>
 
 <div class="container">
-    <h2>Especialidades da PowerTech</h2>
+    <h2>Soluções Avançadas PowerTech</h2>
     
     <div class="grid">
-        <!-- Elétrica Industrial e Comercial -->
+        <!-- Segurança Inteligente Intelbras -->
         <div class="card">
-            <h3>Engenharia Elétrica</h3>
-            <p>A <strong>PowerTech</strong> entrega infraestrutura robusta para todos os segmentos:</p>
+            <h3>Segurança e CFTV (Ecossistema Intelbras)</h3>
+            <p>Implementamos o que há de mais moderno em monitoramento com tecnologia Intelbras:</p>
             <ul>
-                <li>Instalações residenciais, comerciais e industriais de alta complexidade.</li>
-                <li>Montagem de painéis elétricos customizados (QGBT).</li>
-                <li>Banco de capacitores para correção do fator de potência e economia na conta de energia.</li>
-                <li>Manutenção preventiva em motores e sistemas de proteção.</li>
+                <li>Câmeras IP com Inteligência Artificial e Reconhecimento Facial.</li>
+                <li>Sistemas Colorvu para imagens coloridas 24h em total escuridão.</li>
+                <li>Gravadores NVD/MHDX com análise de vídeo inteligente (IVS).</li>
+                <li>Integração total via app Intelbras Guardian e ISIC Lite.</li>
             </ul>
         </div>
 
-        <!-- Energia Solar Completa -->
+        <!-- Eletromobilidade -->
+        <div class="card">
+            <h3>Carregamento Elétrico</h3>
+            <p>Infraestrutura completa para o futuro da mobilidade:</p>
+            <ul>
+                <li>Instalação de Estações de Recarga (Wallbox) residenciais e comerciais.</li>
+                <li>Projetos de infraestrutura elétrica para condomínios e empresas.</li>
+                <li>Consultoria de demanda para carregamento de veículos híbridos e elétricos.</li>
+            </ul>
+        </div>
+
+        <!-- Consultoria Técnica -->
+        <div class="card">
+            <h3>Consultoria Técnica Especializada</h3>
+            <p>Suporte de engenharia para decisões estratégicas:</p>
+            <ul>
+                <li>Cálculos de demanda de carga e análise de fatura de energia.</li>
+                <li>Projetos de adequação às normas NBR e eficiência energética.</li>
+                <li>Laudos técnicos e vistorias de instalações elétricas industriais.</li>
+            </ul>
+        </div>
+
+        <!-- Energia Solar -->
         <div class="card">
             <h3>Sistemas de Energia Solar</h3>
-            <p>Dominamos as tecnologias fotovoltaicas para máxima autossuficiência:</p>
+            <p>Máxima autossuficiência e economia:</p>
             <ul>
-                <li><strong>On-Grid:</strong> Conexão com a rede elétrica para redução imediata de custos.</li>
-                <li><strong>Off-Grid:</strong> Sistemas com baterias para locais sem acesso à rede pública.</li>
-                <li><strong>Bombeamento Solar:</strong> Soluções eficientes para irrigação e pecuária.</li>
+                <li>Sistemas On-Grid, Off-Grid e Bombeamento Solar especializado.</li>
+                <li>Dimensionamento preciso para alta performance fotovoltaica.</li>
             </ul>
         </div>
 
-        <!-- Automação e Smart Home -->
+        <!-- Automação -->
         <div class="card">
-            <h3>Automação e Integração</h3>
-            <p>A <strong>PowerTech</strong> transforma ambientes em espaços inteligentes:</p>
+            <h3>Automação e Redes</h3>
+            <p>Ambientes inteligentes e conectividade estável:</p>
             <ul>
-                <li>Integração total com <strong>Alexa</strong> e <strong>Google Home</strong>.</li>
-                <li>Protocolos avançados <strong>Zigbee</strong> e <strong>Z-Wave</strong> para estabilidade de rede.</li>
-                <li>Controle de iluminação, climatização e dispositivos Wi-Fi via smartphone.</li>
-            </ul>
-        </div>
-
-        <!-- Infraestrutura de Redes e CFTV -->
-        <div class="card">
-            <h3>TI e Segurança Eletrônica</h3>
-            <p>Segurança e conectividade para empresas e residências:</p>
-            <ul>
-                <li>Cabeamento estruturado com certificação e organização de dados.</li>
-                <li>Montagem técnica de Racks de rede e servidores.</li>
-                <li>Monitoramento por vídeo (CFTV) em alta definição com acesso remoto.</li>
+                <li>Integração com <strong>Alexa</strong> e <strong>Google Home</strong> via Zigbee/Z-Wave.</li>
+                <li>Montagem técnica de racks e cabeamento estruturado de TI.</li>
             </ul>
         </div>
     </div>
 
-    <h2 style="margin-top: 80px;">Central de Atendimento ao Cliente</h2>
+    <h2 style="margin-top: 80px;">Central de Atendimento</h2>
     <div class="contato-wrapper">
         <div class="contato-info">
-            <h3>Fale com a PowerTech</h3>
-            <p>Dúvidas técnicas, orçamentos ou consultoria? Nossa equipe está pronta para responder.</p>
+            <h3>PowerTech Industrial</h3>
             <p><strong>📍 Localização:</strong> Floriano - Piauí</p>
+            <p><strong>📞 WhatsApp:</strong> (89) 98104-9318</p>
             <p><strong>📧 E-mail:</strong> powertechfloriano@gmail.com</p>
+            <p><strong>🏢 CNPJ:</strong> 59.613.165/0001-81</p>
         </div>
 
-        <!-- Formulário de Contato -->
         <div id="contato">
             <form action="https://formsubmit.co/powertechfloriano@gmail.com" method="POST">
                 <input type="text" name="nome" placeholder="Seu Nome Completo" required>
-                <input type="email" name="email" placeholder="Seu Melhor E-mail" required>
-                <input type="tel" name="telefone" placeholder="Telefone / WhatsApp" required>
-                <textarea name="mensagem" placeholder="Descreva sua dúvida ou o projeto que deseja realizar..." required></textarea>
-                
-                <!-- Campos extras para o formulário funcionar melhor -->
+                <input type="email" name="email" placeholder="Seu E-mail" required>
+                <input type="tel" name="telefone" placeholder="Telefone" required>
+                <textarea name="mensagem" placeholder="Como podemos ajudar no seu projeto?" required></textarea>
                 <input type="hidden" name="_next" value="https://dgiomararaujo.github.io/site-da-powertech/">
-                <input type="hidden" name="_captcha" value="false">
-                
-                <button type="submit">Enviar Mensagem agora</button>
+                <button type="submit">Enviar Solicitação</button>
             </form>
         </div>
     </div>
