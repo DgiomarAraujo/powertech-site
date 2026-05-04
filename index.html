@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PowerTech Industrial | Engenharia, Automação e Energia Solar</title>
+    <title>PowerTech Industrial | Engenharia e Soluções Tecnológicas</title>
     <style>
-        :root { --primary-blue: #003366; --accent-blue: #0056b3; --success-green: #25d366; --light-bg: #f4f7f9; --text-dark: #333; }
+        :root { --primary-blue: #003366; --accent-blue: #0056b3; --whatsapp-green: #25d366; --light-bg: #f4f7f9; --text-dark: #333; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: var(--text-dark); line-height: 1.6; background-color: var(--light-bg); }
         
         header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); color: white; padding: 110px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); }
@@ -22,7 +22,10 @@
         .card ul { padding-left: 20px; color: #555; font-size: 0.95em; }
         .card li { margin-bottom: 8px; }
 
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--success-green); color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; display: flex; align-items: center; gap: 10px; }
+        /* Botão WhatsApp Flutuante Elegante */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); color: white; width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        .whatsapp-float svg { width: 35px; height: 35px; fill: white; }
 
         .form-section { background: white; padding: 45px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px; }
         form { display: flex; flex-direction: column; gap: 15px; }
@@ -36,8 +39,9 @@
 </head>
 <body>
 
-<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank">
-    <span>WhatsApp: (89) 98104-9318</span>
+<!-- Botão WhatsApp (Ícone Limpo) -->
+<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
+    <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.5-16.4-14.7-27.5-32.8-30.7-38.3-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.4-29.8-17-40.7-4.5-10.7-9-9.2-12.4-9.4-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
 </a>
 
 <header>
@@ -46,91 +50,93 @@
 </header>
 
 <div class="container">
-    <h2>Soluções em Engenharia e Tecnologia</h2>
+    <h2>Especialidades PowerTech</h2>
     
     <div class="grid">
-        <!-- Proteção e Aterramento -->
+        <!-- Elétrica Residencial e Comercial - DESTAQUE -->
+        <div class="card">
+            <h3>Elétrica Residencial e Comercial</h3>
+            <p>Infraestrutura completa e segura para seu imóvel:</p>
+            <ul>
+                <li>Projetos e execuções de novas instalações elétricas.</li>
+                <li>Reforma de quadros de distribuição e substituição de fiação.</li>
+                <li>Instalação de iluminação técnica e decorativa.</li>
+                <li>Adequação de circuitos para ar-condicionado e eletrodomésticos.</li>
+            </ul>
+        </div>
+
+        <!-- Elétrica Industrial e Painéis -->
+        <div class="card">
+            <h3>Elétrica e Painéis Industriais</h3>
+            <p>Força e automação para processos produtivos:</p>
+            <ul>
+                <li>Montagem de painéis elétricos (QGBT) e comandos de motores.</li>
+                <li>Instalação de bancos de capacitores para correção de fator de potência.</li>
+                <li>Manutenção preventiva e corretiva de máquinas industriais.</li>
+                <li>Projetos conforme normas técnicas <strong>NBR</strong>.</li>
+            </ul>
+        </div>
+
+        <!-- SPDA e Aterramento Hikari -->
         <div class="card">
             <h3>SPDA e Aterramento</h3>
-            <p>Segurança máxima contra descargas atmosféricas e surtos:</p>
+            <p>Proteção técnica contra descargas e surtos:</p>
             <ul>
-                <li>Instalação e manutenção de sistemas de SPDA (Para-raios).</li>
-                <li>Sistemas de aterramento com medição de precisão via <strong>Terrômetro Hikari</strong>.</li>
-                <li>Laudos técnicos de resistência de terra e continuidade.</li>
-                <li>Proteção de equipamentos sensíveis contra surtos elétricos.</li>
+                <li>Instalação de sistemas de para-raios (SPDA).</li>
+                <li>Aterramento técnico com medição via <strong>Terrômetro Hikari</strong>.</li>
+                <li>Laudos de continuidade e resistência de terra.</li>
+                <li>Vistorias e adequações de segurança elétrica.</li>
             </ul>
         </div>
 
-        <!-- Energia Solar -->
+        <!-- Energia Solar Completa -->
         <div class="card">
-            <h3>Sistemas de Energia Solar</h3>
-            <p>Engenharia fotovoltaica de alto rendimento:</p>
+            <h3>Energia Solar Fotovoltaica</h3>
+            <p>Máxima eficiência energética e economia:</p>
             <ul>
-                <li>Sistemas On-Grid (Redução de custos com a rede).</li>
-                <li>Sistemas Off-Grid (Autonomia total via baterias).</li>
-                <li>Bombeamento Solar para agronegócio e indústria.</li>
+                <li>Sistemas On-Grid e Off-Grid (com baterias).</li>
+                <li>Sistemas de bombeamento solar para áreas rurais.</li>
+                <li>Dimensionamento preciso para alta performance.</li>
             </ul>
         </div>
 
-        <!-- Eletromobilidade e Consultoria -->
+        <!-- Segurança e Intelbras -->
         <div class="card">
-            <h3>Carregamento e Consultoria</h3>
-            <p>Preparando sua infraestrutura para o futuro:</p>
+            <h3>Segurança e CFTV (Intelbras)</h3>
+            <p>Tecnologia de monitoramento avançada:</p>
             <ul>
-                <li>Instalação de carregadores elétricos (Wallbox).</li>
-                <li>Consultoria técnica para eficiência energética.</li>
-                <li>Análise de demanda de carga e correção de fator de potência.</li>
-            </ul>
-        </div>
-
-        <!-- Segurança Intelbras -->
-        <div class="card">
-            <h3>CFTV e Segurança (Intelbras)</h3>
-            <p>Monitoramento inteligente de última geração:</p>
-            <ul>
-                <li>Câmeras Colorvu (imagens coloridas 24h) e IA.</li>
-                <li>Reconhecimento facial e leitura de placas.</li>
-                <li>Integração total via aplicativos Intelbras Guardian.</li>
+                <li>Câmeras Colorvu (imagens coloridas 24h) e Inteligência Artificial.</li>
+                <li>Reconhecimento facial e leitura de placas veiculares.</li>
+                <li>Gestão remota via aplicativos Intelbras Guardian.</li>
             </ul>
         </div>
 
         <!-- Automação e Redes -->
         <div class="card">
-            <h3>Automação e TI Inteligente</h3>
-            <p>Conectividade e controle na palma da mão:</p>
+            <h3>Automação e TI</h3>
+            <p>Ambientes inteligentes e conectividade robusta:</p>
             <ul>
-                <li>Integração Alexa e Google Home via Zigbee e Z-Wave.</li>
-                <li>Cabeamento estruturado e montagem técnica de Racks.</li>
-                <li>Redes Wi-Fi de alta performance para empresas e residências.</li>
-            </ul>
-        </div>
-
-        <!-- Industrial -->
-        <div class="card">
-            <h3>Elétrica e Painéis Industriais</h3>
-            <p>Potência e controle para sua produção:</p>
-            <ul>
-                <li>Montagem de painéis elétricos e banco de capacitores.</li>
-                <li>Manutenção técnica de motores e infraestrutura pesada.</li>
-                <li>Instalações residenciais, comerciais e industriais (NBR).</li>
+                <li>Integração <strong>Alexa / Google Home</strong> via Zigbee e Z-Wave.</li>
+                <li>Montagem de Racks e cabeamento estruturado para dados.</li>
+                <li>Instalação de carregadores elétricos <strong>Wallbox</strong>.</li>
             </ul>
         </div>
     </div>
 
-    <!-- Diferenciais Técnicos -->
-    <h2 style="margin-top: 80px;">Diferenciais PowerTech</h2>
+    <!-- Diferenciais PowerTech -->
+    <h2 style="margin-top: 80px;">Diferenciais Técnicos</h2>
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
         <div style="background: #eef4ff; padding: 20px; border-radius: 10px; text-align: center;">
             <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Ferramental Premium</strong>
-            Uso rigoroso de ferramentas <strong>DeWalt, Bosch e Stanley</strong> para garantir acabamento e precisão técnica superior.
+            Execução com ferramentas líderes: <strong>DeWalt, Bosch e Stanley</strong>.
         </div>
         <div style="background: #eef4ff; padding: 20px; border-radius: 10px; text-align: center;">
-            <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Normas Técnicas</strong>
-            Execução de projetos em estrita conformidade com as normas NBR, garantindo a legalidade e segurança da obra.
+            <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Consultoria</strong>
+            Análise de demanda de carga e laudos de conformidade técnica.
         </div>
         <div style="background: #eef4ff; padding: 20px; border-radius: 10px; text-align: center;">
-            <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Suporte Local</strong>
-            Presença consolidada em Floriano - PI, com agilidade no atendimento e consultoria presencial especializada.
+            <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Atuação Regional</strong>
+            Atendimento especializado em <strong>Floriano - Piauí</strong> e região.
         </div>
     </div>
 
@@ -139,7 +145,7 @@
     <div class="form-section">
         <div class="info">
             <h3>PowerTech Industrial</h3>
-            <p>Fale diretamente com nossa equipe técnica para orçamentos e vistorias.</p>
+            <p>Sua parceira em engenharia e inovação tecnológica.</p>
             <p><strong>📍 Local:</strong> Floriano - Piauí</p>
             <p><strong>🏢 CNPJ:</strong> 59.613.165/0001-81</p>
             <p><strong>📞 WhatsApp:</strong> (89) 98104-9318</p>
@@ -148,19 +154,19 @@
 
         <form action="https://formsubmit.co/powertechfloriano@gmail.com" method="POST">
             <input type="text" name="nome" placeholder="Seu Nome Completo" required>
-            <input type="email" name="email" placeholder="Seu Melhor E-mail" required>
+            <input type="email" name="email" placeholder="Seu E-mail" required>
             <select name="servico">
-                <option value="">Selecione o serviço de interesse</option>
+                <option value="">Selecione o serviço</option>
+                <option value="Residencial">Elétrica Residencial / Comercial</option>
                 <option value="Solar">Energia Solar (On/Off/Bombeamento)</option>
                 <option value="Automação">Automação e Smart Home</option>
-                <option value="SPDA">SPDA e Aterramento Técnico</option>
+                <option value="SPDA">SPDA e Aterramento</option>
                 <option value="Industrial">Elétrica Industrial e Painéis</option>
                 <option value="Segurança">CFTV e Segurança Intelbras</option>
-                <option value="Outro">Outros Serviços / Consultoria</option>
             </select>
-            <textarea name="mensagem" placeholder="Descreva seu projeto ou dúvida técnica..." required></textarea>
+            <textarea name="mensagem" placeholder="Como podemos ajudar no seu projeto?" required></textarea>
             <input type="hidden" name="_next" value="https://dgiomararaujo.github.io/site-da-powertech/">
-            <button type="submit">Enviar Solicitação Técnica</button>
+            <button type="submit">Enviar Solicitação</button>
         </form>
     </div>
 </div>
