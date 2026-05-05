@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  color: #222;
+}
+header {
+  background: #182C61;
+  color: #fff;
+  padding: 30px 0 15px 0;
+  text-align: center;
+}
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 10px;
+  transition: background 0.2s;
+}
+.menu a:hover {
+  background: #44bd32;
+  border-radius: 4px;
+}
+main {
+  max-width: 900px;
+  margin: 35px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+section {
+  margin-bottom: 45px;
+}
+.portfolio-list {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.project {
+  background: #f0f3f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 20px 16px;
+  flex: 1 1 250px;
+  min-width: 210px;
+}
+details {
+  margin-bottom: 12px;
+}
+footer {
+  text-align: center;
+  padding: 22px 0;
+  color: #fff;
+  background: #182C61;
+  font-size: 1em;
+  margin-top: 38px;
+}
+
+@media (max-width: 760px) {
+  main { padding: 16px; }
+  .portfolio-list {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
