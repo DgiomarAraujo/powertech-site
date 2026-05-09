@@ -3,45 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Cálculos | PowerTech Industrial</title>
-    <link rel="icon" type="image/png" href="favicon-32x32.png">
+    <title>Calculadoras Técnicas | PowerTech Industrial</title>
     <style>
-        :root { --primary: #003366; --accent: #0056b3; --bg: #f4f7f9; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; text-align: center; }
-        .container { max-width: 1000px; margin: auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h1 { color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 15px; }
-        .grid-calcs { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
-        .calc-card { border: 1px solid #ddd; padding: 20px; border-radius: 10px; transition: 0.3s; cursor: pointer; }
-        .calc-card:hover { background: #eef4ff; border-color: var(--accent); transform: scale(1.03); }
-        .calc-card h3 { color: var(--accent); margin: 0 0 10px 0; }
-        .btn-voltar { display: inline-block; margin-top: 30px; text-decoration: none; color: #666; font-weight: bold; }
+        :root { --blue: #003366; --accent: #0056b3; --bg: #f4f7f9; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; }
+        .header { text-align: center; padding: 40px 0; }
+        .calc-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        h2 { color: var(--blue); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1em; }
+        button { width: 100%; padding: 15px; background: var(--blue); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.3s; }
+        button:hover { background: var(--accent); }
+        .res { margin-top: 20px; padding: 15px; background: #eef4ff; border-radius: 8px; font-weight: bold; color: var(--blue); text-align: center; font-size: 1.2em; display: none; }
+        .btn-voltar { display: block; text-align: center; margin-top: 20px; text-decoration: none; color: #666; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Central de Ferramentas Técnicas</h1>
-        <p>Selecione o cálculo desejado para seu projeto de engenharia:</p>
-        
-        <div class="grid-calcs">
-            <div class="calc-card">
-                <h3>Queda de Tensão</h3>
-                <p>Cálculo de perda conforme NBR 5410.</p>
-            </div>
-            <div class="calc-card">
-                <h3>Cálculo de Corrente</h3>
-                <p>Dimensionamento por potência e tensão.</p>
-            </div>
-            <div class="calc-card">
-                <h3>Cálculo de Demanda</h3>
-                <p>Previsão de carga para QDC.</p>
-            </div>
-            <div class="calc-card">
-                <h3>Geração Solar</h3>
-                <p>Estimativa baseada na irradiação de Floriano-PI.</p>
-            </div>
-        </div>
 
-        <a href="index.html" class="btn-voltar">← Voltar para a Página Principal</a>
+<div class="container">
+    <div class="header">
+        <h1>Central de Ferramentas PowerTech</h1>
+        <p>Cálculos de engenharia baseados na NBR 5410</p>
     </div>
+
+    <div class="calc-card">
+        <h2>Queda de Tensão (V)</h2>
+        <div class="input-group">
+            <label>Corrente do Circuito (A):</label>
+            <input type="number" id="corrente" placeholder="Ex: 20">
+        </div>
+        <div class="input-group">
+            <label>Distância do Cabo (metros):</label>
+            <input type="number" id="distancia" placeholder="Ex: 30">
+        </div>
+        <div class="input-group">
+            <label>Seção do Cabo (mm²):</label>
+            <select id="bitola">
+                <option value="1.5">1.5 mm²</option>
+                <option value="2.5">2.5 mm²</option>
+                <option value="4">4 mm²</option>
+                <option value="6">6 mm²</option>
+                <option value="10">10 mm²</option>
+                <option value="16">16 mm²</option>
+            </select>
+        </div>
+        <button onclick="calcularQueda()">CALCULAR AGORA</button>
+        <div id="resQueda" class="res"></div>
+    </div>
+
+    <div class="calc-card">
+        <h2>Cálculo de Corrente (I)</h2>
+        <div class="input-group">
+            <label>Potência (Watts):</label>
+            <input type="number" id="potencia" placeholder="Ex: 5500">
+        </div>
+        <div class="input-group">
+            <label>Tensão (Volts):</label>
+            <select id="tensao">
+                <option value="220">220V (Fase-Neutro)</option>
+                <option value="380">380V (Fase-Fase)</option>
+                <option value="127">127V (Fase-Neutro)</option>
+            </select>
+        </div>
+        <button onclick="calcularCorrente()">CALCULAR CORRENTE</button>
+        <div id="resCorrente" class="res"></div>
+    </div>
+
+    <a href="index.html" class="btn-voltar">← Voltar para o Site</a>
+</div>
+
+<script>
+    function calcularQueda() {
+        const I = parseFloat(document.getElementById('corrente').value);
+        const L = parseFloat(document.getElementById('distancia').value);
+        const S = parseFloat(document.getElementById('bitola').value);
+        const rho = 0.0172; // Resistividade do Cobre
+
+        if(I > 0 && L > 0) {
+            // Fórmula Simplificada Monofásica: V = (2 * rho * L * I) / S
+            const queda = (2 * rho * L * I) / S;
+            const resDiv = document.getElementById('resQueda');
+            resDiv.style.display = "block";
+            resDiv.innerHTML = "Queda Estimada: " + queda.toFixed(2) + " Volts";
+        }
+    }
+
+    function calcularCorrente() {
+        const P = parseFloat(document.getElementById('potencia').value);
+        const V = parseFloat(document.getElementById('tensao').value);
+
+        if(P > 0) {
+            const I = P / V;
+            const resDiv = document.getElementById('resCorrente');
+            resDiv.style.display = "block";
+            resDiv.innerHTML = "Corrente Nominal: " + I.toFixed(2) + " Ampères";
+        }
+    }
+</script>
+
 </body>
 </html>
