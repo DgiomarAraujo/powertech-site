@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Cálculos | PowerTech Industrial</title>
+    <link rel="icon" type="image/png" href="favicon-32x32.png">
+    <style>
+        :root { --primary: #003366; --accent: #0056b3; --bg: #f4f7f9; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; text-align: center; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 15px; }
+        .grid-calcs { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
+        .calc-card { border: 1px solid #ddd; padding: 20px; border-radius: 10px; transition: 0.3s; cursor: pointer; }
+        .calc-card:hover { background: #eef4ff; border-color: var(--accent); transform: scale(1.03); }
+        .calc-card h3 { color: var(--accent); margin: 0 0 10px 0; }
+        .btn-voltar { display: inline-block; margin-top: 30px; text-decoration: none; color: #666; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Central de Ferramentas Técnicas</h1>
+        <p>Selecione o cálculo desejado para seu projeto de engenharia:</p>
+        
+        <div class="grid-calcs">
+            <div class="calc-card">
+                <h3>Queda de Tensão</h3>
+                <p>Cálculo de perda conforme NBR 5410.</p>
+            </div>
+            <div class="calc-card">
+                <h3>Cálculo de Corrente</h3>
+                <p>Dimensionamento por potência e tensão.</p>
+            </div>
+            <div class="calc-card">
+                <h3>Cálculo de Demanda</h3>
+                <p>Previsão de carga para QDC.</p>
+            </div>
+            <div class="calc-card">
+                <h3>Geração Solar</h3>
+                <p>Estimativa baseada na irradiação de Floriano-PI.</p>
+            </div>
+        </div>
+
+        <a href="index.html" class="btn-voltar">← Voltar para a Página Principal</a>
+    </div>
+</body>
+</html>
