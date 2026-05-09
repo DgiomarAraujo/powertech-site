@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PowerTech Industrial | Engenharia e Soluções Tecnológicas</title>
     
-    <!-- CONFIGURAÇÃO DOS ÍCONES (FAVICON) -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -16,51 +15,53 @@
         :root { --primary-blue: #003366; --accent-blue: #0056b3; --whatsapp-green: #25d366; --light-bg: #f4f7f9; --text-dark: #333; --cta-orange: #f39c12; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: var(--text-dark); line-height: 1.6; background-color: var(--light-bg); scroll-behavior: smooth; }
         
-        /* Header Dinâmico */
-        header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); color: white; padding: 120px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); }
+        /* Header e Navegação */
+        header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); color: white; padding: 80px 20px 120px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); }
         header h1 { margin: 0; font-size: 3.5em; text-transform: uppercase; letter-spacing: 3px; }
-        header p { font-size: 1.2em; opacity: 0.9; margin-bottom: 30px; }
+        header p { font-size: 1.2em; opacity: 0.9; margin-bottom: 20px; }
         
-        .btn-main { background: var(--cta-orange); color: white; padding: 15px 35px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.1em; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        nav { margin-bottom: 30px; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; text-transform: uppercase; font-size: 0.9em; border-bottom: 2px solid transparent; transition: 0.3s; }
+        nav a:hover { border-bottom: 2px solid var(--cta-orange); }
+
+        .btn-main { background: var(--cta-orange); color: white; padding: 15px 35px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.1em; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: inline-block; }
         .btn-main:hover { transform: scale(1.05); background: #e67e22; }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
         h2 { color: var(--primary-blue); font-size: 2.2em; border-left: 8px solid var(--accent-blue); padding-left: 15px; margin-bottom: 40px; }
         
-        /* Grid de Serviços */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
         .card { background: white; padding: 35px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 4px solid transparent; transition: 0.3s; }
         .card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--accent-blue); }
         .card h3 { color: var(--accent-blue); margin-top: 0; font-size: 1.4em; border-bottom: 1px solid #eee; padding-bottom: 10px; }
 
-        /* Seção de Ferramentas (Destaque) */
         .tools-section { background: #eef4ff; padding: 80px 20px; text-align: center; border-radius: 30px; margin: 40px 0; }
         .btn-tools { background: var(--primary-blue); color: white; padding: 20px 45px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1.2em; display: inline-block; transition: 0.3s; }
         .btn-tools:hover { background: var(--accent-blue); box-shadow: 0 5px 20px rgba(0,51,102,0.3); }
 
-        /* Espaço para Monetização (AdSense) */
         .ad-space { background: #fff; border: 1px dashed #ccc; margin: 30px auto; padding: 10px; max-width: 728px; text-align: center; color: #999; font-size: 0.8em; border-radius: 8px; }
 
-        /* Botão WhatsApp */
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); color: white; width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.13); display: flex; align-items: center; justify-content: center; z-index: 999; transition: 0.3s; }
-        .whatsapp-float:hover { transform: scale(1.1); }
         .whatsapp-float svg { width: 35px; height: 35px; fill: white; }
 
-        /* Formulário */
         .form-section { background: white; padding: 45px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         form { display: flex; flex-direction: column; gap: 15px; }
         input, textarea, select { padding: 14px; border: 1px solid #ddd; border-radius: 8px; width: 100%; box-sizing: border-box; font-size: 1em; }
         button { background: var(--accent-blue); color: white; padding: 18px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.3s; }
-        button:hover { background: var(--primary-blue); }
 
         footer { text-align: center; padding: 60px 20px; background: #1a1a1a; color: #999; margin-top: 80px; }
-        footer a { color: #fff; text-decoration: none; font-weight: bold; }
+        footer a { color: #fff; text-decoration: none; font-weight: bold; margin: 0 10px; }
         .footer-brand { color: white; font-size: 1.5em; margin-bottom: 10px; display: block; }
     </style>
 </head>
 <body>
 
 <header>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="calculadoras.html">Calculadoras</a>
+        <a href="#contato">Contato</a>
+    </nav>
     <h1>PowerTech Industrial</h1>
     <p>Engenharia de Precisão e Inovação em Floriano-PI</p>
     <a href="#contato" class="btn-main">SOLICITAR ORÇAMENTO</a>
@@ -85,7 +86,6 @@
         </div>
     </div>
 
-    <!-- SEÇÃO DE DESTAQUE: CALCULADORAS -->
     <section class="tools-section">
         <h2>Central de Ferramentas Técnicas</h2>
         <p>Acesse nossa plataforma de cálculos de engenharia: Queda de Tensão, Demanda, Corrente e mais.</p>
@@ -119,15 +119,18 @@
     </div>
 </div>
 
-<!-- Botão WhatsApp Flutuante -->
-<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
+<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank">
     <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.4-23.1-115.2-65.1-157.1zM224 439.6c-33.7 0-66.9-9-95.6-25.9l-6.8-4-69.8 18.4 18.6-68-4.4-7C48.8 323.2 39 294.6 39 256c0-102.3 83.7-186 186.1-186 49.7 0 96.4 19.3 131.5 54.3S410 206.3 410 256c0 102.3-83.7 183.6-186 183.6zM329.6 340.2c-5.8-2.9-34.4-17-39.7-18.9-5.3-1.9-9.2-2.9-13.1 2.9-3.9 5.8-15 18.9-18.4 22.9-3.4 3.9-6.8 4.4-12.6 1.5-5.8-2.9-24.4-9-46.5-29-17.2-15.3-28.8-34.2-32.2-40-3.4-5.8-0.4-8.8 2.6-11.7 2.7-2.7 5.8-7.2 8.7-10.7 2.9-3.5 3.9-5.8 5.8-9.7 1.9-3.9 1-7.3-0.5-10.2-1.5-2.9-13.1-31.7-17.9-43.5-4.7-11.3-9.4-9.8-13.1-10-3.4-0.2-7.3-0.2-11.2-0.2s-10.2 1.5-15.5 7.3c-5.3 5.8-20.3 20-20.3 48.9s20.8 56.7 23.6 60.6c2.9 3.9 41 62.6 99.4 85.9 13.9 5.2 24.7 8.3 33.1 10.7 13.9 4.4 26.7 3.8 36.8 2.3 11.2-1.7 34.4-14.1 39.2-27.7 4.8-13.6 4.8-25.2 3.3-27.7-1.4-2.5-5.3-3.8-11.1-6.7z"/></svg>
 </a>
 
 <footer>
     <strong class="footer-brand">PowerTech Industrial</strong>
-    <p>&copy; 2026 Todos os direitos reservados. | Responsável: Dgiomar Cassemiro Araujo</p>
-    <p><a href="privacidade.html">Política de Privacidade</a> | <a href="calculadoras.html">Calculadoras</a></p>
+    <p>&copy; 2026 Todos os direitos reservados.</p>
+    <p>
+        <a href="index.html">Início</a> | 
+        <a href="calculadoras.html">Calculadoras</a> | 
+        <a href="privacidade.html">Privacidade</a>
+    </p>
 </footer>
 
 </body>
