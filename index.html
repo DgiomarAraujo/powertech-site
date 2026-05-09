@@ -5,81 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PowerTech Industrial | Engenharia e Soluções Tecnológicas</title>
     
-    <!-- ÍCONE PARA O GOOGLE -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifesto">
+    <link rel="shortcut icon" href="favicon.ico">
+
     <style>
         :root { --primary-blue: #003366; --accent-blue: #0056b3; --whatsapp-green: #25d366; --light-bg: #f4f7f9; --text-dark: #333; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: var(--text-dark); line-height: 1.6; background-color: var(--light-bg); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: var(--text-dark); line-height: 1.6; background-color: var(--light-bg); scroll-behavior: smooth; }
+        
         header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); color: white; padding: 110px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); }
         header h1 { margin: 0; font-size: 3.5em; text-transform: uppercase; letter-spacing: 3px; }
         header p { font-size: 1.2em; opacity: 0.9; }
+
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
         h2 { color: var(--primary-blue); font-size: 2.2em; border-left: 8px solid var(--accent-blue); padding-left: 15px; margin-bottom: 40px; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
         .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 4px solid transparent; transition: 0.3s; }
         .card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--accent-blue); }
         .card h3 { color: var(--accent-blue); margin-top: 0; font-size: 1.4em; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); color: white; width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.13); display: flex; align-items: center; justify-content: center; z-index: 999; transition: 0.3s; }
+        .card ul { padding-left: 20px; color: #555; font-size: 0.95em; }
+        .card li { margin-bottom: 8px; }
+
+        /* SEÇÃO DA CALCULADORA (DESTAQUE) */
+        .calc-section { text-align: center; padding: 50px 20px; background: #eef4ff; border-radius: 25px; margin: 40px 0; border: 1px solid #d1e3ff; }
+        .btn-calc { background: var(--primary-blue); color: white; padding: 20px 45px; text-decoration: none; border-radius: 12px; font-weight: bold; font-size: 1.2em; display: inline-block; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,51,102,0.2); }
+        .btn-calc:hover { background: var(--accent-blue); transform: scale(1.05); }
+
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); color: white; width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .whatsapp-float:hover { transform: scale(1.1); }
         .whatsapp-float svg { width: 35px; height: 35px; fill: white; }
-        
-        .form-section { background: white; padding: 45px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+
+        .form-section { background: white; padding: 45px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px; }
         form { display: flex; flex-direction: column; gap: 15px; }
-        input, textarea, select { padding: 14px; border: 1px solid #ddd; border-radius: 8px; width: 100%; box-sizing: border-box; }
-        button { background: var(--accent-blue); color: white; padding: 18px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        input, textarea, select { padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 1em; width: 100%; box-sizing: border-box; }
+        button { background: var(--accent-blue); color: white; padding: 18px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.3s; }
+        button:hover { background: var(--primary-blue); }
+
         footer { text-align: center; padding: 50px; background: #1a1a1a; color: #999; margin-top: 80px; }
-        footer a { color: #fff; text-decoration: none; }
+        footer a { color: #fff; text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>PowerTech Industrial</h1>
-    <p>Engenharia de Precisão em Floriano-PI</p>
-</header>
-
-<div class="container">
-    <h2>Nossas Especialidades</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Energia Solar</h3>
-            <p>Sistemas On-Grid e Off-Grid com dimensionamento preciso para alta performance.</p>
-        </div>
-        <div class="card">
-            <h3>Instalações Industriais</h3>
-            <p>Montagem de painéis (QGBT), comandos de motores e correção de fator de potência.</p>
-        </div>
-        <div class="card">
-            <h3>Segurança e Automação</h3>
-            <p>CFTV Intelbras e integração com Alexa/Google Home via Zigbee.</p>
-        </div>
-    </div>
-
-    <h2 style="margin-top:80px;">Solicite um Orçamento</h2>
-    <div class="form-section">
-        <div>
-            <h3>Contatos Diretos</h3>
-            <p>📍 Floriano - Piauí</p>
-            <p>📞 (89) 98104-9318</p>
-            <p>📧 powertechfloriano@gmail.com</p>
-        </div>
-        <form action="https://formsubmit.co/powertechfloriano@gmail.com" method="POST">
-            <input type="text" name="nome" placeholder="Seu Nome" required>
-            <textarea name="mensagem" placeholder="Descreva seu projeto..." required></textarea>
-            <button type="submit">Enviar Solicitação</button>
-        </form>
-    </div>
-</div>
-
-<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank">
-    <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.4-23.1-115.2-65.1-157.1zM224 439.6c-33.7 0-66.9-9-95.6-25.9l-6.8-4-69.8 18.4 18.6-68-4.4-7C48.8 323.2 39 294.6 39 256c0-102.3 83.7-186 186.1-186 49.7 0 96.4 19.3 131.5 54.3S410 206.3 410 256c0 102.3-83.7 183.6-186 183.6z"/></svg>
-</a>
-
-<footer>
-    <p>&copy; 2026 PowerTech Industrial | Responsável: Dgiomar Cassemiro Araujo</p>
-    <p><a href="privacidade.html">Política de Privacidade</a></p>
-</footer>
-
-</body>
-</html>
+<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
+    <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7
