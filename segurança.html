@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segurança Total | PowerTech Industrial</title>
+    
+    <style>
+        :root { 
+            --deep-dark: #0a0e14; 
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --neon-blue: #00d2ff; 
+            --danger-red: #ff3e3e;
+            --warning-orange: #ff9100;
+            --text-gray: #a0aec0;
+            --pure-white: #ffffff;
+        }
+
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            color: var(--pure-white); 
+            line-height: 1.7; 
+            background: radial-gradient(circle at bottom left, #1e1b4b, #0a0e14);
+            background-attachment: fixed;
+        }
+
+        .nav-header { position: absolute; top: 25px; right: 30px; z-index: 1000; }
+        .nav-menu { display: flex; gap: 12px; list-style: none; }
+        .nav-menu a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 210, 255, 0.1);
+            background: rgba(10, 14, 20, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        header { 
+            background: linear-gradient(180deg, rgba(255, 62, 62, 0.1), transparent);
+            padding: 100px 20px 60px; 
+            text-align: center; 
+            border-bottom: 1px solid rgba(255, 62, 62, 0.2);
+        }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 3em; 
+            text-transform: uppercase; 
+            letter-spacing: 6px; 
+            background: linear-gradient(to right, #fff, var(--danger-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
+
+        .alert-card {
+            background: rgba(255, 62, 62, 0.05);
+            border: 1px solid rgba(255, 62, 62, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .alert-card h2 { color: var(--danger-red); margin-top: 0; display: flex; align-items: center; gap: 10px; }
+
+        .grid-safety {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .safety-item {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+        }
+
+        .safety-item:hover { border-color: var(--warning-orange); transform: translateY(-5px); }
+
+        .safety-item h3 { color: var(--warning-orange); margin-top: 0; }
+
+        .epi-section {
+            margin-top: 60px;
+            background: rgba(0, 210, 255, 0.03);
+            border: 1px solid rgba(0, 210, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        strong { color: var(--neon-blue); }
+
+        footer { text-align: center; padding: 60px; color: var(--text-gray); border-top: 1px solid rgba(255,255,255,0.05); }
+    </style>
+</head>
+<body>
+
+<nav class="nav-header">
+    <div class="nav-menu">
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="normas.html">Normas</a>
+        <a href="artigos.html">Artigos</a>
+    </div>
+</nav>
+
+<header>
+    <h1>Segurança & Vida</h1>
+    <p>Prevenção e proteção em ambientes energizados</p>
+</header>
+
+<div class="container">
+
+    <section class="alert-card">
+        <h2>⚠️ Perigo Pós-Tempestade</h2>
+        <p>Após chuvas intensas, o perigo permanece. Fios partidos podem energizar <strong>cercas de arame, portões metálicos e poças d'água</strong> por longas distâncias. Nunca se aproxime de fiação caída e evite contato com estruturas metálicas em áreas desacampadas até a verificação técnica.</p>
+    </section>
+
+    <div class="grid-safety">
+        <div class="safety-item">
+            <h3>🏠 Residências</h3>
+            <p>O uso do <strong>DR</strong> é obrigatório em áreas molhadas. Ele evita que um simples acidente com um eletrodoméstico se torne um choque fatal para adultos, crianças e animais.</p>
+        </div>
+        <div class="safety-item">
+            <h3>⚡ Passo de Tensão</h3>
+            <p>Em tempestades, se um raio cair perto, não corra. Mantenha os pés juntos e arraste-os no chão. A diferença de potencial entre pernas abertas pode eletrocutar você ou seu animal.</p>
+        </div>
+        <div class="safety-item">
+            <h3>🏭 Indústrias</h3>
+            <p>O risco de <strong>Arco Elétrico</strong> exige painéis testados (NBR IEC 61439) e o cumprimento rigoroso da <strong>NR-10</strong> para proteção do operador.</p>
+        </div>
+    </div>
+
+    <section class="epi-section">
+        <h2 style="color:var(--neon-blue)">🛡️ O Profissional e os EPIs</h2>
+        <p>Na PowerTech Industrial, nenhum serviço é iniciado sem o check-list completo de segurança. O uso de EPIs não é opcional, é lei.</p>
+        <div class="grid-safety" style="margin-top:20px;">
+            <ul style="color:#cbd5e1">
+                <li><strong>Botas Dielétricas:</strong> Isolamento contra o solo.</li>
+                <li><strong>Luvas de Classe:</strong> Proteção direta nas mãos.</li>
+                <li><strong>Capacete Classe B:</strong> Proteção contra arcos e impactos.</li>
+            </ul>
+            <ul style="color:#cbd5e1">
+                <li><strong>Roupas FR:</strong> Tecidos que não propagam chamas.</li>
+                <li><strong>Vara de Manobra:</strong> Distanciamento seguro do ponto energizado.</li>
+                <li><strong>Sinalização LOTO:</strong> Travamento e etiquetagem de circuitos.</li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>POWERTECH INDUSTRIAL © 2026 | Segurança em Primeiro Lugar</p>
+</footer>
+
+</body>
+</html>
