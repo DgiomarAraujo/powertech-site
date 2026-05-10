@@ -1,1 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Normas e Segurança | PowerTech Industrial</title>
+    
+    <style>
+        :root { 
+            --deep-dark: #0a0e14; 
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --neon-blue: #00d2ff; 
+            --accent-blue: #0056b3; 
+            --text-gray: #a0aec0;
+            --pure-white: #ffffff;
+            --safety-orange: #ff6b00;
+        }
 
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            color: var(--pure-white); 
+            line-height: 1.7; 
+            background: radial-gradient(circle at top right, #111827, #0a0e14);
+            background-attachment: fixed;
+        }
+
+        /* Menu Superior */
+        .nav-header {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 210, 255, 0.1);
+            transition: 0.3s;
+            background: rgba(10, 14, 20, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-menu a:hover {
+            color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+        }
+
+        header { 
+            background: linear-gradient(180deg, rgba(0, 51, 102, 0.8), transparent);
+            padding: 100px 20px 60px; 
+            text-align: center; 
+            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+        }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 3em; 
+            text-transform: uppercase; 
+            letter-spacing: 6px; 
+            background: linear-gradient(to right, #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
+
+        /* Estilo das Seções Normativas */
+        .norma-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            transition: 0.3s;
+        }
+
+        .norma-section:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.1);
+        }
+
+        .norma-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--accent-blue);
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        h2 { color: var(--neon-blue); margin-top: 0; font-size: 1.8em; }
+        h3 { color: var(--safety-orange); margin-top: 30px; font-size: 1.3em; border-left: 3px solid var(--safety-orange); padding-left: 10px;}
+
+        p { color: #cbd5e1; text-align: justify; }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-item strong { color: var(--neon-blue); display: block; margin-bottom: 10px; }
+
+        .dica-box {
+            background: rgba(255, 107, 0, 0.05);
+            border: 1px dashed var(--safety-orange);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+
+        .dica-box h4 { color: var(--safety-orange); margin: 0 0 10px 0; text-transform: uppercase; }
+
+        footer { text-align: center; padding: 60px 20px; color: var(--text-gray); border-top: 1px solid rgba(255,255,255,0.05); }
+    </style>
+</head>
+<body>
+
+<nav class="nav-header">
+    <div class="nav-menu">
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="dicas.html">Dicas</a>
+        <a href="artigos.html">Artigos</a>
+    </div>
+</nav>
+
+<header>
+    <h1>Normas & Segurança</h1>
+</header>
+
+<div class="container">
+
+    <!-- NBR 5410 -->
+    <section class="norma-section">
+        <div class="norma-badge">NBR 5410 // BAIXA TENSÃO</div>
+        <h2>Instalações Elétricas de Precisão</h2>
+        <p>A principal diretriz para instalações até 1000V. É o alicerce de todo projeto seguro e eficiente.</p>
+        
+        <div class="info-grid">
+            <div class="info-item">
+                <strong>Origem & Globalização</strong>
+                Baseada na norma internacional <strong>IEC 60364</strong>, garantindo padrões globais de engenharia.
+            </div>
+            <div class="info-item">
+                <strong>Foco na Vida</strong>
+                Exige o uso de DR (Diferencial Residual) para evitar mortes por choque e DPS para proteger o patrimônio contra surtos.
+            </div>
+            <div class="info-item">
+                <strong>Desafio Brasil</strong>
+                O custo de componentes certificados e a cultura da "gambiarra" ainda são barreiras para a segurança total no país.
+            </div>
+        </div>
+    </section>
+
+    <!-- NBR 5419 -->
+    <section class="norma-section">
+        <div class="norma-badge">NBR 5419 // SPDA</div>
+        <h2>Proteção Contra Raios</h2>
+        <p>Regulamenta o SPDA (Sistema de Proteção contra Descargas Atmosféricas) em um dos países com maior incidência de raios do globo.</p>
+        
+        <div class="info-grid">
+            <div class="info-item">
+                <strong>Padrão Mundial</strong>
+                Totalmente alinhada à <strong>IEC 62305</strong>, utilizando cálculos complexos de gerenciamento de risco.
+            </div>
+            <div class="info-item">
+                <strong>Aterramento</strong>
+                Não é apenas uma haste. Exige malhas estruturais para dissipar correntes de descarga de altíssima magnitude.
+            </div>
+            <div class="info-item">
+                <strong>Desafio Brasil</strong>
+                A extensão territorial e a alta salinidade em áreas litorâneas exigem manutenção semestral, frequentemente ignorada.
+            </div>
+        </div>
+    </section>
+
+    <!-- NBR 16690 -->
+    <section class="norma-section">
+        <div class="norma-badge">NBR 16690 // SOLAR</div>
+        <h2>Sistemas Fotovoltaicos</h2>
+        <p>Normatiza o lado CC (Corrente Contínua) da energia solar, onde o risco de arco elétrico é crítico.</p>
+        
+        <div class="info-grid">
+            <div class="info-item">
+                <strong>Diferencial</strong>
+                Baseada na <strong>IEC 62446</strong>. Foca na proteção de bombeiros e técnicos durante manutenções sob sol pleno.
+            </div>
+            <div class="info-item">
+                <strong>Desafio Financeiro</strong>
+                Inversores de alta qualidade e proteção CC dedicada encarecem o projeto inicial, mas evitam incêndios catastróficos.
+            </div>
+        </div>
+    </section>
+
+    <!-- AS NRs -->
+    <h2 style="margin-top: 80px;">// Segurança do Profissional (NRs)</h2>
+    <p>Diferente das NBRs (que focam no equipamento), as NRs são Leis que garantem que o profissional volte para casa em segurança.</p>
+    
+    <div class="info-grid">
+        <div class="info-item">
+            <strong style="color:var(--safety-orange)">NR-10</strong>
+            Segurança em instalações e serviços em eletricidade. Proíbe o trabalho de pessoas não qualificadas.
+        </div>
+        <div class="info-item">
+            <strong style="color:var(--safety-orange)">NR-35</strong>
+            Trabalho em altura. Essencial para instalações de telhado (Solar) e torres (SPDA).
+        </div>
+        <div class="info-item">
+            <strong style="color:var(--safety-orange)">NR-12</strong>
+            Segurança no trabalho em máquinas e equipamentos industriais.
+        </div>
+    </div>
+
+    <!-- BOX DE DICAS -->
+    <div class="dica-box">
+        <h4>⚡ Dica de Engenharia PowerTech</h4>
+        <p><strong>Fator Piauí:</strong> No calor de Floriano, a NBR 5410 exige fatores de correção de temperatura severos. Um cabo dimensionado para o Sul pode derreter aqui com a mesma carga. Nós aplicamos rigorosamente o cálculo térmico local em cada projeto.</p>
+    </div>
+
+</div>
+
+<footer>
+    <p>POWERTECH INDUSTRIAL © 2026 | Rigor Técnico e Conformidade Normativa</p>
+</footer>
+
+</body>
+</html>
