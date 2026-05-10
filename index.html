@@ -495,12 +495,12 @@
 
         const API_KEY = "AIzaSyAiQd_F94XAdV4ShDMo9utnUq7Y-9Jc5Kk";
         
-        // Versão estável v1 com o sufixo -latest exigido pelo Google
-        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
+        // VOLTANDO PARA v1beta E USANDO O NOME PADRÃO DO MODELO
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
         const data = {
             contents: [{
-                parts: [{ text: `Você é o engenheiro assistente da PowerTech Industrial. Calcule a quantidade de painéis de 550W necessários para um consumo de ${consumo}kWh/mês em Floriano-PI (Irradiação média de 5.8). Seja profissional, direto e encerre convidando o cliente a entrar em contato com o Dgiomar pelo WhatsApp (89) 98104-9318.` }]
+                parts: [{ text: `Você é o assistente técnico da PowerTech Industrial. Calcule a quantidade de painéis de 550W necessários para um consumo de ${consumo}kWh/mês em Floriano-PI. Seja profissional, direto e convide para falar com Dgiomar no WhatsApp (89) 98104-9318.` }]
             }]
         };
 
@@ -514,14 +514,15 @@
             const json = await response.json();
             
             if (json.error) {
+                // EXIBE O ERRO REAL PARA NÓS VERMOS
                 resultadoDiv.innerText = "Nota técnica: " + json.error.message;
             } else if (json.candidates && json.candidates[0].content) {
                 resultadoDiv.innerText = json.candidates[0].content.parts[0].text;
             } else {
-                resultadoDiv.innerText = "Erro na resposta. Tente novamente em instantes.";
+                resultadoDiv.innerText = "Erro na resposta do Google. Tente novamente.";
             }
         } catch (error) {
-            resultadoDiv.innerText = "Erro de conexão. Verifique se o site está em HTTPS.";
+            resultadoDiv.innerText = "Erro de conexão. Verifique se seu site está em HTTPS.";
         } finally {
             btn.disabled = false;
             btn.innerText = "⚡ CALCULAR COM IA";
