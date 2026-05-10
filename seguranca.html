@@ -39,13 +39,12 @@
             background-attachment: fixed;
         }
 
-        /* BARRA SUPERIOR IGUAL À HOME (SEM NOME E COM BOTÕES À DIREITA) */
         .topbar {
             width: 100%;
             background: rgba(10, 14, 20, 0.6);
             border-bottom: 1px solid rgba(0, 210, 255, 0.1);
             display: flex;
-            justify-content: flex-end; /* Alinha os botões à direita */
+            justify-content: flex-end; 
             align-items: center;
             padding: 20px 30px;
             position: sticky;
@@ -136,16 +135,16 @@
         }
 
         .safety-item:hover { 
-            border-color: var(--warning-orange); 
+            border-color: var(--neon-blue); 
             transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(255, 145, 0, 0.1);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.1);
         }
 
         .safety-item h3 { 
-            color: var(--warning-orange); 
+            color: var(--neon-blue); 
             margin-bottom: 15px; 
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 145, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
             padding-bottom: 10px;
         }
 
@@ -232,22 +231,106 @@
         <p style="margin-bottom: 30px; color: #cbd5e1;">Na PowerTech Industrial, nenhum serviço é iniciado sem o check-list completo de segurança. O uso de EPIs não é opcional, é lei.</p>
         <div class="grid-safety">
             <ul>
-                <li><strong>Botas Dielétricas:</strong> Isolamento contra o solo.</li>
-                <li><strong>Luvas de Classe:</strong> Proteção direta nas mãos.</li>
+                <li><strong>Botas Dielétricas:</strong> Isolamento contra o solo (Classe E).</li>
+                <li><strong>Luvas de Classe:</strong> Proteção direta de acordo com a tensão.</li>
                 <li><strong>Capacete Classe B:</strong> Proteção contra arcos e impactos.</li>
             </ul>
             <ul>
-                <li><strong>Roupas FR:</strong> Tecidos que não propagam chamas (Anti-chama).</li>
-                <li><strong>Vara de Manobra:</strong> Distanciamento seguro do ponto energizado.</li>
-                <li><strong>Sinalização LOTO:</strong> Travamento e etiquetagem de circuitos.</li>
+                <li><strong>Roupas FR:</strong> Tecidos que não propagam chamas (ATPv).</li>
+                <li><strong>Vara de Manobra:</strong> Distanciamento seguro.</li>
+                <li><strong>Sinalização LOTO:</strong> Lockout e Tagout de circuitos.</li>
             </ul>
         </div>
     </section>
 
+    <h2 style="margin-top: 60px; color: var(--neon-blue); text-transform: uppercase;">⚡ 20 Dicas Essenciais de Segurança Elétrica</h2>
+    <div class="grid-safety" style="margin-top: 30px;">
+        <div class="safety-item">
+            <h3>01. Desenergização</h3>
+            <p>Sempre realize a <strong>Seccionadora</strong>, impedimento de reenergização e constatação de ausência de tensão antes de tocar em qualquer condutor.</p>
+        </div>
+        <div class="safety-item">
+            <h3>02. Dispositivo DR</h3>
+            <p>Instale o Interruptor Diferencial Residual (DR). Ele detecta fugas de corrente e desarma em milisegundos, salvando vidas contra choques diretos.</p>
+        </div>
+        <div class="safety-item">
+            <h3>03. Aterramento (PE)</h3>
+            <p>O fio terra não é enfeite. Ele é o caminho de menor resistência para correntes de falta. Use <strong>Terrômetro</strong> para garantir a eficácia conforme NBR 5410.</p>
+        </div>
+        <div class="safety-item">
+            <h3>04. Fator de Agrupamento</h3>
+            <p>Nunca sobrecarregue eletrodutos. O calor gerado por muitos fios juntos derrete o isolamento e causa incêndios por curto-circuito.</p>
+        </div>
+        <div class="safety-item">
+            <h3>05. Gambiarras Mortais</h3>
+            <p>Evite o uso de "Tês" e extensões definitivas. Conexões frouxas geram <strong>pontos quentes</strong> que são a maior causa de incêndios elétricos.</p>
+        </div>
+        <div class="safety-item">
+            <h3>06. Umidade x Eletricidade</h3>
+            <p>Água e eletricidade não se misturam. Nunca opere dispositivos elétricos com mãos ou pés descalços e úmidos.</p>
+        </div>
+        <div class="safety-item">
+            <h3>07. Inspeção Termográfica</h3>
+            <p>Realize inspeções periódicas em painéis. O calor invisível a olho nu revela conexões oxidadas ou disjuntores prestes a falhar.</p>
+        </div>
+        <div class="safety-item">
+            <h3>08. Módulos Solares</h3>
+            <p>Cuidado ao limpar painéis solares. Eles geram tensão em <strong>Corrente Contínua (DC)</strong> mesmo se o inversor estiver desligado. Risco de choque fatal.</p>
+        </div>
+        <div class="safety-item">
+            <h3>09. DPS (Surtos)</h3>
+            <p>Proteja seus equipamentos contra raios. O DPS desvia o surto de tensão para o aterramento antes que chegue à sua TV ou Computador.</p>
+        </div>
+        <div class="safety-item">
+            <h3>10. Identificação de Circuitos</h3>
+            <p>Quadros elétricos devem estar devidamente identificados. Em emergências, você precisa saber qual disjuntor desliga cada setor rapidamente.</p>
+        </div>
+        <div class="safety-item">
+            <h3>11. Ferramentas Isoladas</h3>
+            <p>Utilize apenas ferramentas com isolamento de <strong>1000V</strong> certificado. O cabo de borracha comum não garante proteção dielétrica.</p>
+        </div>
+        <div class="safety-item">
+            <h3>12. Arco Elétrico</h3>
+            <p>Nunca abra painéis industriais sem a vestimenta adequada. O calor de um arco elétrico pode ser quatro vezes superior à temperatura da superfície do sol.</p>
+        </div>
+        <div class="safety-item">
+            <h3>13. Manutenção de Baterias</h3>
+            <p>Baterias de sistemas Off-Grid liberam gases inflamáveis. Mantenha o local ventilado e use ferramentas que não gerem faíscas.</p>
+        </div>
+        <div class="safety-item">
+            <h3>14. Altura e Redes</h3>
+            <p>Ao trabalhar em telhados ou escadas, mantenha distância mínima de 3 metros das redes de alta tensão da concessionária.</p>
+        </div>
+        <div class="safety-item">
+            <h3>15. Disjuntores Corretos</h3>
+            <p>O disjuntor protege o <strong>fio</strong>, não o aparelho. Nunca troque um disjuntor por um de maior amperagem sem trocar a fiação correspondente.</p>
+        </div>
+        <div class="safety-item">
+            <h3>16. Conexões Estanques</h3>
+            <p>Em áreas externas e jardins, use caixas de passagem com grau de proteção <strong>IP66</strong> ou superior para evitar entrada de água.</p>
+        </div>
+        <div class="safety-item">
+            <h3>17. Cuidado com o Neutro</h3>
+            <p>O condutor neutro também pode estar energizado em sistemas desequilibrados. Trate-o com o mesmo respeito que trata a fase.</p>
+        </div>
+        <div class="safety-item">
+            <h3>18. Proteção de Crianças</h3>
+            <p>Use protetores de tomada em residências com crianças. A curiosidade infantil com objetos metálicos pode ser fatal em frações de segundo.</p>
+        </div>
+        <div class="safety-item">
+            <h3>19. Capacitor de Partida</h3>
+            <p>Cuidado ao manusear motores. Capacitores podem reter carga elétrica perigosa mesmo minutos após o motor ser desligado da rede.</p>
+        </div>
+        <div class="safety-item">
+            <h3>20. Chame um Profissional</h3>
+            <p>A eletricidade é invisível e silenciosa. Na dúvida, chame a <strong>PowerTech Industrial</strong>. O custo de um erro pode ser a sua vida.</p>
+        </div>
+    </div>
+
 </div>
 
 <footer>
-    POWERTECH INDUSTRIAL © 2026 | Segurança em Primeiro Lugar
+    POWERTECH INDUSTRIAL © 2026 | Tecnologia, Inovação e Segurança Normativa
 </footer>
 
 </body>
