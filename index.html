@@ -388,7 +388,7 @@
         <div class="ia-input-container">
             <input type="number" id="ia-consumo" placeholder="Digite seu consumo (Ex: 450)" style="margin-bottom: 15px; text-align: center;">
             <button id="ia-btn" onclick="chamarGemini()" class="btn-calc" style="width: 100%; justify-content: center;">
-                <span>⚡</span> CALCULULAR COM IA
+                <span>⚡</span> CALCULAR COM IA
             </button>
             <div id="ia-resultado"></div>
         </div>
@@ -481,52 +481,49 @@
 </footer>
 
 <script type="module">
+    // Importa a biblioteca oficial conforme sugerido na documentação
+    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
     async function chamarGemini() {
         const consumo = document.getElementById('ia-consumo').value;
         const resultadoDiv = document.getElementById('ia-resultado');
         const btn = document.getElementById('ia-btn');
 
-        if (!consumo) { alert("Por favor, informe o consumo mensal."); return; }
+        if (!consumo) { alert("Informe o consumo mensal."); return; }
 
         btn.disabled = true;
         btn.innerText = "CALCULANDO...";
         resultadoDiv.style.display = "block";
-        resultadoDiv.innerHTML = "<i>Conectando ao motor da PowerTech...</i>";
+        resultadoDiv.innerHTML = "<i>Autenticando com Google Cloud...</i>";
 
         const API_KEY = "AIzaSyAiQd_F94XAdV4ShDMo9utnUq7Y-9Jc5Kk";
-        
-        // Ajuste conforme a recomendação técnica: Usando v1 estável e gemini-1.5-flash
-        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-
-        const data = {
-            contents: [{
-                parts: [{ text: `Como assistente técnico da PowerTech Industrial em Floriano-PI, calcule a quantidade de painéis de 550W para um consumo de ${consumo}kWh/mês. Seja técnico e profissional.` }]
-            }]
-        };
 
         try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            const json = await response.json();
+            // Inicializa a IA usando o método oficial
+            const genAI = new GoogleGenerativeAI(API_KEY);
             
-            if (json.error) {
-                resultadoDiv.innerText = "Ação Necessária: " + json.error.message;
-            } else if (json.candidates && json.candidates[0].content) {
-                resultadoDiv.innerText = json.candidates[0].content.parts[0].text;
-            } else {
-                resultadoDiv.innerText = "O modelo não respondeu. Verifique se a API está ativa no Google Cloud.";
-            }
+            // Usamos o identificador estável que o suporte do Google exige
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+            const prompt = `Como assistente técnico da PowerTech Industrial em Floriano-PI, calcule quantos painéis de 550W são necessários para um consumo de ${consumo}kWh/mês. Seja direto e convide para falar com Dgiomar no WhatsApp.`;
+
+            const result = await model.generateContent(prompt);
+            const response = await result.response;
+            const text = response.text();
+            
+            // EXIBE O RESULTADO
+            resultadoDiv.innerText = text;
+
         } catch (error) {
-            resultadoDiv.innerText = "Erro de conexão. Verifique o HTTPS ou sua rede.";
+            // Se der erro de autenticação, detalha o que falta no console
+            resultadoDiv.innerText = "Erro Técnico: " + error.message;
+            console.error("Erro detalhado:", error);
         } finally {
             btn.disabled = false;
             btn.innerText = "⚡ CALCULAR COM IA";
         }
     }
+    // Garante que o botão no HTML encontre a função
     window.chamarGemini = chamarGemini;
 </script>
 
