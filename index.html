@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PowerTech Industrial | Engenharia e Soluções Tecnológicas</title>
+    <title>PowerTech Industrial | Engenharia e Alta Tecnologia</title>
     
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -12,182 +12,357 @@
     <link rel="shortcut icon" href="favicon.ico">
 
     <style>
-        :root { --primary-blue: #003366; --accent-blue: #0056b3; --whatsapp-green: #25d366; --light-bg: #f4f7f9; --text-dark: #333; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: var(--text-dark); line-height: 1.6; background-color: var(--light-bg); scroll-behavior: smooth; }
+        :root { 
+            --deep-dark: #0a0e14; 
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --neon-blue: #00d2ff; 
+            --accent-blue: #0056b3; 
+            --whatsapp-green: #25d366; 
+            --text-gray: #a0aec0;
+            --pure-white: #ffffff;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            color: var(--pure-white); 
+            line-height: 1.6; 
+            background: radial-gradient(circle at top right, #111827, #0a0e14);
+            background-attachment: fixed;
+            scroll-behavior: smooth;
+        }
         
-        header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); color: white; padding: 110px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); }
-        header h1 { margin: 0; font-size: 3.5em; text-transform: uppercase; letter-spacing: 3px; }
-        header p { font-size: 1.2em; opacity: 0.9; }
+        header { 
+            background: linear-gradient(180deg, rgba(0, 51, 102, 0.8), transparent);
+            padding: 140px 20px; 
+            text-align: center; 
+            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+        }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 4em; 
+            text-transform: uppercase; 
+            letter-spacing: 8px; 
+            background: linear-gradient(to right, #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.3));
+        }
+
+        header p { font-size: 1.3em; color: var(--text-gray); letter-spacing: 2px; }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
-        h2 { color: var(--primary-blue); font-size: 2.2em; border-left: 8px solid var(--accent-blue); padding-left: 15px; margin-bottom: 40px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 4px solid transparent; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--accent-blue); }
-        .card h3 { color: var(--accent-blue); margin-top: 0; font-size: 1.4em; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .card ul { padding-left: 20px; color: #555; font-size: 0.95em; }
-        .card li { margin-bottom: 8px; }
+        h2 { 
+            color: var(--neon-blue); 
+            font-size: 2.2em; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        h2::after { content: ''; flex: 1; height: 1px; background: rgba(0, 210, 255, 0.2); }
 
-        /* SEÇÃO DA CALCULADORA (DESTAQUE) */
-        .calc-section { text-align: center; padding: 50px 20px; background: #eef4ff; border-radius: 25px; margin: 40px 0; border: 1px solid #d1e3ff; }
-        .btn-calc { background: var(--primary-blue); color: white; padding: 20px 45px; text-decoration: none; border-radius: 12px; font-weight: bold; font-size: 1.2em; display: inline-block; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,51,102,0.2); }
-        .btn-calc:hover { background: var(--accent-blue); transform: scale(1.05); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
 
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); color: white; width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-        .whatsapp-float:hover { transform: scale(1.1); }
-        .whatsapp-float svg { width: 35px; height: 35px; fill: white; }
+        .card { 
+            background: var(--card-bg); 
+            padding: 35px; 
+            border-radius: 20px; 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-        .form-section { background: white; padding: 45px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px; }
-        form { display: flex; flex-direction: column; gap: 15px; }
-        input, textarea, select { padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 1em; width: 100%; box-sizing: border-box; }
-        button { background: var(--accent-blue); color: white; padding: 18px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.3s; }
-        button:hover { background: var(--primary-blue); }
+        .card:hover { 
+            transform: translateY(-10px) scale(1.02); 
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--neon-blue);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
 
-        footer { text-align: center; padding: 50px; background: #1a1a1a; color: #999; margin-top: 80px; }
-        footer a { color: #fff; text-decoration: none; margin: 0 10px; }
+        .card h3 { color: var(--neon-blue); margin-top: 0; font-size: 1.5em; text-transform: uppercase; }
+        .card ul { padding-left: 20px; color: var(--text-gray); }
+        .card li { margin-bottom: 10px; }
+
+        /* SEÇÃO DE FERRAMENTAS - TECH LOOK ATUALIZADA */
+        .calc-section { 
+            text-align: center; 
+            background: linear-gradient(45deg, rgba(0, 51, 102, 0.3), rgba(0, 210, 255, 0.1));
+            border-radius: 30px; 
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-calc { 
+            background: #003366; /* Azul escuro da imagem */
+            color: #ffffff; 
+            padding: 15px 35px; 
+            text-decoration: none; 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 1.1em; 
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-calc:hover { 
+            background: #004a94;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.3);
+        }
+
+        /* FAQ GLASS STYLE */
+        .faq-item { 
+            background: rgba(255, 255, 255, 0.02); 
+            margin-bottom: 15px; 
+            padding: 25px; 
+            border-radius: 12px; 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .faq-question { font-weight: bold; color: var(--neon-blue); display: block; margin-bottom: 10px; font-size: 1.1em; }
+        .faq-answer { color: var(--text-gray); }
+
+        /* ESSÊNCIA & MVV */
+        .mvv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .mvv-card { 
+            background: rgba(255, 255, 255, 0.02); 
+            padding: 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+            border: 1px solid rgba(0, 210, 255, 0.1); 
+        }
+
+        /* FORMULÁRIO DASHBOARD */
+        .form-section { 
+            background: rgba(0, 0, 0, 0.3); 
+            padding: 50px; 
+            border-radius: 30px; 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 50px; 
+        }
+
+        input, textarea, select { 
+            background: rgba(255, 255, 255, 0.05);
+            padding: 16px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 8px; 
+            font-size: 1em; 
+            width: 100%; 
+            color: white;
+            box-sizing: border-box;
+        }
+
+        input:focus { border-color: var(--neon-blue); outline: none; background: rgba(255, 255, 255, 0.08); }
+
+        button { 
+            background: linear-gradient(90deg, var(--accent-blue), var(--neon-blue));
+            color: white; 
+            padding: 20px; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 1.1em; 
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        button:hover { filter: brightness(1.2); letter-spacing: 1px; }
+
+        .whatsapp-float { 
+            position: fixed; bottom: 30px; right: 30px; 
+            background-color: var(--whatsapp-green); 
+            width: 65px; height: 65px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            z-index: 1000; transition: 0.3s;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 80px 20px; 
+            background: #05070a; 
+            color: #4a5568; 
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        footer a { color: var(--neon-blue); text-decoration: none; margin: 0 15px; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5em; letter-spacing: 4px; }
+        }
     </style>
 </head>
 <body>
 
-<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
-    <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.5-16.4-14.7-27.5-32.8-30.7-38.3-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.4-29.8-17-40.7-4.5-10.7-9-9.2-12.4-9.4-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank">
+    <svg viewBox="0 0 448 512" width="35" height="35" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.5-16.4-14.7-27.5-32.8-30.7-38.3-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.4-29.8-17-40.7-4.5-10.7-9-9.2-12.4-9.4-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
 </a>
 
 <header>
     <h1>PowerTech Industrial</h1>
-    <p>Engenharia de Precisão | CNPJ: 59.613.165/0001-81</p>
+    <p>Elétrica de Precisão | Floriano-PI | CNPJ: 59.613.165/0001-81</p>
 </header>
 
 <div class="container">
-    <h2>Especialidades PowerTech</h2>
     
+    <h2>// Especialidades Técnicas</h2>
     <div class="grid">
         <div class="card">
             <h3>Elétrica Residencial e Comercial</h3>
-            <p>Infraestrutura completa e segura para seu imóvel:</p>
             <ul>
                 <li>Projetos e execuções de novas instalações elétricas.</li>
                 <li>Reforma de quadros de distribuição e substituição de fiação.</li>
                 <li>Instalação de iluminação técnica e decorativa.</li>
-                <li>Adequação de circuitos para ar-condicionado e eletrodomésticos.</li>
             </ul>
         </div>
 
         <div class="card">
             <h3>Elétrica e Painéis Industriais</h3>
-            <p>Força e automação para processos produtivos:</p>
             <ul>
                 <li>Montagem de painéis elétricos (QGBT) e comandos de motores.</li>
-                <li>Instalação de bancos de capacitores para correção de fator de potência.</li>
-                <li>Manutenção preventiva e corretiva de máquinas industriais.</li>
-                <li>Projetos conforme normas técnicas <strong>NBR</strong>.</li>
+                <li>Bancos de capacitores para correção de fator de potência.</li>
+                <li>Manutenção preventiva conforme normas <strong>NBR</strong>.</li>
             </ul>
         </div>
 
         <div class="card">
             <h3>SPDA e Aterramento</h3>
-            <p>Proteção técnica contra descargas e surtos:</p>
             <ul>
                 <li>Instalação de sistemas de para-raios (SPDA).</li>
-                <li>Aterramento técnico com medição via <strong>Terrômetro Hikari</strong>.</li>
+                <li>Aterramento com medição via <strong>Terrômetro Hikari</strong>.</li>
                 <li>Laudos de continuidade e resistência de terra.</li>
-                <li>Vistorias e adequações de segurança elétrica.</li>
             </ul>
         </div>
 
         <div class="card">
             <h3>Energia Solar Fotovoltaica</h3>
-            <p>Máxima eficiência energética e economia:</p>
             <ul>
-                <li>Sistemas On-Grid e Off-Grid (com baterias).</li>
-                <li>Sistemas de bombeamento solar para áreas rurais.</li>
-                <li>Dimensionamento preciso para alta performance.</li>
+                <li>Sistemas On-Grid, Off-Grid e Bombeamento Solar.</li>
+                <li>Dimensionamento preciso para alta performance regional.</li>
             </ul>
         </div>
 
         <div class="card">
             <h3>Segurança e CFTV (Intelbras)</h3>
-            <p>Tecnologia de monitoramento avançada:</p>
             <ul>
-                <li>Câmeras Colorvu (coloridas 24h) e Inteligência Artificial.</li>
-                <li>Reconhecimento facial e leitura de placas veiculares.</li>
-                <li>Gestão remota via aplicativos Intelbras Guardian.</li>
+                <li>Câmeras Colorvu (24h color) e IA Intelbras.</li>
+                <li>Reconhecimento facial e monitoramento via Guardian.</li>
             </ul>
         </div>
 
         <div class="card">
             <h3>Automação e TI</h3>
-            <p>Ambientes inteligentes e conectividade robusta:</p>
             <ul>
                 <li>Integração <strong>Alexa / Google Home</strong> via Zigbee.</li>
-                <li>Montagem de Racks e cabeamento estruturado para dados.</li>
-                <li>Instalação de carregadores elétricos <strong>Wallbox</strong>.</li>
+                <li>Carregadores Wallbox e infraestrutura de rede.</li>
             </ul>
         </div>
     </div>
 
-    <div class="calc-section">
-        <h3>Central de Ferramentas Técnicas</h3>
-        <p>Utilize nossas calculadoras exclusivas para dimensionamento de projetos elétricos e solares.</p>
-        <a href="calculadoras.html" class="btn-calc">⚙️ ABRIR CALCULADORAS</a>
+    <div class="calc-section" style="padding: 60px 20px; margin: 40px 0; text-align: center;">
+        <h3 style="font-size: 1.5em; letter-spacing: 1px; color: #fff; margin-bottom: 15px;">Central de Ferramentas Técnicas</h3>
+        <p style="font-size: 1.1em; color: var(--text-gray); margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Utilize nossas calculadoras exclusivas para dimensionamento de projetos elétricos e solares.
+        </p>
+        <a href="calculadoras.html" class="btn-calc">
+            <span>⚙️</span> ABRIR CALCULADORAS
+        </a>
     </div>
 
-    <h2 style="margin-top: 80px;">Diferenciais Técnicos</h2>
+    <h2>// Perguntas Frequentes</h2>
+    <div class="faq-section">
+        <div class="faq-item">
+            <span class="faq-question">Vocês realizam o dimensionamento de motores e quadros de comando?</span>
+            <span class="faq-answer">Sim. Projetamos o quadro de comando (partida direta, estrela-triângulo ou soft-starter) e garantimos a proteção adequada dos condutores conforme a NBR 5410 e NR-10.</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-question">Multa por excedente reativo na conta industrial?</span>
+            <span class="faq-answer">Realizamos a análise técnica do seu fator de potência e instalamos bancos de capacitores para eliminar multas na conta da Equatorial Piauí.</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-question">Qual a importância da medição com terrômetro?</span>
+            <span class="faq-answer">O terrômetro garante que a resistência do terra está dentro das normas de segurança, protegendo equipamentos e pessoas.</span>
+        </div>
+    </div>
+
+    <h2>// Nossa Essência</h2>
+    <div class="mvv-grid">
+        <div class="mvv-card">
+            <h3>Missão</h3>
+            <p>Soluções de engenharia elétrica de alta precisão através de tecnologia de ponta.</p>
+        </div>
+        <div class="mvv-card">
+            <h3>Visão</h3>
+            <p>Ser referência em inovação técnica e energia renovável no Piauí.</p>
+        </div>
+        <div class="mvv-card">
+            <h3>Valores</h3>
+            <p>Rigor técnico, conformidade NBR e compromisso com a segurança.</p>
+        </div>
+    </div>
+
+    <h2>// Diferenciais Técnicos</h2>
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-        <div style="background: #eef4ff; padding: 20px; border-radius: 10px; text-align: center;">
-            <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Ferramental Premium</strong>
-            Execução com ferramentas líderes: <strong>DeWalt, Bosch e Stanley</strong>.
+        <div class="card" style="text-align: center;">
+            <strong style="color: var(--neon-blue);">Ferramental Premium</strong><br>
+            DeWalt, Bosch e Stanley para precisão absoluta.
         </div>
-        <div style="background: #eef4ff; padding: 20px; border-radius: 10px; text-align: center;">
-            <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Consultoria</strong>
-            Análise de demanda de carga e laudos de conformidade técnica.
+        <div class="card" style="text-align: center;">
+            <strong style="color: var(--neon-blue);">Consultoria</strong><br>
+            Laudos de conformidade e análise crítica de demanda.
         </div>
-        <div style="background: #eef4ff; padding: 20px; border-radius: 10px; text-align: center;">
-            <strong style="color: var(--primary-blue); display: block; margin-bottom: 10px;">Atuação Regional</strong>
-            Atendimento especializado em <strong>Floriano - Piauí</strong> e região.
+        <div class="card" style="text-align: center;">
+            <strong style="color: var(--neon-blue);">Parcerias</strong><br>
+            Instalação autorizada <strong>Intelbras e Weg</strong>.
         </div>
     </div>
 
-    <h2 style="margin-top: 80px;">Central de Atendimento</h2>
+    <h2 id="contato">// Terminal de Atendimento</h2>
     <div class="form-section">
         <div class="info">
-            <h3>PowerTech Industrial</h3>
-            <p>Sua parceira em engenharia e inovação tecnológica.</p>
+            <h3>PowerTech HQ</h3>
             <p><strong>📍 Local:</strong> Floriano - Piauí</p>
-            <p><strong>🏢 CNPJ:</strong> 59.613.165/0001-81</p>
             <p><strong>📞 WhatsApp:</strong> (89) 98104-9318</p>
             <p><strong>📧 E-mail:</strong> powertechfloriano@gmail.com</p>
-            <p><strong>Responsável:</strong> Dgiomar Cassemiro Araujo</p>
+            <p><strong>Gestão:</strong> Dgiomar Cassemiro Araujo</p>
         </div>
 
         <form action="https://formsubmit.co/powertechfloriano@gmail.com" method="POST">
-            <input type="text" name="nome" placeholder="Seu Nome Completo" required>
-            <input type="email" name="email" placeholder="Seu E-mail" required>
+            <input type="text" name="nome" placeholder="NOME DO REQUISITANTE" required>
+            <input type="email" name="email" placeholder="E-MAIL DE CONTATO" required>
             <select name="servico">
-                <option value="">Selecione o serviço</option>
-                <option value="Residencial">Elétrica Residencial / Comercial</option>
-                <option value="Solar">Energia Solar (On/Off/Bombeamento)</option>
-                <option value="Automação">Automação e Smart Home</option>
-                <option value="SPDA">SPDA e Aterramento</option>
-                <option value="Industrial">Elétrica Industrial e Painéis</option>
-                <option value="Segurança">CFTV e Segurança Intelbras</option>
+                <option value="">SELECIONE O PROTOCOLO</option>
+                <option value="Solar">ENERGIA SOLAR</option>
+                <option value="Industrial">ELÉTRICA INDUSTRIAL</option>
+                <option value="SPDA">SPDA / ATERRAMENTO</option>
+                <option value="Segurança">SEGURANÇA ELETRÔNICA</option>
             </select>
-            <textarea name="mensagem" placeholder="Como podemos ajudar no seu projeto?" required></textarea>
-            <input type="hidden" name="_next" value="https://dgiomararaujo.github.io/site-da-powertech/">
-            <button type="submit">Enviar Solicitação</button>
+            <textarea name="mensagem" placeholder="DETALHES DO PROJETO..." required></textarea>
+            <button type="submit">Transmitir Solicitação</button>
         </form>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 PowerTech Industrial | Responsável Técnico: Dgiomar Cassemiro Araujo</p>
+    <p>&copy; 2026 PowerTech Industrial | Engenharia e Tecnologia</p>
     <p>
-        <a href="index.html">Início</a> | 
-        <a href="calculadoras.html">Calculadoras</a> | 
-        <a href="privacidade.html">Política de Privacidade</a>
+        <a href="index.html">INÍCIO</a> | 
+        <a href="calculadoras.html">CALCULADORAS</a> | 
+        <a href="privacidade.html">PRIVACIDADE</a>
     </p>
 </footer>
 
 </body>
-</html>
+</html>	
