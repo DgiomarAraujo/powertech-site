@@ -358,7 +358,7 @@
             <h3>Energia Solar Fotovoltaica</h3>
             <ul>
                 <li>Sistemas On-Grid, Off-Grid e Bombeamento Solar.</li>
-                <li>Dimensionamento preciso para alta performance regional.</li>
+                <li>Dimensionamento preciso para alta performance regional. </li>
             </ul>
         </div>
 
@@ -380,9 +380,9 @@
     </div>
 
     <div class="calc-section">
-        <h3 style="font-size: 1.5em; letter-spacing: 1px; color: #fff; margin-bottom: 15px;">Dimensionamento Inteligente via IA</h3>
+        <h3 style="font-size: 1.5em; letter-spacing: 1px; color: #fff; margin-bottom: 15px;">Dimensionamento Inteligente via ChatGPT</h3>
         <p style="font-size: 1.1em; color: var(--text-gray); margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
-            Informe seu consumo mensal em kWh e nossa IA calculará o projeto solar ideal para Floriano-PI.
+            Informe seu consumo mensal em kWh e nossa IA calculará o projeto solar ideal para Floriano-PI. 
         </p>
         
         <div class="ia-input-container">
@@ -495,29 +495,27 @@
         btn.disabled = true;
         btn.innerHTML = "<span>⏳</span> PROCESSANDO...";
         resultadoDiv.style.display = "block";
-        resultadoDiv.innerHTML = "<i>Analisando dados climáticos e técnicos para Floriano-PI com ChatGPT...</i>";
+        resultadoDiv.innerHTML = "<i>Analisando dados técnicos para Floriano-PI com ChatGPT...</i>";
 
-        // CONFIGURAÇÃO: Insira sua chave da OpenAI aqui
-        const OPENAI_API_KEY = "SUA_CHAVE_OPENAI_AQUI";
+        const OPENAI_API_KEY = "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";
 
         try {
             const response = await fetch("https://api.openai.com/v1/chat/completions", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${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
-}`
+                    "Authorization": `Bearer ${OPENAI_API_KEY}`
                 },
                 body: JSON.stringify({
                     model: "gpt-3.5-turbo", 
                     messages: [
                         {
                             role: "system",
-                            content: "Você é o consultor técnico sênior da PowerTech Industrial. Contexto Local: Floriano, Piauí (Irradiação média: 5.8 kWh/m²/dia). Estilo de Resposta: Profissional, técnico e direto. Mencione normas NBR 5410 e NBR 16274. Convide para falar com Dgiomar no WhatsApp (89) 98104-9318."
+                            content: "Você é o consultor técnico sênior da PowerTech Industrial. Contexto Local: Floriano, Piauí. Use irradiação média de 5.8 kWh/m²/dia. Responda de forma técnica e direta, citando as normas NBR 5410 e NBR 16274. Finalize convidando para falar com Dgiomar no (89) 98104-9318."
                         },
                         {
                             role: "user",
-                            content: `Calcule a potência necessária (kWp), quantidade aproximada de painéis de 550W e área em m² para um consumo de ${consumo} kWh/mês em Floriano-PI.`
+                            content: `Faça o dimensionamento para um consumo de ${consumo} kWh/mês. Calcule kWp necessário, número de painéis de 550W e área necessária.`
                         }
                     ],
                     temperature: 0.7
@@ -529,12 +527,12 @@
             if (data.choices && data.choices.length > 0) {
                 resultadoDiv.innerText = data.choices[0].message.content;
             } else {
-                throw new Error("Resposta inválida da API.");
+                throw new Error("Erro na resposta da API.");
             }
 
         } catch (error) {
             console.error("Erro na PowerTech IA:", error);
-            resultadoDiv.innerText = "Nota técnica: Ocorreu uma oscilação na conexão com o ChatGPT. Por favor, tente novamente.";
+            resultadoDiv.innerText = "Nota técnica: Ocorreu uma falha na comunicação com o ChatGPT. Tente novamente em instantes.";
         } finally {
             btn.disabled = false;
             btn.innerHTML = "<span>⚡</span> CALCULAR COM IA";
