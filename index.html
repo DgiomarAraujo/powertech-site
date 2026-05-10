@@ -358,7 +358,7 @@
             <h3>Energia Solar Fotovoltaica</h3>
             <ul>
                 <li>Sistemas On-Grid, Off-Grid e Bombeamento Solar.</li>
-                <li>Dimensionamento preciso para alta performance regional.</li>
+                <li>Dimensionamento preciso para alta performance regional. </li>
             </ul>
         </div>
 
@@ -366,14 +366,14 @@
             <h3>Segurança e CFTV (Intelbras)</h3>
             <ul>
                 <li>Câmeras Colorvu (24h color) e IA Intelbras.</li>
-                <li>Reconhecimento facial e monitoramento via Guardian.</li>
+                <li>Reconhecimento facial e monitoramento via Guardian. [cite: 4]</li>
             </ul>
         </div>
 
         <div class="card">
             <h3>Automação e TI</h3>
             <ul>
-                <li>Integração <strong>Alexa / Google Home</strong> via Zigbee.</li>
+                <li>Integração <strong>Alexa / Google Home</strong> via Zigbee. [cite: 5]</li>
                 <li>Carregadores Wallbox e infraestrutura de rede.</li>
             </ul>
         </div>
@@ -382,7 +382,7 @@
     <div class="calc-section">
         <h3 style="font-size: 1.5em; letter-spacing: 1px; color: #fff; margin-bottom: 15px;">Dimensionamento Inteligente via IA</h3>
         <p style="font-size: 1.1em; color: var(--text-gray); margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
-            Informe seu consumo mensal em kWh e nossa IA calculará o projeto solar ideal para Floriano-PI.
+            Informe seu consumo mensal em kWh e nossa IA calculará o projeto solar ideal para Floriano-PI. 
         </p>
         
         <div class="ia-input-container">
@@ -481,6 +481,7 @@
 </footer>
 
 <script type="module">
+    // Importação via CDN oficial do Google (esm.run)
     import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
     async function chamarGemini() {
@@ -489,32 +490,35 @@
         const btn = document.getElementById('ia-btn');
         const consumo = consumoInput.value;
 
+        // Validação
         if (!consumo || consumo <= 0) { 
             alert("Por favor, informe um valor de consumo mensal válido."); 
             return; 
         }
 
+        // Interface: Estado de carregamento
         btn.disabled = true;
         btn.innerHTML = "<span>⏳</span> PROCESSANDO...";
         resultadoDiv.style.display = "block";
         resultadoDiv.innerHTML = "<i>Analisando dados climáticos e técnicos para Floriano-PI...</i>";
 
+        // CONFIGURAÇÃO: Insira sua chave gerada no AI Studio aqui
         const API_KEY = "AIzaSyBjO0OKsQG5pcj_OGWFQT-4JHekQKjplmM";
 
         try {
+            // Inicializa o SDK
             const genAI = new GoogleGenerativeAI(API_KEY);
             const model = genAI.getGenerativeModel({ 
                 model: "gemini-1.5-flash",
                 generationConfig: {
                     temperature: 0.7,
-                    topP: 0.95,
-                    topK: 40,
                     maxOutputTokens: 800,
                 }
             });
 
+            // Prompt otimizado para o seu negócio
             const prompt = `Atue como o consultor técnico sênior da PowerTech Industrial. 
-            Contexto Local: Floriano, Piauí (Irradiação média: 5.8 kWh/m²/dia).
+            Contexto Local: Floriano, Piauí (Irradiação média: 5.8 kWh/m²/dia). 
             Dados do Cliente: Consumo de ${consumo} kWh/mês.
             
             Tarefa Técnica:
@@ -523,23 +527,29 @@
             3. Estime a área necessária em m² para a instalação.
             
             Estilo de Resposta:
-            - Seja extremamente profissional, técnico e direto.
-            - Mencione que o dimensionamento segue as normas NBR 5410 e NBR 16274.
-            - Ao final, convide o cliente de forma educada para falar com Dgiomar no WhatsApp (89) 98104-9318 para um orçamento formal.`;
+            - Seja profissional, técnico e direto.
+            - Mencione as normas NBR 5410 e NBR 16274.
+            - Convide para falar com Dgiomar no WhatsApp (89) 98104-9318 para um orçamento formal.`;
 
+            // Execução da IA
             const result = await model.generateContent(prompt);
             const response = await result.response;
-            resultadoDiv.innerText = response.text();
+            const text = response.text();
+
+            // Exibição do resultado (InnerText mantém a formatação de linhas)
+            resultadoDiv.innerText = text;
 
         } catch (error) {
+            console.error("Erro na PowerTech IA:", error);
             resultadoDiv.innerText = "Nota técnica: Ocorreu uma oscilação na conexão. Por favor, tente novamente.";
-            console.error("Erro na API Gemini:", error);
         } finally {
+            // Restaura o botão
             btn.disabled = false;
             btn.innerHTML = "<span>⚡</span> CALCULAR COM IA";
         }
     }
 
+    // Expõe a função para o HTML (Necessário quando se usa type="module")
     window.chamarGemini = chamarGemini;
 </script>
 
