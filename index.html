@@ -14,7 +14,7 @@
     
     <title>PowerTech Industrial | Elétrica, Solar e Redes em Floriano-PI</title>
     <meta name="description" content="Engenharia Elétrica de precisão em Floriano, Barão de Grajaú e Sul do Piauí. Especialistas em Energia Solar, SPDA, Painéis Industriais e Cabeamento Estruturado. Atendimento técnico especializado NBR.">
-    <meta name="keywords" content="eletricista em floriano, energia solar floriano pi, cabeamento estruturado floriano, automação residencial piauí, eletricista industrial floriano, manutenção de para-raios pi, installation elétrica barão de grajaú, spda sul do piauí, projeto elétrico floriano">
+    <meta name="keywords" content="eletricista em floriano, energia solar floriano pi, cabeamento estruturado floriano, automação residencial piauí, eletricista industrial floriano, manutenção de para-raios pi, instalação elétrica barão de grajaú, spda sul do piauí, projeto elétrico floriano">
     <meta name="author" content="Dgiomar Cassemiro Araujo">
     <link rel="canonical" href="https://powertechindustrial.com.br/">
 
@@ -388,7 +388,7 @@
         <div class="ia-input-container">
             <input type="number" id="ia-consumo" placeholder="Digite seu consumo (Ex: 450)" style="margin-bottom: 15px; text-align: center;">
             <button id="ia-btn" onclick="chamarGemini()" class="btn-calc" style="width: 100%; justify-content: center;">
-                <span>⚡</span> CALCULAR COM IA
+                <span>⚡</span> CALCULULAR COM IA
             </button>
             <div id="ia-resultado"></div>
         </div>
@@ -491,16 +491,16 @@
         btn.disabled = true;
         btn.innerText = "CALCULANDO...";
         resultadoDiv.style.display = "block";
-        resultadoDiv.innerHTML = "<i>Conectando ao assistente PowerTech...</i>";
+        resultadoDiv.innerHTML = "<i>Conectando ao motor da PowerTech...</i>";
 
         const API_KEY = "AIzaSyAiQd_F94XAdV4ShDMo9utnUq7Y-9Jc5Kk";
         
-        // ENDEREÇO TÉCNICO EXATO (v1 estável com sufixo de versão específica)
-        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-001:generateContent?key=${API_KEY}`;
+        // Ajuste conforme a recomendação técnica: Usando v1 estável e gemini-1.5-flash
+        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
         const data = {
             contents: [{
-                parts: [{ text: `Você é o engenheiro da PowerTech Industrial. Calcule a quantidade de painéis de 550W necessários para um consumo de ${consumo}kWh/mês em Floriano-PI (Irradiação média de 5.8). Seja profissional, direto e convide para falar com Dgiomar no WhatsApp (89) 98104-9318.` }]
+                parts: [{ text: `Como assistente técnico da PowerTech Industrial em Floriano-PI, calcule a quantidade de painéis de 550W para um consumo de ${consumo}kWh/mês. Seja técnico e profissional.` }]
             }]
         };
 
@@ -514,20 +514,19 @@
             const json = await response.json();
             
             if (json.error) {
-                resultadoDiv.innerText = "Nota técnica: " + json.error.message;
+                resultadoDiv.innerText = "Ação Necessária: " + json.error.message;
             } else if (json.candidates && json.candidates[0].content) {
                 resultadoDiv.innerText = json.candidates[0].content.parts[0].text;
             } else {
-                resultadoDiv.innerText = "Resposta pendente. Tente novamente em 1 minuto.";
+                resultadoDiv.innerText = "O modelo não respondeu. Verifique se a API está ativa no Google Cloud.";
             }
         } catch (error) {
-            resultadoDiv.innerText = "Erro de conexão. Verifique se o seu site está rodando em HTTPS.";
+            resultadoDiv.innerText = "Erro de conexão. Verifique o HTTPS ou sua rede.";
         } finally {
             btn.disabled = false;
             btn.innerText = "⚡ CALCULAR COM IA";
         }
     }
-    // Exporta para o botão HTML funcionar
     window.chamarGemini = chamarGemini;
 </script>
 
