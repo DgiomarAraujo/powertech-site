@@ -1,1 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós | PowerTech Industrial</title>
+    
+    <style>
+        :root { 
+            --deep-dark: #0a0e14; 
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --neon-blue: #00d2ff; 
+            --accent-blue: #0056b3; 
+            --whatsapp-green: #25d366; 
+            --text-gray: #a0aec0;
+            --pure-white: #ffffff;
+        }
 
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            color: var(--pure-white); 
+            line-height: 1.8; 
+            background: radial-gradient(circle at top right, #111827, #0a0e14);
+            background-attachment: fixed;
+            scroll-behavior: smooth;
+        }
+
+        /* Barra de Navegação */
+        .nav-header {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 210, 255, 0.1);
+            transition: all 0.3s ease;
+            background: rgba(10, 14, 20, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-menu a:hover {
+            color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+            background: rgba(0, 210, 255, 0.08);
+        }
+
+        header { 
+            background: linear-gradient(180deg, rgba(0, 51, 102, 0.8), transparent);
+            padding: 100px 20px 60px; 
+            text-align: center; 
+            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+        }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 3em; 
+            text-transform: uppercase; 
+            letter-spacing: 6px; 
+            background: linear-gradient(to right, #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container { max-width: 1000px; margin: auto; padding: 60px 20px; }
+
+        .sobre-content {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 { 
+            color: var(--neon-blue); 
+            font-size: 1.8em; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            margin-top: 40px;
+            border-left: 4px solid var(--neon-blue);
+            padding-left: 15px;
+        }
+
+        p {
+            color: #cbd5e1;
+            margin-bottom: 25px;
+            text-align: justify;
+            font-size: 1.1rem;
+        }
+
+        strong { color: var(--neon-blue); }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.08) 0%, rgba(0, 86, 179, 0.08) 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        .highlight-box h3 {
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+        }
+
+        .whatsapp-float { 
+            position: fixed; bottom: 30px; right: 30px; 
+            background-color: var(--whatsapp-green); 
+            width: 65px; height: 65px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            z-index: 1000; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 60px 20px; 
+            background: #05070a; 
+            color: #4a5568; 
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        footer a { color: var(--neon-blue); text-decoration: none; margin: 0 15px; }
+
+        @media (max-width: 768px) {
+            .nav-header { position: relative; top: 0; right: 0; padding: 20px; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; }
+            .sobre-content { padding: 25px; }
+            header h1 { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank">
+    <svg viewBox="0 0 448 512" width="35" height="35" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.5-16.4-14.7-27.5-32.8-30.7-38.3-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.4-29.8-17-40.7-4.5-10.7-9-9.2-12.4-9.4-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+</a>
+
+<nav class="nav-header">
+    <div class="nav-menu">
+        <a href="index.html">Início</a>
+        <a href="calculadoras.html">Calculadoras</a>
+        <a href="dicas.html">Dicas</a>
+        <a href="artigos.html">Artigos</a>
+        <a href="#footer">Contato</a>
+    </div>
+</nav>
+
+<header>
+    <h1>Nossa História</h1>
+</header>
+
+<div class="container">
+    <div class="sobre-content">
+        <h2>// Quem Somos</h2>
+        <p>
+            A <strong>PowerTech Industrial</strong> é um centro de engenharia de precisão e inovação tecnológica sediado em Floriano, Piauí. Fundada sob a gestão de <strong>Dgiomar Cassemiro Araujo</strong>, nossa organização nasceu com o propósito de elevar o padrão das instalações elétricas na região, integrando o rigor das normas técnicas brasileiras (<strong>NBR</strong>) com o que há de mais avançado em tecnologia mundial.
+        </p>
+
+        <p>
+            Nossa atuação é pautada pelo compromisso inegociável com a segurança e a eficiência energética. Entendemos que cada projeto exige uma abordagem técnica única. Por isso, investimos continuamente em um <strong>ferramental premium</strong> e equipamentos de medição de alta precisão, como o Terrômetro Hikari, garantindo conformidade absoluta.
+        </p>
+
+        <div class="highlight-box">
+            <h3>// Nossos Pilares de Expertise</h3>
+            <ul>
+                <li><strong>Infraestrutura Industrial:</strong> Montagem de painéis QGBT e correção de fator de potência, otimizando o consumo de grandes motores.</li>
+                <li><strong>Energia Renovável:</strong> Protagonistas na transição energética com projetos fotovoltaicos On-Grid e Off-Grid de alta performance.</li>
+                <li><strong>Inteligência e Segurança:</strong> Parceiros Intelbras para soluções de IA, reconhecimento facial e automação residencial (Smart Home).</li>
+            </ul>
+        </div>
+
+        <h2>// Nossa Essência</h2>
+        <p>
+            Nossa <strong>Missão</strong> é entregar soluções de engenharia que protejam vidas e patrimônios. Visualizamos um futuro onde a PowerTech será a principal referência em inovação técnica e energia limpa no Piauí, reconhecida pela consultoria crítica e ética.
+        </p>
+
+        <p>
+            Nossos valores são inabaláveis: rigor técnico, conformidade total com a <strong>NBR 5410 e NR-10</strong>, e transparência absoluta. Cada cabo passado e cada disjuntor dimensionado carrega a assinatura de uma empresa que respeita a longevidade da infraestrutura nacional.
+        </p>
+        
+        <p style="text-align: center; color: var(--neon-blue); font-weight: bold; margin-top: 40px;">
+            PowerTech Industrial: Onde a eletricidade encontra a alta tecnologia.
+        </p>
+    </div>
+</div>
+
+<footer id="footer">
+    <p>&copy; 2026 PowerTech Industrial | Engenharia e Tecnologia</p>
+    <p>
+        <a href="index.html">INÍCIO</a> | 
+        <a href="calculadoras.html">CALCULADORAS</a> | 
+        <a href="privacidade.html">PRIVACIDADE</a>
+    </p>
+</footer>
+
+</body>
+</html>
