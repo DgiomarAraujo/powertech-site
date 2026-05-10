@@ -495,12 +495,12 @@
 
         const API_KEY = "AIzaSyAiQd_F94XAdV4ShDMo9utnUq7Y-9Jc5Kk";
         
-        // CORREÇÃO DEFINITIVA: URL v1 (estável) e modelo gemini-1.5-flash
-        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        // A URL correta para 2026 é v1 (estável) com o modelo flash-latest
+        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
 
         const data = {
             contents: [{
-                parts: [{ text: `Você é o engenheiro da PowerTech Industrial. Calcule quantos painéis de 550W são necessários para um consumo de ${consumo}kWh/mês em Floriano-PI. Seja direto, técnico e profissional.` }]
+                parts: [{ text: `Você é o assistente técnico da PowerTech Industrial. Calcule quantos painéis de 550W são necessários para um consumo de ${consumo}kWh/mês em Floriano-PI. Seja direto e convide para falar com Dgiomar pelo WhatsApp.` }]
             }]
         };
 
@@ -514,11 +514,13 @@
             const json = await response.json();
             
             if (json.error) {
+                // Aqui o Google nos dirá se a chave está bloqueada ou se a API está desativada
                 resultadoDiv.innerText = "Nota técnica do Google: " + json.error.message;
             } else if (json.candidates && json.candidates[0].content) {
+                // SUCESSO: A IA responde
                 resultadoDiv.innerText = json.candidates[0].content.parts[0].text;
             } else {
-                resultadoDiv.innerText = "O servidor demorou a responder. Tente novamente.";
+                resultadoDiv.innerText = "Resposta vazia. Verifique as permissões da chave API.";
             }
         } catch (error) {
             resultadoDiv.innerText = "Erro de conexão. Verifique se o site está em HTTPS.";
@@ -527,7 +529,6 @@
             btn.innerText = "⚡ CALCULAR COM IA";
         }
     }
-    // Exporta para o escopo global para o botão HTML funcionar
     window.chamarGemini = chamarGemini;
 </script>
 
