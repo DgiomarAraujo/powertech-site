@@ -495,12 +495,12 @@
 
         const API_KEY = "AIzaSyAiQd_F94XAdV4ShDMo9utnUq7Y-9Jc5Kk";
         
-        // AJUSTE: Usando a URL estável v1 e o nome correto do modelo
-        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        // Versão estável v1 com o sufixo -latest exigido pelo Google
+        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
 
         const data = {
             contents: [{
-                parts: [{ text: `Você é o engenheiro assistente da PowerTech Industrial. Calcule a quantidade de painéis de 550W necessários para um consumo de ${consumo}kWh/mês em Floriano-PI (Irradiação média de 5.8). Seja profissional, direto e convide para falar com Dgiomar no WhatsApp.` }]
+                parts: [{ text: `Você é o engenheiro assistente da PowerTech Industrial. Calcule a quantidade de painéis de 550W necessários para um consumo de ${consumo}kWh/mês em Floriano-PI (Irradiação média de 5.8). Seja profissional, direto e encerre convidando o cliente a entrar em contato com o Dgiomar pelo WhatsApp (89) 98104-9318.` }]
             }]
         };
 
@@ -516,7 +516,6 @@
             if (json.error) {
                 resultadoDiv.innerText = "Nota técnica: " + json.error.message;
             } else if (json.candidates && json.candidates[0].content) {
-                // Exibe a resposta técnica da IA
                 resultadoDiv.innerText = json.candidates[0].content.parts[0].text;
             } else {
                 resultadoDiv.innerText = "Erro na resposta. Tente novamente em instantes.";
@@ -528,7 +527,7 @@
             btn.innerText = "⚡ CALCULAR COM IA";
         }
     }
-    // Garante que o botão HTML consiga disparar a função
+    // Exporta a função para o botão HTML
     window.chamarGemini = chamarGemini;
 </script>
 
