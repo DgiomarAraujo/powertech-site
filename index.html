@@ -481,51 +481,65 @@
 </footer>
 
 <script type="module">
-    // Importa a biblioteca oficial estável
     import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
     async function chamarGemini() {
-        const consumo = document.getElementById('ia-consumo').value;
+        const consumoInput = document.getElementById('ia-consumo');
         const resultadoDiv = document.getElementById('ia-resultado');
         const btn = document.getElementById('ia-btn');
+        const consumo = consumoInput.value;
 
-        if (!consumo) { alert("Informe o consumo mensal."); return; }
+        if (!consumo || consumo <= 0) { 
+            alert("Por favor, informe um valor de consumo mensal válido."); 
+            return; 
+        }
 
         btn.disabled = true;
-        btn.innerText = "CALCULANDO...";
+        btn.innerHTML = "<span>⏳</span> PROCESSANDO...";
         resultadoDiv.style.display = "block";
-        resultadoDiv.innerHTML = "<i>Gerando dimensionamento técnico para Floriano-PI...</i>";
+        resultadoDiv.innerHTML = "<i>Analisando dados climáticos e técnicos para Floriano-PI...</i>";
 
-        // Nova chave gerada no AI Studio integrada
-        const API_KEY = "AIzaSyAhaoCLqnTiBo7Mwm1CMqEFOLuzh5oSmDw";
+        const API_KEY = "AIzaSyAiQd_F94XAdV4ShDMo9utnUq7Y-9Jc5Kk";
 
         try {
             const genAI = new GoogleGenerativeAI(API_KEY);
-            
-            // O modelo gemini-1.5-flash é o padrão ouro para cálculos rápidos
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+            const model = genAI.getGenerativeModel({ 
+                model: "gemini-1.5-flash",
+                generationConfig: {
+                    temperature: 0.7,
+                    topP: 0.95,
+                    topK: 40,
+                    maxOutputTokens: 800,
+                }
+            });
 
-            const prompt = `Você é o engenheiro da PowerTech Industrial em Floriano-PI. 
-            O cliente consome ${consumo}kWh/mês. Calcule a quantidade de painéis de 550W necessários.
-            Considere a irradiação solar de Floriano (5.8 kWh/m²/dia). 
-            Seja direto e convide para falar com Dgiomar no WhatsApp (89) 98104-9318.`;
+            const prompt = `Atue como o consultor técnico sênior da PowerTech Industrial. 
+            Contexto Local: Floriano, Piauí (Irradiação média: 5.8 kWh/m²/dia).
+            Dados do Cliente: Consumo de ${consumo} kWh/mês.
+            
+            Tarefa Técnica:
+            1. Calcule a potência total necessária do sistema (kWp).
+            2. Calcule a quantidade aproximada de painéis fotovoltaicos de 550W.
+            3. Estime a área necessária em m² para a instalação.
+            
+            Estilo de Resposta:
+            - Seja extremamente profissional, técnico e direto.
+            - Mencione que o dimensionamento segue as normas NBR 5410 e NBR 16274.
+            - Ao final, convide o cliente de forma educada para falar com Dgiomar no WhatsApp (89) 98104-9318 para um orçamento formal.`;
 
             const result = await model.generateContent(prompt);
             const response = await result.response;
-            const text = response.text();
-            
-            // Exibe o dimensionamento técnico na tela
-            resultadoDiv.innerText = text;
+            resultadoDiv.innerText = response.text();
 
         } catch (error) {
-            resultadoDiv.innerText = "Nota técnica: " + error.message;
-            console.error("Erro detalhado:", error);
+            resultadoDiv.innerText = "Nota técnica: Ocorreu uma oscilação na conexão. Por favor, tente novamente.";
+            console.error("Erro na API Gemini:", error);
         } finally {
             btn.disabled = false;
-            btn.innerText = "⚡ CALCULAR COM IA";
+            btn.innerHTML = "<span>⚡</span> CALCULAR COM IA";
         }
     }
-    // Necessário para o botão HTML encontrar a função dentro do módulo JS
+
     window.chamarGemini = chamarGemini;
 </script>
 
