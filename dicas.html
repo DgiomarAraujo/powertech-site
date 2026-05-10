@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -59,12 +58,14 @@
             text-decoration: none;
             transition: .3s;
             font-size: .9rem;
+            text-transform: uppercase;
+            font-weight: bold;
         }
         .menu a:hover { color: var(--neon); }
 
         /* Cabeçalho */
         header { 
-            padding: 60px 20px 20px; 
+            padding: 100px 20px 20px; 
             text-align: center; 
         }
         header h1 { 
@@ -202,7 +203,8 @@
         }
 
         @media(max-width:768px){
-            .topbar { flex-direction: column; gap: 15px; }
+            .topbar { flex-direction: column; gap: 15px; padding: 15px; }
+            header { padding-top: 60px; }
             header h1 { font-size: 2rem; }
             .artigo-section { padding: 25px; }
         }
@@ -213,10 +215,11 @@
 <nav class="topbar">
     <div class="logo">⚡ POWERTECH INDUSTRIAL</div>
     <div class="menu">
-        <a href="#">Dicas</a>
-        <a href="#">Artigos</a>
-        <a href="#">Normas</a>
-        <a href="#">Segurança</a>
+        <a href="index.html">Início</a>
+        <a href="dicas.html">Dicas</a>
+        <a href="artigos.html">Artigos</a>
+        <a href="normas.html">Normas</a>
+        <a href="seguranca.html">Segurança</a>
     </div>
 </nav>
 
@@ -282,8 +285,6 @@
         <div class="artigo-content">
             <p>A Inteligência Artificial (IA) deixou de ser um conceito de ficção para se tornar o cérebro das <strong>Smart Grids</strong> brasileiras. O principal desafio enfrentado pelos engenheiros hoje é o processamento do gigantesco volume de dados gerado por medidores inteligentes. Com a IA, sistemas de <em>Machine Learning</em> conseguem prever picos de demanda com uma precisão superior a 95%, permitindo que concessionárias ajustem a carga de transformadores em tempo real.</p>
             
-            
-
             <p>Um exemplo real é a implementação de algoritmos de <strong>manutenção preditiva</strong> em subestações de grande porte. Em vez de trocar um disjuntor por tempo de uso, a IA analisa a assinatura elétrica e o calor dissipado, emitindo um alerta apenas quando o componente apresenta comportamento anômalo. Isso reduz custos operacionais em até 30% e evita apagões não programados que custam milhões à indústria.</p>
             
             <div class="highlight-box">
@@ -301,8 +302,6 @@
         <div class="artigo-content">
             <p>O Brasil vive uma expansão acelerada na venda de veículos elétricos (VE), mas a infraestrutura elétrica de prédios antigos e redes de distribuição não foi projetada para essa demanda súbita. O carregamento de um único carro elétrico em modo rápido pode equivaler ao consumo de dez casas populares ligadas simultaneamente. Isso gera um desafio crítico de <strong>estabilidade de fase</strong> e aumento de harmônicas na rede.</p>
             
-            
-
             <p>O desafio técnico reside no fato de que o carregamento concentrado (geralmente à noite) pode sobrecarregar transformadores de bairro. Além disso, a norma <strong>NBR 17019</strong> traz diretrizes rigorosas sobre as instalações elétricas para recarga, exigindo dispositivos de proteção contra surtos (DPS) e interruptores diferenciais residenciais (DR) do tipo B, que são capazes de detectar fugas de corrente contínua — algo que os DRs comuns (Tipo AC ou A) falham em proteger com segurança total.</p>
             
             <div class="highlight-box">
