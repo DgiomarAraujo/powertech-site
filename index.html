@@ -481,6 +481,7 @@
 </footer>
 
 <script type="module">
+    // Importa a biblioteca oficial estável
     import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
     async function chamarGemini() {
@@ -491,34 +492,40 @@
         if (!consumo) { alert("Informe o consumo mensal."); return; }
 
         btn.disabled = true;
-        btn.innerText = "PROCESSANDO...";
+        btn.innerText = "CALCULANDO...";
         resultadoDiv.style.display = "block";
-        resultadoDiv.innerHTML = "<i>Sincronizando com PowerTech Cloud...</i>";
+        resultadoDiv.innerHTML = "<i>Gerando dimensionamento técnico para Floriano-PI...</i>";
 
-        const API_KEY = "AIzaSyAiQd_F94XAdV4ShDMo9utnUq7Y-9Jc5Kk";
+        // Nova chave gerada no AI Studio integrada
+        const API_KEY = "AIzaSyAhaoCLqnTiBo7Mwm1CMqEFOLuzh5oSmDw";
 
         try {
             const genAI = new GoogleGenerativeAI(API_KEY);
             
-            // Usando o alias 'latest' conforme padrões técnicos de compatibilidade de 2026
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+            // O modelo gemini-1.5-flash é o padrão ouro para cálculos rápidos
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-            const prompt = `Você é o assistente técnico da PowerTech Industrial em Floriano-PI. Calcule a quantidade de painéis de 550W necessários para um consumo de ${consumo}kWh/mês. Seja técnico, use termos como 'string inverter' e convide para falar com Dgiomar no WhatsApp.`;
+            const prompt = `Você é o engenheiro da PowerTech Industrial em Floriano-PI. 
+            O cliente consome ${consumo}kWh/mês. Calcule a quantidade de painéis de 550W necessários.
+            Considere a irradiação solar de Floriano (5.8 kWh/m²/dia). 
+            Seja direto e convide para falar com Dgiomar no WhatsApp (89) 98104-9318.`;
 
             const result = await model.generateContent(prompt);
             const response = await result.response;
             const text = response.text();
             
+            // Exibe o dimensionamento técnico na tela
             resultadoDiv.innerText = text;
 
         } catch (error) {
-            resultadoDiv.innerText = "Nota técnica: O modelo ainda não foi liberado para sua chave. Se o erro 404 persistir, crie uma nova chave no Google AI Studio.";
-            console.error(error);
+            resultadoDiv.innerText = "Nota técnica: " + error.message;
+            console.error("Erro detalhado:", error);
         } finally {
             btn.disabled = false;
             btn.innerText = "⚡ CALCULAR COM IA";
         }
     }
+    // Necessário para o botão HTML encontrar a função dentro do módulo JS
     window.chamarGemini = chamarGemini;
 </script>
 
