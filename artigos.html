@@ -1,1 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resenha Técnica | PowerTech Industrial</title>
+    <style>
+        :root { 
+            --deep-dark: #0a0e14; 
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --neon-blue: #00d2ff; 
+            --accent-blue: #0056b3; 
+            --text-gray: #a0aec0;
+            --pure-white: #ffffff;
+            --warning-amber: #ffb100;
+        }
 
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            color: var(--pure-white); 
+            line-height: 1.8; 
+            background: radial-gradient(circle at top right, #111827, #0a0e14);
+            background-attachment: fixed;
+        }
+
+        .container { max-width: 1100px; margin: auto; padding: 60px 20px; }
+
+        .artigo-master {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 210, 255, 0.1);
+            border-radius: 30px;
+            padding: 50px;
+            backdrop-filter: blur(15px);
+        }
+
+        .header-artigo {
+            border-left: 5px solid var(--neon-blue);
+            padding-left: 25px;
+            margin-bottom: 40px;
+        }
+
+        .header-artigo h1 {
+            font-size: 2.5em;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .header-artigo span {
+            color: var(--text-gray);
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        h2 { 
+            color: var(--neon-blue); 
+            margin-top: 40px; 
+            font-size: 1.6em; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        p {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 1.1rem;
+        }
+
+        .highlight-box {
+            background: rgba(0, 210, 255, 0.05);
+            border: 1px dashed var(--neon-blue);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 35px 0;
+        }
+
+        .warning-box {
+            background: rgba(255, 177, 0, 0.05);
+            border-left: 4px solid var(--warning-amber);
+            padding: 20px;
+            margin: 30px 0;
+            color: #ffd08a;
+        }
+
+        .footer-creditos {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9em;
+            color: var(--text-gray);
+        }
+
+        strong { color: var(--neon-blue); }
+
+        @media (max-width: 768px) {
+            .artigo-master { padding: 25px; }
+            .header-artigo h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <article class="artigo-master">
+        <div class="header-artigo">
+            <span>Resenha Técnica Especializada // Maio 2026</span>
+            <h1>O Paradoxo da Transição Energética</h1>
+            <p>IA, Eletromobilidade e os Desafios da Rede Elétrica Brasileira</p>
+        </div>
+
+        <h2>01. A Convergência Tecnológica</h2>
+        <p>
+            Vivemos um momento singular na engenharia elétrica: a convergência entre a descarbonização (Veículos Elétricos e Sistemas Fotovoltaicos) e a digitalização extrema (Inteligência Artificial). Embora essas tecnologias prometam um futuro sustentável, elas impõem à malha de distribuição brasileira um estresse sem precedentes, revelando fragilidades técnicas que vão desde a qualidade da energia até a precariedade da infraestrutura física.
+        </p>
+
+        <h2>02. O Ruído Silencioso: Inversores e VEs</h2>
+        <p>
+            Um dos maiores desafios técnicos discutidos hoje na engenharia elétrica é a <strong>Qualidade da Energia (QE)</strong>. Sistemas fotovoltaicos e carregadores de veículos elétricos (VEs) utilizam eletrônica de potência baseada em chaves semicondutores de alta velocidade. 
+        </p>
+        <p>
+            Os inversores fotovoltaicos, embora eficientes, são fontes inerentes de <strong>harmônicas e ruídos de alta frequência (EMI)</strong>. Quando centenas de inversores injetam energia simultaneamente em uma rede de distribuição, eles podem causar distorções na forma de onda da tensão. O resultado? Aquecimento excessivo de transformadores da concessionária, atuação indevida de proteções e falha prematura de equipamentos eletrônicos sensíveis em unidades consumidoras vizinhas.
+        </p>
+
+        <div class="warning-box">
+            <strong>ALERTA TÉCNICO:</strong> Carregadores de VEs comportam-se como cargas não-lineares pesadas. A injeção de ruído de comutação ocorre justamente no momento em que a rede atinge seu pico de demanda noturna, exacerbando o desequilíbrio de fases.
+        </div>
+
+        <h2>03. A Malha de Distribuição Brasileira</h2>
+        <p>
+            A malha de distribuição do Brasil foi projetada para um modelo de consumo passivo do século XX. A inserção massiva de carregadores de VEs traz o risco de sobrecarga catastrófica em transformadores de bairro. Um carregador rápido (DC) pode consumir o equivalente a dez residências de padrão médio ligadas simultaneamente.
+        </p>
+        <p>
+            Em muitas regiões, a malha é <strong>precária</strong>, com alta impedância e baixa capacidade de curto-circuito. Isso gera um cenário de instabilidade: a entrada de uma carga pesada causa quedas de tensão severas (flicker), enquanto a injeção solar excessiva em horários de baixa carga pode elevar a tensão acima dos limites da ANEEL, forçando o desligamento de inversores por proteção.
+        </p>
+
+        <div class="highlight-box">
+            <h3>Consumo Oculto da IA</h3>
+            <p>
+                Enquanto focamos nas ruas, os Data Centers que processam IAs enfrentam um dilema energético e hídrico. Uma consulta em modelos de linguagem avançados consome até 10 vezes mais energia que uma pesquisa comum. Além disso, o resfriamento desses servidores exige bilhões de litros de água doce, criando um novo gargalo de sustentabilidade.
+            </p>
+        </div>
+
+        <h2>04. Conclusão e Perspectivas</h2>
+        <p>
+            O cenário descrito não é um impedimento ao progresso, mas um chamado para a <strong>Engenharia de Precisão</strong>. A mitigação de ruidos e o suporte à demanda energética brasileira passam obrigatoriamente pela filtragem ativa de harmônicas, adoção de Smart Grids com tecnologia V2G (Vehicle-to-Grid) e, acima de tudo, um monitoramento técnico rigoroso com analisadores de energia de classe A.
+        </p>
+
+        <div class="footer-creditos">
+            <p>
+                <strong>Créditos Técnicos:</strong> Conteúdo desenvolvido pela Equipe Técnica da <strong>PowerTech Industrial</strong>.<br>
+                <strong>Base Normativa:</strong> Referências à NBR 5410, NBR 16690, NBR 17019 e Resoluções da ANEEL.<br>
+                <strong>Direitos Reservados:</strong> Permitida a citação parcial com atribuição de fonte.
+            </p>
+        </div>
+    </article>
+</div>
+
+</body>
+</html>
