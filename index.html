@@ -153,7 +153,6 @@
         .card ul { padding-left: 20px; color: var(--text-gray); }
         .card li { margin-bottom: 10px; }
 
-        /* IA SECTION STYLES */
         .calc-section { 
             text-align: center; 
             background: linear-gradient(45deg, rgba(0, 51, 102, 0.3), rgba(0, 210, 255, 0.1));
@@ -185,8 +184,6 @@
             white-space: pre-wrap;
             color: #d1d5db;
         }
-
-        /* FIM IA SECTION */
 
         .btn-calc { 
             background: #003366; 
@@ -486,7 +483,7 @@
 <script type="module">
     import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-    const API_KEY = "AIzaSyDtqMwlRFhimsYpMNpPujlOaDYGNFiJ36Y"; // COLOQUE SUA CHAVE AQUI
+    const API_KEY = "AIzaSyDtqMwlRFhimsYpMNpPujlOaDYGNFiJ36Y"; 
 
     async function chamarGemini() {
         const consumo = document.getElementById('ia-consumo').value;
@@ -512,7 +509,8 @@
 
             const prompt = `O cliente informou consumo de ${consumo} kWh/mês. Gere um dimensionamento rápido.`;
             const result = await model.generateContent(prompt);
-            const text = result.response.text();
+            const response = await result.response;
+            const text = response.text();
             
             resultadoDiv.innerText = text;
         } catch (error) {
@@ -523,6 +521,8 @@
             btn.innerText = "⚡ CALCULAR COM IA";
         }
     }
+
+    // Exporta a função para o escopo global (window)
     window.chamarGemini = chamarGemini;
 </script>
 
