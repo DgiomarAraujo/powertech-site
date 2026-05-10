@@ -1,516 +1,404 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PowerTech Industrial | Engenharia Elétrica PRO</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZHRMSQ7DQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-<style>
-:root{
-    --bg:#0a0e14;
-    --card:#121822;
-    --border:#1f2937;
-    --neon:#00d2ff;
-    --blue:#0056b3;
-    --text:#ffffff;
-    --gray:#94a3b8;
-}
+      gtag('config', 'G-1ZHRMSQ7DQ');
+    </script>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadoras Técnicas | PowerTech Industrial</title>
 
-body{
-    font-family:'Segoe UI',sans-serif;
-    background:radial-gradient(circle at top right,#111827,#0a0e14);
-    color:var(--text);
-    min-height:100vh;
-}
+    <style>
+        :root{
+            --bg:#0a0e14;
+            --card:#121822;
+            --border:#1f2937;
+            --neon:#00d2ff;
+            --blue:#0056b3;
+            --text:#ffffff;
+            --gray:#94a3b8;
+        }
 
-header{
-    padding:50px 20px;
-    text-align:center;
-}
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-header h1{
-    color:var(--neon);
-    font-size:2.3rem;
-    letter-spacing:3px;
-    margin-bottom:10px;
-}
+        body{
+            font-family:'Segoe UI',sans-serif;
+            background:radial-gradient(circle at top right,#111827,#0a0e14);
+            color:var(--text);
+            min-height:100vh;
+        }
 
-header p{
-    color:var(--gray);
-}
+        /* Barra de Navegação Superior */
+        .topbar {
+            width: 100%;
+            background: #05080d;
+            border-bottom: 1px solid rgba(0, 210, 255, .2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+        }
 
-.container{
-    max-width:1400px;
-    margin:auto;
-    padding:20px;
-}
+        .logo { 
+            color: var(--neon); 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            font-size: 1.1rem;
+        }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-    gap:25px;
-}
+        .menu { display: flex; gap: 15px; }
+        .menu a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 210, 255, 0.1);
+            transition: 0.3s;
+            background: rgba(10, 14, 20, 0.6);
+        }
 
-.card{
-    background:rgba(255,255,255,0.03);
-    border:1px solid rgba(255,255,255,0.05);
-    backdrop-filter:blur(12px);
-    border-radius:20px;
-    padding:25px;
-    transition:.3s;
-}
+        .menu a:hover {
+            color: var(--neon);
+            border-color: var(--neon);
+            background: rgba(0, 210, 255, 0.05);
+        }
 
-.card:hover{
-    transform:translateY(-5px);
-    border-color:var(--neon);
-}
+        header{
+            padding: 60px 20px 30px;
+            text-align:center;
+        }
 
-.card h2{
-    color:var(--neon);
-    font-size:1rem;
-    margin-bottom:20px;
-    border-bottom:1px solid rgba(0,210,255,.2);
-    padding-bottom:10px;
-}
+        header h1{
+            color:var(--neon);
+            font-size:2.3rem;
+            letter-spacing:3px;
+            margin-bottom:10px;
+        }
 
-.group{
-    margin-bottom:14px;
-}
+        header p{
+            color:var(--gray);
+        }
 
-label{
-    display:block;
-    margin-bottom:5px;
-    font-size:.85rem;
-    color:var(--gray);
-}
+        .container{
+            max-width:1400px;
+            margin:auto;
+            padding:20px;
+        }
 
-input,select{
-    width:100%;
-    padding:11px;
-    border-radius:8px;
-    border:1px solid rgba(255,255,255,0.1);
-    background:rgba(255,255,255,0.05);
-    color:white;
-    outline:none;
-}
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+            gap:25px;
+        }
 
-input:focus,select:focus{
-    border-color:var(--neon);
-}
+        .card{
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(255,255,255,0.05);
+            backdrop-filter:blur(12px);
+            border-radius:20px;
+            padding:25px;
+            transition:.3s;
+        }
 
-button{
-    width:100%;
-    padding:12px;
-    background:var(--blue);
-    border:none;
-    border-radius:8px;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-    text-transform:uppercase;
-}
+        .card:hover{
+            transform:translateY(-5px);
+            border-color:var(--neon);
+        }
 
-button:hover{
-    background:var(--neon);
-    color:black;
-    box-shadow:0 0 15px var(--neon);
-}
+        .card h2{
+            color:var(--neon);
+            font-size:1rem;
+            margin-bottom:20px;
+            border-bottom:1px solid rgba(0,210,255,.2);
+            padding-bottom:10px;
+        }
 
-.result{
-    margin-top:15px;
-    background:rgba(0,210,255,.1);
-    color:var(--neon);
-    padding:14px;
-    border-radius:10px;
-    display:none;
-    font-weight:bold;
-    line-height:1.6;
-}
+        .group{
+            margin-bottom:14px;
+        }
 
-.back{
-    display:block;
-    text-align:center;
-    margin:50px 0;
-    color:var(--neon);
-    text-decoration:none;
-    font-weight:bold;
-}
+        label{
+            display:block;
+            margin-bottom:5px;
+            font-size:.85rem;
+            color:var(--gray);
+        }
 
-option{
-    background:#1a202c;
-}
-</style>
+        input,select{
+            width:100%;
+            padding:11px;
+            border-radius:8px;
+            border:1px solid rgba(255,255,255,0.1);
+            background:rgba(255,255,255,0.05);
+            color:white;
+            outline:none;
+        }
+
+        input:focus,select:focus{
+            border-color:var(--neon);
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:var(--blue);
+            border:none;
+            border-radius:8px;
+            color:white;
+            font-weight:bold;
+            cursor:pointer;
+            transition:.3s;
+            text-transform:uppercase;
+        }
+
+        button:hover{
+            background:var(--neon);
+            color:black;
+            box-shadow:0 0 15px var(--neon);
+        }
+
+        .result{
+            margin-top:15px;
+            background:rgba(0,210,255,.1);
+            color:var(--neon);
+            padding:14px;
+            border-radius:10px;
+            display:none;
+            font-weight:bold;
+            line-height:1.6;
+        }
+
+        .back{
+            display:block;
+            text-align:center;
+            margin:50px 0;
+            color:var(--neon);
+            text-decoration:none;
+            font-weight:bold;
+            text-transform: uppercase;
+        }
+
+        option{
+            background:#1a202c;
+        }
+
+        @media (max-width: 768px) {
+            .topbar { flex-direction: column; gap: 10px; padding: 15px; }
+            .menu { flex-wrap: wrap; justify-content: center; }
+            header h1 { font-size: 1.8rem; }
+        }
+    </style>
 </head>
 <body>
 
+<nav class="topbar">
+    <div class="logo">⚡ POWERTECH</div>
+    <div class="menu">
+        <a href="index.html">Início</a>
+        <a href="dicas.html">Dicas</a>
+        <a href="artigos.html">Artigos</a>
+        <a href="normas.html">Normas</a>
+        <a href="seguranca.html">Segurança</a>
+        <a href="sobre.html">Sobre</a>
+    </div>
+</nav>
+
 <header>
-<h1>POWERTECH INDUSTRIAL</h1>
-<p>Calculadoras Profissional de Engenharia Elétrica</p>
+    <h1>POWERTECH INDUSTRIAL</h1>
+    <p>Calculadoras Profissionais de Engenharia Elétrica</p>
 </header>
 
 <div class="container">
-
-<div class="grid">
-
-<!-- 1 -->
-<div class="card">
-<h2>01. Queda de Tensão</h2>
-
-<div class="group">
-<label>Corrente (A)</label>
-<input type="number" id="i1">
-</div>
-
-<div class="group">
-<label>Distância (m)</label>
-<input type="number" id="d1">
-</div>
-
-<div class="group">
-<label>Bitola (mm²)</label>
-<input type="number" id="s1">
-</div>
-
-<div class="group">
-<label>Material</label>
-<select id="m1">
-<option value="0.0172">Cobre</option>
-<option value="0.0282">Alumínio</option>
-</select>
-</div>
-
-<div class="group">
-<label>Temperatura</label>
-<select id="t1">
-<option value="20">20°C</option>
-<option value="30">30°C</option>
-<option value="40">40°C</option>
-<option value="70">70°C</option>
-</select>
-</div>
-
-<button onclick="calc1()">Calcular</button>
-
-<div class="result" id="r1"></div>
-</div>
-
-<!-- 2 -->
-<div class="card">
-<h2>02. Lei de Ohm</h2>
-
-<div class="group">
-<label>Tensão (V)</label>
-<input type="number" id="v2">
-</div>
-
-<div class="group">
-<label>Resistência (Ω)</label>
-<input type="number" id="r2">
-</div>
-
-<button onclick="calc2()">Calcular</button>
-
-<div class="result" id="r2_res"></div>
-</div>
-
-<!-- 3 -->
-<div class="card">
-<h2>03. Disjuntor Profissional</h2>
-
-<div class="group">
-<label>Potência (W)</label>
-<input type="number" id="p3">
-</div>
-
-<div class="group">
-<label>Tensão</label>
-<select id="v3">
-<option value="127">127V</option>
-<option value="220">220V</option>
-<option value="380">380V</option>
-</select>
-</div>
-
-<div class="group">
-<label>FCA</label>
-<select id="fca3">
-<option value="1">1.00</option>
-<option value="0.8">0.80</option>
-<option value="0.7">0.70</option>
-<option value="0.65">0.65</option>
-</select>
-</div>
-
-<div class="group">
-<label>FCT</label>
-<select id="fct3">
-<option value="1">1.00</option>
-<option value="0.94">0.94</option>
-<option value="0.87">0.87</option>
-<option value="0.79">0.79</option>
-</select>
-</div>
-
-<button onclick="calc3()">Dimensionar</button>
-
-<div class="result" id="r3"></div>
-</div>
-
-<!-- 4 -->
-<div class="card">
-<h2>04. Banco de Capacitores</h2>
-
-<div class="group">
-<label>Potência (kW)</label>
-<input type="number" id="p4">
-</div>
-
-<div class="group">
-<label>FP Atual</label>
-<input type="number" step="0.01" id="fa4">
-</div>
-
-<div class="group">
-<label>FP Desejado</label>
-<input type="number" step="0.01" id="fd4" value="0.92">
-</div>
-
-<button onclick="calc4()">Calcular</button>
-
-<div class="result" id="r4"></div>
-</div>
-
-<!-- 5 -->
-<div class="card">
-<h2>05. Custo Energia</h2>
-
-<div class="group">
-<label>Potência (W)</label>
-<input type="number" id="p5">
-</div>
-
-<div class="group">
-<label>Horas/Dia</label>
-<input type="number" id="h5">
-</div>
-
-<div class="group">
-<label>Tarifa kWh (R$)</label>
-<input type="number" id="t5" value="0.90">
-</div>
-
-<button onclick="calc5()">Calcular</button>
-
-<div class="result" id="r5"></div>
-</div>
-
-<!-- 6 -->
-<div class="card">
-<h2>06. Potência Trifásica</h2>
-
-<div class="group">
-<label>Tensão (V)</label>
-<input type="number" id="v6" value="380">
-</div>
-
-<div class="group">
-<label>Corrente (A)</label>
-<input type="number" id="i6">
-</div>
-
-<div class="group">
-<label>Fator Potência</label>
-<input type="number" id="fp6" value="0.92" step="0.01">
-</div>
-
-<button onclick="calc6()">Calcular</button>
-
-<div class="result" id="r6"></div>
-</div>
-
-<!-- 7 -->
-<div class="card">
-<h2>07. CV para kW</h2>
-
-<div class="group">
-<label>CV</label>
-<input type="number" id="cv7">
-</div>
-
-<button onclick="calc7()">Converter</button>
-
-<div class="result" id="r7"></div>
-</div>
-
-<!-- 8 -->
-<div class="card">
-<h2>08. Sistema Solar</h2>
-
-<div class="group">
-<label>Consumo Mensal (kWh)</label>
-<input type="number" id="k8">
-</div>
-
-<div class="group">
-<label>Horas Sol Pico</label>
-<input type="number" id="hsp8" value="5.5">
-</div>
-
-<div class="group">
-<label>Eficiência Sistema (%)</label>
-<input type="number" id="ef8" value="80">
-</div>
-
-<button onclick="calc8()">Calcular</button>
-
-<div class="result" id="r8"></div>
-</div>
-
-<!-- 9 -->
-<div class="card">
-<h2>09. Resistores Série</h2>
-
-<div class="group">
-<label>Valores separados por vírgula</label>
-<input type="text" id="t9">
-</div>
-
-<button onclick="calc9()">Calcular</button>
-
-<div class="result" id="r9"></div>
-</div>
-
-<!-- 10 -->
-<div class="card">
-<h2>10. Reatância Indutiva</h2>
-
-<div class="group">
-<label>Frequência (Hz)</label>
-<input type="number" id="f10" value="60">
-</div>
-
-<div class="group">
-<label>Indutância (H)</label>
-<input type="number" id="l10">
-</div>
-
-<button onclick="calc10()">Calcular</button>
-
-<div class="result" id="r10"></div>
-</div>
-
-<!-- 11 -->
-<div class="card">
-<h2>11. Bitola Profissional</h2>
-
-<div class="group">
-<label>Corrente (A)</label>
-<input type="number" id="i11">
-</div>
-
-<div class="group">
-<label>FCA</label>
-<select id="fca11">
-<option value="1">1.00</option>
-<option value="0.8">0.80</option>
-<option value="0.7">0.70</option>
-<option value="0.65">0.65</option>
-</select>
-</div>
-
-<div class="group">
-<label>FCT</label>
-<select id="fct11">
-<option value="1">1.00</option>
-<option value="0.94">0.94</option>
-<option value="0.87">0.87</option>
-<option value="0.79">0.79</option>
-</select>
-</div>
-
-<button onclick="calc11()">Dimensionar</button>
-
-<div class="result" id="r11"></div>
-</div>
-
-<!-- 12 -->
-<div class="card">
-<h2>12. Eficiência Motor</h2>
-
-<div class="group">
-<label>Potência Saída (W)</label>
-<input type="number" id="ps12">
-</div>
-
-<div class="group">
-<label>Potência Entrada (W)</label>
-<input type="number" id="pe12">
-</div>
-
-<button onclick="calc12()">Calcular</button>
-
-<div class="result" id="r12"></div>
-</div>
-
-<!-- 13 -->
-<div class="card">
-<h2>13. AWG → mm²</h2>
-
-<div class="group">
-<label>AWG</label>
-<input type="number" id="awg13">
-</div>
-
-<button onclick="calc13()">Converter</button>
-
-<div class="result" id="r13"></div>
-</div>
-
-<!-- 14 -->
-<div class="card">
-<h2>14. Iluminação NBR 5410</h2>
-
-<div class="group">
-<label>Área (m²)</label>
-<input type="number" id="a14">
-</div>
-
-<button onclick="calc14()">Calcular</button>
-
-<div class="result" id="r14"></div>
-</div>
-
-<!-- 15 -->
-<div class="card">
-<h2>15. TUGs NBR 5410</h2>
-
-<div class="group">
-<label>Perímetro (m)</label>
-<input type="number" id="p15">
-</div>
-
-<button onclick="calc15()">Calcular</button>
-
-<div class="result" id="r15"></div>
-</div>
-
-</div>
-
-<a href="index.html" class="back">
-← VOLTAR AO TERMINAL
-</a>
-
+    <div class="grid">
+        <div class="card">
+            <h2>01. Queda de Tensão</h2>
+            <div class="group">
+                <label>Corrente (A)</label>
+                <input type="number" id="i1">
+            </div>
+            <div class="group">
+                <label>Distância (m)</label>
+                <input type="number" id="d1">
+            </div>
+            <div class="group">
+                <label>Bitola (mm²)</label>
+                <input type="number" id="s1">
+            </div>
+            <div class="group">
+                <label>Material</label>
+                <select id="m1">
+                    <option value="0.0172">Cobre</option>
+                    <option value="0.0282">Alumínio</option>
+                </select>
+            </div>
+            <div class="group">
+                <label>Temperatura</label>
+                <select id="t1">
+                    <option value="20">20°C</option>
+                    <option value="30">30°C</option>
+                    <option value="40">40°C</option>
+                    <option value="70">70°C</option>
+                </select>
+            </div>
+            <button onclick="calc1()">Calcular</button>
+            <div class="result" id="r1"></div>
+        </div>
+
+        <div class="card">
+            <h2>02. Lei de Ohm</h2>
+            <div class="group">
+                <label>Tensão (V)</label>
+                <input type="number" id="v2">
+            </div>
+            <div class="group">
+                <label>Resistência (Ω)</label>
+                <input type="number" id="r2">
+            </div>
+            <button onclick="calc2()">Calcular</button>
+            <div class="result" id="r2_res"></div>
+        </div>
+
+        <div class="card">
+            <h2>03. Disjuntor Profissional</h2>
+            <div class="group">
+                <label>Potência (W)</label>
+                <input type="number" id="p3">
+            </div>
+            <div class="group">
+                <label>Tensão</label>
+                <select id="v3">
+                    <option value="127">127V</option>
+                    <option value="220">220V</option>
+                    <option value="380">380V</option>
+                </select>
+            </div>
+            <div class="group">
+                <label>FCA</label>
+                <select id="fca3">
+                    <option value="1">1.00</option>
+                    <option value="0.8">0.80</option>
+                    <option value="0.7">0.70</option>
+                    <option value="0.65">0.65</option>
+                </select>
+            </div>
+            <div class="group">
+                <label>FCT</label>
+                <select id="fct3">
+                    <option value="1">1.00</option>
+                    <option value="0.94">0.94</option>
+                    <option value="0.87">0.87</option>
+                    <option value="0.79">0.79</option>
+                </select>
+            </div>
+            <button onclick="calc3()">Dimensionar</button>
+            <div class="result" id="r3"></div>
+        </div>
+
+        <div class="card">
+            <h2>04. Banco de Capacitores</h2>
+            <div class="group">
+                <label>Potência (kW)</label>
+                <input type="number" id="p4">
+            </div>
+            <div class="group">
+                <label>FP Atual</label>
+                <input type="number" step="0.01" id="fa4">
+            </div>
+            <div class="group">
+                <label>FP Desejado</label>
+                <input type="number" step="0.01" id="fd4" value="0.92">
+            </div>
+            <button onclick="calc4()">Calcular</button>
+            <div class="result" id="r4"></div>
+        </div>
+
+        <div class="card">
+            <h2>06. Potência Trifásica</h2>
+            <div class="group">
+                <label>Tensão (V)</label>
+                <input type="number" id="v6" value="380">
+            </div>
+            <div class="group">
+                <label>Corrente (A)</label>
+                <input type="number" id="i6">
+            </div>
+            <div class="group">
+                <label>Fator Potência</label>
+                <input type="number" id="fp6" value="0.92" step="0.01">
+            </div>
+            <button onclick="calc6()">Calcular</button>
+            <div class="result" id="r6"></div>
+        </div>
+
+        <div class="card">
+            <h2>08. Sistema Solar</h2>
+            <div class="group">
+                <label>Consumo Mensal (kWh)</label>
+                <input type="number" id="k8">
+            </div>
+            <div class="group">
+                <label>Horas Sol Pico</label>
+                <input type="number" id="hsp8" value="5.5">
+            </div>
+            <div class="group">
+                <label>Eficiência Sistema (%)</label>
+                <input type="number" id="ef8" value="80">
+            </div>
+            <button onclick="calc8()">Calcular</button>
+            <div class="result" id="r8"></div>
+        </div>
+
+        <div class="card">
+            <h2>11. Bitola Profissional</h2>
+            <div class="group">
+                <label>Corrente (A)</label>
+                <input type="number" id="i11">
+            </div>
+            <div class="group">
+                <label>FCA</label>
+                <select id="fca11">
+                    <option value="1">1.00</option>
+                    <option value="0.8">0.80</option>
+                    <option value="0.7">0.70</option>
+                    <option value="0.65">0.65</option>
+                </select>
+            </div>
+            <div class="group">
+                <label>FCT</label>
+                <select id="fct11">
+                    <option value="1">1.00</option>
+                    <option value="0.94">0.94</option>
+                    <option value="0.87">0.87</option>
+                    <option value="0.79">0.79</option>
+                </select>
+            </div>
+            <button onclick="calc11()">Dimensionar</button>
+            <div class="result" id="r11"></div>
+        </div>
+    </div>
+
+    <a href="index.html" class="back">← Voltar à Página Inicial</a>
 </div>
 
 <script>
-
 function mostrar(id,valor){
     let el=document.getElementById(id);
     el.style.display="block";
@@ -522,210 +410,95 @@ function invalido(v){
 }
 
 function calc1(){
-
-    const i=parseFloat(i1.value);
-    const d=parseFloat(d1.value);
-    const s=parseFloat(s1.value);
-    const rhoBase=parseFloat(m1.value);
-    const temp=parseFloat(t1.value);
+    const i=parseFloat(document.getElementById('i1').value);
+    const d=parseFloat(document.getElementById('d1').value);
+    const s=parseFloat(document.getElementById('s1').value);
+    const rhoBase=parseFloat(document.getElementById('m1').value);
+    const temp=parseFloat(document.getElementById('t1').value);
 
     if([i,d,s].some(invalido)){
         mostrar("r1","Valores inválidos");
         return;
     }
-
     const rho=rhoBase*(1+(0.004*(temp-20)));
-
     const vd=(2*rho*d*i)/s;
-
-    mostrar("r1",
-        `Queda de tensão: ${vd.toFixed(2)} V`
-    );
+    mostrar("r1", `Queda de tensão: ${vd.toFixed(2)} V`);
 }
 
 function calc2(){
-
-    const v=parseFloat(v2.value);
-    const r=parseFloat(r2.value);
-
+    const v=parseFloat(document.getElementById('v2').value);
+    const r=parseFloat(document.getElementById('r2').value);
     if([v,r].some(invalido)){
         mostrar("r2_res","Valores inválidos");
         return;
     }
-
-    mostrar("r2_res",
-        `Corrente: ${(v/r).toFixed(2)} A`
-    );
+    mostrar("r2_res", `Corrente: ${(v/r).toFixed(2)} A`);
 }
 
 function calc3(){
-
-    const p=parseFloat(p3.value);
-    const v=parseFloat(v3.value);
-    const fca=parseFloat(fca3.value);
-    const fct=parseFloat(fct3.value);
+    const p=parseFloat(document.getElementById('p3').value);
+    const v=parseFloat(document.getElementById('v3').value);
+    const fca=parseFloat(document.getElementById('fca3').value);
+    const fct=parseFloat(document.getElementById('fct3').value);
 
     if([p,v].some(invalido)){
         mostrar("r3","Valores inválidos");
         return;
     }
-
     const ib=p/v;
     const ic=ib/(fca*fct);
-    const ifinal=ic*1.1;
-
     const dj=[10,16,20,25,32,40,50,63,70,80,100,125];
-
-    const sug=dj.find(x=>x>=ifinal)||"Acima 125A";
-
-    mostrar("r3",
-        `Ib: ${ib.toFixed(2)} A<br>
-         Corrigida: ${ic.toFixed(2)} A<br>
-         <strong>Disjuntor: ${sug} A</strong>`
-    );
+    const sug=dj.find(x=>x>=ic*1.1)||"Acima 125A";
+    mostrar("r3", `Ib: ${ib.toFixed(2)} A<br>Corrigida: ${ic.toFixed(2)} A<br><strong>Disjuntor: ${sug} A</strong>`);
 }
 
 function calc4(){
-
-    const p=parseFloat(p4.value);
-    const fa=parseFloat(fa4.value);
-    const fd=parseFloat(fd4.value);
-
+    const p=parseFloat(document.getElementById('p4').value);
+    const fa=parseFloat(document.getElementById('fa4').value);
+    const fd=parseFloat(document.getElementById('fd4').value);
     if([p,fa,fd].some(invalido)){
         mostrar("r4","Valores inválidos");
         return;
     }
-
     const kvar=p*(Math.tan(Math.acos(fa))-Math.tan(Math.acos(fd)));
-
-    mostrar("r4",
-        `Banco necessário: ${kvar.toFixed(2)} kVAr`
-    );
-}
-
-function calc5(){
-
-    const p=parseFloat(p5.value);
-    const h=parseFloat(h5.value);
-    const t=parseFloat(t5.value);
-
-    if([p,h,t].some(invalido)){
-        mostrar("r5","Valores inválidos");
-        return;
-    }
-
-    const custo=((p/1000)*h*30*t);
-
-    mostrar("r5",
-        `Estimativa: R$ ${custo.toFixed(2)}`
-    );
+    mostrar("r4", `Banco necessário: ${kvar.toFixed(2)} kVAr`);
 }
 
 function calc6(){
-
-    const v=parseFloat(v6.value);
-    const i=parseFloat(i6.value);
-    const fp=parseFloat(fp6.value);
-
+    const v=parseFloat(document.getElementById('v6').value);
+    const i=parseFloat(document.getElementById('i6').value);
+    const fp=parseFloat(document.getElementById('fp6').value);
     if([v,i,fp].some(invalido)){
         mostrar("r6","Valores inválidos");
         return;
     }
-
     const p=1.732*v*i*fp;
-
-    mostrar("r6",
-        `Potência: ${p.toFixed(0)} W`
-    );
-}
-
-function calc7(){
-
-    const cv=parseFloat(cv7.value);
-
-    if(invalido(cv)){
-        mostrar("r7","Valor inválido");
-        return;
-    }
-
-    mostrar("r7",
-        `${cv} CV = ${(cv*0.7355).toFixed(2)} kW`
-    );
+    mostrar("r6", `Potência: ${p.toFixed(0)} W`);
 }
 
 function calc8(){
-
-    const k=parseFloat(k8.value);
-    const hsp=parseFloat(hsp8.value);
-    const ef=parseFloat(ef8.value)/100;
-
+    const k=parseFloat(document.getElementById('k8').value);
+    const hsp=parseFloat(document.getElementById('hsp8').value);
+    const ef=parseFloat(document.getElementById('ef8').value)/100;
     if([k,hsp,ef].some(invalido)){
         mostrar("r8","Valores inválidos");
         return;
     }
-
     const placa=0.55;
-
-    const qtd=Math.ceil(
-        k/(30*hsp*placa*ef)
-    );
-
-    mostrar("r8",
-        `Placas necessárias: ${qtd}`
-    );
-}
-
-function calc9(){
-
-    try{
-
-        const valores=t9.value
-            .split(',')
-            .map(v=>parseFloat(v));
-
-        const total=valores.reduce((a,b)=>a+b,0);
-
-        mostrar("r9",
-            `Req: ${total.toFixed(2)} Ω`
-        );
-
-    }catch{
-        mostrar("r9","Valores inválidos");
-    }
-}
-
-function calc10(){
-
-    const f=parseFloat(f10.value);
-    const l=parseFloat(l10.value);
-
-    if([f,l].some(invalido)){
-        mostrar("r10","Valores inválidos");
-        return;
-    }
-
-    const xl=2*Math.PI*f*l;
-
-    mostrar("r10",
-        `XL = ${xl.toFixed(2)} Ω`
-    );
+    const qtd=Math.ceil(k/(30*hsp*placa*ef));
+    mostrar("r8", `Placas necessárias: ${qtd}`);
 }
 
 function calc11(){
-
-    const i=parseFloat(i11.value);
-    const fca=parseFloat(fca11.value);
-    const fct=parseFloat(fct11.value);
-
+    const i=parseFloat(document.getElementById('i11').value);
+    const fca=parseFloat(document.getElementById('fca11').value);
+    const fct=parseFloat(document.getElementById('fct11').value);
     if(invalido(i)){
         mostrar("r11","Valor inválido");
         return;
     }
-
     const ic=i/(fca*fct);
-
     let cabo="1.5 mm²";
-
     if(ic>15) cabo="2.5 mm²";
     if(ic>21) cabo="4 mm²";
     if(ic>28) cabo="6 mm²";
@@ -733,80 +506,8 @@ function calc11(){
     if(ic>50) cabo="16 mm²";
     if(ic>68) cabo="25 mm²";
     if(ic>89) cabo="35 mm²";
-
-    mostrar("r11",
-        `Corrente Corrigida: ${ic.toFixed(2)} A<br>
-         Cabo recomendado: <strong>${cabo}</strong>`
-    );
+    mostrar("r11", `Corrente Corrigida: ${ic.toFixed(2)} A<br>Cabo recomendado: <strong>${cabo}</strong>`);
 }
-
-function calc12(){
-
-    const ps=parseFloat(ps12.value);
-    const pe=parseFloat(pe12.value);
-
-    if([ps,pe].some(invalido)){
-        mostrar("r12","Valores inválidos");
-        return;
-    }
-
-    const ef=(ps/pe)*100;
-
-    mostrar("r12",
-        `Eficiência: ${ef.toFixed(1)}%`
-    );
-}
-
-function calc13(){
-
-    const awg=parseFloat(awg13.value);
-
-    if(isNaN(awg)){
-        mostrar("r13","Valor inválido");
-        return;
-    }
-
-    const mm=0.012668*Math.pow(92,((36-awg)/19.5));
-
-    mostrar("r13",
-        `Área aproximada: ${mm.toFixed(2)} mm²`
-    );
-}
-
-function calc14(){
-
-    const a=parseFloat(a14.value);
-
-    if(invalido(a)){
-        mostrar("r14","Valor inválido");
-        return;
-    }
-
-    let va=100;
-
-    if(a>6){
-        va+=Math.ceil((a-6)/4)*60;
-    }
-
-    mostrar("r14",
-        `Carga mínima: ${va} VA`
-    );
-}
-
-function calc15(){
-
-    const p=parseFloat(p15.value);
-
-    if(invalido(p)){
-        mostrar("r15","Valor inválido");
-        return;
-    }
-
-    mostrar("r15",
-        `Mínimo: ${Math.ceil(p/5)} TUGs`
-    );
-}
-
 </script>
 
 </body>
