@@ -6,7 +6,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-1ZHRMSQ7DQ');
     </script>
 
@@ -159,14 +158,21 @@
             z-index: 1000; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
         }
 
+        /* FOOTER CORRIGIDO: CENTRALIZAÇÃO TOTAL */
         footer { 
             text-align: center; 
             padding: 60px 20px; 
             background: #05070a; 
             color: #4a5568; 
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza horizontalmente no flex-column */
+            justify-content: center;
+            gap: 15px;
         }
-        footer a { color: var(--neon-blue); text-decoration: none; margin: 0 15px; }
+        
+        footer a { color: var(--neon-blue); text-decoration: none; margin: 0 10px; }
 
         @media (max-width: 768px) {
             .nav-header { position: relative; top: 0; right: 0; padding: 20px; }
@@ -201,44 +207,44 @@
     <div class="sobre-content">
         <h2>// Quem Somos</h2>
         <p>
-            A <strong>PowerTech Industrial</strong> é uma empresa de energia de precisão e inovação tecnológica sediada em Floriano, Piauí. Fundada sob a gestão de <strong>Dgiomar Cassemiro Araujo</strong>, nossa organização nasceu com o propósito de elevar o padrão das instalações elétricas na região, integrando o rigor das normas técnicas brasileiras (<strong>NBR</strong>) com o que há de mais avançado em tecnologia mundial.
+            A <strong>PowerTech Industrial</strong> é uma organização de tecnologia e engenharia técnica sediada em Floriano, Piauí. Sob a liderança de <strong>Dgiomar Cassemiro Araujo</strong>, profissional em especialização técnica eletrotécnica e desenvolvedor de sistemas, a empresa opera na intersecção entre a elétrica convencional e a transformação digital.
         </p>
 
         <p>
-            Nossa atuação é pautada pelo compromisso inegociável com a segurança e a eficiência energética. Entendemos que cada projeto exige uma abordagem técnica única. Por isso, investimos continuamente em um <strong>ferramental premium</strong> e equipamentos de medição de alta precisão, como o Terrômetro Hikari, garantindo conformidade absoluta.
+            Nossa filosofia baseia-se no <strong>Rigor Normativo</strong>. Diferente do mercado comum, a PowerTech aplica as diretrizes da <strong>NBR 5410, NBR 14039 e NR-10</strong> como fundamentos básicos de cada entrega. Utilizamos um ecossistema de ferramentas de alta performance (DeWalt, Bosch, Stanley) e instrumentação certificada para diagnósticos precisos em sistemas complexos.
         </p>
 
         <div class="highlight-box">
-            <h3>// Nossos Pilares de Expertise</h3>
+            <h3>// Expertise de Vanguarda</h3>
             <ul>
-                <li><strong>Infraestrutura Industrial:</strong> Montagem de painéis QGBT e correção de fator de potência, otimizando o consumo de grandes motores.</li>
-                <li><strong>Energia Renovável:</strong> Protagonistas na transição energética com projetos fotovoltaicos On-Grid e Off-Grid de alta performance.</li>
-                <li><strong>Inteligência e Segurança:</strong> Parceiros Intelbras para soluções de IA, reconhecimento facial e automação residencial (Smart Home).</li>
+                <li><strong>Modernização (Retrofitting):</strong> Reengenharia de quadros de distribuição (QDC/QGBT) e sistemas de aterramento obsoletos para padrões contemporâneos de segurança.</li>
+                <li><strong>Engenharia Solar Avançada:</strong> Desenvolvimento de projetos fotovoltaicos otimizados via software, garantindo o máximo rendimento de geração regional.</li>
+                <li><strong>Tecnologia Aplicada:</strong> Integração de Inteligência Artificial e automação (Zigbee/Wi-Fi) para gestão inteligente de carga e eficiência energética.</li>
             </ul>
         </div>
 
-        <h2>// Nossa Essência</h2>
+        <h2>// Nossa Visão e Compromisso</h2>
         <p>
-            Nossa <strong>Missão</strong> é entregar soluções de engenharia que protejam vidas e patrimônios. Visualizamos um futuro onde a PowerTech será a principal referência em inovação técnica e energia limpa no Piauí, reconhecida pela consultoria crítica e ética.
+            Nossa <strong>Missão</strong> é mitigar riscos e maximizar a continuidade operacional de nossos clientes. Através da união entre o conhecimento prático de campo e o desenvolvimento de softwares próprios para cálculos técnicos, entregamos uma engenharia consultiva que antecipa falhas e protege investimentos.
         </p>
 
         <p>
-            Nossos valores são inabaláveis: rigor técnico, conformidade total com a <strong>NBR 5410 e NR-10</strong>, e transparência absoluta. Cada cabo passado e cada disjuntor dimensionado carrega a assinatura de uma empresa que respeita a longevidade da infraestrutura nacional.
+            Na PowerTech Industrial, cada projeto é tratado como um ativo crítico. Nosso compromisso é com a transparência técnica e com a segurança da vida humana, estabelecendo um novo patamar de confiabilidade para o setor elétrico e tecnológico do Sul do Piauí.
         </p>
         
         <p style="text-align: center; color: var(--neon-blue); font-weight: bold; margin-top: 40px;">
-            PowerTech Industrial: Onde a eletricidade encontra a alta tecnologia.
+            PowerTech Industrial: Precisão Técnica | Inovação Digital | Segurança Absoluta.
         </p>
     </div>
 </div>
 
 <footer id="footer">
     <p>&copy; 2026 PowerTech Industrial | Engenharia e Tecnologia</p>
-    <p>
+    <div>
         <a href="index.html">INÍCIO</a> | 
         <a href="calculadoras.html">CALCULADORAS</a> | 
         <a href="privacidade.html">PRIVACIDADE</a>
-    </p>
+    </div>
 </footer>
 
 </body>
