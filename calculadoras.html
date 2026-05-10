@@ -3,44 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadoras Técnicas | PowerTech Industrial</title>
+    <title>Toolbox Técnica | PowerTech Industrial</title>
     <style>
-        :root { --blue: #003366; --accent: #0056b3; --bg: #f4f7f9; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: auto; }
-        .header { text-align: center; padding: 40px 0; }
-        .calc-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        h2 { color: var(--blue); border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .input-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1em; }
-        button { width: 100%; padding: 15px; background: var(--blue); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1em; transition: 0.3s; }
-        button:hover { background: var(--accent); }
-        .res { margin-top: 20px; padding: 15px; background: #eef4ff; border-radius: 8px; font-weight: bold; color: var(--blue); text-align: center; font-size: 1.2em; display: none; }
-        .btn-voltar { display: block; text-align: center; margin-top: 20px; text-decoration: none; color: #666; font-weight: bold; }
+        :root { 
+            --deep-dark: #0a0e14; 
+            --neon-blue: #00d2ff; 
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-gray: #a0aec0;
+        }
+
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            color: #fff; 
+            background: radial-gradient(circle at top right, #111827, #0a0e14);
+            background-attachment: fixed;
+        }
+
+        header { 
+            padding: 60px 20px; 
+            text-align: center; 
+            background: linear-gradient(180deg, rgba(0, 51, 102, 0.5), transparent);
+        }
+
+        header h1 { font-size: 2.5em; letter-spacing: 4px; color: var(--neon-blue); text-transform: uppercase; }
+
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+
+        h2 { border-left: 4px solid var(--neon-blue); padding-left: 15px; margin-top: 40px; font-size: 1.4em; }
+
+        .calc-card { 
+            background: var(--card-bg); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+        }
+
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: var(--text-gray); font-size: 0.9em; }
+        
+        input, select { 
+            width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; 
+            box-sizing: border-box;
+        }
+
+        button { 
+            width: 100%; padding: 15px; 
+            background: linear-gradient(90deg, #0056b3, #00d2ff);
+            border: none; border-radius: 8px; color: white; font-weight: bold;
+            cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .result { 
+            margin-top: 20px; padding: 15px; border-radius: 8px; 
+            background: rgba(0, 210, 255, 0.1); color: var(--neon-blue);
+            text-align: center; font-weight: bold; display: none;
+        }
+
+        .back-link { display: block; text-align: center; margin: 40px 0; color: var(--text-gray); text-decoration: none; }
+        .back-link:hover { color: var(--neon-blue); }
     </style>
 </head>
 <body>
 
+<header>
+    <h1>Toolbox PowerTech</h1>
+    <p>Dimensionamento Técnico NBR 5410</p>
+</header>
+
 <div class="container">
-    <div class="header">
-        <h1>Central de Ferramentas PowerTech</h1>
-        <p>Cálculos de engenharia baseados na NBR 5410</p>
-    </div>
 
     <div class="calc-card">
-        <h2>Queda de Tensão (V)</h2>
+        <h2>1. Queda de Tensão e Condutores</h2>
+        <p style="color:var(--text-gray); font-size:0.9em;">Cálculo baseado na resistividade do cobre (\(\rho = 0,0172\)).</p>
         <div class="input-group">
-            <label>Corrente do Circuito (A):</label>
-            <input type="number" id="corrente" placeholder="Ex: 20">
+            <label>Corrente (A):</label>
+            <input type="number" id="i_queda" placeholder="Ex: 32">
         </div>
         <div class="input-group">
-            <label>Distância do Cabo (metros):</label>
-            <input type="number" id="distancia" placeholder="Ex: 30">
+            <label>Distância (m):</label>
+            <input type="number" id="l_queda" placeholder="Ex: 50">
         </div>
         <div class="input-group">
             <label>Seção do Cabo (mm²):</label>
-            <select id="bitola">
+            <select id="s_queda">
                 <option value="1.5">1.5 mm²</option>
                 <option value="2.5">2.5 mm²</option>
                 <option value="4">4 mm²</option>
@@ -49,57 +98,113 @@
                 <option value="16">16 mm²</option>
             </select>
         </div>
-        <button onclick="calcularQueda()">CALCULAR AGORA</button>
-        <div id="resQueda" class="res"></div>
+        <button onclick="calcQueda()">Calcular Queda</button>
+        <div id="res_queda" class="result"></div>
     </div>
 
     <div class="calc-card">
-        <h2>Cálculo de Corrente (I)</h2>
+        <h2>2. Dimensionamento de Disjuntor</h2>
         <div class="input-group">
-            <label>Potência (Watts):</label>
-            <input type="number" id="potencia" placeholder="Ex: 5500">
+            <label>Potência Total (W):</label>
+            <input type="number" id="p_disj" placeholder="Ex: 5500">
         </div>
         <div class="input-group">
-            <label>Tensão (Volts):</label>
-            <select id="tensao">
-                <option value="220">220V (Fase-Neutro)</option>
-                <option value="380">380V (Fase-Fase)</option>
-                <option value="127">127V (Fase-Neutro)</option>
+            <label>Tensão (V):</label>
+            <select id="v_disj">
+                <option value="220">220V</option>
+                <option value="127">127V</option>
+                <option value="380">380V</option>
             </select>
         </div>
-        <button onclick="calcularCorrente()">CALCULAR CORRENTE</button>
-        <div id="resCorrente" class="res"></div>
+        <button onclick="calcDisjuntor()">Sugerir Disjuntor</button>
+        <div id="res_disj" class="result"></div>
     </div>
 
-    <a href="index.html" class="btn-voltar">← Voltar para o Site</a>
+    <div class="calc-card">
+        <h2>3. Correção de Fator de Potência</h2>
+        <div class="input-group">
+            <label>Potência Ativa Atual (kW):</label>
+            <input type="number" id="kw_fp" placeholder="Ex: 50">
+        </div>
+        <div class="input-group">
+            <label>FP Atual:</label>
+            <input type="number" step="0.01" id="fp_atual" placeholder="Ex: 0.80">
+        </div>
+        <div class="input-group">
+            <label>FP Desejado:</label>
+            <input type="number" step="0.01" id="fp_desejado" value="0.92">
+        </div>
+        <button onclick="calcFP()">Calcular Banco (kVAr)</button>
+        <div id="res_fp" class="result"></div>
+    </div>
+
+    <div class="calc-card">
+        <h2>4. Estimativa de Custo (kWh)</h2>
+        <div class="input-group">
+            <label>Potência do Equipamento (W):</label>
+            <input type="number" id="p_custo" placeholder="Ex: 2000">
+        </div>
+        <div class="input-group">
+            <label>Horas de uso/dia:</label>
+            <input type="number" id="h_custo" placeholder="Ex: 8">
+        </div>
+        <div class="input-group">
+            <label>Tarifa da Concessionária (R$/kWh):</label>
+            <input type="number" step="0.01" id="t_custo" value="0.85">
+        </div>
+        <button onclick="calcCusto()">Calcular Consumo Mensal</button>
+        <div id="res_custo" class="result"></div>
+    </div>
+
+    <a href="index.html" class="back-link">← VOLTAR AO TERMINAL PRINCIPAL</a>
 </div>
 
 <script>
-    function calcularQueda() {
-        const I = parseFloat(document.getElementById('corrente').value);
-        const L = parseFloat(document.getElementById('distancia').value);
-        const S = parseFloat(document.getElementById('bitola').value);
-        const rho = 0.0172; // Resistividade do Cobre
-
-        if(I > 0 && L > 0) {
-            // Fórmula Simplificada Monofásica: V = (2 * rho * L * I) / S
-            const queda = (2 * rho * L * I) / S;
-            const resDiv = document.getElementById('resQueda');
-            resDiv.style.display = "block";
-            resDiv.innerHTML = "Queda Estimada: " + queda.toFixed(2) + " Volts";
-        }
+    function showRes(id, text) {
+        const el = document.getElementById(id);
+        el.style.display = "block";
+        el.innerHTML = text;
     }
 
-    function calcularCorrente() {
-        const P = parseFloat(document.getElementById('potencia').value);
-        const V = parseFloat(document.getElementById('tensao').value);
+    function calcQueda() {
+        const I = document.getElementById('i_queda').value;
+        const L = document.getElementById('l_queda').value;
+        const S = document.getElementById('s_queda').value;
+        const quedaV = (2 * 0.0172 * L * I) / S;
+        showRes('res_queda', `Queda de Tensão: ${quedaV.toFixed(2)}V`);
+    }
 
-        if(P > 0) {
-            const I = P / V;
-            const resDiv = document.getElementById('resCorrente');
-            resDiv.style.display = "block";
-            resDiv.innerHTML = "Corrente Nominal: " + I.toFixed(2) + " Ampères";
-        }
+    function calcDisjuntor() {
+        const P = document.getElementById('p_disj').value;
+        const V = document.getElementById('v_disj').value;
+        const I = P / V;
+        // Lógica simples de mercado (disjuntores comerciais)
+        const sugerido = [10, 16, 20, 25, 32, 40, 50, 63, 70, 80, 100];
+        const d = sugerido.find(x => x > I * 1.15) || "Consultar Técnico";
+        showRes('res_disj', `Corrente: ${I.toFixed(2)}A | Sugestão: Disjuntor ${d}A`);
+    }
+
+    function calcFP() {
+        const P = document.getElementById('kw_fp').value;
+        const f1 = document.getElementById('fp_atual').value;
+        const f2 = document.getElementById('fp_desejado').value;
+        
+        const tang1 = Math.tan(Math.acos(f1));
+        const tang2 = Math.tan(Math.acos(f2));
+        const kVAr = P * (tang1 - tang2);
+        
+        showRes('res_fp', `Necessário Banco de: ${kVAr.toFixed(2)} kVAr`);
+    }
+
+    function calcCusto() {
+        const P = document.getElementById('p_custo').value;
+        const H = document.getElementById('h_custo').value;
+        const T = document.getElementById('t_custo').value;
+        
+        const mensalKwh = (P / 1000) * H * 30;
+        const valor = mensalKwh * T;
+        
+        showRes('res_custo', `Consumo: ${mensalKwh.toFixed(2)} kWh/mês | Custo: R$ ${valor.toFixed(2)}`);
     }
 </script>
 
