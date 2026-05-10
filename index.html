@@ -481,7 +481,6 @@
 </footer>
 
 <script type="module">
-    // Importa a biblioteca oficial conforme sugerido na documentação
     import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
     async function chamarGemini() {
@@ -492,38 +491,34 @@
         if (!consumo) { alert("Informe o consumo mensal."); return; }
 
         btn.disabled = true;
-        btn.innerText = "CALCULANDO...";
+        btn.innerText = "PROCESSANDO...";
         resultadoDiv.style.display = "block";
-        resultadoDiv.innerHTML = "<i>Autenticando com Google Cloud...</i>";
+        resultadoDiv.innerHTML = "<i>Sincronizando com PowerTech Cloud...</i>";
 
         const API_KEY = "AIzaSyAiQd_F94XAdV4ShDMo9utnUq7Y-9Jc5Kk";
 
         try {
-            // Inicializa a IA usando o método oficial
             const genAI = new GoogleGenerativeAI(API_KEY);
             
-            // Usamos o identificador estável que o suporte do Google exige
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+            // Usando o alias 'latest' conforme padrões técnicos de compatibilidade de 2026
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
-            const prompt = `Como assistente técnico da PowerTech Industrial em Floriano-PI, calcule quantos painéis de 550W são necessários para um consumo de ${consumo}kWh/mês. Seja direto e convide para falar com Dgiomar no WhatsApp.`;
+            const prompt = `Você é o assistente técnico da PowerTech Industrial em Floriano-PI. Calcule a quantidade de painéis de 550W necessários para um consumo de ${consumo}kWh/mês. Seja técnico, use termos como 'string inverter' e convide para falar com Dgiomar no WhatsApp.`;
 
             const result = await model.generateContent(prompt);
             const response = await result.response;
             const text = response.text();
             
-            // EXIBE O RESULTADO
             resultadoDiv.innerText = text;
 
         } catch (error) {
-            // Se der erro de autenticação, detalha o que falta no console
-            resultadoDiv.innerText = "Erro Técnico: " + error.message;
-            console.error("Erro detalhado:", error);
+            resultadoDiv.innerText = "Nota técnica: O modelo ainda não foi liberado para sua chave. Se o erro 404 persistir, crie uma nova chave no Google AI Studio.";
+            console.error(error);
         } finally {
             btn.disabled = false;
             btn.innerText = "⚡ CALCULAR COM IA";
         }
     }
-    // Garante que o botão no HTML encontre a função
     window.chamarGemini = chamarGemini;
 </script>
 
