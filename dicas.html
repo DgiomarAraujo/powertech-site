@@ -1,1 +1,344 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerTech | Portal Técnico Unificado</title>
+    <style>
+        :root {
+            --bg: #0a0e14;
+            --card: #121822;
+            --border: #1f2937;
+            --neon: #00d2ff;
+            --blue: #0056b3;
+            --text: #ffffff;
+            --gray: #94a3b8;
+            --gold: #f1c40f;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top right, #111827, #0a0e14);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Barra de Navegação */
+        .topbar {
+            width: 100%;
+            background: #05080d;
+            border-bottom: 1px solid rgba(0, 210, 255, .2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo { 
+            color: var(--neon); 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            font-size: 1.1rem;
+        }
+
+        .menu { display: flex; gap: 20px; }
+        .menu a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: .3s;
+            font-size: .9rem;
+        }
+        .menu a:hover { color: var(--neon); }
+
+        /* Cabeçalho */
+        header { 
+            padding: 60px 20px 20px; 
+            text-align: center; 
+        }
+        header h1 { 
+            color: var(--neon); 
+            font-size: 2.8rem; 
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        header p { color: var(--gray); font-size: 1.1rem; }
+
+        /* Campo de Busca */
+        .search-box {
+            max-width: 600px;
+            margin: 30px auto 50px;
+            padding: 0 20px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: rgba(255, 255, 255, .04);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+        .search-box input:focus {
+            border-color: var(--neon);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+        }
+
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+
+        /* Grid de Dicas Técnicas */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 30px;
+            transition: .3s;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0, 210, 255, .05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon);
+            box-shadow: 0 0 25px rgba(0, 210, 255, .15);
+        }
+
+        .card h2 {
+            color: var(--neon);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .card p {
+            color: #d1d5db;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .norma-tag {
+            align-self: flex-start;
+            background: rgba(0, 210, 255, 0.1);
+            color: var(--neon);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        /* Seção de Artigos Profundos */
+        .artigo-section {
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            padding: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .artigo-header {
+            border-left: 5px solid var(--neon);
+            padding-left: 20px;
+            margin-bottom: 35px;
+        }
+
+        .artigo-header h2 { color: var(--neon); font-size: 2rem; margin-top: 5px; }
+        .artigo-header span { color: var(--gray); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .artigo-content p {
+            margin-bottom: 25px;
+            color: #cbd5e1;
+            text-align: justify;
+            font-size: 1.05rem;
+        }
+
+        /* Destaques dentro dos artigos */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.08) 0%, rgba(0, 86, 179, 0.08) 100%);
+            border-left: 4px solid var(--neon);
+            padding: 25px;
+            border-radius: 0 15px 15px 0;
+            margin: 30px 0;
+        }
+
+        .highlight-box h4 { 
+            color: var(--neon); 
+            margin-bottom: 12px; 
+            text-transform: uppercase; 
+            font-size: 0.9rem;
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 60px; 
+            color: var(--gray); 
+            border-top: 1px solid rgba(255,255,255,0.05); 
+            margin-top: 100px;
+        }
+
+        @media(max-width:768px){
+            .topbar { flex-direction: column; gap: 15px; }
+            header h1 { font-size: 2rem; }
+            .artigo-section { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="topbar">
+    <div class="logo">⚡ POWERTECH INDUSTRIAL</div>
+    <div class="menu">
+        <a href="#">Dicas</a>
+        <a href="#">Artigos</a>
+        <a href="#">Normas</a>
+        <a href="#">Segurança</a>
+    </div>
+</nav>
+
+<header>
+    <h1>PORTAL TÉCNICO UNIFICADO</h1>
+    <p>Engenharia, IA e o futuro da Eletromobilidade no Brasil</p>
+</header>
+
+<div class="search-box">
+    <input type="text" id="searchDica" placeholder="O que você deseja aprender hoje? (Ex: NBR 5410, IA, Carros Elétricos...)" onkeyup="filtrarConteudo()">
+</div>
+
+<div class="container">
+    
+    <!-- GRID DE DICAS RÁPIDAS -->
+    <div class="grid" id="mainGrid">
+
+        <div class="card">
+            <h2>⚡ Instalações BT</h2>
+            <p>O dimensionamento correto evita o efeito Joule excessivo. Considere sempre o fator de agrupamento em eletrodutos saturados.</p>
+            <div class="norma-tag">NBR 5410</div>
+        </div>
+
+        <div class="card">
+            <h2>🛡️ Proteção Ativa</h2>
+            <p>Dispositivos DR são vitais. O Tipo B é o único capaz de garantir proteção em sistemas com componentes de Corrente Contínua (Inversores).</p>
+            <div class="norma-tag">NR 10 | NBR 5410</div>
+        </div>
+
+        <div class="card">
+            <h2>☀️ Geração Solar</h2>
+            <p>Módulos fotovoltaicos degradam mais rápido sem ventilação adequada. Mantenha o espaçamento mínimo entre o telhado e a estrutura.</p>
+            <div class="norma-tag">NBR 16690</div>
+        </div>
+
+        <div class="card">
+            <h2>🏭 Automação Industrial</h2>
+            <p>Utilize cabos blindados (shieldados) para sinais analógicos 4-20mA para evitar interferências de conversores de frequência próximos.</p>
+            <div class="norma-tag">NBR IEC 61439</div>
+        </div>
+
+        <div class="card">
+            <h2>📹 Monitoramento IP</h2>
+            <p>Em sistemas críticos, utilize Nobreaks de dupla conversão (Online) para garantir que surtos de rede não queimem as portas dos switches PoE.</p>
+            <div class="norma-tag">ANSI/TIA-568</div>
+        </div>
+
+        <div class="card">
+            <h2>🏗️ Cabines Primárias</h2>
+            <p>A coordenação entre o relé de proteção e os elos fusíveis é o que separa um desligamento local de um blecaute total na planta industrial.</p>
+            <div class="norma-tag">NBR 14039</div>
+        </div>
+
+    </div>
+
+    <!-- SEÇÃO DE ARTIGOS TÉCNICOS DETALHADOS -->
+    
+    <article class="artigo-section content-item">
+        <div class="artigo-header">
+            <span>Exploração Técnica #01</span>
+            <h2>A Revolução da IA na Gestão de Energia</h2>
+        </div>
+        <div class="artigo-content">
+            <p>A Inteligência Artificial (IA) deixou de ser um conceito de ficção para se tornar o cérebro das <strong>Smart Grids</strong> brasileiras. O principal desafio enfrentado pelos engenheiros hoje é o processamento do gigantesco volume de dados gerado por medidores inteligentes. Com a IA, sistemas de <em>Machine Learning</em> conseguem prever picos de demanda com uma precisão superior a 95%, permitindo que concessionárias ajustem a carga de transformadores em tempo real.</p>
+            
+            
+
+            <p>Um exemplo real é a implementação de algoritmos de <strong>manutenção preditiva</strong> em subestações de grande porte. Em vez de trocar um disjuntor por tempo de uso, a IA analisa a assinatura elétrica e o calor dissipado, emitindo um alerta apenas quando o componente apresenta comportamento anômalo. Isso reduz custos operacionais em até 30% e evita apagões não programados que custam milhões à indústria.</p>
+            
+            <div class="highlight-box">
+                <h4>Exemplo Real: Manutenção de Precisão</h4>
+                <p>Empresas de energia em São Paulo já utilizam drones com câmeras térmicas acopladas a softwares de reconhecimento de imagem para identificar isoladores trincados em linhas de transmissão, tarefa que antes levava semanas e agora é feita em horas, reduzindo riscos humanos drásticamente.</p>
+            </div>
+        </div>
+    </article>
+
+    <article class="artigo-section content-item">
+        <div class="artigo-header">
+            <span>Exploração Técnica #02</span>
+            <h2>Carros Elétricos no Brasil: Desafios de Infraestrutura</h2>
+        </div>
+        <div class="artigo-content">
+            <p>O Brasil vive uma expansão acelerada na venda de veículos elétricos (VE), mas a infraestrutura elétrica de prédios antigos e redes de distribuição não foi projetada para essa demanda súbita. O carregamento de um único carro elétrico em modo rápido pode equivaler ao consumo de dez casas populares ligadas simultaneamente. Isso gera um desafio crítico de <strong>estabilidade de fase</strong> e aumento de harmônicas na rede.</p>
+            
+            
+
+            <p>O desafio técnico reside no fato de que o carregamento concentrado (geralmente à noite) pode sobrecarregar transformadores de bairro. Além disso, a norma <strong>NBR 17019</strong> traz diretrizes rigorosas sobre as instalações elétricas para recarga, exigindo dispositivos de proteção contra surtos (DPS) e interruptores diferenciais residenciais (DR) do tipo B, que são capazes de detectar fugas de corrente contínua — algo que os DRs comuns (Tipo AC ou A) falham em proteger com segurança total.</p>
+            
+            <div class="highlight-box">
+                <h4>O Dilema dos Condomínios:</h4>
+                <p>Em capitais como Curitiba e Rio de Janeiro, para instalar apenas 10 carregadores em garagens coletivas, muitas vezes é necessário um upgrade no padrão de entrada da concessionária e a instalação de um transformador dedicado, o que pode elevar o custo do projeto em mais de R$ 100.000,00, gerando conflitos em assembleias de moradores.</p>
+            </div>
+
+            <p>A solução a longo prazo envolve a integração <strong>V2G (Vehicle-to-Grid)</strong>: permitir que as baterias dos carros funcionem como reservatórios para a rede durante horários críticos. Para isso, o Brasil precisa de regulação ágil da ANEEL e a popularização de inversores bidirecionais, transformando o "problema" do consumo em uma "solução" de armazenamento distribuído.</p>
+        </div>
+    </article>
+
+</div>
+
+<footer>
+    POWERTECH INDUSTRIAL © 2026 | Tecnologia, Inovação e Segurança Normativa
+</footer>
+
+<script>
+    function filtrarConteudo() {
+        let input = document.getElementById('searchDica').value.toLowerCase();
+        
+        // Filtrar Cards
+        let cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            let texto = card.innerText.toLowerCase();
+            card.style.display = texto.includes(input) ? 'flex' : 'none';
+        });
+
+        // Filtrar Artigos
+        let artigos = document.querySelectorAll('.content-item');
+        artigos.forEach(artigo => {
+            let texto = artigo.innerText.toLowerCase();
+            artigo.style.display = texto.includes(input) ? 'block' : 'none';
+        });
+    }
+</script>
+
+</body>
+</html>
