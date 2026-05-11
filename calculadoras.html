@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- Configurações de Rastreamento (Mantidas) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZHRMSQ7DQ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -12,9 +13,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Calculadoras de Engenharia Elétrica NBR 5410 | PowerTech Industrial</title>
-    <meta name="description" content="Ferramentas online para dimensionamento elétrico: Queda de Tensão, Disjuntores, Banco de Capacitores e Energia Solar. Baseado na NBR 5410 para engenheiros e estudantes.">
-    <meta name="keywords" content="calculadora eletrica, dimensionamento de cabos nbr 5410, calcular queda de tensão, banco de capacitores formula, projeto solar floriano, engenharia eletrica ferramentas">
+    <!-- SEO OTIMIZADO: Título e descrições focados em busca orgânica -->
+    <title>Calculadoras Elétricas NBR 5410 e Solar | PowerTech Industrial</title>
+    <meta name="description" content="Ferramentas profissionais para dimensionamento elétrico: Queda de Tensão, Disjuntores, Banco de Capacitores e Projetos Solares. Cálculos técnicos precisos pela PowerTech.">
+    <link rel="canonical" href="https://powertechindustrial.com.br/calculadoras.html">
     
     <style>
         :root {
@@ -124,11 +126,19 @@
         .card h2 {
             color: var(--neon-blue);
             font-size: 1.2rem;
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* Reduzi para caber o texto descritivo */
             border-bottom: 1px solid rgba(0, 210, 255, 0.2);
             padding-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        /* Novo estilo para o texto de apoio SEO */
+        .seo-text {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            font-style: italic;
         }
 
         .group { margin-bottom: 14px; }
@@ -229,15 +239,17 @@
 
 <div class="container">
     <div class="grid">
+        <!-- CARD 01 -->
         <div class="card">
             <h2>01. Dimensionamento Solar</h2>
+            <p class="seo-text">Simule a geração fotovoltaica e placas necessárias para sua região.</p>
             <div class="group">
                 <label>Consumo Médio (kWh/mês)</label>
                 <input type="number" id="k8" placeholder="Ex: 500">
             </div>
             <div class="group">
                 <label>Horas de Sol Pico (Floriano-PI: 5.8)</label>
-                <input type="number" id="hsp8" value="5.8">
+                <input type="number" id="hsp8" value="5.8" step="0.1">
             </div>
             <div class="group">
                 <label>Perdas do Sistema (%)</label>
@@ -251,8 +263,10 @@
             <div class="result" id="r8"></div>
         </div>
 
+        <!-- CARD 02 -->
         <div class="card">
             <h2>02. Queda de Tensão</h2>
+            <p class="seo-text">Cálculo de queda de tensão em circuitos conforme NBR 5410.</p>
             <div class="group">
                 <label>Corrente (A)</label>
                 <input type="number" id="i1">
@@ -272,12 +286,14 @@
                     <option value="0.0282">Alumínio</option>
                 </select>
             </div>
-            <button onclick="calc1()">Calcular</button>
+            <button onclick="calc1()">Calcular Queda</button>
             <div class="result" id="r1"></div>
         </div>
 
+        <!-- CARD 03 -->
         <div class="card">
             <h2>03. Lei de Ohm</h2>
+            <p class="seo-text">Relação fundamental entre tensão, corrente e resistência.</p>
             <div class="group">
                 <label>Tensão (V)</label>
                 <input type="number" id="v2">
@@ -286,12 +302,14 @@
                 <label>Resistência (Ω)</label>
                 <input type="number" id="r2">
             </div>
-            <button onclick="calc2()">Calcular</button>
+            <button onclick="calc2()">Calcular Corrente</button>
             <div class="result" id="r2_res"></div>
         </div>
 
+        <!-- CARD 04 -->
         <div class="card">
             <h2>04. Disjuntor (NBR 5410)</h2>
+            <p class="seo-text">Dimensionamento de proteção térmica e fatores de agrupamento.</p>
             <div class="group">
                 <label>Potência (W)</label>
                 <input type="number" id="p3">
@@ -311,12 +329,14 @@
                     <option value="0.7">0.70 (3 circuitos)</option>
                 </select>
             </div>
-            <button onclick="calc3()">Dimensionar</button>
+            <button onclick="calc3()">Dimensionar Disjuntor</button>
             <div class="result" id="r3"></div>
         </div>
 
+        <!-- CARD 05 -->
         <div class="card">
             <h2>05. Banco de Capacitores</h2>
+            <p class="seo-text">Correção do Fator de Potência para eliminar multas de reativo.</p>
             <div class="group">
                 <label>Potência Ativa (kW)</label>
                 <input type="number" id="p4">
@@ -329,12 +349,14 @@
                 <label>FP Desejado</label>
                 <input type="number" step="0.01" id="fd4" value="0.92">
             </div>
-            <button onclick="calc4()">Calcular</button>
+            <button onclick="calc4()">Calcular kVAr</button>
             <div class="result" id="r4"></div>
         </div>
 
+        <!-- CARD 06 -->
         <div class="card">
             <h2>06. Potência Trifásica</h2>
+            <p class="seo-text">Cálculo de potência aparente e ativa em sistemas trifásicos.</p>
             <div class="group">
                 <label>Tensão (V)</label>
                 <input type="number" id="v6" value="380">
@@ -347,54 +369,46 @@
                 <label>Fator Potência</label>
                 <input type="number" id="fp6" value="0.92" step="0.01">
             </div>
-            <button onclick="calc6()">Calcular</button>
+            <button onclick="calc6()">Calcular Watts</button>
             <div class="result" id="r6"></div>
         </div>
     </div>
+
+    <!-- Seção FAQ para SEO (Texto que o Google ama ler) -->
+    <section style="margin-top: 60px; padding: 20px; border-top: 1px solid rgba(0, 210, 255, 0.1);">
+        <h3 style="color: var(--neon-blue); margin-bottom: 15px;">Calculadoras Elétricas e Normas Técnicas</h3>
+        <p style="color: var(--text-gray); font-size: 0.9rem; max-width: 800px;">
+            As ferramentas da <b>PowerTech Industrial</b> auxiliam no pré-dimensionamento de instalações elétricas e sistemas de energia solar. 
+            Todos os cálculos de disjuntores e cabos baseiam-se na <b>NBR 5410</b>, considerando critérios de queda de tensão e capacidade de condução. 
+            Para projetos executivos e diagramas elétricos complexos, consulte sempre nossa engenharia em Floriano-PI.
+        </p>
+    </section>
 
     <a href="index.html" class="back-link">← Voltar à Página Inicial</a>
 </div>
 
 <script>
+// Funções Matemáticas Preservadas Intactas
 function mostrar(id,valor){
     let el=document.getElementById(id);
     el.style.display="block";
-    el.innerHTML=valor;
+    // Melhoria de conversão: link discreto para o portfólio no resultado
+    el.innerHTML=valor + `<br><a href="index.html" style="color:#fff; font-size:10px; text-decoration:underline; opacity:0.7; display:block; margin-top:8px;">Ver projeto técnico PowerTech →</a>`;
 }
 
 function invalido(v){ return isNaN(v) || v<=0; }
 
-// LOGICA SOLAR MELHORADA
 function calc8(){
     const consumo = parseFloat(document.getElementById('k8').value);
     const hsp = parseFloat(document.getElementById('hsp8').value);
     const perdas = parseFloat(document.getElementById('ef8').value) / 100;
     const wpPainel = parseFloat(document.getElementById('wp8').value);
-    
-    if(invalido(consumo) || hsp <= 0) {
-        mostrar("r8", "⚠️ Informe o consumo mensal.");
-        return;
-    }
-
-    // Cálculo da Potência do Sistema (kWp)
-    // Formula: P (kWp) = Consumo / (30 dias * HSP * Eficiência)
+    if(invalido(consumo) || hsp <= 0) { mostrar("r8", "⚠️ Informe o consumo mensal."); return; }
     const eficiencia = 1 - perdas;
     const kwp = consumo / (30 * hsp * eficiencia);
-    
-    // Quantidade de painéis
     const qtd = Math.ceil((kwp * 1000) / wpPainel);
-    
-    // Área aproximada (cada painel de 550W tem ~2.6m²)
     const area = qtd * 2.6;
-
-    mostrar("r8", 
-        `⚡ <b>Diagnóstico PowerTech:</b><br>` +
-        `• Sistema Sugerido: <b>On-Grid</b><br>` +
-        `• Potência Total: <b>${kwp.toFixed(2)} kWp</b><br>` +
-        `• Painéis (${wpPainel}W): <b>${qtd} un</b><br>` +
-        `• Área Necessária: <b>~${area.toFixed(1)} m²</b><br>` +
-        `• Geração Estimada: <b>${consumo} kWh/mês</b>`
-    );
+    mostrar("r8", `⚡ <b>Diagnóstico PowerTech:</b><br>• Sistema: <b>On-Grid</b><br>• Potência: <b>${kwp.toFixed(2)} kWp</b><br>• Painéis: <b>${qtd} un</b><br>• Área: <b>~${area.toFixed(1)} m²</b>`);
 }
 
 function calc1(){
