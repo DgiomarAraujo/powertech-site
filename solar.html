@@ -1,38 +1,161 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZHRMSQ7DQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1ZHRMSQ7DQ');
+    </script>
+
     <meta charset="UTF-8">
-    <title>PowerTech Beta - Solar Precision</title>
-    <meta name="robots" content="noindex, nofollow"> <style>
-        /* Reutilize seu CSS neon aqui */
-        .debug-panel { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; margin-top: 20px; }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow"> <title>Análise Solar via Satélite | PowerTech Industrial Floriano-PI</title>
+    <meta name="description" content="Ferramenta exclusiva da PowerTech Industrial para mapeamento de irradiação solar e potencial fotovoltaico em Floriano-PI usando dados oficiais do Google Solar API.">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+
+    <style>
+        :root { 
+            --deep-dark: #0a0e14; 
+            --neon-blue: #00d2ff; 
+            --text-gray: #cbd5e0;
+            --pure-white: #ffffff;
+            --accent-blue: #0056b3;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            color: var(--pure-white); 
+            background: radial-gradient(circle at top right, #111827, #0a0e14);
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 900px; margin: auto; padding: 40px 20px; }
+
+        header { text-align: center; padding: 60px 0; border-bottom: 1px solid rgba(0, 210, 255, 0.1); }
+        header h1 { letter-spacing: 5px; text-transform: uppercase; background: linear-gradient(to right, #fff, var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        h2 { color: var(--neon-blue); text-transform: uppercase; letter-spacing: 2px; margin-top: 40px; }
+        .seo-text { font-size: 0.9rem; color: #64748b; margin-top: -15px; margin-bottom: 25px; display: block; }
+
+        .solar-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-gray); }
+        
+        input { 
+            width: 100%; padding: 15px; background: rgba(0,0,0,0.4); 
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; 
+            color: #fff; font-size: 1rem; box-sizing: border-box;
+        }
+        input:focus { border-color: var(--neon-blue); outline: none; }
+
+        .btn-calc { 
+            width: 100%; padding: 20px; background: rgba(10, 14, 20, 0.8);
+            color: var(--pure-white); border: 1px solid var(--neon-blue);
+            border-radius: 12px; font-weight: bold; text-transform: uppercase;
+            cursor: pointer; transition: 0.3s; letter-spacing: 2px;
+        }
+        .btn-calc:hover { background: var(--neon-blue); color: var(--deep-dark); box-shadow: 0 0 20px rgba(0, 210, 255, 0.4); }
+
+        #resultado { 
+            display: none; margin-top: 30px; padding: 25px; 
+            background: rgba(0, 210, 255, 0.05); border-radius: 15px; 
+            border-left: 4px solid var(--neon-blue);
+        }
+
+        .micro-conv { font-size: 0.85rem; margin-top: 15px; display: block; color: var(--neon-blue); text-decoration: none; font-style: italic; }
+        
+        footer { margin-top: 100px; padding: 40px; background: rgba(0,0,0,0.5); border-radius: 20px; font-size: 0.9rem; color: var(--text-gray); }
+        .faq-box h3 { color: var(--neon-blue); font-size: 1.1rem; }
     </style>
 </head>
 <body>
-    <h1>Módulo de Testes: Solar API</h1>
-    
-    <div class="container">
-        <input type="text" id="endereco" placeholder="Digite o endereço do telhado..." style="width: 80%; padding: 10px;">
-        <button onclick="buscarDadosSolar()">Analisar Potencial</button>
 
-        <div id="status-api" class="debug-panel">
-            Aguardando entrada de dados para consulta via Google Cloud...
+<div class="container">
+    <header>
+        <h1>PowerTech Solar API</h1>
+        <p>Mapeamento de Irradiação de Alta Precisão</p>
+    </header>
+
+    <h2>// Diagnóstico por Satélite</h2>
+    <span class="seo-text">Engenharia fotovoltaica em Floriano-PI utilizando processamento de dados geoespaciais em tempo real.</span>
+
+    <div class="solar-card">
+        <div class="input-group">
+            <label>Endereço ou Coordenadas do Telhado:</label>
+            <input type="text" id="location" placeholder="Ex: Rua Fernando Marques, Floriano, PI">
+        </div>
+        
+        <div class="input-group">
+            <label>Consumo Mensal Médio (kWh):</label>
+            <input type="number" id="consumo" placeholder="000" inputmode="numeric">
+        </div>
+
+        <button class="btn-calc" onclick="consultarSolarAPI()">Iniciar Transmissão de Dados</button>
+
+        <div id="resultado">
+            <div id="dados-api">
+                </div>
+            <a href="../portfolio.html" class="micro-conv">→ Ver projeto técnico similar executado pela PowerTech</a>
         </div>
     </div>
 
-    <script>
-        const API_KEY = 'SUA_CHAVE_AQUI'; // Lembre-se: nunca publique isso na index principal
+    <footer>
+        <div class="faq-box">
+            <h3>Por que usamos a Google Solar API?</h3>
+            <p>A PowerTech Industrial investe em tecnologia de ponta para garantir que seu projeto solar em Floriano-PI não seja baseado em médias genéricas. Nossa ferramenta calcula a incidência de luz solar anual e sombreamentos específicos de cada telhado, maximizando o retorno sobre o investimento (ROI) em energia solar fotovoltaica e sistemas industriais.</p>
+        </div>
+        <p style="text-align: center; margin-top: 30px; font-size: 0.7rem; opacity: 0.5;">
+            &copy; 2026 PowerTech Industrial | Engenharia de Precisão | Floriano-Piauí
+        </p>
+    </footer>
+</div>
 
-        async function buscarDadosSolar() {
-            // Aqui entra o código que faremos para conectar ao Google Solar
-            document.getElementById('status-api').innerHTML = "Consultando camadas de irradiação para Floriano-PI...";
+<script>
+    const GOOGLE_API_KEY = 'SUA_CHAVE_API_AQUI';
+
+    async function consultarSolarAPI() {
+        const location = document.getElementById('location').value;
+        const resDiv = document.getElementById('resultado');
+        const dadosDiv = document.getElementById('dados-api');
+
+        if(!location) { alert("Por favor, insira um local."); return; }
+
+        resDiv.style.display = 'block';
+        dadosDiv.innerHTML = "Conectando ao Google Cloud Console... Analisando camadas de irradiação...";
+
+        try {
+            // Logica Sênior: Primeiro Geocoding para pegar Lat/Lng
+            // Depois chamada para: https://solar.googleapis.com/v1/buildingInsights:findClosest?location.latitude=LAT&location.longitude=LNG&key=API_KEY
             
-            // O fluxo será:
-            // 1. Geocoding (Endereço -> Lat/Log)
-            // 2. Solar API (Lat/Log -> Dados de Irradiação)
-            // 3. Update na sua calculadora
+            // Simulação de processamento para teste de layout
+            setTimeout(() => {
+                dadosDiv.innerHTML = `
+                    <strong style="color:var(--neon-blue)">ANÁLISE CONCLUÍDA:</strong><br>
+                    Potencial de Irradiação: 2.150 kWh/m² por ano<br>
+                    Área de Telhado Disponível: Analisando obstáculos...<br>
+                    Sugestão: Sistema de 5.4 kWp recomendado para cobrir seu consumo.
+                `;
+            }, 2000);
+
+        } catch (error) {
+            dadosDiv.innerHTML = "Erro na conexão técnica. Verifique as credenciais do console.";
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>
