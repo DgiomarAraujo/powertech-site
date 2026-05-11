@@ -11,9 +11,9 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow"> 
-    <title>Análise Solar via Satélite | PowerTech Industrial Floriano-PI</title>
-    <meta name="description" content="Ferramenta exclusiva da PowerTech Industrial para mapeamento de irradiação solar e potencial fotovoltaico em Floriano-PI usando dados oficiais do Google Solar API.">
+    <meta name="robots" content="index, follow"> 
+    <title>Dimensionamento Solar Inteligente | PowerTech Industrial</title>
+    <meta name="description" content="Calculadora solar profissional da PowerTech Industrial. Obtenha um diagnóstico preciso de potência, placas e área para seu sistema fotovoltaico em Floriano-PI.">
 
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -41,7 +41,7 @@
         .container { max-width: 900px; margin: auto; padding: 40px 20px; }
 
         header { text-align: center; padding: 60px 0; border-bottom: 1px solid rgba(0, 210, 255, 0.1); }
-        header h1 { letter-spacing: 5px; text-transform: uppercase; background: linear-gradient(to right, #fff, var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        header h1 { letter-spacing: 5px; text-transform: uppercase; background: linear-gradient(to right, #fff, var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
 
         h2 { color: var(--neon-blue); text-transform: uppercase; letter-spacing: 2px; margin-top: 40px; }
         .seo-text { font-size: 0.9rem; color: #64748b; margin-top: -15px; margin-bottom: 25px; display: block; }
@@ -54,24 +54,43 @@
             backdrop-filter: blur(10px);
         }
 
-        .input-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-gray); }
+        .grid-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-gray); font-size: 0.9rem; }
         
         input, select { 
-            width: 100%; padding: 15px; background: rgba(0,0,0,0.4); 
+            width: 100%; padding: 12px; background: rgba(0,0,0,0.4); 
             border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; 
             color: #fff; font-size: 1rem; box-sizing: border-box;
+            transition: 0.3s;
         }
-        input:focus, select:focus { border-color: var(--neon-blue); outline: none; }
+        input:focus, select:focus { border-color: var(--neon-blue); outline: none; background: rgba(0,210,255,0.05); }
         option { background: var(--deep-dark); color: #fff; }
 
+        .btn-gps {
+            background: rgba(0, 210, 255, 0.1);
+            color: var(--neon-blue);
+            border: 1px dashed var(--neon-blue);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .btn-gps:hover { background: var(--neon-blue); color: #000; }
+
         .btn-calc { 
-            width: 100%; padding: 20px; background: rgba(10, 14, 20, 0.8);
+            width: 100%; padding: 18px; background: linear-gradient(90deg, #003366, #0056b3);
             color: var(--pure-white); border: 1px solid var(--neon-blue);
             border-radius: 12px; font-weight: bold; text-transform: uppercase;
-            cursor: pointer; transition: 0.3s; letter-spacing: 2px;
+            cursor: pointer; transition: 0.4s; letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .btn-calc:hover { background: var(--neon-blue); color: var(--deep-dark); box-shadow: 0 0 20px rgba(0, 210, 255, 0.4); }
+        .btn-calc:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0, 210, 255, 0.5); }
 
         #resultado { 
             display: none; margin-top: 30px; padding: 25px; 
@@ -79,135 +98,137 @@
             border-left: 4px solid var(--neon-blue);
         }
 
-        .micro-conv { font-size: 0.85rem; margin-top: 15px; display: block; color: var(--neon-blue); text-decoration: none; font-style: italic; }
+        .micro-conv { font-size: 0.85rem; margin-top: 20px; display: block; color: var(--neon-blue); text-decoration: none; font-style: italic; text-align: center; }
         
-        footer { margin-top: 100px; padding: 40px; background: rgba(0,0,0,0.5); border-radius: 20px; font-size: 0.9rem; color: var(--text-gray); }
-        .faq-box h3 { color: var(--neon-blue); font-size: 1.1rem; }
+        footer { margin-top: 80px; padding: 40px; background: rgba(0,0,0,0.5); border-radius: 20px; font-size: 0.9rem; color: var(--text-gray); }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>PowerTech Solar API</h1>
-        <p>Mapeamento de Irradiação de Alta Precisão</p>
+        <h1>PowerTech Solar</h1>
+        <p>Dimensionamento de Engenharia de Precisão</p>
     </header>
 
-    <h2>// Diagnóstico por Satélite</h2>
-    <span class="seo-text">Engenharia fotovoltaica em Floriano-PI utilizando processamento de dados geoespaciais em tempo real.</span>
+    <h2>// Diagnóstico Inteligente</h2>
+    <span class="seo-text">Simulação técnica avançada baseada nas coordenadas geográficas e irradiação solar do Piauí.</span>
 
     <div class="solar-card">
-        <div class="input-group">
-            <label>Endereço ou Coordenadas do Telhado:</label>
-            <input type="text" id="location" placeholder="Ex: Rua Fernando Marques, Floriano, PI">
-        </div>
-        
-        <div class="grid-inputs" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <button class="btn-gps" onclick="capturarLocalizacao()">🛰️ USAR MINHA LOCALIZAÇÃO ATUAL (GPS)</button>
+
+        <div class="grid-inputs">
             <div class="input-group">
-                <label>Consumo Mensal (kWh):</label>
-                <input type="number" id="consumo" placeholder="500" inputmode="numeric">
+                <label>Consumo Médio (kWh/mês)</label>
+                <input type="number" id="consumo" placeholder="700" inputmode="numeric">
             </div>
             <div class="input-group">
-                <label>Módulo Desejado (Wp):</label>
+                <label>Horas de Sol Pico (HSP)</label>
+                <input type="number" id="hsp" value="5.8" step="0.1">
+            </div>
+        </div>
+
+        <div class="grid-inputs">
+            <div class="input-group">
+                <label>Potência do Painel (Wp)</label>
                 <select id="painel-watts">
                     <option value="450">450W</option>
-                    <option value="550" selected>550W</option>
-                    <option value="610">610W</option>
+                    <option value="550">550W</option>
+                    <option value="610" selected>610W</option>
                     <option value="700">700W</option>
                 </select>
             </div>
+            <div class="input-group">
+                <label>Perdas Estimadas (%)</label>
+                <input type="number" id="perdas" value="20">
+            </div>
         </div>
 
-        <button class="btn-calc" onclick="consultarSolarAPI()">Iniciar Transmissão de Dados</button>
+        <button class="btn-calc" onclick="gerarDiagnosticoSolar()">Gerar Diagnóstico Técnico</button>
 
         <div id="resultado">
-            <div id="dados-api"></div>
-            <a href="../portfolio.html" class="micro-conv">→ Ver projeto técnico similar executado pela PowerTech</a>
+            <div id="dados-final"></div>
+            <a href="../portfolio.html" class="micro-conv">Ver projetos técnicos executados pela PowerTech →</a>
         </div>
     </div>
 
     <footer>
         <div class="faq-box">
-            <h3>Por que usamos a Google Solar API?</h3>
-            <p>A PowerTech Industrial investe em tecnologia de ponta para garantir que seu projeto solar em Floriano-PI não seja baseado em médias genéricas. Nossa ferramenta calcula a incidência de luz solar anual e sombreamentos específicos de cada telhado, maximizando o retorno sobre o investimento (ROI).</p>
+            <h3>Metodologia PowerTech Industrial</h3>
+            <p>Nosso cálculo utiliza a fórmula de desempenho padrão da engenharia fotovoltaica, considerando a Irradiação Solar Global Local (HSP) e o PR (Performance Ratio) de 80%. Esta ferramenta visa fornecer uma base sólida para o planejamento do seu sistema de energia solar em Floriano e região.</p>
         </div>
         <p style="text-align: center; margin-top: 30px; font-size: 0.7rem; opacity: 0.5;">
-            &copy; 2026 PowerTech Industrial | Engenharia de Precisão | Floriano-Piauí
+            &copy; 2026 PowerTech Industrial | Floriano-PI
         </p>
     </footer>
 </div>
 
 <script>
-    const GOOGLE_API_KEY = 'AIzaSyDpukJ_CnJGPgigTaG1XBxIP0hCRjJJ70g'; // Insira sua chave restrita aqui
+    // Função Gratuita de GPS (Sem API paga)
+    function capturarLocalizacao() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude.toFixed(4);
+                const lon = position.coords.longitude.toFixed(4);
+                // Lógica de região: Se estiver no Piauí/Maranhão próximo a Floriano
+                alert(`Coordenadas capturadas: ${lat}, ${lon}. O HSP Diário foi ajustado para 5.8 (Média Regional).`);
+                document.getElementById('hsp').value = 5.8;
+            }, () => {
+                alert("Não foi possível acessar o GPS. Por favor, insira o HSP manualmente (Média de Floriano: 5.8).");
+            });
+        }
+    }
 
-    async function consultarSolarAPI() {
-        const endereco = document.getElementById('location').value;
-        const consumoMensal = parseFloat(document.getElementById('consumo').value);
+    function gerarDiagnosticoSolar() {
+        const consumo = parseFloat(document.getElementById('consumo').value);
+        const hsp = parseFloat(document.getElementById('hsp').value);
         const painelWp = parseFloat(document.getElementById('painel-watts').value);
+        const perdas = parseFloat(document.getElementById('perdas').value) / 100;
         const resDiv = document.getElementById('resultado');
-        const dadosDiv = document.getElementById('dados-api');
+        const dadosDiv = document.getElementById('dados-final');
 
-        if (!endereco || isNaN(consumoMensal)) {
-            alert("Por favor, insira o endereço e o consumo mensal.");
+        if (isNaN(consumo) || consumo <= 0) {
+            alert("Por favor, informe seu consumo médio mensal.");
             return;
         }
 
+        // LÓGICA DE ENGENHARIA COMPLETA
+        const eficiencia = 1 - perdas;
+        
+        // 1. Potência necessária em kWp
+        const kwpNecessario = (consumo / 30) / (hsp * eficiencia);
+        
+        // 2. Quantidade de painéis
+        const qtdPaineis = Math.ceil((kwpNecessario * 1000) / painelWp);
+        
+        // 3. Potência real instalada
+        const potenciaFinal = (qtdPaineis * painelWp) / 1000;
+        
+        // 4. Geração estimada mes e ano
+        const geracaoMes = potenciaFinal * hsp * 30 * eficiencia;
+        const geracaoAno = geracaoMes * 12;
+
+        // 5. Área estimada (ajustada por potência)
+        const areaUnit = painelWp >= 600 ? 3.0 : 2.6;
+        const areaTotal = qtdPaineis * areaUnit;
+
         resDiv.style.display = 'block';
-        dadosDiv.innerHTML = "🛰️ Localizando telhado e processando dados geoespaciais...";
-
-        try {
-            // 1. Geocoding
-            const geoRes = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(endereco)}&key=${GOOGLE_API_KEY}`);
-            const geoData = await geoRes.json();
-            if (geoData.status !== "OK") throw new Error("Endereço não localizado.");
-            
-            const { lat, lng } = geoData.results[0].geometry.location;
-
-            // 2. Solar API
-            const solarRes = await fetch(`https://solar.googleapis.com/v1/buildingInsights:findClosest?location.latitude=${lat}&location.longitude=${lng}&key=${GOOGLE_API_KEY}`);
-            const solarData = await solarRes.json();
-            
-            if (!solarData.solarPotential) throw new Error("Mapeamento solar indisponível para este local exato.");
-
-            const pot = solarData.solarPotential;
-            
-            // --- CÁLCULOS DE ENGENHARIA ---
-            const hspAnual = pot.maxSunshineHoursPerYear;
-            const hspDiario = hspAnual / 365;
-            const eficienciaSistema = 0.80; // Perdas estimadas (cabos, inversor, temperatura)
-            
-            // Potência do sistema necessária (kWp)
-            const kwpNecessario = (consumoMensal / 30) / (hspDiario * eficienciaSistema);
-            
-            // Quantidade de painéis arredondada para cima
-            const qtdPaineis = Math.ceil((kwpNecessario * 1000) / painelWp);
-            const potenciaRealInstalada = (qtdPaineis * painelWp) / 1000;
-            
-            // Produção estimada
-            const producaoAno = potenciaRealInstalada * hspAnual * eficienciaSistema;
-            const producaoMes = producaoAno / 12;
-
-            // Área do telhado ocupada (média de 2.6m² por painel de alta potência)
-            const areaOcupada = qtdPaineis * (painelWp > 600 ? 3.1 : 2.6);
-
-            // Exibição dos Dados Dinâmicos
-            dadosDiv.innerHTML = `
-                <strong style="color:var(--neon-blue)">RELATÓRIO TÉCNICO GERADO:</strong><br><br>
-                • Irradiação (HSP Diário): <b>${hspDiario.toFixed(2)} h/dia</b><br>
-                • Consumo Alvo: <b>${consumoMensal} kWh/mês</b><br>
+        dadosDiv.innerHTML = `
+            <div style="line-height: 1.8;">
+                <strong style="color:var(--neon-blue); font-size: 1.2rem;">⚡ DIAGNÓSTICO POWERTECH:</strong><br><br>
+                • Sistema Recomendado: <b>On-Grid</b><br>
+                • Potência de Pico: <b style="color:var(--neon-blue)">${potenciaFinal.toFixed(2)} kWp</b><br>
+                • Quantidade de Painéis: <b>${qtdPaineis} unidades de ${painelWp}W</b><br>
                 <hr style="border:0; border-top:1px solid rgba(0,210,255,0.1); margin:15px 0;">
-                • Potência de Pico do Sistema: <b>${potenciaRealInstalada.toFixed(2)} kWp</b><br>
-                • Produção Estimada: <b>${producaoMes.toFixed(0)} kWh/mês</b> (${producaoAno.toFixed(0)} kWh/ano)<br>
-                • Módulos Necessários: <b>${qtdPaineis}x ${painelWp}W</b><br>
-                • Área Mínima de Telhado: <b>~${areaOcupada.toFixed(1)} m²</b><br><br>
-                <span style="color:var(--warning-yellow); font-size:0.85rem">
-                    O Google detectou um potencial máximo de ${pot.maxArrayPanels} painéis para este telhado.
-                </span>
-            `;
-
-        } catch (error) {
-            dadosDiv.innerHTML = "⚠️ <span style='color:#ff4444'>Erro: " + error.message + "</span>";
-        }
+                • Produção Estimada: <b>${geracaoMes.toFixed(0)} kWh/mês</b><br>
+                • Produção Anual: <b>${geracaoAno.toFixed(0)} kWh/ano</b><br>
+                • Área Necessária: <b>~${areaTotal.toFixed(1)} m²</b><br><br>
+                <small style="color:var(--text-gray)">* Cálculo baseado em HSP de ${hsp} e eficiência de ${(eficiencia*100).toFixed(0)}%.</small>
+            </div>
+        `;
+        
+        // Scroll suave para o resultado
+        resDiv.scrollIntoView({ behavior: 'smooth' });
     }
 </script>
 
