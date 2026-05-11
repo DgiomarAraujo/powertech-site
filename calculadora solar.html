@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>PowerTech Beta - Solar Precision</title>
+    <meta name="robots" content="noindex, nofollow"> <style>
+        /* Reutilize seu CSS neon aqui */
+        .debug-panel { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Módulo de Testes: Solar API</h1>
+    
+    <div class="container">
+        <input type="text" id="endereco" placeholder="Digite o endereço do telhado..." style="width: 80%; padding: 10px;">
+        <button onclick="buscarDadosSolar()">Analisar Potencial</button>
+
+        <div id="status-api" class="debug-panel">
+            Aguardando entrada de dados para consulta via Google Cloud...
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = 'SUA_CHAVE_AQUI'; // Lembre-se: nunca publique isso na index principal
+
+        async function buscarDadosSolar() {
+            // Aqui entra o código que faremos para conectar ao Google Solar
+            document.getElementById('status-api').innerHTML = "Consultando camadas de irradiação para Floriano-PI...";
+            
+            // O fluxo será:
+            // 1. Geocoding (Endereço -> Lat/Log)
+            // 2. Solar API (Lat/Log -> Dados de Irradiação)
+            // 3. Update na sua calculadora
+        }
+    </script>
+</body>
+</html>
