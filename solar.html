@@ -11,7 +11,8 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow"> <title>Análise Solar via Satélite | PowerTech Industrial Floriano-PI</title>
+    <meta name="robots" content="noindex, nofollow"> 
+    <title>Análise Solar via Satélite | PowerTech Industrial Floriano-PI</title>
     <meta name="description" content="Ferramenta exclusiva da PowerTech Industrial para mapeamento de irradiação solar e potencial fotovoltaico em Floriano-PI usando dados oficiais do Google Solar API.">
 
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -25,6 +26,7 @@
             --text-gray: #cbd5e0;
             --pure-white: #ffffff;
             --accent-blue: #0056b3;
+            --warning-yellow: #ffcc00;
         }
 
         body { 
@@ -55,12 +57,13 @@
         .input-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-gray); }
         
-        input { 
+        input, select { 
             width: 100%; padding: 15px; background: rgba(0,0,0,0.4); 
             border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; 
             color: #fff; font-size: 1rem; box-sizing: border-box;
         }
-        input:focus { border-color: var(--neon-blue); outline: none; }
+        input:focus, select:focus { border-color: var(--neon-blue); outline: none; }
+        option { background: var(--deep-dark); color: #fff; }
 
         .btn-calc { 
             width: 100%; padding: 20px; background: rgba(10, 14, 20, 0.8);
@@ -99,16 +102,26 @@
             <input type="text" id="location" placeholder="Ex: Rua Fernando Marques, Floriano, PI">
         </div>
         
-        <div class="input-group">
-            <label>Consumo Mensal Médio (kWh):</label>
-            <input type="number" id="consumo" placeholder="000" inputmode="numeric">
+        <div class="grid-inputs" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="input-group">
+                <label>Consumo Mensal (kWh):</label>
+                <input type="number" id="consumo" placeholder="500" inputmode="numeric">
+            </div>
+            <div class="input-group">
+                <label>Módulo Desejado (Wp):</label>
+                <select id="painel-watts">
+                    <option value="450">450W</option>
+                    <option value="550" selected>550W</option>
+                    <option value="610">610W</option>
+                    <option value="700">700W</option>
+                </select>
+            </div>
         </div>
 
         <button class="btn-calc" onclick="consultarSolarAPI()">Iniciar Transmissão de Dados</button>
 
         <div id="resultado">
-            <div id="dados-api">
-                </div>
+            <div id="dados-api"></div>
             <a href="../portfolio.html" class="micro-conv">→ Ver projeto técnico similar executado pela PowerTech</a>
         </div>
     </div>
@@ -116,7 +129,7 @@
     <footer>
         <div class="faq-box">
             <h3>Por que usamos a Google Solar API?</h3>
-            <p>A PowerTech Industrial investe em tecnologia de ponta para garantir que seu projeto solar em Floriano-PI não seja baseado em médias genéricas. Nossa ferramenta calcula a incidência de luz solar anual e sombreamentos específicos de cada telhado, maximizando o retorno sobre o investimento (ROI) em energia solar fotovoltaica e sistemas industriais.</p>
+            <p>A PowerTech Industrial investe em tecnologia de ponta para garantir que seu projeto solar em Floriano-PI não seja baseado em médias genéricas. Nossa ferramenta calcula a incidência de luz solar anual e sombreamentos específicos de cada telhado, maximizando o retorno sobre o investimento (ROI).</p>
         </div>
         <p style="text-align: center; margin-top: 30px; font-size: 0.7rem; opacity: 0.5;">
             &copy; 2026 PowerTech Industrial | Engenharia de Precisão | Floriano-Piauí
@@ -125,34 +138,75 @@
 </div>
 
 <script>
-    const GOOGLE_API_KEY = 'AIzaSyDpukJ_CnJGPgigTaG1XBxIP0hCRjJJ70g';
+    const GOOGLE_API_KEY = 'AIzaSyDpukJ_CnJGPgigTaG1XBxIP0hCRjJJ70g'; // Insira sua chave restrita aqui
 
     async function consultarSolarAPI() {
-        const location = document.getElementById('location').value;
+        const endereco = document.getElementById('location').value;
+        const consumoMensal = parseFloat(document.getElementById('consumo').value);
+        const painelWp = parseFloat(document.getElementById('painel-watts').value);
         const resDiv = document.getElementById('resultado');
         const dadosDiv = document.getElementById('dados-api');
 
-        if(!location) { alert("Por favor, insira um local."); return; }
+        if (!endereco || isNaN(consumoMensal)) {
+            alert("Por favor, insira o endereço e o consumo mensal.");
+            return;
+        }
 
         resDiv.style.display = 'block';
-        dadosDiv.innerHTML = "Conectando ao Google Cloud Console... Analisando camadas de irradiação...";
+        dadosDiv.innerHTML = "🛰️ Localizando telhado e processando dados geoespaciais...";
 
         try {
-            // Logica Sênior: Primeiro Geocoding para pegar Lat/Lng
-            // Depois chamada para: https://solar.googleapis.com/v1/buildingInsights:findClosest?location.latitude=LAT&location.longitude=LNG&key=API_KEY
+            // 1. Geocoding
+            const geoRes = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(endereco)}&key=${GOOGLE_API_KEY}`);
+            const geoData = await geoRes.json();
+            if (geoData.status !== "OK") throw new Error("Endereço não localizado.");
             
-            // Simulação de processamento para teste de layout
-            setTimeout(() => {
-                dadosDiv.innerHTML = `
-                    <strong style="color:var(--neon-blue)">ANÁLISE CONCLUÍDA:</strong><br>
-                    Potencial de Irradiação: 2.150 kWh/m² por ano<br>
-                    Área de Telhado Disponível: Analisando obstáculos...<br>
-                    Sugestão: Sistema de 5.4 kWp recomendado para cobrir seu consumo.
-                `;
-            }, 2000);
+            const { lat, lng } = geoData.results[0].geometry.location;
+
+            // 2. Solar API
+            const solarRes = await fetch(`https://solar.googleapis.com/v1/buildingInsights:findClosest?location.latitude=${lat}&location.longitude=${lng}&key=${GOOGLE_API_KEY}`);
+            const solarData = await solarRes.json();
+            
+            if (!solarData.solarPotential) throw new Error("Mapeamento solar indisponível para este local exato.");
+
+            const pot = solarData.solarPotential;
+            
+            // --- CÁLCULOS DE ENGENHARIA ---
+            const hspAnual = pot.maxSunshineHoursPerYear;
+            const hspDiario = hspAnual / 365;
+            const eficienciaSistema = 0.80; // Perdas estimadas (cabos, inversor, temperatura)
+            
+            // Potência do sistema necessária (kWp)
+            const kwpNecessario = (consumoMensal / 30) / (hspDiario * eficienciaSistema);
+            
+            // Quantidade de painéis arredondada para cima
+            const qtdPaineis = Math.ceil((kwpNecessario * 1000) / painelWp);
+            const potenciaRealInstalada = (qtdPaineis * painelWp) / 1000;
+            
+            // Produção estimada
+            const producaoAno = potenciaRealInstalada * hspAnual * eficienciaSistema;
+            const producaoMes = producaoAno / 12;
+
+            // Área do telhado ocupada (média de 2.6m² por painel de alta potência)
+            const areaOcupada = qtdPaineis * (painelWp > 600 ? 3.1 : 2.6);
+
+            // Exibição dos Dados Dinâmicos
+            dadosDiv.innerHTML = `
+                <strong style="color:var(--neon-blue)">RELATÓRIO TÉCNICO GERADO:</strong><br><br>
+                • Irradiação (HSP Diário): <b>${hspDiario.toFixed(2)} h/dia</b><br>
+                • Consumo Alvo: <b>${consumoMensal} kWh/mês</b><br>
+                <hr style="border:0; border-top:1px solid rgba(0,210,255,0.1); margin:15px 0;">
+                • Potência de Pico do Sistema: <b>${potenciaRealInstalada.toFixed(2)} kWp</b><br>
+                • Produção Estimada: <b>${producaoMes.toFixed(0)} kWh/mês</b> (${producaoAno.toFixed(0)} kWh/ano)<br>
+                • Módulos Necessários: <b>${qtdPaineis}x ${painelWp}W</b><br>
+                • Área Mínima de Telhado: <b>~${areaOcupada.toFixed(1)} m²</b><br><br>
+                <span style="color:var(--warning-yellow); font-size:0.85rem">
+                    O Google detectou um potencial máximo de ${pot.maxArrayPanels} painéis para este telhado.
+                </span>
+            `;
 
         } catch (error) {
-            dadosDiv.innerHTML = "Erro na conexão técnica. Verifique as credenciais do console.";
+            dadosDiv.innerHTML = "⚠️ <span style='color:#ff4444'>Erro: " + error.message + "</span>";
         }
     }
 </script>
