@@ -14,6 +14,7 @@
 
     <title>Calculadoras de Engenharia Elétrica NBR 5410 | PowerTech Industrial</title>
     <meta name="description" content="Ferramentas online para dimensionamento elétrico: Queda de Tensão, Disjuntores, Banco de Capacitores e Energia Solar. Baseado na NBR 5410 para engenheiros e estudantes.">
+    <meta name="keywords" content="calculadora eletrica, dimensionamento de cabos nbr 5410, calcular queda de tensão, banco de capacitores formula, projeto solar floriano, engenharia eletrica ferramentas">
     
     <style>
         :root {
@@ -60,7 +61,6 @@
             letter-spacing: 2px;
         }
 
-        /* MENU INTEGRADO AO CONTEÚDO (NÃO FLUTUANTE) */
         .nav-container {
             display: flex;
             justify-content: center;
@@ -230,7 +230,29 @@
 <div class="container">
     <div class="grid">
         <div class="card">
-            <h2>01. Queda de Tensão</h2>
+            <h2>01. Dimensionamento Solar</h2>
+            <div class="group">
+                <label>Consumo Médio (kWh/mês)</label>
+                <input type="number" id="k8" placeholder="Ex: 500">
+            </div>
+            <div class="group">
+                <label>Horas de Sol Pico (Floriano-PI: 5.8)</label>
+                <input type="number" id="hsp8" value="5.8">
+            </div>
+            <div class="group">
+                <label>Perdas do Sistema (%)</label>
+                <input type="number" id="ef8" value="20">
+            </div>
+            <div class="group">
+                <label>Potência do Painel (Wp)</label>
+                <input type="number" id="wp8" value="550">
+            </div>
+            <button onclick="calc8()">Gerar Diagnóstico Solar</button>
+            <div class="result" id="r8"></div>
+        </div>
+
+        <div class="card">
+            <h2>02. Queda de Tensão</h2>
             <div class="group">
                 <label>Corrente (A)</label>
                 <input type="number" id="i1">
@@ -250,21 +272,12 @@
                     <option value="0.0282">Alumínio</option>
                 </select>
             </div>
-            <div class="group">
-                <label>Temperatura</label>
-                <select id="t1">
-                    <option value="20">20°C</option>
-                    <option value="30">30°C</option>
-                    <option value="40">40°C</option>
-                    <option value="70">70°C</option>
-                </select>
-            </div>
             <button onclick="calc1()">Calcular</button>
             <div class="result" id="r1"></div>
         </div>
 
         <div class="card">
-            <h2>02. Lei de Ohm</h2>
+            <h2>03. Lei de Ohm</h2>
             <div class="group">
                 <label>Tensão (V)</label>
                 <input type="number" id="v2">
@@ -278,35 +291,24 @@
         </div>
 
         <div class="card">
-            <h2>03. Disjuntor Profissional</h2>
+            <h2>04. Disjuntor (NBR 5410)</h2>
             <div class="group">
                 <label>Potência (W)</label>
                 <input type="number" id="p3">
             </div>
             <div class="group">
-                <label>Tensão</label>
+                <label>Tensão (V)</label>
                 <select id="v3">
                     <option value="127">127V</option>
                     <option value="220">220V</option>
-                    <option value="380">380V</option>
                 </select>
             </div>
             <div class="group">
-                <label>FCA</label>
+                <label>FCA (Agrupamento)</label>
                 <select id="fca3">
-                    <option value="1">1.00</option>
-                    <option value="0.8">0.80</option>
-                    <option value="0.7">0.70</option>
-                    <option value="0.65">0.65</option>
-                </select>
-            </div>
-            <div class="group">
-                <label>FCT</label>
-                <select id="fct3">
-                    <option value="1">1.00</option>
-                    <option value="0.94">0.94</option>
-                    <option value="0.87">0.87</option>
-                    <option value="0.79">0.79</option>
+                    <option value="1">1.00 (Solitário)</option>
+                    <option value="0.8">0.80 (2 circuitos)</option>
+                    <option value="0.7">0.70 (3 circuitos)</option>
                 </select>
             </div>
             <button onclick="calc3()">Dimensionar</button>
@@ -314,9 +316,9 @@
         </div>
 
         <div class="card">
-            <h2>04. Banco de Capacitores</h2>
+            <h2>05. Banco de Capacitores</h2>
             <div class="group">
-                <label>Potência (kW)</label>
+                <label>Potência Ativa (kW)</label>
                 <input type="number" id="p4">
             </div>
             <div class="group">
@@ -332,7 +334,7 @@
         </div>
 
         <div class="card">
-            <h2>05. Potência Trifásica</h2>
+            <h2>06. Potência Trifásica</h2>
             <div class="group">
                 <label>Tensão (V)</label>
                 <input type="number" id="v6" value="380">
@@ -348,52 +350,6 @@
             <button onclick="calc6()">Calcular</button>
             <div class="result" id="r6"></div>
         </div>
-
-        <div class="card">
-            <h2>06. Sistema Solar</h2>
-            <div class="group">
-                <label>Consumo Mensal (kWh)</label>
-                <input type="number" id="k8">
-            </div>
-            <div class="group">
-                <label>Horas Sol Pico (HSP)</label>
-                <input type="number" id="hsp8" value="5.8">
-            </div>
-            <div class="group">
-                <label>Eficiência Sistema (%)</label>
-                <input type="number" id="ef8" value="80">
-            </div>
-            <button onclick="calc8()">Calcular Placas</button>
-            <div class="result" id="r8"></div>
-        </div>
-
-        <div class="card">
-            <h2>07. Bitola NBR 5410</h2>
-            <div class="group">
-                <label>Corrente Nominal (A)</label>
-                <input type="number" id="i11">
-            </div>
-            <div class="group">
-                <label>FCA</label>
-                <select id="fca11">
-                    <option value="1">1.00</option>
-                    <option value="0.8">0.80</option>
-                    <option value="0.7">0.70</option>
-                    <option value="0.65">0.65</option>
-                </select>
-            </div>
-            <div class="group">
-                <label>FCT</label>
-                <select id="fct11">
-                    <option value="1">1.00</option>
-                    <option value="0.94">0.94</option>
-                    <option value="0.87">0.87</option>
-                    <option value="0.79">0.79</option>
-                </select>
-            </div>
-            <button onclick="calc11()">Calcular Bitola</button>
-            <div class="result" id="r11"></div>
-        </div>
     </div>
 
     <a href="index.html" class="back-link">← Voltar à Página Inicial</a>
@@ -406,22 +362,47 @@ function mostrar(id,valor){
     el.innerHTML=valor;
 }
 
-function invalido(v){
-    return isNaN(v) || v<=0;
+function invalido(v){ return isNaN(v) || v<=0; }
+
+// LOGICA SOLAR MELHORADA
+function calc8(){
+    const consumo = parseFloat(document.getElementById('k8').value);
+    const hsp = parseFloat(document.getElementById('hsp8').value);
+    const perdas = parseFloat(document.getElementById('ef8').value) / 100;
+    const wpPainel = parseFloat(document.getElementById('wp8').value);
+    
+    if(invalido(consumo) || hsp <= 0) {
+        mostrar("r8", "⚠️ Informe o consumo mensal.");
+        return;
+    }
+
+    // Cálculo da Potência do Sistema (kWp)
+    // Formula: P (kWp) = Consumo / (30 dias * HSP * Eficiência)
+    const eficiencia = 1 - perdas;
+    const kwp = consumo / (30 * hsp * eficiencia);
+    
+    // Quantidade de painéis
+    const qtd = Math.ceil((kwp * 1000) / wpPainel);
+    
+    // Área aproximada (cada painel de 550W tem ~2.6m²)
+    const area = qtd * 2.6;
+
+    mostrar("r8", 
+        `⚡ <b>Diagnóstico PowerTech:</b><br>` +
+        `• Sistema Sugerido: <b>On-Grid</b><br>` +
+        `• Potência Total: <b>${kwp.toFixed(2)} kWp</b><br>` +
+        `• Painéis (${wpPainel}W): <b>${qtd} un</b><br>` +
+        `• Área Necessária: <b>~${area.toFixed(1)} m²</b><br>` +
+        `• Geração Estimada: <b>${consumo} kWh/mês</b>`
+    );
 }
 
 function calc1(){
     const i=parseFloat(document.getElementById('i1').value);
     const d=parseFloat(document.getElementById('d1').value);
     const s=parseFloat(document.getElementById('s1').value);
-    const rhoBase=parseFloat(document.getElementById('m1').value);
-    const temp=parseFloat(document.getElementById('t1').value);
-
-    if([i,d,s].some(invalido)){
-        mostrar("r1","Valores inválidos");
-        return;
-    }
-    const rho=rhoBase*(1+(0.004*(temp-20)));
+    const rho=parseFloat(document.getElementById('m1').value);
+    if([i,d,s].some(invalido)){ mostrar("r1","Valores inválidos"); return; }
     const vd=(2*rho*d*i)/s;
     mostrar("r1", `Queda de tensão: ${vd.toFixed(2)} V`);
 }
@@ -429,10 +410,7 @@ function calc1(){
 function calc2(){
     const v=parseFloat(document.getElementById('v2').value);
     const r=parseFloat(document.getElementById('r2').value);
-    if([v,r].some(invalido)){
-        mostrar("r2_res","Valores inválidos");
-        return;
-    }
+    if([v,r].some(invalido)){ mostrar("r2_res","Valores inválidos"); return; }
     mostrar("r2_res", `Corrente: ${(v/r).toFixed(2)} A`);
 }
 
@@ -440,27 +418,19 @@ function calc3(){
     const p=parseFloat(document.getElementById('p3').value);
     const v=parseFloat(document.getElementById('v3').value);
     const fca=parseFloat(document.getElementById('fca3').value);
-    const fct=parseFloat(document.getElementById('fct3').value);
-
-    if([p,v].some(invalido)){
-        mostrar("r3","Valores inválidos");
-        return;
-    }
+    if([p,v].some(invalido)){ mostrar("r3","Valores inválidos"); return; }
     const ib=p/v;
-    const ic=ib/(fca*fct);
+    const ic=ib/fca;
     const dj=[10,16,20,25,32,40,50,63,70,80,100,125];
-    const sug=dj.find(x=>x>=ic*1.1)||"Acima 125A";
-    mostrar("r3", `Ib: ${ib.toFixed(2)} A<br>Corrigida: ${ic.toFixed(2)} A<br><strong>Disjuntor: ${sug} A</strong>`);
+    const sug=dj.find(x=>x>=ic*1.1)||"Consultar Engenharia";
+    mostrar("r3", `Ib: ${ib.toFixed(1)}A | Ic: ${ic.toFixed(1)}A<br><b>Sugestão: Disjuntor ${sug}A</b>`);
 }
 
 function calc4(){
     const p=parseFloat(document.getElementById('p4').value);
     const fa=parseFloat(document.getElementById('fa4').value);
     const fd=parseFloat(document.getElementById('fd4').value);
-    if([p,fa,fd].some(invalido)){
-        mostrar("r4","Valores inválidos");
-        return;
-    }
+    if([p,fa,fd].some(invalido)){ mostrar("r4","Valores inválidos"); return; }
     const kvar=p*(Math.tan(Math.acos(fa))-Math.tan(Math.acos(fd)));
     mostrar("r4", `Banco necessário: ${kvar.toFixed(2)} kVAr`);
 }
@@ -469,45 +439,9 @@ function calc6(){
     const v=parseFloat(document.getElementById('v6').value);
     const i=parseFloat(document.getElementById('i6').value);
     const fp=parseFloat(document.getElementById('fp6').value);
-    if([v,i,fp].some(invalido)){
-        mostrar("r6","Valores inválidos");
-        return;
-    }
+    if([v,i,fp].some(invalido)){ mostrar("r6","Valores inválidos"); return; }
     const p=1.732*v*i*fp;
     mostrar("r6", `Potência: ${p.toFixed(0)} W`);
-}
-
-function calc8(){
-    const k=parseFloat(document.getElementById('k8').value);
-    const hsp=parseFloat(document.getElementById('hsp8').value);
-    const ef=parseFloat(document.getElementById('ef8').value)/100;
-    if([k,hsp,ef].some(invalido)){
-        mostrar("r8","Valores inválidos");
-        return;
-    }
-    const placa=0.55;
-    const qtd=Math.ceil(k/(30*hsp*placa*ef));
-    mostrar("r8", `Placas de 550W necessárias: ${qtd}`);
-}
-
-function calc11(){
-    const i=parseFloat(document.getElementById('i11').value);
-    const fca=parseFloat(document.getElementById('fca11').value);
-    const fct=parseFloat(document.getElementById('fct11').value);
-    if(invalido(i)){
-        mostrar("r11","Valor inválido");
-        return;
-    }
-    const ic=i/(fca*fct);
-    let cabo="1.5 mm²";
-    if(ic>15) cabo="2.5 mm²";
-    if(ic>21) cabo="4 mm²";
-    if(ic>28) cabo="6 mm²";
-    if(ic>36) cabo="10 mm²";
-    if(ic>50) cabo="16 mm²";
-    if(ic>68) cabo="25 mm²";
-    if(ic>89) cabo="35 mm²";
-    mostrar("r11", `Corrente Corrigida: ${ic.toFixed(2)} A<br>Cabo recomendado: <strong>${cabo}</strong>`);
 }
 </script>
 
