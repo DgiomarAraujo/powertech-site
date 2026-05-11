@@ -13,8 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow"> 
     <title>Energia Solar Inteligente | PowerTech Industrial</title>
-    <meta name="description" content="Engenharia Solar de alta precisão. Calculadora avançada com balanceamento de strings e suporte a redes 127/220/380V.">
-
+    
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,61 +36,60 @@
             background-attachment: fixed; line-height: 1.6; scroll-behavior: smooth;
         }
 
+        /* --- MENU E HEADER ORIGINAIS --- */
         .nav-header { position: absolute; top: 25px; right: 30px; z-index: 1000; }
-        .nav-menu { display: flex; gap: 12px; list-style: none; }
+        .nav-menu { display: flex; gap: 12px; list-style: none; padding: 0; }
         .nav-menu a {
             color: var(--pure-white); text-decoration: none; font-size: 0.8rem; font-weight: bold;
             text-transform: uppercase; letter-spacing: 1.5px; padding: 10px 18px;
             border-radius: 8px; border: 1px solid rgba(0, 210, 255, 0.3);
             background: rgba(10, 14, 20, 0.6); backdrop-filter: blur(8px); transition: 0.3s;
         }
-        .nav-menu a:hover { color: var(--neon-blue); border-color: var(--neon-blue); }
+        .nav-menu a:hover { color: var(--neon-blue); border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
 
         header { padding: 140px 20px 60px; text-align: center; border-bottom: 1px solid rgba(0, 210, 255, 0.1); }
-        header h1 { letter-spacing: 8px; text-transform: uppercase; background: linear-gradient(to right, #fff, var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: clamp(2.5em, 8vw, 4em); margin: 0; }
+        header h1 { letter-spacing: 8px; text-transform: uppercase; background: linear-gradient(to right, #fff, var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: clamp(2.5em, 8vw, 4em); margin: 0; filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.3)); }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
         h2 { color: var(--neon-blue); text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; gap: 15px; margin: 40px 0; }
         h2::after { content: ''; flex: 1; height: 1px; background: rgba(0, 210, 255, 0.1); }
 
-        /* CALCULADORA */
-        .solar-card { 
-            background: var(--card-bg); padding: 40px; border-radius: 25px; 
-            border: 1px solid rgba(0, 210, 255, 0.2); backdrop-filter: blur(10px);
-        }
-        .btn-gps {
-            width: 100%; padding: 12px; background: rgba(0, 210, 255, 0.1); color: var(--neon-blue);
-            border: 1px dashed var(--neon-blue); border-radius: 8px; cursor: pointer; margin-bottom: 25px; font-weight: bold;
-        }
-        .grid-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 25px; }
+        /* --- CALCULADORA ROBUSTA --- */
+        .solar-card { background: var(--card-bg); padding: 40px; border-radius: 25px; border: 1px solid rgba(0, 210, 255, 0.2); backdrop-filter: blur(10px); }
+        .btn-gps { width: 100%; padding: 12px; background: rgba(0, 210, 255, 0.05); color: var(--neon-blue); border: 1px dashed var(--neon-blue); border-radius: 8px; cursor: pointer; margin-bottom: 25px; font-weight: bold; }
+        .grid-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 25px; }
         label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-gray); font-size: 0.85rem; }
-        input, select, textarea { 
-            width: 100%; padding: 14px; background: rgba(0,0,0,0.5); 
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; box-sizing: border-box;
-        }
-        .btn-calc { 
-            width: 100%; padding: 22px; background: linear-gradient(90deg, #003366, #0056b3);
-            color: #fff; border: 1px solid var(--neon-blue); border-radius: 12px;
-            font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.4s;
-        }
+        input, select, textarea { width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; box-sizing: border-box; }
+        .btn-calc { width: 100%; padding: 22px; background: linear-gradient(90deg, #003366, #0056b3); color: #fff; border: 1px solid var(--neon-blue); border-radius: 12px; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.4s; }
+        .btn-calc:hover { box-shadow: 0 0 25px rgba(0, 210, 255, 0.5); }
 
         #resultado { display: none; margin-top: 30px; padding: 30px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; border-left: 5px solid var(--neon-blue); }
         .nota-tecnica { background: rgba(251, 192, 45, 0.1); border: 1px solid var(--warning-yellow); color: var(--warning-yellow); padding: 15px; border-radius: 8px; font-size: 0.85rem; margin-top: 20px; }
 
-        /* SEÇÕES EXTRAS (Igual a Principal) */
+        /* --- SEÇÕES DA HOME --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         .card { background: var(--card-bg); padding: 35px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
-        .card h3 { color: var(--neon-blue); margin: 0 0 15px 0; text-transform: uppercase; }
+        .card:hover { border-color: var(--neon-blue); transform: translateY(-5px); }
+        .card h3 { color: var(--neon-blue); margin-top: 0; text-transform: uppercase; }
 
-        .form-section { background: rgba(0, 0, 0, 0.3); padding: 50px; border-radius: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .faq-item { background: rgba(255, 255, 255, 0.02); margin-bottom: 15px; padding: 25px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .faq-question { font-weight: bold; color: var(--neon-blue); display: block; margin-bottom: 5px; }
+
+        .form-section { background: rgba(0, 0, 0, 0.3); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); }
 
         footer { text-align: center; padding: 80px 20px; background: #05070a; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); }
 
+        /* --- REGRAS DE IMPRESSÃO A4 --- */
         @media print {
-            .nav-header, .btn-gps, .btn-calc, header, footer, .form-section, .whatsapp-float { display: none !important; }
-            body { background: white; color: black; }
-            #resultado { display: block !important; border: 1px solid #000; }
+            @page { size: A4; margin: 15mm; }
+            body { background: white !important; color: black !important; }
+            .nav-header, .btn-gps, .btn-calc, header, footer, .form-section, .whatsapp-float, h2, .grid, .grid-inputs, label, .card, .faq-item { display: none !important; }
+            .container { padding: 0; width: 100%; max-width: 100% !important; }
+            .solar-card { border: none !important; background: white !important; padding: 0 !important; }
+            #resultado { display: block !important; border: 2px solid #000 !important; color: black !important; background: white !important; padding: 20px !important; margin: 0 !important; }
+            .nota-tecnica { border: 1px solid #000 !important; color: black !important; background: #f9f9f9 !important; }
+            .coord-box { background: #eee !important; border: 1px solid #000 !important; color: black !important; padding: 10px !important; }
         }
     </style>
 </head>
@@ -100,19 +98,20 @@
 <nav class="nav-header">
     <ul class="nav-menu">
         <li><a href="../index.html">Início</a></li>
+        <li><a href="../dicas.html">Dicas</a></li>
         <li><a href="../sobre.html">Sobre</a></li>
     </ul>
 </nav>
 
 <header>
     <h1>PowerTech Solar</h1>
-    <p>Engenharia e Diagnóstico por GPS</p>
+    <p>Engenharia Fotovoltaica de Precisão | GPS Mapeado</p>
 </header>
 
 <main class="container">
-    <h2>// Diagnóstico Inteligente</h2>
+    <h2>// Diagnóstico por GPS</h2>
     <section class="solar-card">
-        <button class="btn-gps" onclick="capturarGPS()">🛰️ USAR MINHA LOCALIZAÇÃO ATUAL (HSP)</button>
+        <button class="btn-gps" onclick="capturarGPS()" id="btn-gps-txt">🛰️ CAPTURAR LOCALIZAÇÃO ATUAL (COORDINATES)</button>
         
         <div class="grid-inputs">
             <div class="input-group">
@@ -122,14 +121,13 @@
             <div class="input-group">
                 <label>Margem de Expansão (%)</label>
                 <select id="expansao">
-                    <option value="0">0% (Consumo Real)</option>
-                    <option value="20" selected>20% (Segurança)</option>
-                    <option value="50">50% (Dobrar Carga)</option>
+                    <option value="10">10%</option>
+                    <option value="20" selected>20%</option>
+                    <option value="30">30%</option>
+                    <option value="40">40%</option>
+                    <option value="50">50%</option>
                 </select>
             </div>
-        </div>
-
-        <div class="grid-inputs">
             <div class="input-group">
                 <label>Tipo de Rede (Entrada)</label>
                 <select id="tipo-rede">
@@ -154,28 +152,25 @@
         <button class="btn-calc" onclick="gerarRelatorio()">Gerar Relatório de Engenharia</button>
 
         <div id="resultado">
-            <div id="dados-pdf"></div>
-            <div class="nota-tecnica">
-                <strong>⚠️ AVISO TÉCNICO:</strong> Projetos solares devem ser homologados junto à concessionária local para garantir segurança e crédito na fatura. Este relatório busca o balanceamento ideal de strings; o projeto final pode sofrer revisões técnicas.
+            <div id="cabecalho-pdf" style="border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; color: black !important; display: none;" class="print-only">
+                <h2 style="margin:0; border:none;">POWERTECH INDUSTRIAL - RELATÓRIO TÉCNICO</h2>
+                <small>Engenharia de Precisão | Floriano-PI</small>
             </div>
-            <button class="btn-calc" style="margin-top:20px; background:transparent; font-size:0.8rem;" onclick="window.print()">📄 Salvar Relatório em PDF</button>
+
+            <div id="dados-corpo"></div>
+
+            <div class="nota-tecnica">
+                <strong>⚠️ AVISO TÉCNICO:</strong> Projetos solares devem ser homologados junto à concessionária local para garantir segurança e crédito na fatura. Este dimensionamento foca no balanceamento de strings e irradiação por GPS.
+            </div>
+            <button class="btn-calc" style="margin-top:20px; background:rgba(255,255,255,0.1);" onclick="window.print()">📄 SALVAR RELATÓRIO EM PDF (A4)</button>
         </div>
     </section>
 
     <h2>// Vantagens PowerTech</h2>
     <div class="grid">
-        <div class="card">
-            <h3>Strings Balanceadas</h3>
-            <p>Projetos otimizados para evitar clipping e garantir a vida útil do inversor.</p>
-        </div>
-        <div class="card">
-            <h3>Suporte Nacional</h3>
-            <p>Adequação técnica para todas as faixas de tensão (127V, 220V e 380V).</p>
-        </div>
-        <div class="card">
-            <h3>Engenharia NBR</h3>
-            <p>Conformidade total com as normas de segurança e proteção elétrica.</p>
-        </div>
+        <div class="card"><h3>Strings Balanceadas</h3><p>Otimização MPPT para evitar clipping e perdas térmicas.</p></div>
+        <div class="card"><h3>Suporte Nacional</h3><p>Soluções para 127V, 220V e 380V em todo o território.</p></div>
+        <div class="card"><h3>Engenharia NBR</h3><p>Conformidade técnica absoluta com as normas NBR 5410 e 16274.</p></div>
     </div>
 
     <h2>// Nossa Essência</h2>
@@ -184,6 +179,10 @@
         <div class="card"><h3>Visão</h3><p>Referência técnica no Piauí.</p></div>
         <div class="card"><h3>Valores</h3><p>Rigor técnico e segurança.</p></div>
     </div>
+
+    <h2>// Perguntas Frequentes</h2>
+    <div class="faq-item"><span class="faq-question">Preciso trocar meu medidor?</span><span>Sim, a concessionária instalará um medidor bidirecional após a homologação.</span></div>
+    <div class="faq-item"><span class="faq-question">O sistema funciona à noite?</span><span>Sistemas On-Grid desligam à noite; a energia vem da rede usando os créditos gerados no dia.</span></div>
 
     <h2>// Atendimento</h2>
     <div class="form-section">
@@ -200,23 +199,21 @@
     </div>
 </main>
 
-<footer>
-    <p>&copy; 2026 PowerTech Industrial | Engenharia Fotovoltaica</p>
-</footer>
+<footer><p>&copy; 2026 PowerTech Industrial | Floriano-PI</p></footer>
 
 <a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
-    <svg viewBox="0 0 448 512" width="35" height="35" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.5-16.4-14.7-27.5-32.8-30.7-38.3-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.4-29.8-17-40.7-4.5-10.7-9-9.2-12.4-9.4-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    <svg viewBox="0 0 448 512" width="30" height="30" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.5-16.4-14.7-27.5-32.8-30.7-38.3-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.4-29.8-17-40.7-4.5-10.7-9-9.2-12.4-9.4-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
 </a>
 
 <script>
-    let hspLocal = 5.8;
-
+    let coords = { lat: "Não capturado", lon: "Não capturado" };
     function capturarGPS() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(pos => {
-                alert("GPS Localizado com sucesso! HSP ajustado para a média regional (5.8).");
-                hspLocal = 5.8;
-            }, () => alert("Acesso ao GPS negado. Usando média regional padrão."));
+                coords.lat = pos.coords.latitude.toFixed(6);
+                coords.lon = pos.coords.longitude.toFixed(6);
+                document.getElementById('btn-gps-txt').innerText = `✅ GPS: ${coords.lat}, ${coords.lon}`;
+            }, () => alert("GPS Negado."));
         }
     }
 
@@ -226,29 +223,33 @@
         const rede = document.getElementById('tipo-rede').options[document.getElementById('tipo-rede').selectedIndex].text;
         const painel = parseFloat(document.getElementById('painel-watts').value);
 
-        if(!consumo) { alert("Informe o consumo."); return; }
+        if(!consumo) return alert("Insira o consumo.");
 
-        const consumoCalculado = consumo * margem;
-        const kwp = (consumoCalculado / 30) / (hspLocal * 0.80);
-        
-        // LÓGICA SÊNIOR: ARREDONDAR PARA NÚMERO PAR PARA BALANCEAMENTO DE STRINGS
+        const consumoTotal = consumo * margem;
+        const kwp = (consumoTotal / 30) / (5.8 * 0.80);
         let qtd = Math.ceil((kwp * 1000) / painel);
-        if (qtd % 2 !== 0) {
-            qtd += 1; // Força o número par (ex: 19 vira 20)
-        }
+        if (qtd % 2 !== 0) qtd += 1;
 
-        const area = qtd * (painel > 600 ? 2.8 : 2.5); // Refinado para 610W
+        const potenciaFinal = (qtd * painel) / 1000;
+        const area = qtd * (painel > 600 ? 2.8 : 2.5);
 
         document.getElementById('resultado').style.display = 'block';
-        document.getElementById('dados-pdf').innerHTML = `
-            <h3 style="color:var(--neon-blue)">DIAGNÓSTICO TÉCNICO (BALANCEADO)</h3>
-            <p>• Consumo com Margem: <b>${consumoCalculado.toFixed(0)} kWh/mês</b></p>
-            <p>• Padrão de Rede: <b>${rede}</b></p>
-            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:15px 0;">
-            <p>• Potência do Sistema: <b style="color:var(--neon-blue)">${(qtd*painel/1000).toFixed(2)} kWp</b></p>
-            <p>• Quantidade de Módulos: <b>${qtd} Painéis (Configuração Par)</b></p>
-            <p>• Área Estimada: <b>~${area.toFixed(1)} m²</b></p>
-            <p style="font-size:0.8rem; color:var(--text-gray);">* Arredondado para par para melhor distribuição em MPPTs.</p>
+        document.getElementById('dados-corpo').innerHTML = `
+            <div style="background: rgba(0,210,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--neon-blue);" class="coord-box">
+                <strong>📍 COORDENADAS GPS:</strong> ${coords.lat} , ${coords.lon}
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin-bottom: 20px;">
+                <div>
+                    <p>Consumo Médio: <b>${consumo} kWh/mês</b></p>
+                    <p>Consumo c/ Margem: <b>${consumoTotal.toFixed(0)} kWh/mês</b></p>
+                    <p>Padrão de Rede: <b>${rede}</b></p>
+                </div>
+                <div>
+                    <p>Potência Recomendada: <b style="color:var(--neon-blue)">${potenciaFinal.toFixed(2)} kWp</b></p>
+                    <p>Quantidade de Módulos: <b>${qtd} Painéis (${painel}W)</b></p>
+                    <p>Área Estimada: <b>~${area.toFixed(1)} m²</b></p>
+                </div>
+            </div>
         `;
         document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
     }
