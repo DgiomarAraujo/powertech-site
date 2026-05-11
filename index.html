@@ -13,29 +13,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>PowerTech Industrial | Elétrica, Solar e Redes em Floriano-PI</title>
-    <meta name="description" content="Engenharia Elétrica de precisão em Floriano, Barão de Grajaú e Sul do Piauí. Especialistas em Energia Solar, SPDA, Painéis Industriais e Cabeamento Estruturado. Atendimento técnico especializado NBR.">
-    <meta name="keywords" content="eletricista em floriano, energia solar floriano pi, cabeamento estruturado floriano, automação residencial piauí, eletricista industrial floriano, manutenção de para-raios pi, instalação elétrica barão de grajaú, spda sul do piauí, projeto elétrico floriano">
-    <meta name="author" content="Dgiomar Cassemiro Araujo">
+    <meta name="description" content="Engenharia Elétrica de precisão em Floriano-PI. Especialistas em Energia Solar, SPDA, Painéis Industriais e Automação conforme NBR 5410.">
     <link rel="canonical" href="https://powertechindustrial.com.br/">
-
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="PowerTech Industrial | Elétrica e Tecnologia">
-    <meta property="og:description" content="Soluções de Engenharia Elétrica e TI para Floriano e Sul do Piauí. Clique para ver nossos serviços e calculadoras.">
-    <meta property="og:image" content="https://powertechindustrial.com.br/apple-touch-icon.png"> <meta property="og:url" content="https://powertechindustrial.com.br/">
-    <meta property="og:site_name" content="PowerTech Industrial">
-
-    <meta name="geo.region" content="BR-PI">
-    <meta name="geo.placename" content="Floriano, Barão de Grajaú">
-    <meta name="geo.position" content="-6.7669;-43.0225">
-    <meta name="ICBM" content="-6.7669, -43.0225">
 
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifesto">
     <link rel="shortcut icon" href="favicon.ico">
 
     <style>
@@ -45,9 +28,8 @@
             --neon-blue: #00d2ff; 
             --accent-blue: #0056b3; 
             --whatsapp-green: #25d366; 
-            --text-gray: #a0aec0;
+            --text-gray: #cbd5e0; /* Contraste melhorado para Acessibilidade */
             --pure-white: #ffffff;
-            --warning-yellow: #fbc02d;
         }
 
         body { 
@@ -73,8 +55,8 @@
             list-style: none;
         }
 
-        .nav-menu a {
-            color: var(--text-gray);
+        .nav-menu a, .btn-style {
+            color: var(--pure-white);
             text-decoration: none;
             font-size: 0.8rem;
             font-weight: bold;
@@ -82,23 +64,21 @@
             letter-spacing: 1.5px;
             padding: 10px 18px;
             border-radius: 8px;
-            border: 1px solid rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.3);
             transition: all 0.3s ease;
             background: rgba(10, 14, 20, 0.6);
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
         }
 
-        .nav-menu a:hover {
+        .nav-menu a:hover, .btn-style:hover {
             color: var(--neon-blue);
             border-color: var(--neon-blue);
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
             background: rgba(0, 210, 255, 0.08);
-            transform: translateY(-2px);
         }
 
         header { 
-            background: linear-gradient(180deg, rgba(0, 51, 102, 0.8), transparent);
+            background: linear-gradient(180deg, rgba(0, 51, 102, 0.6), transparent);
             padding: 140px 20px; 
             text-align: center; 
             border-bottom: 1px solid rgba(0, 210, 255, 0.1);
@@ -106,7 +86,7 @@
 
         header h1 { 
             margin: 0; 
-            font-size: 4em; 
+            font-size: clamp(2.5em, 8vw, 4em); 
             text-transform: uppercase; 
             letter-spacing: 8px; 
             background: linear-gradient(to right, #fff, var(--neon-blue));
@@ -115,13 +95,13 @@
             filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.3));
         }
 
-        header p { font-size: 1.3em; color: var(--text-gray); letter-spacing: 2px; }
+        header p { font-size: 1.2em; color: var(--text-gray); letter-spacing: 2px; }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
 
         h2 { 
             color: var(--neon-blue); 
-            font-size: 2.2em; 
+            font-size: 2em; 
             text-transform: uppercase; 
             letter-spacing: 2px;
             display: flex;
@@ -139,27 +119,26 @@
             border-radius: 20px; 
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover { 
-            transform: translateY(-10px) scale(1.02); 
-            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-5px); 
             border-color: var(--neon-blue);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
-        .card h3 { color: var(--neon-blue); margin-top: 0; font-size: 1.5em; text-transform: uppercase; }
-        .card ul { padding-left: 20px; color: var(--text-gray); }
+        .card h3 { color: var(--neon-blue); margin-top: 0; font-size: 1.4em; text-transform: uppercase; }
+        .card ul { padding-left: 20px; color: var(--text-gray); flex-grow: 1; }
         .card li { margin-bottom: 10px; }
 
         .calc-section { 
             text-align: center; 
-            background: linear-gradient(45deg, rgba(0, 51, 102, 0.3), rgba(0, 210, 255, 0.1));
+            background: linear-gradient(45deg, rgba(0, 51, 102, 0.2), rgba(0, 210, 255, 0.05));
             border-radius: 30px; 
             border: 1px solid rgba(0, 210, 255, 0.2);
-            position: relative;
-            overflow: hidden;
             padding: 60px 20px;
             margin: 40px 0;
         }
@@ -176,46 +155,15 @@
             display: inline-flex;
             align-items: center;
             gap: 15px;
-            transition: all 0.4s ease;
+            transition: 0.4s;
             text-transform: uppercase;
             letter-spacing: 2px;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
-            cursor: pointer;
         }
 
         .btn-calc:hover { 
             background: var(--neon-blue);
             color: var(--deep-dark);
-            transform: translateY(-3px);
             box-shadow: 0 0 30px rgba(0, 210, 255, 0.5);
-        }
-
-        .btn-transmitir {
-            background: linear-gradient(90deg, #003366, #0056b3);
-            color: #fff;
-            padding: 18px 30px;
-            border: 1px solid var(--neon-blue);
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-transmitir:hover {
-            background: var(--neon-blue);
-            color: var(--deep-dark);
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.6);
-            transform: scale(1.02);
-        }
-
-        .btn-transmitir:active {
-            transform: scale(0.98);
         }
 
         .faq-item { 
@@ -225,7 +173,7 @@
             border-radius: 12px; 
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .faq-question { font-weight: bold; color: var(--neon-blue); display: block; margin-bottom: 10px; font-size: 1.1em; }
+        .faq-question { font-weight: bold; color: var(--neon-blue); display: block; margin-bottom: 10px; }
         .faq-answer { color: var(--text-gray); }
 
         .mvv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
@@ -252,68 +200,62 @@
             padding: 16px; 
             border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 8px; 
-            font-size: 1em; 
             width: 100%; 
             color: white;
+            margin-bottom: 15px;
             box-sizing: border-box;
         }
 
-        select option {
-            background-color: #1a202c;
+        /* Botão Enviar com estilo Neon dos superiores */
+        .btn-transmitir {
+            width: 100%;
+            padding: 18px;
+            background: rgba(10, 14, 20, 0.6);
+            color: var(--pure-white);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            border-radius: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-transmitir:hover {
             color: var(--neon-blue);
-            padding: 10px;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+            background: rgba(0, 210, 255, 0.08);
         }
-
-        select {
-            appearance: none; 
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300d2ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 18px;
-        }
-
-        input:focus, select:focus { border-color: var(--neon-blue); outline: none; background: rgba(255, 255, 255, 0.08); }
 
         .whatsapp-float { 
             position: fixed; bottom: 30px; right: 30px; 
             background-color: var(--whatsapp-green); 
             width: 65px; height: 65px; border-radius: 50%; 
             display: flex; align-items: center; justify-content: center; 
-            z-index: 1000; transition: 0.3s;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
         }
 
         footer { 
             text-align: center; 
             padding: 80px 20px; 
             background: #05070a; 
-            color: #4a5568; 
+            color: var(--text-gray); 
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         footer a { color: var(--neon-blue); text-decoration: none; margin: 0 15px; }
 
         @media (max-width: 768px) {
-            .nav-header {
-                position: relative;
-                top: 0;
-                right: 0;
-                padding: 20px;
-                display: flex;
-                justify-content: center;
-            }
-            .nav-menu {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 8px;
-            }
+            .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 8px; }
             header { padding-top: 60px; }
-            header h1 { font-size: 2.5em; letter-spacing: 4px; }
+            header h1 { font-size: 2.2em; }
         }
     </style>
 </head>
 <body>
 
-<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank">
+<a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank" aria-label="WhatsApp PowerTech">
     <svg viewBox="0 0 448 512" width="35" height="35" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.5-16.4-14.7-27.5-32.8-30.7-38.3-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.4-29.8-17-40.7-4.5-10.7-9-9.2-12.4-9.4-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
 </a>
 
@@ -339,35 +281,35 @@
         <div class="card">
             <h3>Elétrica Residencial e Comercial</h3>
             <ul>
-                <li>Projetos e execuções de novas instalações elétricas.</li>
-                <li>Reforma de quadros de distribution e substituição de fiação.</li>
-                <li>Instalação de iluminação técnica e decorativa.</li>
+                <li>Projetos e execuções de novas instalações.</li>
+                <li>Reforma de quadros e substituição de fiação.</li>
+                <li>Iluminação técnica e decorativa.</li>
             </ul>
         </div>
 
         <div class="card">
             <h3>Elétrica e Painéis Industriais</h3>
             <ul>
-                <li>Montagem de painéis elétricos (QGBT) e comandos de motores.</li>
-                <li>Bancos de capacitores para correção de fator de potência.</li>
-                <li>Manutenção preventiva conforme normas <strong>NBR</strong>.</li>
+                <li>Montagem de painéis QGBT e comandos.</li>
+                <li>Bancos de capacitores para fator de potência.</li>
+                <li>Manutenção preventiva conforme NBR.</li>
             </ul>
         </div>
 
         <div class="card">
             <h3>SPDA e Aterramento</h3>
             <ul>
-                <li>Instalação de sistemas de para-raios (SPDA).</li>
-                <li>Aterramento com medição via <strong>Terrômetro Hikari</strong>.</li>
-                <li>Laudos de continuidade e resistência de terra.</li>
+                <li>Sistemas de para-raios (SPDA).</li>
+                <li>Aterramento com medição via Terrômetro Hikari.</li>
+                <li>Laudos de continuidade e resistência.</li>
             </ul>
         </div>
 
         <div class="card">
             <h3>Energia Solar Fotovoltaica</h3>
             <ul>
-                <li>Sistemas On-Grid, Off-Grid e Bombeamento Solar.</li>
-                <li>Dimensionamento preciso para alta performance regional. </li>
+                <li>Sistemas On-Grid, Off-Grid e Bombeamento.</li>
+                <li>Dimensionamento preciso para alta performance.</li>
             </ul>
         </div>
 
@@ -382,33 +324,31 @@
         <div class="card">
             <h3>Automação e TI</h3>
             <ul>
-                <li>Integração <strong>Alexa / Google Home</strong> via Zigbee.</li>
+                <li>Integração Alexa / Google Home via Zigbee.</li>
                 <li>Carregadores Wallbox e infraestrutura de rede.</li>
             </ul>
         </div>
     </div>
 
     <div class="calc-section">
-        <div class="ia-input-container">
-            <a href="calculadoras.html" class="btn-calc" style="width: 100%; justify-content: center; text-decoration: none;">
-                <span>📊</span> CALCULADORAS ELÉTRICAS
-            </a>
-        </div>
+        <a href="calculadoras.html" class="btn-calc">
+            <span>📊</span> CALCULADORAS ELÉTRICAS
+        </a>
     </div>
 
     <h2>// Perguntas Frequentes</h2>
     <div class="faq-section">
         <div class="faq-item">
             <span class="faq-question">Vocês realizam o dimensionamento de motores e quadros de comando?</span>
-            <span class="faq-answer">Sim. Projetamos o quadro de comando (partida direta, estrela-triângulo ou soft-starter) e garantimos a proteção adequada dos condutores conforme a NBR 5410 e NR-10.</span>
+            <span class="faq-answer">Sim. Projetamos o quadro de comando e garantimos a proteção adequada conforme a NBR 5410 e NR-10.</span>
         </div>
         <div class="faq-item">
             <span class="faq-question">Multa por excedente reativo na conta industrial?</span>
-            <span class="faq-answer">Realizamos a análise técnica do seu fator de potência e instalamos bancos de capacitores para eliminar multas na conta da Equatorial Piauí.</span>
+            <span class="faq-answer">Analisamos seu fator de potência e instalamos bancos de capacitores para eliminar multas na Equatorial Piauí.</span>
         </div>
         <div class="faq-item">
             <span class="faq-question">Qual a importância da medição com terrômetro?</span>
-            <span class="faq-answer">O terrômetro garante que a resistência do terra está dentro das normas de segurança, protegendo equipamentos e pessoas.</span>
+            <span class="faq-answer">Garante que a resistência do terra está segura, protegendo equipamentos e pessoas.</span>
         </div>
     </div>
 
@@ -416,15 +356,15 @@
     <div class="mvv-grid">
         <div class="mvv-card">
             <h3>Missão</h3>
-            <p>Soluções de engenharia elétrica de alta precisão através de tecnologia de ponta.</p>
+            <p>Soluções de engenharia elétrica de alta precisão.</p>
         </div>
         <div class="mvv-card">
             <h3>Visão</h3>
-            <p>Ser referência em inovação técnica e energia renovável no Piauí.</p>
+            <p>Referência em inovação técnica no Piauí.</p>
         </div>
         <div class="mvv-card">
             <h3>Valores</h3>
-            <p>Rigor técnico, conformidade NBR e compromisso com a segurança.</p>
+            <p>Rigor técnico, conformidade NBR e segurança.</p>
         </div>
     </div>
 
@@ -436,11 +376,11 @@
         </div>
         <div class="card" style="text-align: center;">
             <strong style="color: var(--neon-blue);">Consultoria</strong><br>
-            Laudos de conformidade e análise crítica de demanda.
+            Laudos de conformidade e análise de demanda.
         </div>
         <div class="card" style="text-align: center;">
             <strong style="color: var(--neon-blue);">Parcerias</strong><br>
-            Instalação autorizada <strong>Intelbras e Weg</strong>.
+            Instalação autorizada Intelbras e Weg.
         </div>
     </div>
 
@@ -451,23 +391,22 @@
             <p><strong>📍 Local:</strong> Floriano - Piauí</p>
             <p><strong>📞 WhatsApp:</strong> (89) 98104-9318</p>
             <p><strong>📧 E-mail:</strong> powertechfloriano@gmail.com</p>
-            <p><strong>Gestão:</strong> Dgiomar Cassemiro Araujo</p>
+            <p>Gestão: Dgiomar Cassemiro Araujo</p>
         </div>
 
         <form action="https://formsubmit.co/powertechfloriano@gmail.com" method="POST">
-            <input type="text" name="nome" placeholder="NOME DO REQUISITANTE" required>
-            <input type="email" name="email" placeholder="E-MAIL DE CONTATO" required>
-            <select name="servico" required>
+            <input type="text" name="nome" placeholder="NOME DO REQUISITANTE" required aria-label="Nome">
+            <input type="email" name="email" placeholder="E-MAIL DE CONTATO" required aria-label="Email">
+            <select name="servico" required aria-label="Serviço">
                 <option value="">SELECIONE O PROTOCOLO</option>
-                <option value="Solar">ENERGIA SOLAR (PROJETO/INSTALAÇÃO)</option>
-                <option value="Industrial">ELÉTRICA INDUSTRIAL (PAINÉIS/COMANDOS)</option>
-                <option value="SPDA">SPDA / ATERRAMENTO TÉCNICO</option>
-                <option value="Segurança">SEGURANÇA ELETRÔNICA (CFTV/IA)</option>
-                <option value="Automacao">AUTOMAÇÃO E SMART HOME</option>
-                <option value="Manutencao">MANUTENÇÃO PREVENTIVA/CORRETIVA</option>
+                <option value="Solar">ENERGIA SOLAR</option>
+                <option value="Industrial">ELÉTRICA INDUSTRIAL</option>
+                <option value="SPDA">SPDA / ATERRAMENTO</option>
+                <option value="Segurança">SEGURANÇA ELETRÔNICA</option>
+                <option value="Manutencao">MANUTENÇÃO</option>
             </select>
-            <textarea name="mensagem" placeholder="DETALHES DO PROJETO..." required></textarea>
-            <button type="submit" class="btn-transmitir" style="width:100%">Transmitir Solicitação</button>
+            <textarea name="mensagem" placeholder="DETALHES DO PROJETO..." required aria-label="Mensagem"></textarea>
+            <button type="submit" class="btn-transmitir">Transmitir Solicitação</button>
         </form>
     </div>
 </div>
