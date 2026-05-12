@@ -79,17 +79,14 @@
             background: rgba(0, 210, 255, 0.08);
         }
 
-        /* AJUSTE FINAL: Altura aumentada para exibir todo o logo e baixar o layout */
+        /* AJUSTE TÉCNICO: 'CONTAIN' PARA NÃO CORTAR O LOGO */
         header { 
-            background: linear-gradient(rgba(10, 14, 20, 0.3), rgba(10, 14, 20, 0.3)), 
-                        url('header-powertech.png'); 
-            background-size: cover;
-            background-position: center top;
-            background-attachment: scroll;
+            background: #0a0e14 url('header-powertech.png') no-repeat center top; 
+            background-size: contain; /* Faz a imagem inteira caber na largura sem cortar topo ou base */
             
-            /* Aumentamos a altura mínima e o padding inferior para "baixar" o site */
-            min-height: 250px; 
-            padding-bottom: 50px; 
+            /* A altura mínima agora respeita a proporção da sua imagem */
+            min-height: 212px; 
+            width: 100%;
             
             display: flex;
             align-items: center;
@@ -97,9 +94,10 @@
             border-bottom: 1px solid rgba(0, 210, 255, 0.3);
         }
 
+        /* Ajuste do menu para acompanhar a nova altura */
         @media (min-width: 769px) {
             .nav-header {
-                top: 100px; /* Ajustado para acompanhar a nova altura */
+                top: 85px; 
             }
         }
 
@@ -253,7 +251,7 @@
         @media (max-width: 768px) {
             .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
             .nav-menu { flex-wrap: wrap; justify-content: center; gap: 8px; }
-            header { min-height: 180px; }
+            header { min-height: 120px; }
         }
     </style>
 </head>
