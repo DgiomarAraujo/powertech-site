@@ -79,14 +79,14 @@
             background: rgba(0, 210, 255, 0.08);
         }
 
-        /* AJUSTE SÊNIOR: HEADER AMPLIADO E SEM TEXTO SOBREPOSTO */
+        /* MODIFICAÇÃO REALIZADA: ALINHAMENTO PELO TOPO PARA POSICIONAR O RAIO */
         header { 
             background: linear-gradient(rgba(10, 14, 20, 0.4), rgba(10, 14, 20, 0.4)), 
                         url('header-powertech.png'); 
             background-size: cover;
-            background-position: center;
+            background-position: center top; /* Alinha a imagem pelo topo conforme solicitado */
             background-attachment: fixed;
-            padding: 350px 20px 150px; /* Aumentado para mostrar o logo inteiro */
+            padding: 280px 20px 100px; /* Ajuste de altura para visual orgânico */
             text-align: center; 
             border-bottom: 1px solid rgba(0, 210, 255, 0.3);
         }
@@ -241,7 +241,7 @@
         @media (max-width: 768px) {
             .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
             .nav-menu { flex-wrap: wrap; justify-content: center; gap: 8px; }
-            header { padding: 150px 20px 80px; } /* Ajuste mobile para não ficar longo demais */
+            header { padding: 150px 20px 80px; }
         }
     </style>
 </head>
@@ -381,7 +381,7 @@
             <h3>PowerTech Industrial</h3>
             <p><strong>📍 Local:</strong> Floriano - Piauí</p>
             <p><strong>📞 WhatsApp:</strong> (89) 98104-9318</p>
-            <p><strong>📧 E-mail:</strong> powertechfloriano@gmail.com</p>
+            <p><strong>📧 powertechfloriano@gmail.com</strong></p>
             <p>Gestão: Dgiomar Cassemiro Araujo</p>
         </div>
 
