@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>PowerTech Industrial | Elétrica, Solar e Redes em Floriano-PI</title>
-    <meta name="description" content="Engenharia Elétrica de precisão em Floriano-PI. Especialistas em Energia Solar, SPDA, Painéis Industriais e Automação conforme NBR 5410.">
+    <meta name="description" content="Engenharia Elétrica de precision em Floriano-PI. Especialistas em Energia Solar, SPDA, Painéis Industriais e Automação conforme NBR 5410.">
     <link rel="canonical" href="https://powertechindustrial.com.br/">
 
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -79,31 +79,17 @@
             background: rgba(0, 210, 255, 0.08);
         }
 
-        /* CÓDIGO DO CABEÇALHO COM IMAGEM SOLICITADO */
+        /* AJUSTE SÊNIOR: HEADER AMPLIADO E SEM TEXTO SOBREPOSTO */
         header { 
-            /* O navegador vai procurar o arquivo 'header-powertech.png' nesta mesma pasta */
-            background: linear-gradient(rgba(10, 14, 20, 0.7), rgba(10, 14, 20, 0.7)), 
+            background: linear-gradient(rgba(10, 14, 20, 0.4), rgba(10, 14, 20, 0.4)), 
                         url('header-powertech.png'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            padding: 180px 20px 100px; 
+            padding: 350px 20px 150px; /* Aumentado para mostrar o logo inteiro */
             text-align: center; 
             border-bottom: 1px solid rgba(0, 210, 255, 0.3);
         }
-
-        header h1 { 
-            margin: 0; 
-            font-size: clamp(2.5em, 8vw, 4em); 
-            text-transform: uppercase; 
-            letter-spacing: 8px; 
-            background: linear-gradient(to right, #fff, var(--neon-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.3));
-        }
-
-        header p { font-size: 1.2em; color: var(--text-gray); letter-spacing: 2px; }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
 
@@ -214,7 +200,6 @@
             box-sizing: border-box;
         }
 
-        /* Botão Enviar com estilo Neon dos superiores */
         .btn-transmitir {
             width: 100%;
             padding: 18px;
@@ -256,8 +241,7 @@
         @media (max-width: 768px) {
             .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
             .nav-menu { flex-wrap: wrap; justify-content: center; gap: 8px; }
-            header { padding-top: 60px; }
-            header h1 { font-size: 2.2em; }
+            header { padding: 150px 20px 80px; } /* Ajuste mobile para não ficar longo demais */
         }
     </style>
 </head>
@@ -279,9 +263,7 @@
 </nav>
 
 <header>
-    <h1>PowerTech Industrial</h1>
-    <p>Elétrica de Precisão | Floriano-PI | CNPJ: 59.613.165/0001-81</p>
-</header>
+    </header>
 
 <div class="container">
     
