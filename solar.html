@@ -51,16 +51,41 @@
         }
         .nav-menu a:hover { color: var(--neon-blue); border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
 
-        /* CABEÇALHO ATUALIZADO COM IMAGEM SOLAR */
+        /* AJUSTE SÊNIOR PARA LARGURA TOTAL SEM DISTORÇÃO */
         header { 
+            /* Busca a imagem na raiz e define a cor de fundo para continuidade visual */
             background: #0a0e14 url('../cabeçalho-solar.png') no-repeat center top; 
-            background-size: contain;
-            min-height: 212px; 
+            
+            /* Faz a imagem ocupar sempre 100% da largura da tela */
+            background-size: 100% auto; 
+            
+            /* Altura proporcional para a medida 1586x212 (evita que o conteúdo suba no logo) */
+            min-height: 200px; 
             width: 100%;
+            
             display: flex;
             align-items: center;
             justify-content: center;
             border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Garante que em telas muito grandes a imagem não 'estique' e perca qualidade */
+        @media (min-width: 1600px) {
+            header {
+                background-size: cover;
+                min-height: 212px;
+            }
+        }
+
+        /* No celular, mantemos o foco na parte central do logo */
+        @media (max-width: 768px) {
+            header {
+                background-size: cover;
+                min-height: 120px;
+            }
+            .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
         }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
@@ -92,12 +117,6 @@
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); }
 
         footer { text-align: center; padding: 80px 20px; background: #05070a; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); }
-
-        @media (max-width: 768px) {
-            .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
-            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 8px; }
-            header { min-height: 120px; }
-        }
 
         /* AJUSTES IMPRESSÃO A4 */
         @media print {
