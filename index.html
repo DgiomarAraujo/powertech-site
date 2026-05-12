@@ -79,26 +79,19 @@
             background: rgba(0, 210, 255, 0.08);
         }
 
-        /* AJUSTE TÉCNICO: 'CONTAIN' PARA NÃO CORTAR O LOGO */
         header { 
             background: #0a0e14 url('header-powertech.png') no-repeat center top; 
-            background-size: contain; /* Faz a imagem inteira caber na largura sem cortar topo ou base */
-            
-            /* A altura mínima agora respeita a proporção da sua imagem */
+            background-size: contain; 
             min-height: 212px; 
             width: 100%;
-            
             display: flex;
             align-items: center;
             justify-content: center;
             border-bottom: 1px solid rgba(0, 210, 255, 0.3);
         }
 
-        /* Ajuste do menu para acompanhar a nova altura */
         @media (min-width: 769px) {
-            .nav-header {
-                top: 85px; 
-            }
+            .nav-header { top: 85px; }
         }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
@@ -205,9 +198,15 @@
             border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 8px; 
             width: 100%; 
-            color: white;
+            color: white; /* Garante que o texto digitado seja branco */
             margin-bottom: 15px;
             box-sizing: border-box;
+        }
+
+        /* CORREÇÃO DA COR DO PROTOCOLO (SELECT) */
+        select option {
+            background-color: #0a0e14; /* Fundo escuro para a lista */
+            color: white; /* Letras brancas para leitura */
         }
 
         .btn-transmitir {
@@ -273,7 +272,7 @@
 </nav>
 
 <header>
-    </header>
+</header>
 
 <div class="container">
     
@@ -399,7 +398,7 @@
             <input type="text" name="nome" placeholder="NOME DO REQUISITANTE" required aria-label="Nome">
             <input type="email" name="email" placeholder="E-MAIL DE CONTATO" required aria-label="Email">
             <select name="servico" required aria-label="Serviço">
-                <option value="">SELECIONE O PROTOCOLO</option>
+                <option value="" disabled selected>SELECIONE O PROTOCOLO</option>
                 <option value="Solar">ENERGIA SOLAR</option>
                 <option value="Industrial">ELÉTRICA INDUSTRIAL</option>
                 <option value="SPDA">SPDA / ATERRAMENTO</option>
