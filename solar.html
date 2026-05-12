@@ -11,10 +11,10 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index, follow">
     
+    <meta name="robots" content="index, follow">
     <title>Energia Solar Inteligente | PowerTech Industrial Floriano-PI</title>
-    <meta name="description" content="Engenharia Solar de alta precisão em Floriano-PI. Calculadora avançada com mapeamento GPS, suporte a redes 127V/220V/380V e relatórios profissionais em PDF.">
+    <meta name="description" content="Engenharia Solar de alta precisão em Floriano-PI. Calculadora avançada com mapeamento GPS e relatórios técnicos profissionais em PDF.">
     <link rel="canonical" href="https://powertechindustrial.com.br/solar/">
     
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -51,18 +51,12 @@
         }
         .nav-menu a:hover { color: var(--neon-blue); border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
 
-        /* AJUSTE SÊNIOR PARA LARGURA TOTAL SEM DISTORÇÃO */
+        /* AJUSTE SÊNIOR: LARGURA TOTAL E PROPORÇÃO 1586x212 */
         header { 
-            /* Busca a imagem na raiz e define a cor de fundo para continuidade visual */
             background: #0a0e14 url('../cabeçalho-solar.png') no-repeat center top; 
-            
-            /* Faz a imagem ocupar sempre 100% da largura da tela */
             background-size: 100% auto; 
-            
-            /* Altura proporcional para a medida 1586x212 (evita que o conteúdo suba no logo) */
             min-height: 200px; 
             width: 100%;
-            
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,20 +65,12 @@
             margin: 0;
         }
 
-        /* Garante que em telas muito grandes a imagem não 'estique' e perca qualidade */
         @media (min-width: 1600px) {
-            header {
-                background-size: cover;
-                min-height: 212px;
-            }
+            header { background-size: cover; min-height: 212px; }
         }
 
-        /* No celular, mantemos o foco na parte central do logo */
         @media (max-width: 768px) {
-            header {
-                background-size: cover;
-                min-height: 120px;
-            }
+            header { background-size: cover; min-height: 120px; }
             .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
         }
 
@@ -103,7 +89,6 @@
         #resultado { display: none; margin-top: 30px; padding: 30px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; border-left: 5px solid var(--neon-blue); }
         .nota-tecnica { background: rgba(251, 192, 45, 0.1); border: 1px solid var(--warning-yellow); color: var(--warning-yellow); padding: 15px; border-radius: 8px; font-size: 0.85rem; margin-top: 20px; }
 
-        /* CARDS E GRIDS */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         .card { background: var(--card-bg); padding: 35px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
         .card:hover { border-color: var(--neon-blue); transform: translateY(-5px); }
@@ -112,13 +97,11 @@
         .faq-item { background: rgba(255, 255, 255, 0.02); margin-bottom: 15px; padding: 25px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05); }
         .faq-question { font-weight: bold; color: var(--neon-blue); display: block; margin-bottom: 5px; }
 
-        /* CONTATO E FOOTER */
         .form-section { background: rgba(0, 0, 0, 0.3); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); }
 
         footer { text-align: center; padding: 80px 20px; background: #05070a; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); }
 
-        /* AJUSTES IMPRESSÃO A4 */
         @media print {
             @page { size: A4; margin: 15mm; }
             body { background: white !important; color: black !important; }
@@ -191,11 +174,9 @@
                 <h2 style="margin:0; border:none;">POWERTECH INDUSTRIAL - RELATÓRIO TÉCNICO</h2>
                 <small>Engenharia de Precisão | Floriano-PI</small>
             </div>
-
             <div id="dados-corpo"></div>
-
             <div class="nota-tecnica">
-                <strong>⚠️ AVISO TÉCNICO:</strong> Projetos solares devem ser homologados junto à concessionária local para garantir segurança e crédito na fatura. Este dimensionamento foca no balanceamento de strings e irradiação por GPS.
+                <strong>⚠️ AVISO TÉCNICO:</strong> Projetos solares devem ser homologados junto à concessionária local para garantir segurança e crédito na fatura.
             </div>
             <button class="btn-calc" style="margin-top:20px; background:rgba(255,255,255,0.1);" onclick="window.print()">📄 SALVAR RELATÓRIO EM PDF (A4)</button>
         </div>
@@ -204,20 +185,20 @@
     <h2>// Especialidades Fotovoltaicas</h2>
     <div class="grid">
         <div class="card"><h3>Sistemas On-Grid</h3><p>Conexão inteligente com a rede elétrica para redução imediata de custos.</p></div>
-        <div class="card"><h3>Sistemas Off-Grid</h3><p>Independência total com baterias de alta performance para áreas isoladas.</p></div>
-        <div class="card"><h3>Bombeamento Solar</h3><p>Automação rural com energia limpa para irrigação e pecuária.</p></div>
+        <div class="card"><h3>Sistemas Off-Grid</h3><p>Independência total com baterias de alta performance.</p></div>
+        <div class="card"><h3>Bombeamento Solar</h3><p>Automação rural com energia limpa para irrigação.</p></div>
     </div>
 
     <h2>// Nossa Essência</h2>
     <div class="grid">
         <div class="card"><h3>Missão</h3><p>Engenharia solar de precisão e alta tecnologia.</p></div>
-        <div class="card"><h3>Visão</h3><p>Liderança técnica e referência em energia renovável.</p></div>
+        <div class="card"><h3>Visão</h3><p>Liderança técnica e referência em Floriano.</p></div>
         <div class="card"><h3>Valores</h3><p>Rigor técnico, transparência e segurança absoluta.</p></div>
     </div>
 
     <h2>// Perguntas Frequentes</h2>
-    <div class="faq-item"><span class="faq-question">Qual a garantia dos painéis?</span><span>Os módulos possuem garantia de performance linear de 25 anos.</span></div>
-    <div class="faq-item"><span class="faq-question">O sistema funciona em dias de chuva?</span><span>Sim, a geração continua através da luz difusa, embora em menor escala.</span></div>
+    <div class="faq-item"><span class="faq-question">Qual a garantia dos painéis?</span><span>Garantia de performance linear de 25 anos.</span></div>
+    <div class="faq-item"><span class="faq-question">Funciona em dias de chuva?</span><span>Sim, a geração continua através da luz difusa.</span></div>
 
     <h2>// Atendimento</h2>
     <div class="form-section">
@@ -287,7 +268,6 @@
                     <p>• Área Estimada: <b>~${area.toFixed(1)} m²</b></p>
                 </div>
             </div>
-            <p style="font-size:0.8rem; border-top:1px solid #eee; padding-top:10px;">* Arredondado para configuração par para balanceamento técnico de strings.</p>
         `;
         document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
     }
