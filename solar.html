@@ -51,8 +51,17 @@
         }
         .nav-menu a:hover { color: var(--neon-blue); border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
 
-        header { padding: 140px 20px 60px; text-align: center; border-bottom: 1px solid rgba(0, 210, 255, 0.1); }
-        header h1 { letter-spacing: 8px; text-transform: uppercase; background: linear-gradient(to right, #fff, var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: clamp(2.5em, 8vw, 4em); margin: 0; filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.3)); }
+        /* CABEÇALHO ATUALIZADO COM IMAGEM SOLAR */
+        header { 
+            background: #0a0e14 url('../cabeçalho-solar.png') no-repeat center top; 
+            background-size: contain;
+            min-height: 212px; 
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+        }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
         h2 { color: var(--neon-blue); text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; gap: 15px; margin: 40px 0; }
@@ -84,6 +93,12 @@
 
         footer { text-align: center; padding: 80px 20px; background: #05070a; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); }
 
+        @media (max-width: 768px) {
+            .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 8px; }
+            header { min-height: 120px; }
+        }
+
         /* AJUSTES IMPRESSÃO A4 */
         @media print {
             @page { size: A4; margin: 15mm; }
@@ -107,9 +122,7 @@
 </nav>
 
 <header>
-    <h1>PowerTech Solar</h1>
-    <p>Engenharia Fotovoltaica e Diagnóstico por GPS</p>
-</header>
+    </header>
 
 <main class="container">
     <h2>// Diagnóstico por GPS</h2>
