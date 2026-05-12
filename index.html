@@ -28,7 +28,7 @@
             --neon-blue: #00d2ff; 
             --accent-blue: #0056b3; 
             --whatsapp-green: #25d366; 
-            --text-gray: #cbd5e0; /* Contraste melhorado para Acessibilidade */
+            --text-gray: #cbd5e0;
             --pure-white: #ffffff;
         }
 
@@ -79,16 +79,17 @@
             background: rgba(0, 210, 255, 0.08);
         }
 
-        /* ATUALIZAÇÃO DO HEADER: Ajustado para a imagem de 212px */
+        /* AJUSTE FINAL: Altura aumentada para exibir todo o logo e baixar o layout */
         header { 
             background: linear-gradient(rgba(10, 14, 20, 0.3), rgba(10, 14, 20, 0.3)), 
                         url('header-powertech.png'); 
             background-size: cover;
-            background-position: center;
+            background-position: center top;
             background-attachment: scroll;
             
-            min-height: 212px; 
-            padding: 0; 
+            /* Aumentamos a altura mínima e o padding inferior para "baixar" o site */
+            min-height: 250px; 
+            padding-bottom: 50px; 
             
             display: flex;
             align-items: center;
@@ -96,10 +97,9 @@
             border-bottom: 1px solid rgba(0, 210, 255, 0.3);
         }
 
-        /* Centraliza o menu dentro da nova altura de 212px */
         @media (min-width: 769px) {
             .nav-header {
-                top: 85px; /* Ajustado para ficar alinhado ao centro da altura de 212px */
+                top: 100px; /* Ajustado para acompanhar a nova altura */
             }
         }
 
@@ -253,7 +253,7 @@
         @media (max-width: 768px) {
             .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
             .nav-menu { flex-wrap: wrap; justify-content: center; gap: 8px; }
-            header { min-height: 150px; } /* Ajuste mobile para não ocupar tela demais */
+            header { min-height: 180px; }
         }
     </style>
 </head>
