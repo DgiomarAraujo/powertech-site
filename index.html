@@ -79,16 +79,28 @@
             background: rgba(0, 210, 255, 0.08);
         }
 
-        /* MODIFICAÇÃO REALIZADA: ALINHAMENTO PELO TOPO PARA POSICIONAR O RAIO */
+        /* ATUALIZAÇÃO DO HEADER: Ajustado para a imagem de 212px */
         header { 
-            background: linear-gradient(rgba(10, 14, 20, 0.4), rgba(10, 14, 20, 0.4)), 
+            background: linear-gradient(rgba(10, 14, 20, 0.3), rgba(10, 14, 20, 0.3)), 
                         url('header-powertech.png'); 
             background-size: cover;
-            background-position: center top; /* Alinha a imagem pelo topo conforme solicitado */
-            background-attachment: fixed;
-            padding: 280px 20px 100px; /* Ajuste de altura para visual orgânico */
-            text-align: center; 
+            background-position: center;
+            background-attachment: scroll;
+            
+            min-height: 212px; 
+            padding: 0; 
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+        }
+
+        /* Centraliza o menu dentro da nova altura de 212px */
+        @media (min-width: 769px) {
+            .nav-header {
+                top: 85px; /* Ajustado para ficar alinhado ao centro da altura de 212px */
+            }
         }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
@@ -241,7 +253,7 @@
         @media (max-width: 768px) {
             .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
             .nav-menu { flex-wrap: wrap; justify-content: center; gap: 8px; }
-            header { padding: 150px 20px 80px; }
+            header { min-height: 150px; } /* Ajuste mobile para não ocupar tela demais */
         }
     </style>
 </head>
