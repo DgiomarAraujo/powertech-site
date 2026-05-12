@@ -28,7 +28,7 @@
             --neon-blue: #00d2ff; 
             --accent-blue: #0056b3; 
             --whatsapp-green: #25d366; 
-            --text-gray: #cbd5e0;
+            --text-gray: #cbd5e0; /* Contraste melhorado para Acessibilidade */
             --pure-white: #ffffff;
         }
 
@@ -79,11 +79,17 @@
             background: rgba(0, 210, 255, 0.08);
         }
 
+        /* CÓDIGO DO CABEÇALHO COM IMAGEM SOLICITADO */
         header { 
-            background: linear-gradient(180deg, rgba(0, 51, 102, 0.6), transparent);
-            padding: 140px 20px; 
+            /* O navegador vai procurar o arquivo 'header-powertech.png' nesta mesma pasta */
+            background: linear-gradient(rgba(10, 14, 20, 0.7), rgba(10, 14, 20, 0.7)), 
+                        url('header-powertech.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 180px 20px 100px; 
             text-align: center; 
-            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 210, 255, 0.3);
         }
 
         header h1 { 
@@ -208,6 +214,7 @@
             box-sizing: border-box;
         }
 
+        /* Botão Enviar com estilo Neon dos superiores */
         .btn-transmitir {
             width: 100%;
             padding: 18px;
