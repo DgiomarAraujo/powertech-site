@@ -103,8 +103,6 @@
         footer { text-align: center; padding: 80px 20px; background: #05070a; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); }
 
         @media print {
-            @page { size: A4; margin: 15mm; }
-            body { background: white !important; color: black !important; }
             .nav-header, .btn-gps, .btn-calc, header, footer, .form-section, .whatsapp-float, h2, .grid, .grid-inputs, label, .card, .faq-item { display: none !important; }
             .container { padding: 0; width: 100%; max-width: 100% !important; }
             .solar-card { border: none !important; background: white !important; padding: 0 !important; }
@@ -124,7 +122,7 @@
 </nav>
 
 <header>
-    </header>
+</header>
 
 <main class="container">
     <h2>// Diagnóstico por GPS</h2>
@@ -207,7 +205,12 @@
             <p>📍 Floriano - Piauí</p>
             <p>📞 WhatsApp: (89) 98104-9318</p>
         </div>
-        <form action="https://formsubmit.co/powertechfloriano@gmail.com" method="POST">
+        
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="84d4796c-3ee1-459b-9ee7-a850fbde610e">
+            
+            <input type="hidden" name="subject" value="Nova solicitação técnica - Aba Solar">
+
             <input type="text" name="nome" placeholder="NOME" required>
             <textarea name="mensagem" placeholder="DETALHES DO PROJETO..." required></textarea>
             <button type="submit" class="btn-calc" style="padding:15px">Enviar Mensagem</button>
