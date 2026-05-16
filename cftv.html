@@ -961,13 +961,19 @@
             <p style="color:var(--text-gray);font-size:0.9rem;">Atendemos Floriano, Oeiras, Simplício Mendes e toda região do Médio Parnaíba.</p>
         </div>
 
-        <form action="https://formsubmit.co/powertechfloriano@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="Orçamento CFTV – PowerTech Industrial">
-            <input type="hidden" name="_next" value="https://powertechindustrial.com.br/obrigado.html">
-            <input type="text" name="nome" placeholder="NOME DO REQUISITANTE" required aria-label="Nome">
+        <!-- Formulário integrado com Web3Forms mantendo o design técnico -->
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <!-- Web3Forms Configurações Ocultas -->
+            <input type="hidden" name="access_key" value="84d4796c-3ee1-459b-9ee7-a850fbde610e">
+            <input type="hidden" name="subject" value="Orçamento CFTV – PowerTech Industrial">
+            <input type="hidden" name="redirect" value="https://powertechindustrial.com.br/obrigado.html">
+            
+            <!-- Campos do Formulário -->
+            <input type="text" name="name" placeholder="NOME DO REQUISITANTE" required aria-label="Nome">
             <input type="email" name="email" placeholder="E-MAIL DE CONTATO" required aria-label="Email">
-            <input type="tel" name="telefone" placeholder="TELEFONE / WHATSAPP" aria-label="Telefone">
-            <select name="tipo_imovel" required aria-label="Tipo de Imóvel">
+            <input type="tel" name="phone" placeholder="TELEFONE / WHATSAPP" aria-label="Telefone">
+            
+            <select name="property_type" required aria-label="Tipo de Imóvel">
                 <option value="" disabled selected>TIPO DE IMÓVEL</option>
                 <option value="Residencia">RESIDÊNCIA</option>
                 <option value="Comercio">COMÉRCIO / LOJA</option>
@@ -976,7 +982,8 @@
                 <option value="Fazenda">FAZENDA / ÁREA RURAL</option>
                 <option value="Outro">OUTRO</option>
             </select>
-            <select name="qtd_cameras" aria-label="Quantidade de Câmeras">
+            
+            <select name="estimated_cameras" aria-label="Quantidade de Câmeras">
                 <option value="" disabled selected>QUANTIDADE ESTIMADA DE CÂMERAS</option>
                 <option value="1-4">1 a 4 câmeras</option>
                 <option value="5-8">5 a 8 câmeras</option>
@@ -984,7 +991,9 @@
                 <option value="16+">Mais de 16 câmeras</option>
                 <option value="nao_sei">Não sei, preciso de orientação</option>
             </select>
-            <textarea name="mensagem" placeholder="DESCREVA O LOCAL E NECESSIDADES..." aria-label="Mensagem"></textarea>
+            
+            <textarea name="message" placeholder="DESCREVA O LOCAL E NECESSIDADES..." required aria-label="Mensagem"></textarea>
+            
             <button type="submit" class="btn-transmitir">Transmitir Solicitação</button>
         </form>
     </div>
