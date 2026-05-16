@@ -109,6 +109,109 @@
             #resultado { display: block !important; border: 2px solid #000 !important; color: black !important; background: white !important; padding: 20px !important; margin: 0 !important; }
             .nota-tecnica { border: 1px solid #000 !important; color: black !important; background: #f9f9f9 !important; }
         }
+
+        /* ===== CSS WIDGET CURTO-CIRCUITO ===== */
+        #cc-widget {
+            position: fixed;
+            bottom: -380px;
+            right: 30px; 
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            transition: bottom 0.65s cubic-bezier(0.34, 1.48, 0.64, 1);
+        }
+        #cc-widget.visible { bottom: 110px; } /* Ajustado para flutuar acima do botão do WhatsApp */
+
+        #cc-bubble {
+            background: #ffffff;
+            border-radius: 20px 20px 6px 20px;
+            padding: 14px 42px 14px 18px;
+            max-width: 240px;
+            box-shadow:
+                0 4px 6px rgba(0,0,0,0.07),
+                0 12px 32px rgba(0,0,0,0.18),
+                0 0 0 1px rgba(0,0,0,0.04);
+            position: relative;
+            opacity: 0;
+            transform: scale(0.82) translateY(8px);
+            transform-origin: bottom right;
+            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+            pointer-events: none;
+        }
+        #cc-bubble.show { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
+        #cc-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -9px; right: 28px;
+            border: 9px solid transparent;
+            border-top-color: #ffffff;
+            border-bottom: 0; border-right: 0;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.08));
+        }
+        .bubble-tag {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.68rem; font-weight: 900;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: #f5a623; margin-bottom: 5px; display: block;
+        }
+        .bubble-tag::before { content: '⚡ '; }
+        #cc-text {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.88rem; font-weight: 700; line-height: 1.45;
+            color: #1a2540; min-height: 38px;
+        }
+        #cc-close {
+            position: absolute; top: 10px; right: 12px;
+            background: #f0f2f5; border: none; border-radius: 50%;
+            width: 22px; height: 22px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; color: #666; cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        #cc-close:hover { background: #e0e4ec; color: #222; }
+
+        #cc-mascot {
+            width: 150px;
+            overflow: visible;
+            cursor: pointer;
+            filter: drop-shadow(0 16px 28px rgba(0,0,0,0.45))
+                    drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        @keyframes idleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50%      { transform: translateY(-7px); }
+        }
+        @keyframes waveArm {
+            0%   { transform: rotate(0deg); }
+            12%  { transform: rotate(-22deg); }
+            26%  { transform: rotate(18deg); }
+            40%  { transform: rotate(-16deg); }
+            54%  { transform: rotate(12deg); }
+            68%  { transform: rotate(-8deg); }
+            82%  { transform: rotate(5deg); }
+            100% { transform: rotate(0deg); }
+        }
+        @keyframes eyeBlink {
+            0%, 85%, 100% { transform: scaleY(1); }
+            91%           { transform: scaleY(0.07); }
+            94%           { transform: scaleY(1); }
+        }
+        @keyframes screenFlicker {
+            0%,100% { opacity: 1; }
+            97%     { opacity: 0.88; }
+        }
+
+        #cc-mascot { animation: idleFloat 3s ease-in-out infinite; }
+        .eye-group { animation: eyeBlink 5s ease-in-out infinite; transform-origin: center; }
+        .eye-group:nth-child(2) { animation-delay: 0.08s; }
+        .screen-face { animation: screenFlicker 8s ease-in-out infinite; }
+        .arm-right { transform-origin: 188px 168px; }
+        .arm-right.waving { animation: waveArm 1.4s ease-in-out 2; }
+
+        #cc-widget:hover #cc-mascot { animation-duration: 1.5s; }
     </style>
 </head>
 <body>
@@ -224,6 +327,106 @@
     <svg viewBox="0 0 448 512" width="30" height="30" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.5-16.4-14.7-27.5-32.8-30.7-38.3-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.4-29.8-17-40.7-4.5-10.7-9-9.2-12.4-9.4-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
 </a>
 
+<div id="cc-widget">
+  <div id="cc-bubble">
+    <button id="cc-close" title="Fechar">✕</button>
+    <span class="bubble-tag">Curto-Circuito</span>
+    <div id="cc-text"></div>
+  </div>
+  <svg id="cc-mascot" viewBox="-20 0 300 368" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+    <defs>
+      <filter id="f-body-shadow" x="-15%" y="-8%" width="130%" height="130%"><feDropShadow dx="3" dy="6" stdDeviation="7" flood-color="#000" flood-opacity="0.28"/></filter>
+      <filter id="f-hat-shadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="2" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.22"/></filter>
+      <linearGradient id="g-body" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F4F7FB"/><stop offset="40%" stop-color="#DDE3EB"/><stop offset="100%" stop-color="#B3BDC9"/></linearGradient>
+      <linearGradient id="g-body-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.22"/><stop offset="100%" stop-color="black" stop-opacity="0.12"/></linearGradient>
+      <linearGradient id="g-screen" x1="0.15" y1="0" x2="0.1" y2="1"><stop offset="0%" stop-color="#52E88A"/><stop offset="100%" stop-color="#1BA551"/></linearGradient>
+      <radialGradient id="g-screen-glare" cx="28%" cy="22%" r="55%"><stop offset="0%" stop-color="white" stop-opacity="0.28"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient>
+      <radialGradient id="g-hat-dome" cx="35%" cy="28%" r="70%"><stop offset="0%" stop-color="#FFE84C"/><stop offset="42%" stop-color="#FFC107"/><stop offset="100%" stop-color="#CC7D00"/></radialGradient>
+      <linearGradient id="g-hat-brim" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFCA28"/><stop offset="100%" stop-color="#E09000"/></linearGradient>
+      <radialGradient id="g-hat-glare" cx="38%" cy="32%" r="45%"><stop offset="0%" stop-color="white" stop-opacity="0.45"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient>
+      <linearGradient id="g-boot" x1="0.1" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#5BADF5"/><stop offset="100%" stop-color="#1E4FA8"/></linearGradient>
+      <linearGradient id="g-boot-sole" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1840A0"/><stop offset="100%" stop-color="#102A78"/></linearGradient>
+      <linearGradient id="g-leg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5A6080"/><stop offset="100%" stop-color="#2E3348"/></linearGradient>
+      <linearGradient id="g-btn-dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5A6480"/><stop offset="100%" stop-color="#3A4055"/></linearGradient>
+      <linearGradient id="g-btn-blue" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4A90E2"/><stop offset="100%" stop-color="#2B65B8"/></linearGradient>
+      <linearGradient id="g-btn-orange" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFB733"/><stop offset="100%" stop-color="#E08000"/></linearGradient>
+      <linearGradient id="g-btn-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F06060"/><stop offset="100%" stop-color="#CC2020"/></linearGradient>
+      <linearGradient id="g-btn-green" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#40E080"/><stop offset="100%" stop-color="#18A048"/>
+    </defs>
+    <ellipse cx="130" cy="358" rx="58" ry="9" fill="rgba(0,0,0,0.22)"/>
+    <rect x="97" y="243" width="17" height="38" rx="8.5" fill="url(#g-leg)"/>
+    <rect x="99" y="245" width="5"  height="34" rx="2.5" fill="white" opacity="0.16"/>
+    <rect x="146" y="243" width="17" height="38" rx="8.5" fill="url(#g-leg)"/>
+    <rect x="148" y="245" width="5"  height="34" rx="2.5" fill="white" opacity="0.16"/>
+    <rect x="72" y="88" width="116" height="160" rx="26" fill="url(#g-body)" filter="url(#f-body-shadow)"/>
+    <rect x="72" y="88" width="116" height="160" rx="26" fill="url(#g-body-side)"/>
+    <rect x="76" y="93"  width="34" height="150" rx="22" fill="white" opacity="0.17"/>
+    <rect x="80" y="218" width="100" height="26"  rx="16" fill="#8899BB" opacity="0.18"/>
+    <g class="screen-face">
+      <rect x="80" y="96" width="100" height="72" rx="13" fill="#0E1420"/>
+      <rect x="81" y="97"  width="98"  height="70" rx="12" fill="url(#g-screen)"/>
+      <rect x="81" y="97"  width="98"  height="70" rx="12" fill="url(#g-screen-glare)"/>
+      <rect x="86" y="100" width="38"  height="14" rx="7" fill="white" opacity="0.22" transform="rotate(-8 105 107)"/>
+      <g class="eye-group" style="transform-origin:108px 126px">
+        <circle cx="108" cy="126" r="13"   fill="white"/><circle cx="110" cy="128" r="7.5"  fill="#0E1420"/><circle cx="110" cy="128" r="5.5"  fill="#1a1a3e" opacity="0.6"/><circle cx="114" cy="123" r="3.5"  fill="white" opacity="0.97"/><circle cx="107" cy="131" r="1.5"  fill="white" opacity="0.55"/>
+      </g>
+      <g class="eye-group" style="transform-origin:152px 126px">
+        <circle cx="152" cy="126" r="13"   fill="white"/><circle cx="154" cy="128" r="7.5"  fill="#0E1420"/><circle cx="154" cy="128" r="5.5"  fill="#1a1a3e" opacity="0.6"/><circle cx="158" cy="123" r="3.5"  fill="white" opacity="0.97"/><circle cx="151" cy="131" r="1.5"  fill="white" opacity="0.55"/>
+      </g>
+      <path d="M97 113 Q108 107 119 113" stroke="#0E1420" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+      <path d="M141 113 Q152 107 163 113" stroke="#0E1420" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+      <path d="M109 152 Q121 145 130 150 Q139 155 151 149" stroke="#0E1420" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="91"  cy="140" rx="10" ry="6.5" fill="#FF5FA0" opacity="0.36"/><ellipse cx="169" cy="140" rx="10" ry="6.5" fill="#FF5FA0" opacity="0.36"/>
+    </g>
+    <line x1="80" y1="173" x2="180" y2="173" stroke="#C8D0DC" stroke-width="1.2"/>
+    <rect x="85"  y="178" width="17" height="14" rx="4.5" fill="url(#g-btn-orange)"/><text x="93.5" y="188.5" text-anchor="middle" font-size="8.5" font-weight="900" fill="white" font-family="Nunito, sans-serif">×</text>
+    <rect x="105" y="178" width="17" height="14" rx="4.5" fill="url(#g-btn-blue)"/><text x="113.5" y="188.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">7</text>
+    <rect x="125" y="178" width="17" height="14" rx="4.5" fill="url(#g-btn-blue)"/><text x="133.5" y="188.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">8</text>
+    <rect x="145" y="178" width="17" height="14" rx="4.5" fill="url(#g-btn-blue)"/><text x="153.5" y="188.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">9</text>
+    <rect x="165" y="178" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="173.5" y="188.5" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Nunito, sans-serif">÷</text>
+    <rect x="85"  y="195" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="93.5" y="205.5" text-anchor="middle" font-size="8" font-weight="800" fill="white" font-family="Nunito, sans-serif">%</text>
+    <rect x="105" y="195" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="113.5" y="205.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">4</text>
+    <rect x="125" y="195" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="133.5" y="205.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">5</text>
+    <rect x="145" y="195" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="153.5" y="205.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">6</text>
+    <rect x="165" y="195" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="173.5" y="205.5" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Nunito, sans-serif">−</text>
+    <rect x="85"  y="212" width="17" height="14" rx="4.5" fill="url(#g-btn-red)"/><text x="93.5" y="222" text-anchor="middle" font-size="7" font-weight="900" fill="white" font-family="Nunito, sans-serif">AC</text>
+    <rect x="105" y="212" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="113.5" y="222" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">1</text>
+    <rect x="125" y="212" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="133.5" y="222" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">2</text>
+    <rect x="145" y="212" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="153.5" y="222" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">3</text>
+    <rect x="165" y="212" width="17" height="31" rx="4.5" fill="url(#g-btn-green)"/><text x="173.5" y="231" text-anchor="middle" font-size="13" font-weight="900" fill="white" font-family="Nunito, sans-serif">+</text>
+    <rect x="85"  y="229" width="17" height="14" rx="4.5" fill="url(#g-btn-red)" opacity="0.78"/><text x="93.5" y="239.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">C</text>
+    <rect x="105" y="229" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="113.5" y="239.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">0</text>
+    <rect x="125" y="229" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="133.5" y="239.5" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Nunito, sans-serif">·</text>
+    <rect x="145" y="229" width="17" height="14" rx="4.5" fill="url(#g-btn-orange)"/><text x="153.5" y="239.5" text-anchor="middle" font-size="8.5" font-weight="900" fill="white" font-family="Nunito, sans-serif">=</text>
+    <path d="M74 180 Q42 182 33 202" stroke="#4A5368" stroke-width="15" fill="none" stroke-linecap="round"/>
+    <circle cx="30" cy="208" r="16" fill="white"/>
+    <g transform="translate(18,216) rotate(-18)">
+      <rect x="0" y="0" width="24" height="20" rx="6" fill="#2B65B8"/><rect x="1" y="1" width="22" height="18" rx="5" fill="#4A90E2"/>
+      <line x1="4" y1="6"  x2="20" y2="6"  stroke="rgba(255,255,255,0.65)" stroke-width="1.2"/>
+      <ellipse cx="12" cy="0"  rx="12" ry="4" fill="#3A7BD5"/><ellipse cx="12" cy="20" rx="12" ry="4" fill="#1E4FA8"/>
+    </g>
+    <g class="arm-right" id="right-arm">
+      <path d="M186 168 Q212 154 218 132" stroke="#4A5368" stroke-width="15" fill="none" stroke-linecap="round"/>
+      <circle cx="220" cy="124" r="16" fill="white"/>
+      <ellipse cx="207" cy="112" rx="6" ry="9"   fill="white" transform="rotate(-30 207 112)"/>
+      <ellipse cx="215" cy="108" rx="6" ry="9.5" fill="white" transform="rotate(-12 215 108)"/>
+      <ellipse cx="224" cy="107" rx="6" ry="9.5" fill="white" transform="rotate(5  224 107)"/>
+      <ellipse cx="232" cy="110" rx="6" ry="8.5" fill="white" transform="rotate(22 232 110)"/>
+    </g>
+    <ellipse cx="130" cy="96" rx="79" ry="16" fill="#C07000" opacity="0.6"/><ellipse cx="130" cy="93" rx="78" ry="14" fill="url(#g-hat-brim)"/>
+    <path d="M56 91 C 56 91, 62 18, 130 16 C 198 18, 204 91, 204 91 Z" fill="url(#g-hat-dome)" filter="url(#f-hat-shadow)"/>
+    <g transform="translate(130, 57)">
+      <g fill="#1A2033" opacity="0.92">
+        <rect x="-3.5" y="-19" width="7" height="9" rx="1.5"/><rect x="-3.5" y="-19" width="7" height="9" rx="1.5" transform="rotate(45)"/><rect x="-3.5" y="-19" width="7" height="9" rx="1.5" transform="rotate(90)"/><rect x="-3.5" y="-19" width="7" height="9" rx="1.5" transform="rotate(135)"/>
+        <circle cx="0" cy="0" r="13.5"/>
+      </g>
+      <circle cx="0" cy="0" r="9.5" fill="#FFB800"/><path d="M3.5,-8.5 L-2.5,0.5 L2,0.5 L-3.5,9 L8,-1 L3.5,-1 Z" fill="#1A2033"/>
+    </g>
+    <g><rect x="85"  y="272" width="38" height="24" rx="13" fill="url(#g-boot)"/><ellipse cx="104" cy="296" rx="22" ry="8"  fill="url(#g-boot-sole)"/><rect x="89"  y="268" width="30" height="9" rx="4.5" fill="#F5A623"/><rect x="100" y="268" width="10" height="9" rx="3"   fill="#E08000"/></g>
+    <g><rect x="137" y="272" width="38" height="24" rx="13" fill="url(#g-boot)"/><ellipse cx="156" cy="296" rx="22" ry="8"  fill="url(#g-boot-sole)"/><rect x="141" y="268" width="30" height="9" rx="4.5" fill="#F5A623"/><rect x="152" y="268" width="10" height="9" rx="3"   fill="#E08000"/></g>
+  </svg>
+</div>
+
 <script>
     let coords = { lat: "Não capturado", lon: "Não capturado" };
     function capturarGPS() {
@@ -274,6 +477,75 @@
         `;
         document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
     }
+
+    // ===== LÓGICA DO CURTO-CIRCUITO SOLAR =====
+    (function () {
+      const widget = document.getElementById('cc-widget');
+      const bubble = document.getElementById('cc-bubble');
+      const textEl = document.getElementById('cc-text');
+      const closeBtn = document.getElementById('cc-close');
+      const armR = document.getElementById('right-arm');
+
+      // FRASES EXCLUSIVAS E RELEVANTES PARA A ÁREA SOLAR ☀️
+      const msgs = [
+        "Oi! Sabia que o sol de Floriano é um dos melhores do mundo para gerar energia? Vamos simular sua economia! ☀️",
+        "Sistemas On-Grid reduzem sua conta em até 95%. Já os sistemas Off-Grid te dão independência total com baterias! 🔋",
+        "Precisa automatizar a irrigação no campo? O Bombeamento Solar funciona perfeitamente isolado da rede elétrica! 🌾",
+        "Quer saber o tamanho ideal do projeto? Preencha os dados do Consumo acima e clique em Gerar Relatório! 📐",
+        "Todos os nossos projetos fotovoltaicos seguem as exigências rigorosas de homologação da Equatorial Piauí. 📝"
+      ];
+      let idx = 0, visible = false, typer, hider;
+
+      function typewrite(text, el, done) {
+        el.textContent = '';
+        let i = 0;
+        clearInterval(typer);
+        typer = setInterval(() => {
+          el.textContent += text[i++];
+          if (i >= text.length) { clearInterval(typer); done && done(); }
+        }, 36);
+      }
+
+      function wave() {
+        armR.classList.remove('waving');
+        void armR.offsetWidth;
+        armR.classList.add('waving');
+        setTimeout(() => armR.classList.remove('waving'), 2900);
+      }
+
+      function show() {
+        if (visible) return;
+        visible = true;
+        widget.classList.add('visible');
+        setTimeout(wave, 420);
+        setTimeout(() => {
+          bubble.classList.add('show');
+          const msg = msgs[idx++ % msgs.length];
+          typewrite(msg, textEl, () => {
+            hider = setTimeout(hide, 7000);
+          });
+        }, 750);
+      }
+
+      function hide() {
+        clearTimeout(hider);
+        bubble.classList.remove('show');
+        setTimeout(() => { widget.classList.remove('visible'); visible = false; }, 350);
+      }
+
+      closeBtn.addEventListener('click', e => { e.stopPropagation(); hide(); });
+
+      widget.addEventListener('click', () => {
+        clearTimeout(hider);
+        wave();
+        bubble.classList.add('show');
+        const msg = msgs[idx++ % msgs.length];
+        typewrite(msg, textEl, () => { hider = setTimeout(hide, 8000); });
+      });
+
+      setTimeout(show, 1800);
+      setInterval(() => { if (!visible) show(); }, 28000);
+    })();
 </script>
 </body>
 </html>
