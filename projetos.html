@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos Executados | PowerTech Industrial</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root { 
+            --deep-dark: #0a0e14; 
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --neon-blue: #00d2ff; 
+            --text-gray: #cbd5e0;
+            --pure-white: #ffffff;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            color: var(--pure-white); 
+            line-height: 1.6; 
+            background: radial-gradient(circle at top right, #111827, #0a0e14);
+            background-attachment: fixed;
+        }
+
+        /* ===== NAVEGAÇÃO ===== */
+        .nav-header { position: absolute; top: 25px; right: 30px; z-index: 1000; }
+        .nav-menu { display: flex; gap: 12px; list-style: none; margin: 0; padding: 0; }
+        .nav-menu a {
+            color: var(--pure-white); text-decoration: none; font-size: 0.8rem; font-weight: bold;
+            text-transform: uppercase; letter-spacing: 1.5px; padding: 10px 18px; border-radius: 8px;
+            border: 1px solid rgba(0, 210, 255, 0.3); transition: all 0.3s ease;
+            background: rgba(10, 14, 20, 0.6); backdrop-filter: blur(8px);
+        }
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--neon-blue); border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); background: rgba(0, 210, 255, 0.08);
+        }
+
+        /* ===== CABEÇALHO INTERNO ===== */
+        .page-header {
+            padding: 120px 20px 60px; text-align: center;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
+        }
+        .page-header h1 { color: var(--neon-blue); font-size: 2.8em; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 10px 0; font-family: 'Nunito', sans-serif; }
+        .page-header p { color: var(--text-gray); font-size: 1.1em; max-width: 600px; margin: 0 auto; }
+
+        .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
+
+        /* ===== GALERIA DE PROJETOS ===== */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .project-card { 
+            background: var(--card-bg); border-radius: 16px; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease;
+            display: flex; flex-direction: column;
+        }
+        .project-card:hover { transform: translateY(-8px); border-color: var(--neon-blue); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); }
+        
+        .project-image-wrapper { width: 100%; height: 260px; overflow: hidden; background: #111827; position: relative; cursor: pointer; }
+        .project-image-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .project-card:hover .project-image-wrapper img { transform: scale(1.08); }
+        
+        /* Ícone de lupa ao passar o mouse */
+        .project-image-wrapper::before {
+            content: '🔍 Ampliar'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 30px;
+            font-weight: bold; font-size: 0.9em; opacity: 0; transition: opacity 0.3s ease; z-index: 2; pointer-events: none;
+        }
+        .project-card:hover .project-image-wrapper::before { opacity: 1; }
+
+        .project-category {
+            position: absolute; top: 15px; right: 15px; background: rgba(0, 210, 255, 0.9);
+            color: var(--deep-dark); padding: 5px 12px; border-radius: 4px; font-size: 0.75rem;
+            font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 3;
+        }
+
+        .project-info { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-info h3 { color: var(--pure-white); margin: 0 0 15px 0; font-size: 1.3em; text-transform: uppercase; letter-spacing: 1px; }
+        .project-info p { color: var(--text-gray); margin: 0 0 20px 0; font-size: 0.95em; flex-grow: 1; }
+        .project-details { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 15px; font-size: 0.85em; color: var(--neon-blue); display: flex; justify-content: space-between; }
+
+        footer { text-align: center; padding: 60px 20px; background: #05070a; color: var(--text-gray); border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: 50px; }
+
+        /* ===== LIGHTBOX (TELA CHEIA) ===== */
+        #lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); z-index: 9999; align-items: center; justify-content: center;
+            backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.3s ease;
+        }
+        #lightbox.active { display: flex; opacity: 1; }
+        #lightbox img { max-width: 90%; max-height: 90vh; border-radius: 8px; box-shadow: 0 0 40px rgba(0, 210, 255, 0.2); }
+        #lightbox-close {
+            position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; cursor: pointer; font-weight: bold; transition: color 0.3s;
+        }
+        #lightbox-close:hover { color: var(--neon-blue); }
+
+        @media (max-width: 768px) {
+            .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 8px; }
+            .page-header { padding-top: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav-header">
+    <div class="nav-menu">
+        <a href="index.html">Início</a>
+        <a href="https://powertechindustrial.com.br/solar">Solar</a>
+        <a href="cftv.html">CFTV</a>
+        <a href="projetos.html" class="active">Projetos</a>
+        <a href="sobre.html">Sobre</a>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>Acervo Técnico</h1>
+    <p>Conheça o padrão de qualidade, alinhamento e precisão das instalações executadas pela PowerTech Industrial.</p>
+</div>
+
+<div class="container">
+    <div class="portfolio-grid">
+        
+        <div class="project-card">
+            <div class="project-image-wrapper" onclick="openLightbox('580e4d03-066c-4692-a109-60406c62ef1a.webp')">
+                <span class="project-category">QGBT / Distribuição</span>
+                <img src="580e4d03-066c-4692-a109-60406c62ef1a.webp" alt="Montagem de Quadro de Distribuição com Barramentos">
+            </div>
+            <div class="project-info">
+                <h3>Montagem de QDC com Barramentos</h3>
+                <p>Organização impecável utilizando barramentos de cobre escalonados. Distribuição precisa de circuitos com separação de fases e aplicação de dispositivos de proteção contra surtos (DPS).</p>
+                <div class="project-details">
+                    <span>Alta Capacidade</span>
+                    <span>Padrão NBR 5410</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-wrapper" onclick="openLightbox('4e50f0cd-1742-4820-b599-41663224e3e4.webp')">
+                <span class="project-category">Comando Industrial</span>
+                <img src="4e50f0cd-1742-4820-b599-41663224e3e4.webp" alt="Painel de Comando Frontal">
+            </div>
+            <div class="project-info">
+                <h3>Interface de Painel de Comando</h3>
+                <p>Montagem de porta de painel com sinalização visual de status, voltímetro digital integrado, controle de velocidade via potenciômetro e botão de parada de emergência.</p>
+                <div class="project-details">
+                    <span>Sinalização 380V</span>
+                    <span>NR-10 / NR-12</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-wrapper" onclick="openLightbox('a5778790-a268-4d2f-a84d-ac229ee4f6e4.webp')">
+                <span class="project-category">Automação</span>
+                <img src="a5778790-a268-4d2f-a84d-ac229ee4f6e4.webp" alt="Painel com Inversor de Frequência">
+            </div>
+            <div class="project-info">
+                <h3>Acionamento com Inversor</h3>
+                <p>Layout limpo e seguro para painel de automação industrial, integrando disjuntores motor, contatores e Inversor de Frequência para controle preciso de maquinário.</p>
+                <div class="project-details">
+                    <span>Controle de Velocidade</span>
+                    <span>Eficiência Energética</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-wrapper" onclick="openLightbox('16dc85a1-b2a5-449a-a2ef-3ccc6b6e4420.webp')">
+                <span class="project-category">Quadros Secundários</span>
+                <img src="16dc85a1-b2a5-449a-a2ef-3ccc6b6e4420.webp" alt="Caixa de passagem e disjuntores com fios padronizados">
+            </div>
+            <div class="project-info">
+                <h3>Montagem de Quadro Secundário</h3>
+                <p>Instalação de quadro de distribuição de pequeno porte. Destaque para o rigoroso padrão de cores dos condutores, uso de terminais tubulares (ilhós) e organização interna impecável.</p>
+                <div class="project-details">
+                    <span>Identificação de Fases</span>
+                    <span>Segurança e Estética</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-wrapper" onclick="openLightbox('336d36b6-5dd1-4a01-9add-e3d726c8de5e.webp')">
+                <span class="project-category">Residencial / Comercial</span>
+                <img src="336d36b6-5dd1-4a01-9add-e3d726c8de5e.webp" alt="Quadro Residencial Padronizado">
+            </div>
+            <div class="project-info">
+                <h3>QDC Residencial Padronizado</h3>
+                <p>Instalação de quadro com proteção total à vida e ao patrimônio. Inclusão de Interruptor Diferencial Residual (DR) e DPS, garantindo segurança contra choques e surtos elétricos.</p>
+                <div class="project-details">
+                    <span>Proteção DR + DPS</span>
+                    <span>Confiabilidade Total</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-wrapper" onclick="openLightbox('4480f899-8007-449f-9ec8-dfff6ae25510.webp')">
+                <span class="project-category">Manutenção</span>
+                <img src="4480f899-8007-449f-9ec8-dfff6ae25510.webp" alt="Aferição com alicate amperímetro">
+            </div>
+            <div class="project-info">
+                <h3>Aferição e Diagnóstico</h3>
+                <p>Utilização de ferramentas de precisão para medição de grandezas elétricas. Verificação de tensão, corrente e isolamento para emissão de laudos e manutenções preventivas.</p>
+                <div class="project-details">
+                    <span>Instrumentação Precisa</span>
+                    <span>Laudos Técnicos</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 PowerTech Industrial | Engenharia e Tecnologia</p>
+</footer>
+
+<div id="lightbox" onclick="closeLightbox()">
+    <span id="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Imagem Ampliada">
+</div>
+
+<script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    function openLightbox(imageSrc) {
+        lightboxImg.src = imageSrc;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Impede a rolagem da página por trás
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Devolve a rolagem da página
+    }
+
+    // Fecha se apertar a tecla ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            closeLightbox();
+        }
+    });
+</script>
+
+</body>
+</html>
