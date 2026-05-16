@@ -53,9 +53,10 @@
             z-index: 1000;
         }
 
+        /* ===== AJUSTE DE ESPAÇAMENTO DO MENU (CORREÇÃO DA LOGO) ===== */
         .nav-menu {
             display: flex;
-            gap: 12px;
+            gap: 6px; /* Reduzido de 12px para compactar horizontalmente */
             list-style: none;
             margin: 0;
             padding: 0;
@@ -64,11 +65,11 @@
         .nav-menu a, .btn-style {
             color: var(--pure-white);
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.75rem; /* Ajustado de 0.8rem para garantir o encaixe */
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 10px 18px;
+            letter-spacing: 1px; /* Ajustado de 1.5px */
+            padding: 10px 12px; /* Reduzido de 18px nas laterais para não cortar a logo */
             border-radius: 8px;
             border: 1px solid rgba(0, 210, 255, 0.3);
             transition: all 0.3s ease;
@@ -440,7 +441,7 @@
 
     <div class="calc-section" style="padding: 40px 20px;">
         <h3 style="color: var(--neon-blue); margin-bottom: 25px; text-transform: uppercase; font-size: 1.5em;">Engenharia na Prática</h3>
-        <p style="color: var(--text-gray); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">Explore nosso acervo técnico e confira o padrão de organização, segurança e alinhamento que aplicamos em cada instalação.</p>
+        <p style="color: var(--text-gray); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">Explore nosso acervo técnico e confira o padrão de organization, segurança e alinhamento que aplicamos em cada instalação.</p>
         
         <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
             <a href="projetos.html" class="btn-calc" style="background: var(--neon-blue); color: var(--deep-dark); border-color: var(--neon-blue); box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);">
