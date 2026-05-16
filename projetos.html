@@ -126,6 +126,66 @@
     <div class="portfolio-grid">
         
         <div class="project-card">
+            <div class="project-image-wrapper" onclick="openLightbox('20250925_181904.webp')">
+                <span class="project-category">Iluminação Técnica</span>
+                <img src="20250925_181904.webp" alt="Projeto Luminotécnico Comercial">
+            </div>
+            <div class="project-info">
+                <h3>Engenharia Luminotécnica Comercial</h3>
+                <p>Implementação de sistema de iluminação contínua em perfil de LED sob estrutura de telhado metálico. Planejamento técnico focado em alto rendimento e conforto visual para amplas áreas de atendimento.</p>
+                <div class="project-details">
+                    <span>Instalação em Perfil</span>
+                    <span>Eficiência Energética</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-wrapper" onclick="openLightbox('20250925_182017.webp')">
+                <span class="project-category">Iluminação Técnica</span>
+                <img src="20250925_182017.webp" alt="Distribuição de Fluxo Luminoso Comercial">
+            </div>
+            <div class="project-info">
+                <h3>Distribuição e Zoneamento de Lux</h3>
+                <p>Perspectiva ampliada de projeto luminotécnico estruturado, evidenciando a eliminação total de pontos de sombra em corredores comerciais, gôndolas e balcões de atendimento.</p>
+                <div class="project-details">
+                    <span>Simetria de Cargas</span>
+                    <span>Padrão Corporativo</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-wrapper" onclick="openLightbox('20250929_105812.webp')">
+                <span class="project-category">Infraestrutura Industrial</span>
+                <img src="20250929_105812.webp" alt="Instalação Elétrica de Planta Industrial">
+            </div>
+            <div class="project-info">
+                <h3>Infraestrutura de Linha de Produção</h3>
+                <p>Alimentação elétrica estruturada para maquinários pesados, misturadores e tanques industriais. Montagem aérea de infraestrutura de eletrodutos e posicionamento estratégico de quadros conforme NR-10.</p>
+                <div class="project-details">
+                    <span>Alimentação de Motores</span>
+                    <span>Rigor Técnico NR-10</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image-wrapper" onclick="openLightbox('20251022_201636.webp')">
+                <span class="project-category">Automação</span>
+                <img src="20251022_201636.webp" alt="Gabinete de Automação Industrial com Inversor">
+            </div>
+            <div class="project-info">
+                <h3>Gabinete de Proteção de Acionamento</h3>
+                <p>Integração de inversor de frequência de alta capacidade em painel metálico vedado. Organização com canaletas de PVC, fiação de controle blindada e interface eletrônica exposta para fácil diagnóstico.</p>
+                <div class="project-details">
+                    <span>Acionamento Industrial</span>
+                    <span>Blindagem de Sinais</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
             <div class="project-image-wrapper" onclick="openLightbox('580e4d03-066c-4692-a109-60406c62ef1a.webp')">
                 <span class="project-category">QGBT / Distribuição</span>
                 <img src="580e4d03-066c-4692-a109-60406c62ef1a.webp" alt="Montagem de Quadro de Distribuição com Barramentos">
@@ -136,36 +196,6 @@
                 <div class="project-details">
                     <span>Alta Capacidade</span>
                     <span>Padrão NBR 5410</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image-wrapper" onclick="openLightbox('4e50f0cd-1742-4820-b599-41663224e3e4.webp')">
-                <span class="project-category">Comando Industrial</span>
-                <img src="4e50f0cd-1742-4820-b599-41663224e3e4.webp" alt="Painel de Comando Frontal">
-            </div>
-            <div class="project-info">
-                <h3>Interface de Painel de Comando</h3>
-                <p>Montagem de porta de painel com sinalização visual de status, voltímetro digital integrado, controle de velocidade via potenciômetro e botão de parada de emergência.</p>
-                <div class="project-details">
-                    <span>Sinalização 380V</span>
-                    <span>NR-10 / NR-12</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image-wrapper" onclick="openLightbox('a5778790-a268-4d2f-a84d-ac229ee4f6e4.webp')">
-                <span class="project-category">Automação</span>
-                <img src="a5778790-a268-4d2f-a84d-ac229ee4f6e4.webp" alt="Painel com Inversor de Frequência">
-            </div>
-            <div class="project-info">
-                <h3>Acionamento com Inversor</h3>
-                <p>Layout limpo e seguro para painel de automação industrial, integrando disjuntores motor, contatores e Inversor de Frequência para controle preciso de maquinário.</p>
-                <div class="project-details">
-                    <span>Controle de Velocidade</span>
-                    <span>Eficiência Energética</span>
                 </div>
             </div>
         </div>
@@ -234,21 +264,20 @@
     function openLightbox(imageSrc) {
         lightboxImg.src = imageSrc;
         lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Impede a rolagem da página por trás
+        document.body.style.overflow = 'hidden'; 
     }
 
     function closeLightbox() {
         lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Devolve a rolagem da página
+        document.body.style.overflow = 'auto'; 
     }
 
-    // Fecha se apertar a tecla ESC
     document.addEventListener('keydown', function(event) {
         if (event.key === "Escape") {
             closeLightbox();
         }
     });
 </script>
-    
+
 </body>
 </html>
