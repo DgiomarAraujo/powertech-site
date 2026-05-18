@@ -14,6 +14,7 @@
     
     <title>Sobre Nós | PowerTech Industrial - Engenharia Elétrica</title>
     <meta name="description" content="Conheça a trajetória da PowerTech Industrial em Floriano-PI. Liderada por Dgiomar Araujo, focada em precisão, normas NBR e tecnologia de ponta.">
+    <link rel="canonical" href="https://powertechindustrial.com.br/sobre.html">
     
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -52,6 +53,18 @@
             background-size: contain; min-height: 212px; width: 100%;
             display: flex; align-items: center; justify-content: center;
             border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
@@ -93,12 +106,14 @@
 <nav class="nav-header">
     <div class="nav-menu">
         <a href="index.html">Início</a>
-        <a href="solar/index.html">Solar</a>
-        <a href="contato.html">Contato</a>
+        <a href="https://powertechindustrial.com.br/solar">Solar</a>
+        <a href="index.html#contato">Contato</a>
     </div>
 </nav>
 
-<header></header>
+<header>
+    <h1 class="sr-only">Sobre a PowerTech Industrial</h1>
+</header>
 
 <div class="container">
     <h2>// A PowerTech Industrial</h2>
@@ -134,7 +149,7 @@
     <p>&copy; 2026 PowerTech Industrial | Tecnologia e Engenharia</p>
     <p>
         <a href="index.html">INÍCIO</a> | 
-        <a href="solar/index.html">SOLAR</a> | 
+        <a href="https://powertechindustrial.com.br/solar">SOLAR</a> | 
         <a href="privacidade.html">PRIVACIDADE</a>
     </p>
 </footer>

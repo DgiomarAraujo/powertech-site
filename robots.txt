@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://powertechindustrial.com.br/sitemap.xml
