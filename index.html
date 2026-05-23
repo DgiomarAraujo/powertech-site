@@ -83,7 +83,10 @@
             background: rgba(0, 210, 255, 0.08);
         }
 
+        /* AJUSTE NO HEADER PARA A REDE MESH */
         header { 
+            position: relative;
+            overflow: hidden;
             background: #0a0e14 url('header-powertech.png') no-repeat center top; 
             background-size: contain; 
             min-height: 212px; 
@@ -92,6 +95,15 @@
             align-items: center;
             justify-content: center;
             border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+        }
+
+        #mesh-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
         .sr-only {
@@ -104,6 +116,7 @@
             clip: rect(0, 0, 0, 0);
             white-space: nowrap;
             border: 0;
+            z-index: 1;
         }
 
         @media (min-width: 769px) {
@@ -392,6 +405,7 @@
 </nav>
 
 <header>
+    <canvas id="mesh-canvas"></canvas>
     <h1 class="sr-only">PowerTech Industrial - Engenharia Elétrica, Solar, SPDA, CFTV e Automação em Floriano-PI</h1>
 </header>
 
@@ -879,6 +893,142 @@
 
   setTimeout(show, 1800);
   setInterval(() => { if (!visible) show(); }, 28000);
+})();
+</script>
+
+<script>
+// ==========================================
+// MOTOR DA REDE MESH (PARTÍCULAS)
+// ==========================================
+(function() {
+    const canvas = document.getElementById('mesh-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particlesArray;
+
+    // Ajusta o tamanho do canvas para o tamanho do header
+    function setCanvasSize() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+    setCanvasSize();
+
+    // Captura a posição do mouse
+    let mouse = {
+        x: null,
+        y: null,
+        radius: 120 // Distância que o mouse "puxa" as conexões
+    }
+
+    canvas.addEventListener('mousemove', function(event) {
+        let rect = canvas.getBoundingClientRect();
+        mouse.x = event.clientX - rect.left;
+        mouse.y = event.clientY - rect.top;
+    });
+
+    canvas.addEventListener('mouseout', function() {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    // Classe da Partícula
+    class Particle {
+        constructor(x, y, directionX, directionY, size, color) {
+            this.x = x;
+            this.y = y;
+            this.directionX = directionX;
+            this.directionY = directionY;
+            this.size = size;
+            this.color = color;
+        }
+        // Desenha a partícula
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+        // Atualiza a posição
+        update() {
+            if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+            if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+            this.x += this.directionX;
+            this.y += this.directionY;
+            this.draw();
+        }
+    }
+
+    // Inicializa o array de partículas
+    function init() {
+        particlesArray = [];
+        let numberOfParticles = (canvas.height * canvas.width) / 7000; // Densidade da rede
+        for (let i = 0; i < numberOfParticles; i++) {
+            let size = (Math.random() * 2) + 1;
+            let x = (Math.random() * ((canvas.width - size * 2) - (size * 2)) + size * 2);
+            let y = (Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2);
+            let directionX = (Math.random() * 1) - 0.5; // Velocidade horizontal
+            let directionY = (Math.random() * 1) - 0.5; // Velocidade vertical
+            let color = 'rgba(0, 210, 255, 0.8)'; // Azul Neon da PowerTech
+
+            particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+        }
+    }
+
+    // Verifica a distância entre partículas e desenha as linhas
+    function connect() {
+        let opacityValue = 1;
+        for (let a = 0; a < particlesArray.length; a++) {
+            for (let b = a; b < particlesArray.length; b++) {
+                let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) 
+                             + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                
+                if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                    opacityValue = 1 - (distance / 10000);
+                    ctx.strokeStyle = 'rgba(0, 210, 255,' + opacityValue + ')';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                    ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                    ctx.stroke();
+                }
+            }
+            
+            // Conexão extra com o mouse
+            if(mouse.x != null && mouse.y != null) {
+                let dx = mouse.x - particlesArray[a].x;
+                let dy = mouse.y - particlesArray[a].y;
+                let distanceMouse = Math.sqrt(dx * dx + dy * dy);
+                if(distanceMouse < mouse.radius) {
+                    ctx.strokeStyle = 'rgba(255, 255, 255, ' + (1 - distanceMouse/mouse.radius) + ')';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    // Loop de animação
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+        }
+        connect();
+    }
+
+    // Reajusta caso redimensione a janela
+    window.addEventListener('resize', function() {
+        setCanvasSize();
+        init();
+    });
+
+    // Inicia tudo
+    init();
+    animate();
 })();
 </script>
 </body>
