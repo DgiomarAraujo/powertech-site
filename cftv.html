@@ -263,6 +263,21 @@
         .card ul { padding-left: 20px; }
         .card li { margin-bottom: 10px; }
 
+        /* ── ANIMAÇÕES DA CÂMERA SVG ── */
+        @keyframes cameraPan {
+            0%, 10% { transform: rotate(-25deg); }
+            45%, 55% { transform: rotate(25deg); }
+            90%, 100% { transform: rotate(-25deg); }
+        }
+        @keyframes recBlink {
+            0%, 49% { fill: #ff2a2a; filter: drop-shadow(0 0 4px #ff2a2a); }
+            50%, 100% { fill: #440000; filter: none; }
+        }
+        @keyframes scanBeam {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
         /* ── BADGE INTELBRAS ── */
         .badge-parceiro {
             display: inline-flex;
@@ -604,12 +619,10 @@
 </head>
 <body>
 
-<!-- WhatsApp Float -->
 <a href="https://wa.me/5589981049318" class="whatsapp-float" target="_blank" aria-label="WhatsApp PowerTech">
     <svg viewBox="0 0 448 512" width="35" height="35" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.7 69.4 26.9 106.2 26.9h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.5-16.4-14.7-27.5-32.8-30.7-38.3-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.2 1.9-3.7 1-6.9-.5-9.7-1.4-2.8-12.4-29.8-17-40.7-4.5-10.7-9-9.2-12.4-9.4-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
 </a>
 
-<!-- Navegação -->
 <nav class="nav-header">
     <ul class="nav-menu">
         <a href="index.html">Início</a>
@@ -621,10 +634,8 @@
     </ul>
 </nav>
 
-<!-- Header com logo -->
 <header></header>
 
-<!-- Breadcrumb -->
 <div class="breadcrumb">
     <div style="max-width:1200px;margin:auto;">
         <a href="index.html">Início</a>
@@ -633,7 +644,6 @@
     </div>
 </div>
 
-<!-- HERO -->
 <section class="hero-cftv">
     <div style="position:relative;z-index:1;max-width:800px;margin:auto;">
         <div class="hero-badge">📡 Parceiro Instalador Intelbras</div>
@@ -646,7 +656,6 @@
     </div>
 </section>
 
-<!-- STATS BAR -->
 <div class="stats-bar">
     <div class="stat-item">
         <span class="stat-number">24h</span>
@@ -672,7 +681,6 @@
 
 <div class="container">
 
-    <!-- SISTEMAS -->
     <h2>// Sistemas que Instalamos</h2>
     <div class="grid">
         <div class="card">
@@ -720,9 +728,39 @@
                 <li>Ideal para pequenos comércios e residências.</li>
             </ul>
         </div>
+        
         <div class="card">
-            <span class="card-icon">🔄</span>
-            <h3>Câmeras PTZ Motorizadas</h3>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <h3 style="margin-top:0;">Câmeras PTZ Motorizadas</h3>
+                
+                <svg viewBox="0 0 150 100" width="70" height="50" style="overflow: visible; margin-top: -10px;">
+                    <defs>
+                        <linearGradient id="beamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="rgba(0, 210, 255, 0.6)"/>
+                            <stop offset="100%" stop-color="rgba(0, 210, 255, 0)"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <path d="M10,20 L25,20 A5,5 0 0 1 30,25 L30,75 A5,5 0 0 1 25,80 L10,80 Z" fill="#1a2540"/>
+                    <circle cx="20" cy="30" r="3" fill="#0a0e14"/>
+                    <circle cx="20" cy="70" r="3" fill="#0a0e14"/>
+                    
+                    <circle cx="30" cy="50" r="10" fill="#333a4e"/>
+                    
+                    <g style="transform-origin: 30px 50px; animation: cameraPan 6s ease-in-out infinite;">
+                        <path d="M80,50 L160,0 A100,100 0 0 1 160,100 Z" fill="url(#beamGrad)" style="animation: scanBeam 2s infinite;"/>
+                        
+                        <path d="M30,38 L75,38 A10,10 0 0 1 85,48 L85,52 A10,10 0 0 1 75,62 L30,62 Z" fill="#2e3348"/>
+                        
+                        <path d="M75,40 L88,43 L88,57 L75,60 Z" fill="#0a0e14"/>
+                        <circle cx="81" cy="50" r="5" fill="#000"/>
+                        <circle cx="82" cy="48" r="1.5" fill="#ffffff" opacity="0.4"/>
+                        
+                        <circle cx="78" cy="44" r="1.5" style="animation: recBlink 1s infinite;"/>
+                    </g>
+                </svg>
+            </div>
+            
             <ul>
                 <li>Pan, Tilt e Zoom controlados remotamente.</li>
                 <li>Cobertura ampla com um único equipamento.</li>
@@ -731,7 +769,6 @@
         </div>
     </div>
 
-    <!-- SEGMENTOS -->
     <h2>// Segmentos Atendidos</h2>
     <div class="segmentos-grid">
         <div class="seg-card">
@@ -760,7 +797,6 @@
         </div>
     </div>
 
-    <!-- ACESSO REMOTO -->
     <div class="remote-section">
         <div>
             <h3>📱 Veja tudo pelo celular, de qualquer lugar</h3>
@@ -777,7 +813,6 @@
         <div class="iphone-wrap">
             <div class="iphone">
                 <div class="iphone-screen">
-                    <!-- Status Bar -->
                     <div class="iphone-statusbar">
                         <span class="time">09:41</span>
                         <div class="icons">
@@ -786,17 +821,14 @@
                             <span>🔋</span>
                         </div>
                     </div>
-                    <!-- Dynamic Island -->
                     <div class="dynamic-island">
                         <div class="di-cam"></div>
                         <div class="di-dot"></div>
                     </div>
-                    <!-- App Header -->
                     <div class="app-header">
                         <span class="app-title">📡 Guardian</span>
                         <span class="app-live"><span class="live-dot"></span> AO VIVO</span>
                     </div>
-                    <!-- 4 Cameras Grid -->
                     <div class="cam-grid">
                         <div class="cam-cell">
                             <div class="cam-bg"></div>
@@ -829,21 +861,18 @@
                             <div class="cam-time">09:41:32</div>
                         </div>
                     </div>
-                    <!-- Bottom Nav -->
                     <div class="app-bottom">
                         <div class="app-btn active"><span class="app-btn-icon">📹</span>Câmeras</div>
                         <div class="app-btn"><span class="app-btn-icon">🔔</span>Alertas</div>
                         <div class="app-btn"><span class="app-btn-icon">⏮</span>Replay</div>
                         <div class="app-btn"><span class="app-btn-icon">⚙️</span>Config</div>
                     </div>
-                    <!-- Home Indicator -->
                     <div class="home-indicator"><div class="home-bar"></div></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- PROCESSO -->
     <h2>// Como Funciona a Instalação</h2>
     <div class="processo-list">
         <div class="processo-item">
@@ -883,7 +912,6 @@
         </div>
     </div>
 
-    <!-- POR QUÊ POWERTECH -->
     <h2>// Por que Escolher a PowerTech</h2>
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px,1fr));">
         <div class="card" style="text-align:center;">
@@ -908,7 +936,6 @@
         </div>
     </div>
 
-    <!-- FAQ -->
     <h2>// Perguntas Frequentes</h2>
     <div class="faq-section">
         <div class="faq-item">
@@ -937,7 +964,6 @@
         </div>
     </div>
 
-    <!-- CTA FINAL -->
     <div class="cta-final">
         <h3>Proteja o que é seu</h3>
         <p>Solicite um orçamento sem compromisso.<br><span class="cta-highlight">Visita técnica gratuita em Floriano e região.</span></p>
@@ -947,7 +973,6 @@
         </div>
     </div>
 
-    <!-- FORMULÁRIO -->
     <h2 id="contato">// Terminal de Atendimento</h2>
     <div class="form-section">
         <div class="info">
@@ -961,14 +986,11 @@
             <p style="color:var(--text-gray);font-size:0.9rem;">Atendemos Floriano, Oeiras, Simplício Mendes e toda região do Médio Parnaíba.</p>
         </div>
 
-        <!-- Formulário integrado com Web3Forms mantendo o design técnico -->
         <form action="https://api.web3forms.com/submit" method="POST">
-            <!-- Web3Forms Configurações Ocultas -->
             <input type="hidden" name="access_key" value="84d4796c-3ee1-459b-9ee7-a850fbde610e">
             <input type="hidden" name="subject" value="Orçamento CFTV – PowerTech Industrial">
             <input type="hidden" name="redirect" value="https://powertechindustrial.com.br/obrigado.html">
             
-            <!-- Campos do Formulário -->
             <input type="text" name="name" placeholder="NOME DO REQUISITANTE" required aria-label="Nome">
             <input type="email" name="email" placeholder="E-MAIL DE CONTATO" required aria-label="Email">
             <input type="tel" name="phone" placeholder="TELEFONE / WHATSAPP" aria-label="Telefone">
@@ -1000,7 +1022,6 @@
 
 </div>
 
-<!-- FOOTER -->
 <footer>
     <p>&copy; 2026 PowerTech Industrial | Engenharia e Tecnologia</p>
     <p>
