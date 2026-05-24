@@ -265,60 +265,7 @@
             header { min-height: 120px; }
         }
 
-        /* ===== CSS WIDGET CURTO-CIRCUITO ===== */
-        #cc-widget {
-            position: fixed;
-            bottom: -380px; right: 30px; 
-            z-index: 99998;
-            display: flex; flex-direction: column;
-            align-items: flex-end; gap: 12px;
-            transition: bottom 0.65s cubic-bezier(0.34, 1.48, 0.64, 1);
-        }
-        #cc-widget.visible { bottom: 110px; }
-
-        #cc-bubble {
-            background: #ffffff;
-            border-radius: 20px 20px 6px 20px;
-            padding: 14px 42px 14px 18px;
-            max-width: 240px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 12px 32px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.04);
-            position: relative;
-            opacity: 0;
-            transform: scale(0.82) translateY(8px);
-            transform-origin: bottom right;
-            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-            pointer-events: none;
-        }
-        #cc-bubble.show { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
-        #cc-bubble::after {
-            content: '';
-            position: absolute;
-            bottom: -9px; right: 28px;
-            border: 9px solid transparent;
-            border-top-color: #ffffff;
-            border-bottom: 0; border-right: 0;
-            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.08));
-        }
-        .bubble-tag { font-family: 'Nunito', sans-serif; font-size: 0.68rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: #f5a623; margin-bottom: 5px; display: block; }
-        .bubble-tag::before { content: '⚡ '; }
-        #cc-text { font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700; line-height: 1.45; color: #1a2540; min-height: 38px; }
-        #cc-close { position: absolute; top: 10px; right: 12px; background: #f0f2f5; border: none; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #666; cursor: pointer; transition: background 0.2s, color 0.2s; }
-        #cc-close:hover { background: #e0e4ec; color: #222; }
-
-        #cc-mascot { width: 150px; overflow: visible; cursor: pointer; filter: drop-shadow(0 16px 28px rgba(0,0,0,0.45)) drop-shadow(0 4px 8px rgba(0,0,0,0.3)); }
-
-        @keyframes idleFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-7px); } }
-        @keyframes waveArm { 0% { transform: rotate(0deg); } 12% { transform: rotate(-22deg); } 26% { transform: rotate(18deg); } 40% { transform: rotate(-16deg); } 54% { transform: rotate(12deg); } 68% { transform: rotate(-8deg); } 82% { transform: rotate(5deg); } 100% { transform: rotate(0deg); } }
-        @keyframes eyeBlink { 0%, 85%, 100% { transform: scaleY(1); } 91% { transform: scaleY(0.07); } 94% { transform: scaleY(1); } }
-        @keyframes screenFlicker { 0%,100% { opacity: 1; } 97% { opacity: 0.88; } }
-
-        #cc-mascot { animation: idleFloat 3s ease-in-out infinite; }
-        .eye-group { animation: eyeBlink 5s ease-in-out infinite; transform-origin: center; }
-        .eye-group:nth-child(2) { animation-delay: 0.08s; }
-        .screen-face { animation: screenFlicker 8s ease-in-out infinite; }
-        .arm-right { transform-origin: 188px 168px; }
-        .arm-right.waving { animation: waveArm 1.4s ease-in-out 2; }
-        #cc-widget:hover #cc-mascot { animation-duration: 1.5s; }
+        
     </style>
 </head>
 <body>
@@ -488,179 +435,7 @@
     </div>
 </footer>
 
-<!-- ===== WIDGET SVG CURTO-CIRCUITO (original) ===== -->
-<div id="cc-widget">
-  <div id="cc-bubble">
-    <button id="cc-close" title="Fechar">✕</button>
-    <span class="bubble-tag">Curto-Circuito</span>
-    <div id="cc-text"></div>
-  </div>
-  <svg id="cc-mascot" viewBox="-20 0 300 368" xmlns="http://www.w3.org/2000/svg" overflow="visible">
-    <defs>
-      <filter id="f-body-shadow" x="-15%" y="-8%" width="130%" height="130%"><feDropShadow dx="3" dy="6" stdDeviation="7" flood-color="#000" flood-opacity="0.28"/></filter>
-      <filter id="f-hat-shadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="2" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.22"/></filter>
-      <filter id="f-glow-green" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      <linearGradient id="g-body" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F4F7FB"/><stop offset="40%" stop-color="#DDE3EB"/><stop offset="100%" stop-color="#B3BDC9"/></linearGradient>
-      <linearGradient id="g-body-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.22"/><stop offset="100%" stop-color="black" stop-opacity="0.12"/></linearGradient>
-      <linearGradient id="g-screen" x1="0.15" y1="0" x2="0.1" y2="1"><stop offset="0%" stop-color="#52E88A"/><stop offset="100%" stop-color="#1BA551"/></linearGradient>
-      <radialGradient id="g-screen-glare" cx="28%" cy="22%" r="55%"><stop offset="0%" stop-color="white" stop-opacity="0.28"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient>
-      <radialGradient id="g-hat-dome" cx="35%" cy="28%" r="70%"><stop offset="0%" stop-color="#FFE84C"/><stop offset="42%" stop-color="#FFC107"/><stop offset="100%" stop-color="#CC7D00"/></radialGradient>
-      <linearGradient id="g-hat-brim" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFCA28"/><stop offset="100%" stop-color="#E09000"/></linearGradient>
-      <radialGradient id="g-hat-glare" cx="38%" cy="32%" r="45%"><stop offset="0%" stop-color="white" stop-opacity="0.45"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient>
-      <linearGradient id="g-boot" x1="0.1" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#5BADF5"/><stop offset="100%" stop-color="#1E4FA8"/></linearGradient>
-      <linearGradient id="g-boot-sole" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1840A0"/><stop offset="100%" stop-color="#102A78"/></linearGradient>
-      <linearGradient id="g-arm" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#6B7897"/><stop offset="40%" stop-color="#4A5368"/><stop offset="100%" stop-color="#333A4E"/></linearGradient>
-      <linearGradient id="g-leg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5A6080"/><stop offset="100%" stop-color="#2E3348"/></linearGradient>
-      <linearGradient id="g-btn-dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5A6480"/><stop offset="100%" stop-color="#3A4055"/></linearGradient>
-      <linearGradient id="g-btn-blue" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4A90E2"/><stop offset="100%" stop-color="#2B65B8"/></linearGradient>
-      <linearGradient id="g-btn-orange" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFB733"/><stop offset="100%" stop-color="#E08000"/></linearGradient>
-      <linearGradient id="g-btn-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F06060"/><stop offset="100%" stop-color="#CC2020"/></linearGradient>
-      <linearGradient id="g-btn-green" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#40E080"/><stop offset="100%" stop-color="#18A048"/></linearGradient>
-    </defs>
-    <ellipse cx="130" cy="358" rx="58" ry="9" fill="rgba(0,0,0,0.22)"/>
-    <rect x="97" y="243" width="17" height="38" rx="8.5" fill="url(#g-leg)"/>
-    <rect x="99" y="245" width="5" height="34" rx="2.5" fill="white" opacity="0.16"/>
-    <rect x="146" y="243" width="17" height="38" rx="8.5" fill="url(#g-leg)"/>
-    <rect x="148" y="245" width="5" height="34" rx="2.5" fill="white" opacity="0.16"/>
-    <rect x="72" y="88" width="116" height="160" rx="26" fill="url(#g-body)" filter="url(#f-body-shadow)"/>
-    <rect x="72" y="88" width="116" height="160" rx="26" fill="url(#g-body-side)"/>
-    <rect x="76" y="93" width="34" height="150" rx="22" fill="white" opacity="0.17"/>
-    <rect x="80" y="218" width="100" height="26" rx="16" fill="#8899BB" opacity="0.18"/>
-    <g class="screen-face">
-      <rect x="80" y="96" width="100" height="72" rx="13" fill="#0E1420"/>
-      <rect x="81" y="97" width="98" height="70" rx="12" fill="url(#g-screen)"/>
-      <rect x="81" y="97" width="98" height="70" rx="12" fill="url(#g-screen-glare)"/>
-      <rect x="86" y="100" width="38" height="14" rx="7" fill="white" opacity="0.22" transform="rotate(-8 105 107)"/>
-      <g class="eye-group" style="transform-origin:108px 126px"><circle cx="108" cy="126" r="13" fill="white"/><circle cx="110" cy="128" r="7.5" fill="#0E1420"/><circle cx="110" cy="128" r="5.5" fill="#1a1a3e" opacity="0.6"/><circle cx="114" cy="123" r="3.5" fill="white" opacity="0.97"/><circle cx="107" cy="131" r="1.5" fill="white" opacity="0.55"/></g>
-      <g class="eye-group" style="transform-origin:152px 126px"><circle cx="152" cy="126" r="13" fill="white"/><circle cx="154" cy="128" r="7.5" fill="#0E1420"/><circle cx="154" cy="128" r="5.5" fill="#1a1a3e" opacity="0.6"/><circle cx="158" cy="123" r="3.5" fill="white" opacity="0.97"/><circle cx="151" cy="131" r="1.5" fill="white" opacity="0.55"/></g>
-      <path d="M97 113 Q108 107 119 113" stroke="#0E1420" stroke-width="3.2" fill="none" stroke-linecap="round"/>
-      <path d="M141 113 Q152 107 163 113" stroke="#0E1420" stroke-width="3.2" fill="none" stroke-linecap="round"/>
-      <path d="M109 152 Q121 145 130 150 Q139 155 151 149" stroke="#0E1420" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      <ellipse cx="91" cy="140" rx="10" ry="6.5" fill="#FF5FA0" opacity="0.36"/>
-      <ellipse cx="169" cy="140" rx="10" ry="6.5" fill="#FF5FA0" opacity="0.36"/>
-    </g>
-    <line x1="80" y1="173" x2="180" y2="173" stroke="#C8D0DC" stroke-width="1.2"/>
-    <rect x="85" y="178" width="17" height="14" rx="4.5" fill="url(#g-btn-orange)"/><rect x="85" y="178" width="17" height="5" rx="4.5" fill="white" opacity="0.18"/><text x="93.5" y="188.5" text-anchor="middle" font-size="8.5" font-weight="900" fill="white" font-family="Nunito, sans-serif">×</text>
-    <rect x="105" y="178" width="17" height="14" rx="4.5" fill="url(#g-btn-blue)"/><rect x="105" y="178" width="17" height="5" rx="4.5" fill="white" opacity="0.18"/><text x="113.5" y="188.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">7</text>
-    <rect x="125" y="178" width="17" height="14" rx="4.5" fill="url(#g-btn-blue)"/><rect x="125" y="178" width="17" height="5" rx="4.5" fill="white" opacity="0.18"/><text x="133.5" y="188.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">8</text>
-    <rect x="145" y="178" width="17" height="14" rx="4.5" fill="url(#g-btn-blue)"/><rect x="145" y="178" width="17" height="5" rx="4.5" fill="white" opacity="0.18"/><text x="153.5" y="188.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">9</text>
-    <rect x="165" y="178" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><rect x="165" y="178" width="17" height="5" rx="4.5" fill="white" opacity="0.15"/><text x="173.5" y="188.5" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Nunito, sans-serif">÷</text>
-    <rect x="85" y="195" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><rect x="85" y="195" width="17" height="5" rx="4.5" fill="white" opacity="0.14"/><text x="93.5" y="205.5" text-anchor="middle" font-size="8" font-weight="800" fill="white" font-family="Nunito, sans-serif">%</text>
-    <rect x="105" y="195" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="113.5" y="205.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">4</text>
-    <rect x="125" y="195" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="133.5" y="205.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">5</text>
-    <rect x="145" y="195" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="153.5" y="205.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">6</text>
-    <rect x="165" y="195" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="173.5" y="205.5" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Nunito, sans-serif">−</text>
-    <rect x="85" y="212" width="17" height="14" rx="4.5" fill="url(#g-btn-red)"/><rect x="85" y="212" width="17" height="5" rx="4.5" fill="white" opacity="0.18"/><text x="93.5" y="222" text-anchor="middle" font-size="7" font-weight="900" fill="white" font-family="Nunito, sans-serif">AC</text>
-    <rect x="105" y="212" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="113.5" y="222" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">1</text>
-    <rect x="125" y="212" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="133.5" y="222" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">2</text>
-    <rect x="145" y="212" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="153.5" y="222" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">3</text>
-    <rect x="165" y="212" width="17" height="31" rx="4.5" fill="url(#g-btn-green)"/><rect x="165" y="212" width="17" height="6" rx="4.5" fill="white" opacity="0.22"/><text x="173.5" y="231" text-anchor="middle" font-size="13" font-weight="900" fill="white" font-family="Nunito, sans-serif">+</text>
-    <rect x="85" y="229" width="17" height="14" rx="4.5" fill="url(#g-btn-red)" opacity="0.78"/><text x="93.5" y="239.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">C</text>
-    <rect x="105" y="229" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="113.5" y="239.5" text-anchor="middle" font-size="8.5" font-weight="800" fill="white" font-family="Nunito, sans-serif">0</text>
-    <rect x="125" y="229" width="17" height="14" rx="4.5" fill="url(#g-btn-dark)"/><text x="133.5" y="239.5" text-anchor="middle" font-size="11" font-weight="900" fill="white" font-family="Nunito, sans-serif">·</text>
-    <rect x="145" y="229" width="17" height="14" rx="4.5" fill="url(#g-btn-orange)"/><rect x="145" y="229" width="17" height="5" rx="4.5" fill="white" opacity="0.18"/><text x="153.5" y="239.5" text-anchor="middle" font-size="8.5" font-weight="900" fill="white" font-family="Nunito, sans-serif">=</text>
-    <path d="M74 180 Q42 182 33 202" stroke="#4A5368" stroke-width="15" fill="none" stroke-linecap="round"/>
-    <path d="M74 177 Q42 179 34 198" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.18"/>
-    <circle cx="30" cy="208" r="16" fill="white"/>
-    <ellipse cx="18" cy="197" rx="6" ry="9" fill="white" transform="rotate(-28 18 197)"/>
-    <ellipse cx="25" cy="193" rx="6" ry="9.5" fill="white" transform="rotate(-12 25 193)"/>
-    <ellipse cx="33" cy="192" rx="6" ry="9.5" fill="white" transform="rotate(5 33 192)"/>
-    <ellipse cx="40" cy="196" rx="6" ry="8.5" fill="white" transform="rotate(20 40 196)"/>
-    <path d="M20 208 Q30 204 40 209" stroke="#DDE0E5" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    <g transform="translate(18,216) rotate(-18)"><rect x="0" y="0" width="24" height="20" rx="6" fill="#2B65B8"/><rect x="1" y="1" width="22" height="18" rx="5" fill="#4A90E2"/><line x1="4" y1="6" x2="20" y2="6" stroke="rgba(255,255,255,0.65)" stroke-width="1.2"/><line x1="4" y1="10" x2="20" y2="10" stroke="rgba(255,255,255,0.65)" stroke-width="1.2"/><line x1="4" y1="14" x2="14" y2="14" stroke="rgba(255,255,255,0.65)" stroke-width="1.2"/><rect x="4" y="4" width="5" height="4" stroke="rgba(255,255,255,0.5)" stroke-width="0.8" fill="none"/><ellipse cx="12" cy="0" rx="12" ry="4" fill="#3A7BD5"/><ellipse cx="12" cy="20" rx="12" ry="4" fill="#1E4FA8"/></g>
-    <g class="arm-right" id="right-arm">
-      <path d="M186 168 Q212 154 218 132" stroke="#4A5368" stroke-width="15" fill="none" stroke-linecap="round"/>
-      <path d="M184 165 Q210 151 216 129" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.18"/>
-      <circle cx="220" cy="124" r="16" fill="white"/>
-      <ellipse cx="207" cy="112" rx="6" ry="9" fill="white" transform="rotate(-30 207 112)"/>
-      <ellipse cx="215" cy="108" rx="6" ry="9.5" fill="white" transform="rotate(-12 215 108)"/>
-      <ellipse cx="224" cy="107" rx="6" ry="9.5" fill="white" transform="rotate(5 224 107)"/>
-      <ellipse cx="232" cy="110" rx="6" ry="8.5" fill="white" transform="rotate(22 232 110)"/>
-      <ellipse cx="236" cy="118" rx="6" ry="7.5" fill="white" transform="rotate(36 236 118)"/>
-      <path d="M210 124 Q220 120 230 125" stroke="#DDE0E5" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    </g>
-    <ellipse cx="130" cy="96" rx="79" ry="16" fill="#C07000" opacity="0.6"/>
-    <ellipse cx="130" cy="93" rx="78" ry="14" fill="url(#g-hat-brim)"/>
-    <ellipse cx="130" cy="91" rx="74" ry="10" fill="#FFCA28" opacity="0.55"/>
-    <path d="M56 91 C 56 91, 62 18, 130 16 C 198 18, 204 91, 204 91 Z" fill="url(#g-hat-dome)" filter="url(#f-hat-shadow)"/>
-    <ellipse cx="103" cy="52" rx="30" ry="16" fill="url(#g-hat-glare)" transform="rotate(-15 103 52)"/>
-    <rect x="122" y="15" width="16" height="9" rx="4.5" fill="#E5A000"/>
-    <rect x="123" y="15" width="14" height="5" rx="3" fill="#FFCA28" opacity="0.7"/>
-    <g transform="translate(130, 57)">
-      <g fill="#1A2033" opacity="0.92"><rect x="-3.5" y="-19" width="7" height="9" rx="1.5"/><rect x="-3.5" y="-19" width="7" height="9" rx="1.5" transform="rotate(45)"/><rect x="-3.5" y="-19" width="7" height="9" rx="1.5" transform="rotate(90)"/><rect x="-3.5" y="-19" width="7" height="9" rx="1.5" transform="rotate(135)"/><rect x="-3.5" y="-19" width="7" height="9" rx="1.5" transform="rotate(180)"/><rect x="-3.5" y="-19" width="7" height="9" rx="1.5" transform="rotate(225)"/><rect x="-3.5" y="-19" width="7" height="9" rx="1.5" transform="rotate(270)"/><rect x="-3.5" y="-19" width="7" height="9" rx="1.5" transform="rotate(315)"/><circle cx="0" cy="0" r="13.5"/></g>
-      <circle cx="0" cy="0" r="9.5" fill="#FFB800"/>
-      <path d="M3.5,-8.5 L-2.5,0.5 L2,0.5 L-3.5,9 L8,-1 L3.5,-1 Z" fill="#1A2033"/>
-    </g>
-    <g><rect x="85" y="272" width="38" height="24" rx="13" fill="url(#g-boot)"/><ellipse cx="104" cy="296" rx="22" ry="8" fill="url(#g-boot-sole)"/><ellipse cx="97" cy="276" rx="11" ry="4.5" fill="white" opacity="0.22"/><rect x="89" y="268" width="30" height="9" rx="4.5" fill="#F5A623"/><rect x="90" y="269" width="28" height="4" rx="2" fill="#FFB733" opacity="0.6"/><rect x="100" y="268" width="10" height="9" rx="3" fill="#E08000"/><rect x="102" y="270" width="6" height="5" rx="1.5" fill="#FFCA28" opacity="0.8"/></g>
-    <g><rect x="137" y="272" width="38" height="24" rx="13" fill="url(#g-boot)"/><ellipse cx="156" cy="296" rx="22" ry="8" fill="url(#g-boot-sole)"/><ellipse cx="148" cy="276" rx="11" ry="4.5" fill="white" opacity="0.22"/><rect x="141" y="268" width="30" height="9" rx="4.5" fill="#F5A623"/><rect x="142" y="269" width="28" height="4" rx="2" fill="#FFB733" opacity="0.6"/><rect x="152" y="268" width="10" height="9" rx="3" fill="#E08000"/><rect x="154" y="270" width="6" height="5" rx="1.5" fill="#FFCA28" opacity="0.8"/></g>
-  </svg>
-</div>
 
-<script>
-(function () {
-  const widget = document.getElementById('cc-widget');
-  const bubble = document.getElementById('cc-bubble');
-  const textEl = document.getElementById('cc-text');
-  const closeBtn = document.getElementById('cc-close');
-  const armR = document.getElementById('right-arm');
-
-  const msgs = [
-    "Oi! Eu sou o Curto-Circuito! 👷 Vamos calcular algo juntos?",
-    "Olá! Precisa de ajuda com instalações elétricas? Pode contar comigo! 🔧",
-    "Sabia que economizar energia começa com um bom planejamento? ⚡",
-    "Precisa de orçamento? Eu calculo tudo rapidinho! 🧮",
-    "Dúvidas técnicas? Clica em mim — adoro ajudar! 💡",
-  ];
-  let idx = 0, visible = false, typer, hider;
-
-  function typewrite(text, el, done) {
-    el.textContent = '';
-    let i = 0;
-    clearInterval(typer);
-    typer = setInterval(() => {
-      el.textContent += text[i++];
-      if (i >= text.length) { clearInterval(typer); done && done(); }
-    }, 36);
-  }
-
-  function wave() {
-    armR.classList.remove('waving');
-    void armR.offsetWidth;
-    armR.classList.add('waving');
-    setTimeout(() => armR.classList.remove('waving'), 2900);
-  }
-
-  function show() {
-    if (visible) return;
-    visible = true;
-    widget.classList.add('visible');
-    setTimeout(wave, 420);
-    setTimeout(() => {
-      bubble.classList.add('show');
-      const msg = msgs[idx++ % msgs.length];
-      typewrite(msg, textEl, () => { hider = setTimeout(hide, 7000); });
-    }, 750);
-  }
-
-  function hide() {
-    clearTimeout(hider);
-    bubble.classList.remove('show');
-    setTimeout(() => { widget.classList.remove('visible'); visible = false; }, 350);
-  }
-
-  closeBtn.addEventListener('click', e => { e.stopPropagation(); hide(); });
-  widget.addEventListener('click', () => {
-    clearTimeout(hider);
-    wave();
-    bubble.classList.add('show');
-    const msg = msgs[idx++ % msgs.length];
-    typewrite(msg, textEl, () => { hider = setTimeout(hide, 8000); });
-  });
-
-  setTimeout(show, 1800);
-  setInterval(() => { if (!visible) show(); }, 28000);
-})();
-</script>
 
 <script>
 (function() {
@@ -698,66 +473,180 @@
 })();
 </script>
 
-<!-- MASCOTE 3D POWERTECH -->
-<canvas id="m3d" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9990;"></canvas>
-<div id="m3d-hit" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9989;opacity:0;transition:opacity .15s;background:radial-gradient(circle at var(--hx,50%) var(--hy,50%),rgba(0,210,255,.2) 0%,transparent 50%);"></div>
+<!-- ===== MASCOTE 3D CURTO-CIRCUITO ===== -->
+<style>
+  #m3d-widget {
+    position: fixed;
+    bottom: -300px;
+    right: 20px;
+    z-index: 99998;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    transition: bottom 0.65s cubic-bezier(0.34, 1.48, 0.64, 1);
+  }
+  #m3d-widget.visible { bottom: 20px; }
+
+  #m3d-bubble {
+    background: #ffffff;
+    border-radius: 20px 20px 6px 20px;
+    padding: 14px 42px 14px 18px;
+    max-width: 230px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 12px 32px rgba(0,0,0,0.2);
+    position: relative;
+    opacity: 0;
+    transform: scale(0.82) translateY(8px);
+    transform-origin: bottom right;
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    pointer-events: none;
+  }
+  #m3d-bubble.show { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
+  #m3d-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -9px; right: 28px;
+    border: 9px solid transparent;
+    border-top-color: #ffffff;
+    border-bottom: 0; border-right: 0;
+  }
+  .m3d-tag {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.68rem; font-weight: 900;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #f5a623; margin-bottom: 5px; display: block;
+  }
+  .m3d-tag::before { content: '⚡ '; }
+  #m3d-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem; font-weight: 700; line-height: 1.45;
+    color: #1a2540; min-height: 38px;
+  }
+  #m3d-close {
+    position: absolute; top: 10px; right: 12px;
+    background: #f0f2f5; border: none; border-radius: 50%;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: #666; cursor: pointer;
+    transition: background 0.2s;
+  }
+  #m3d-close:hover { background: #e0e4ec; color: #222; }
+
+  #m3d-canvas-wrap {
+    width: 160px;
+    height: 190px;
+    cursor: pointer;
+    filter: drop-shadow(0 16px 28px rgba(0,0,0,0.5)) drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  }
+  #m3d-cv {
+    width: 160px;
+    height: 190px;
+    display: block;
+  }
+</style>
+
+<div id="m3d-widget">
+  <div id="m3d-bubble">
+    <button id="m3d-close" title="Fechar">✕</button>
+    <span class="m3d-tag">Curto-Circuito</span>
+    <div id="m3d-text"></div>
+  </div>
+  <div id="m3d-canvas-wrap">
+    <canvas id="m3d-cv"></canvas>
+  </div>
+</div>
 
 <script type="module">
 import * as T from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/DRACOLoader.js';
 
-const cv = document.getElementById('m3d');
-const ht = document.getElementById('m3d-hit');
+const W = 160, H = 190;
+const cv      = document.getElementById('m3d-cv');
+const widget  = document.getElementById('m3d-widget');
+const bubble  = document.getElementById('m3d-bubble');
+const textEl  = document.getElementById('m3d-text');
+const closeBtn= document.getElementById('m3d-close');
+const wrap    = document.getElementById('m3d-canvas-wrap');
 
+// Renderer pequeno (apenas o widget)
 const re = new T.WebGLRenderer({ canvas: cv, alpha: true, antialias: true });
 re.setPixelRatio(Math.min(devicePixelRatio, 2));
-re.setSize(innerWidth, innerHeight);
+re.setSize(W, H);
 re.outputColorSpace = T.SRGBColorSpace;
 re.toneMapping = T.ACESFilmicToneMapping;
-re.toneMappingExposure = 1.5;
+re.toneMappingExposure = 1.6;
 
 const sc = new T.Scene();
-const ca = new T.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 1000);
-ca.position.z = 8;
+const ca = new T.PerspectiveCamera(45, W/H, 0.1, 100);
+ca.position.z = 4.5;
 
-sc.add(new T.AmbientLight(0xffffff, 1.5));
-const L1 = new T.DirectionalLight(0xffffff, 3.5); L1.position.set(3,6,5); sc.add(L1);
-const L2 = new T.DirectionalLight(0x00d2ff, 1.2); L2.position.set(-5,2,-3); sc.add(L2);
-const L3 = new T.DirectionalLight(0xffaa44, 1.0); L3.position.set(0,-4,-4); sc.add(L3);
+sc.add(new T.AmbientLight(0xffffff, 1.6));
+const L1 = new T.DirectionalLight(0xffffff, 4.0); L1.position.set(2,5,4); sc.add(L1);
+const L2 = new T.DirectionalLight(0x00d2ff, 1.5); L2.position.set(-4,1,-2); sc.add(L2);
+const L3 = new T.DirectionalLight(0xffaa44, 1.2); L3.position.set(0,-3,-3); sc.add(L3);
 
-// Estado — caminha pela BORDA INFERIOR da tela
-const S = {
-  x: 0,
-  vx: 0.015,           // velocidade horizontal
-  rY: 0, rYT: 0,
-  mode: 'walk',        // walk | hit | wave
-  t: 0, cd: 0,
-  ni: 300 + Math.random()*400,  // timer próximo aceno
-  waveT: 0,            // timer interno do aceno
-};
+// Mensagens
+const msgs = [
+  "Oi! Sou o Curto-Circuito! 👷 Precisa de ajuda elétrica?",
+  "Instalações elétricas seguras começam com um bom projeto! ⚡",
+  "Solar, SPDA, CFTV... a PowerTech resolve tudo! 🔧",
+  "Precisa de orçamento? É só chamar! 🧮",
+  "Dúvidas técnicas? Estou aqui para ajudar! 💡",
+  "Conformidade NBR 5410 em cada instalação! 📋",
+];
+let msgIdx = 0, visible = false, typer, hider;
+let waving = false, waveStart = 0;
+
+function typewrite(text, done) {
+  textEl.textContent = '';
+  let i = 0;
+  clearInterval(typer);
+  typer = setInterval(() => {
+    textEl.textContent += text[i++];
+    if(i >= text.length) { clearInterval(typer); done && done(); }
+  }, 36);
+}
+
+function showBubble() {
+  bubble.classList.add('show');
+  typewrite(msgs[msgIdx++ % msgs.length], () => {
+    hider = setTimeout(hideBubble, 7000);
+  });
+}
+
+function hideBubble() {
+  clearTimeout(hider);
+  bubble.classList.remove('show');
+}
+
+function showWidget() {
+  if(visible) return;
+  visible = true;
+  widget.classList.add('visible');
+  waving = true; waveStart = clock.getElapsedTime();
+  setTimeout(showBubble, 700);
+}
+
+function hideWidget() {
+  hideBubble();
+  setTimeout(() => { widget.classList.remove('visible'); visible = false; }, 350);
+}
+
+closeBtn.addEventListener('click', e => { e.stopPropagation(); hideWidget(); });
+
+wrap.addEventListener('click', () => {
+  clearTimeout(hider);
+  waving = true; waveStart = clock.getElapsedTime();
+  showBubble();
+});
+
+setTimeout(showWidget, 1800);
+setInterval(() => { if(!visible) showWidget(); }, 28000);
+
+// 3D
 let mdl = null;
-
-// Retorna limites horizontais e Y fixo (rodapé da tela)
-const bnd = () => {
-  const h = Math.tan(ca.fov * Math.PI / 360) * ca.position.z;
-  const w = h * ca.aspect;
-  return { l: -w + 1.1, r: w - 1.1, y: -h + 1.0 }; // y = base da tela
-};
-
-const flash = (wx, wy) => {
-  const v = new T.Vector3(wx, wy, 0).project(ca);
-  ht.style.setProperty('--hx', (v.x*.5+.5)*100+'%');
-  ht.style.setProperty('--hy', (-v.y*.5+.5)*100+'%');
-  ht.style.opacity = '1';
-  const o = ca.position.clone(); let n = 0;
-  const iv = setInterval(() => {
-    ca.position.x = o.x + (Math.random()-.5)*.15;
-    ca.position.y = o.y + (Math.random()-.5)*.08;
-    if(++n > 6) { clearInterval(iv); ca.position.copy(o); }
-  }, 35);
-  setTimeout(() => ht.style.opacity = '0', 280);
-};
+const clock = new T.Clock();
 
 const draco = new DRACOLoader();
 draco.setDecoderPath('https://unpkg.com/three@0.160.0/examples/jsm/libs/draco/');
@@ -768,101 +657,37 @@ loader.load('calculator_character.glb', (g) => {
   const obj = g.scene;
   const box = new T.Box3().setFromObject(obj);
   const sz  = box.getSize(new T.Vector3());
-  // 30% menor: escala 1.96 em vez de 2.8
-  obj.scale.setScalar(1.96 / Math.max(sz.x, sz.y, sz.z));
+  obj.scale.setScalar(1.8 / Math.max(sz.x, sz.y, sz.z));
   box.setFromObject(obj);
   obj.position.y -= box.getCenter(new T.Vector3()).y;
+  obj.rotation.y = -0.2; // leve ângulo inicial
   mdl = obj;
   sc.add(mdl);
 }, undefined, e => console.error('GLB erro:', e));
 
-const clock = new T.Clock();
-
 (function loop() {
   requestAnimationFrame(loop);
-  const elapsed = clock.getElapsedTime();
+  const t = clock.getElapsedTime();
 
   if(mdl) {
-    const b = bnd();
-    S.t++; S.cd = Math.max(0, S.cd - 1);
+    // Float idle
+    const idle = Math.sin(t * 2.0) * 0.07;
+    mdl.position.y = idle;
 
-    // ---- WALK ----
-    if(S.mode === 'walk') {
-      S.x += S.vx;
-
-      // Bob vertical suave e pequeno (pisada)
-      const bob = Math.abs(Math.sin(elapsed * 4.5)) * 0.06;
-
-      // Inclina levemente na direção do movimento (corpo)
-      mdl.rotation.z = S.vx > 0 ? -0.04 : 0.04;
-      mdl.rotation.x = 0.02;
-
-      // Bateu na borda direita
-      if(S.x > b.r && S.cd === 0) {
-        S.x = b.r;
-        S.vx = -Math.abs(S.vx);
-        S.rYT = Math.PI;
-        S.mode = 'hit'; S.t = 0; S.cd = 60;
-        flash(S.x + .5, b.y);
-      }
-      // Bateu na borda esquerda
-      else if(S.x < b.l && S.cd === 0) {
-        S.x = b.l;
-        S.vx = Math.abs(S.vx);
-        S.rYT = 0;
-        S.mode = 'hit'; S.t = 0; S.cd = 60;
-        flash(S.x - .5, b.y);
-      }
-
-      // Posiciona na base da tela com bob suave
-      mdl.position.set(S.x, b.y + bob, 0);
-
-      // Hora de acenar?
-      if(--S.ni <= 0) {
-        S.mode = 'wave'; S.t = 0; S.waveT = 0;
-        S.ni = 300 + Math.random()*500;
-      }
+    if(waving) {
+      const wt = t - waveStart;
+      // Acena: balança corpo + inclina
+      mdl.rotation.z = Math.sin(wt * 6) * 0.18 * Math.max(0, 1 - wt/2.0);
+      mdl.rotation.x = Math.sin(wt * 3) * 0.08 * Math.max(0, 1 - wt/2.0);
+      if(wt > 2.2) { waving = false; mdl.rotation.z = 0; mdl.rotation.x = 0; }
+    } else {
+      // Leve movimento de respiração
+      mdl.rotation.z = Math.sin(t * 0.8) * 0.015;
     }
-
-    // ---- HIT (batida na borda) ----
-    else if(S.mode === 'hit') {
-      // Treme e recua
-      const shake = Math.sin(S.t * 0.5) * Math.max(0, 1 - S.t/40) * 0.15;
-      mdl.rotation.z = shake;
-      mdl.position.set(S.x, bnd().y, 0);
-      if(S.t > 55) { S.mode = 'walk'; mdl.rotation.z = 0; }
-    }
-
-    // ---- WAVE (aceno com o corpo todo) ----
-    else if(S.mode === 'wave') {
-      S.waveT++;
-      // Para com o caminhar
-      // Acena: inclina para os lados (esquerda/direita) ritmicamente
-      const wave = Math.sin(S.waveT * 0.18) * 0.18;
-      const bob2 = Math.sin(S.waveT * 0.36) * 0.08;
-      mdl.rotation.z = wave;
-      mdl.rotation.x = bob2;
-      mdl.position.set(S.x, bnd().y + Math.abs(bob2)*0.3, 0);
-
-      // Depois de ~2.5s volta a caminhar
-      if(S.waveT > 160) {
-        S.mode = 'walk'; mdl.rotation.z = 0; mdl.rotation.x = 0;
-      }
-    }
-
-    // Suaviza rotação Y (virar de lado)
-    S.rY += (S.rYT - S.rY) * 0.10;
-    mdl.rotation.y = S.rY;
   }
 
   re.render(sc, ca);
 })();
-
-window.addEventListener('resize', () => {
-  ca.aspect = innerWidth/innerHeight;
-  ca.updateProjectionMatrix();
-  re.setSize(innerWidth, innerHeight);
-});
 </script>
 
 </body>
