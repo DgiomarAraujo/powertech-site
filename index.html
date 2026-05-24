@@ -700,158 +700,161 @@
 
 <!-- MASCOTE 3D POWERTECH -->
 <canvas id="m3d" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9990;"></canvas>
-<div id="m3d-hit" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9989;opacity:0;transition:opacity .1s;background:radial-gradient(circle at var(--hx,50%) var(--hy,50%),rgba(0,210,255,.22) 0%,transparent 55%);"></div>
-<div id="m3d-status" style="position:fixed;bottom:10px;left:10px;color:rgba(0,210,255,0.6);font-family:monospace;font-size:11px;z-index:10000;pointer-events:none;"></div>
+<div id="m3d-hit" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9989;opacity:0;transition:opacity .15s;background:radial-gradient(circle at var(--hx,50%) var(--hy,50%),rgba(0,210,255,.2) 0%,transparent 50%);"></div>
 
-<script type="importmap">
-{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
-</script>
 <script type="module">
-import * as T from 'three';
-import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {DRACOLoader} from 'three/addons/loaders/DRACOLoader.js';
+import * as T from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/DRACOLoader.js';
 
-const cv  = document.getElementById('m3d');
-const ht  = document.getElementById('m3d-hit');
-const dbg = document.getElementById('m3d-status');
-const log = msg => { if(dbg) dbg.textContent = msg; };
+const cv = document.getElementById('m3d');
+const ht = document.getElementById('m3d-hit');
 
-// Renderer
-const re = new T.WebGLRenderer({canvas:cv, alpha:true, antialias:true});
+const re = new T.WebGLRenderer({ canvas: cv, alpha: true, antialias: true });
 re.setPixelRatio(Math.min(devicePixelRatio, 2));
 re.setSize(innerWidth, innerHeight);
 re.outputColorSpace = T.SRGBColorSpace;
 re.toneMapping = T.ACESFilmicToneMapping;
-re.toneMappingExposure = 1.4;
+re.toneMappingExposure = 1.5;
 
-// Cena e câmera
 const sc = new T.Scene();
 const ca = new T.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 1000);
 ca.position.z = 8;
 
-// Iluminação
-sc.add(new T.AmbientLight(0xffffff, 1.2));
-const sun = new T.DirectionalLight(0xfff4e0, 3.0);
-sun.position.set(3, 6, 5);
-sc.add(sun);
-const fill = new T.DirectionalLight(0x00d2ff, 1.0);
-fill.position.set(-5, 2, -3);
-sc.add(fill);
-const rim = new T.DirectionalLight(0xffffff, 0.8);
-rim.position.set(0, -3, -3);
-sc.add(rim);
+sc.add(new T.AmbientLight(0xffffff, 1.5));
+const L1 = new T.DirectionalLight(0xffffff, 3.5); L1.position.set(3,6,5); sc.add(L1);
+const L2 = new T.DirectionalLight(0x00d2ff, 1.2); L2.position.set(-5,2,-3); sc.add(L2);
+const L3 = new T.DirectionalLight(0xffaa44, 1.0); L3.position.set(0,-4,-4); sc.add(L3);
 
-// Estado do mascote
-const S = {x:0, y:0, vx:0.018, ph:0, rY:0, rYT:0, mode:'walk', t:0, cd:0, ni:200+Math.random()*250};
+// Estado — caminha pela BORDA INFERIOR da tela
+const S = {
+  x: 0,
+  vx: 0.015,           // velocidade horizontal
+  rY: 0, rYT: 0,
+  mode: 'walk',        // walk | hit | wave
+  t: 0, cd: 0,
+  ni: 300 + Math.random()*400,  // timer próximo aceno
+  waveT: 0,            // timer interno do aceno
+};
 let mdl = null;
 
-function bnd() {
-  const d = ca.position.z;
-  const h = Math.tan(ca.fov * Math.PI / 360) * d;
-  return {l: -h*ca.aspect + 1.5, r: h*ca.aspect - 1.5};
-}
+// Retorna limites horizontais e Y fixo (rodapé da tela)
+const bnd = () => {
+  const h = Math.tan(ca.fov * Math.PI / 360) * ca.position.z;
+  const w = h * ca.aspect;
+  return { l: -w + 1.1, r: w - 1.1, y: -h + 1.0 }; // y = base da tela
+};
 
-function flash(wx, wy) {
+const flash = (wx, wy) => {
   const v = new T.Vector3(wx, wy, 0).project(ca);
   ht.style.setProperty('--hx', (v.x*.5+.5)*100+'%');
   ht.style.setProperty('--hy', (-v.y*.5+.5)*100+'%');
   ht.style.opacity = '1';
   const o = ca.position.clone(); let n = 0;
   const iv = setInterval(() => {
-    ca.position.x = o.x + (Math.random()-.5)*.2;
-    ca.position.y = o.y + (Math.random()-.5)*.1;
-    if(++n > 7) { clearInterval(iv); ca.position.copy(o); }
+    ca.position.x = o.x + (Math.random()-.5)*.15;
+    ca.position.y = o.y + (Math.random()-.5)*.08;
+    if(++n > 6) { clearInterval(iv); ca.position.copy(o); }
   }, 35);
-  setTimeout(() => ht.style.opacity='0', 300);
-}
+  setTimeout(() => ht.style.opacity = '0', 280);
+};
 
-// Draco + GLTF Loader
 const draco = new DRACOLoader();
 draco.setDecoderPath('https://unpkg.com/three@0.160.0/examples/jsm/libs/draco/');
-
 const loader = new GLTFLoader();
 loader.setDRACOLoader(draco);
 
-log('⏳ Carregando mascote...');
+loader.load('calculator_character.glb', (g) => {
+  const obj = g.scene;
+  const box = new T.Box3().setFromObject(obj);
+  const sz  = box.getSize(new T.Vector3());
+  // 30% menor: escala 1.96 em vez de 2.8
+  obj.scale.setScalar(1.96 / Math.max(sz.x, sz.y, sz.z));
+  box.setFromObject(obj);
+  obj.position.y -= box.getCenter(new T.Vector3()).y;
+  mdl = obj;
+  sc.add(mdl);
+}, undefined, e => console.error('GLB erro:', e));
 
-loader.load(
-  'calculator_character.glb',
-  (gltf) => {
-    const obj = gltf.scene;
+const clock = new T.Clock();
 
-    // Normaliza tamanho
-    const box = new T.Box3().setFromObject(obj);
-    const size = box.getSize(new T.Vector3());
-    const maxDim = Math.max(size.x, size.y, size.z);
-    const scale = 2.8 / maxDim;
-    obj.scale.setScalar(scale);
-
-    // Centraliza na origem
-    box.setFromObject(obj);
-    const center = box.getCenter(new T.Vector3());
-    obj.position.y -= center.y;
-
-    // Melhora materiais existentes (já estão no GLB)
-    obj.traverse(c => {
-      if(c.isMesh && c.material) {
-        c.material.envMapIntensity = 1.0;
-        c.castShadow = true;
-      }
-    });
-
-    mdl = obj;
-    sc.add(mdl);
-    log('');
-    setTimeout(() => { if(dbg) dbg.style.display='none'; }, 2000);
-  },
-  (xhr) => {
-    const pct = Math.round(xhr.loaded / xhr.total * 100);
-    log(`⏳ ${pct}%`);
-  },
-  (err) => {
-    log('❌ GLB não encontrado na raiz do repositório');
-    console.error('GLB load error:', err);
-  }
-);
-
-// Loop de animação
 (function loop() {
   requestAnimationFrame(loop);
+  const elapsed = clock.getElapsedTime();
+
   if(mdl) {
     const b = bnd();
-    S.t++; S.cd = Math.max(0, S.cd-1);
+    S.t++; S.cd = Math.max(0, S.cd - 1);
 
+    // ---- WALK ----
     if(S.mode === 'walk') {
-      S.ph += 0.08;
-      S.x  += S.vx;
-      S.y   = Math.sin(S.ph * 0.5) * 0.25;
-      mdl.rotation.z = Math.sin(S.ph * 0.5) * 0.04;
-      mdl.rotation.x = 0.03;
+      S.x += S.vx;
 
+      // Bob vertical suave e pequeno (pisada)
+      const bob = Math.abs(Math.sin(elapsed * 4.5)) * 0.06;
+
+      // Inclina levemente na direção do movimento (corpo)
+      mdl.rotation.z = S.vx > 0 ? -0.04 : 0.04;
+      mdl.rotation.x = 0.02;
+
+      // Bateu na borda direita
       if(S.x > b.r && S.cd === 0) {
-        S.x = b.r; S.vx = -Math.abs(S.vx);
-        S.rYT = Math.PI; S.mode = 'hit'; S.t = 0; S.cd = 70;
-        flash(S.x + .8, S.y);
-      } else if(S.x < b.l && S.cd === 0) {
-        S.x = b.l; S.vx = Math.abs(S.vx);
-        S.rYT = 0; S.mode = 'hit'; S.t = 0; S.cd = 70;
-        flash(S.x - .8, S.y);
+        S.x = b.r;
+        S.vx = -Math.abs(S.vx);
+        S.rYT = Math.PI;
+        S.mode = 'hit'; S.t = 0; S.cd = 60;
+        flash(S.x + .5, b.y);
       }
-      if(--S.ni <= 0) { S.mode='wave'; S.t=0; S.ni=250+Math.random()*300; }
+      // Bateu na borda esquerda
+      else if(S.x < b.l && S.cd === 0) {
+        S.x = b.l;
+        S.vx = Math.abs(S.vx);
+        S.rYT = 0;
+        S.mode = 'hit'; S.t = 0; S.cd = 60;
+        flash(S.x - .5, b.y);
+      }
 
-    } else if(S.mode === 'hit') {
-      mdl.rotation.z = Math.sin(S.t * 0.25) * 0.2;
-      if(S.t > 60) { S.mode='walk'; mdl.rotation.z=0; }
+      // Posiciona na base da tela com bob suave
+      mdl.position.set(S.x, b.y + bob, 0);
 
-    } else if(S.mode === 'wave') {
-      mdl.rotation.z = Math.sin(S.t * 0.12) * 0.1;
-      if(S.t > 140) S.mode = 'walk';
+      // Hora de acenar?
+      if(--S.ni <= 0) {
+        S.mode = 'wave'; S.t = 0; S.waveT = 0;
+        S.ni = 300 + Math.random()*500;
+      }
     }
 
-    S.rY += (S.rYT - S.rY) * 0.08;
-    mdl.position.set(S.x, S.y - 0.3, 0);
+    // ---- HIT (batida na borda) ----
+    else if(S.mode === 'hit') {
+      // Treme e recua
+      const shake = Math.sin(S.t * 0.5) * Math.max(0, 1 - S.t/40) * 0.15;
+      mdl.rotation.z = shake;
+      mdl.position.set(S.x, bnd().y, 0);
+      if(S.t > 55) { S.mode = 'walk'; mdl.rotation.z = 0; }
+    }
+
+    // ---- WAVE (aceno com o corpo todo) ----
+    else if(S.mode === 'wave') {
+      S.waveT++;
+      // Para com o caminhar
+      // Acena: inclina para os lados (esquerda/direita) ritmicamente
+      const wave = Math.sin(S.waveT * 0.18) * 0.18;
+      const bob2 = Math.sin(S.waveT * 0.36) * 0.08;
+      mdl.rotation.z = wave;
+      mdl.rotation.x = bob2;
+      mdl.position.set(S.x, bnd().y + Math.abs(bob2)*0.3, 0);
+
+      // Depois de ~2.5s volta a caminhar
+      if(S.waveT > 160) {
+        S.mode = 'walk'; mdl.rotation.z = 0; mdl.rotation.x = 0;
+      }
+    }
+
+    // Suaviza rotação Y (virar de lado)
+    S.rY += (S.rYT - S.rY) * 0.10;
     mdl.rotation.y = S.rY;
   }
+
   re.render(sc, ca);
 })();
 
