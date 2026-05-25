@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Montagem — Franklin Electric 4,5 CV</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@400;600;700;900&family=Barlow+Condensed:wght@700;900&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #21262d;
+    --accent: #f0b429;
+    --accent2: #3fb950;
+    --danger: #f85149;
+    --warn: #e3b341;
+    --info: #58a6ff;
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --mono: 'Share Tech Mono', monospace;
+    --body: 'Barlow', sans-serif;
+    --head: 'Barlow Condensed', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0d1117 0%, #1a2233 50%, #0d1117 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 24px 32px 20px;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .header-left h1 {
+    font-family: var(--head);
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .header-left p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .progress-wrap {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  }
+  .progress-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .progress-bar-bg {
+    width: 220px; height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  #progress-text {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent2);
+    font-weight: 700;
+  }
+
+  /* Layout */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+  }
+
+  /* Alert boxes */
+  .alert {
+    border-left: 4px solid;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+  .alert-warn { border-color: var(--warn); background: rgba(227,179,65,.08); }
+  .alert-danger { border-color: var(--danger); background: rgba(248,81,73,.08); }
+  .alert-info { border-color: var(--info); background: rgba(88,166,255,.08); }
+  .alert-ok { border-color: var(--accent2); background: rgba(63,185,80,.08); }
+  .alert strong { display: block; font-size: 12px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+  .alert-warn strong { color: var(--warn); }
+  .alert-danger strong { color: var(--danger); }
+  .alert-info strong { color: var(--info); }
+  .alert-ok strong { color: var(--accent2); }
+
+  /* Phase headers */
+  .phase-header {
+    display: flex; align-items: center; gap: 14px;
+    margin: 36px 0 16px;
+  }
+  .phase-badge {
+    background: var(--accent);
+    color: #000;
+    font-family: var(--head);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .phase-badge.cmd { background: var(--info); }
+  .phase-badge.pre { background: var(--muted); color: var(--bg); }
+  .phase-badge.test { background: var(--accent2); color: #000; }
+  .phase-title {
+    font-family: var(--head);
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text);
+  }
+  .phase-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Step cards */
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .step-card.done {
+    border-color: var(--accent2);
+    opacity: 0.75;
+  }
+  .step-card.done .step-header { background: rgba(63,185,80,.06); }
+
+  .step-header {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .step-header:hover { background: rgba(255,255,255,.03); }
+
+  .step-check {
+    width: 28px; height: 28px; flex-shrink: 0;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    margin-top: 1px;
+  }
+  .step-card.done .step-check {
+    background: var(--accent2);
+    border-color: var(--accent2);
+  }
+  .step-check svg { display: none; }
+  .step-card.done .step-check svg { display: block; }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    white-space: nowrap;
+    margin-top: 5px;
+  }
+
+  .step-main { flex: 1; }
+  .step-title {
+    font-family: var(--body);
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .step-card.done .step-title {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
+
+  .step-body {
+    padding: 0 16px 0 58px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s;
+  }
+  .step-body.open {
+    max-height: 600px;
+    padding: 0 16px 16px 58px;
+  }
+
+  .step-detail {
+    font-size: 13.5px;
+    color: #c9d1d9;
+    line-height: 1.7;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Inline code/terminal style */
+  code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: rgba(255,255,255,.07);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  /* Wiring table */
+  .wire-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 13px;
+  }
+  .wire-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-align: left;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .wire-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid rgba(33,38,45,.6);
+    vertical-align: top;
+  }
+  .wire-table tr:last-child td { border-bottom: none; }
+  .wire-table tr:hover td { background: rgba(255,255,255,.02); }
+
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .dot-black { background: #555; border: 1px solid #888; }
+  .dot-blue { background: #58a6ff; }
+  .dot-brown { background: #8b5e3c; }
+  .dot-red { background: var(--danger); }
+  .dot-green { background: var(--accent2); }
+  .dot-yellow { background: var(--accent); }
+
+  /* Sequence diagram */
+  .seq-box {
+    background: #0a0d12;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 2;
+    color: #c9d1d9;
+    overflow-x: auto;
+    margin-top: 10px;
+  }
+  .seq-box .hl { color: var(--accent); font-weight: bold; }
+  .seq-box .hl2 { color: var(--info); }
+  .seq-box .hl3 { color: var(--accent2); }
+  .seq-box .dim { color: var(--muted); }
+
+  /* Timer visual */
+  .timer-visual {
+    display: flex; align-items: stretch; gap: 0;
+    margin: 12px 0 4px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .tv-seg {
+    flex: 1;
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 11px;
+    font-family: var(--mono);
+    line-height: 1.4;
+  }
+  .tv-k1 { background: rgba(248,81,73,.15); color: #f8a; border-right: 1px solid var(--border); }
+  .tv-k2 { background: rgba(63,185,80,.15); color: #afa; }
+  .tv-label { font-weight: bold; font-size: 12px; }
+
+  /* Checklist counter */
+  .counter-bar {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    z-index: 200;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .counter-bar .big { font-size: 22px; font-weight: bold; line-height: 1; }
+  .counter-bar .small { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+
+  /* Reset button */
+  .btn-reset {
+    display: block;
+    margin: 40px auto 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-reset:hover { border-color: var(--danger); color: var(--danger); }
+
+  /* Completed banner */
+  .done-banner {
+    display: none;
+    text-align: center;
+    padding: 32px 20px;
+    background: rgba(63,185,80,.07);
+    border: 1px solid var(--accent2);
+    border-radius: 12px;
+    margin-top: 32px;
+  }
+  .done-banner.show { display: block; }
+  .done-banner h2 {
+    font-family: var(--head);
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .done-banner p { color: var(--muted); margin-top: 8px; font-size: 13px; font-family: var(--mono); }
+
+  @media (max-width: 600px) {
+    .header { padding: 16px; }
+    .progress-bar-bg { width: 140px; }
+    .step-body.open { padding-left: 16px; }
+    .counter-bar { bottom: 12px; right: 12px; padding: 8px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>⚡ Guia de Montagem — Painel Bifásico</h1>
+    <p>Franklin Electric 4,5 CV · 440V · Capacitor de Partida + Marcha · K1/K2 + T1</p>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label">Progresso — <span id="progress-text">0 / 28</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="pbar"></div></div>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--muted);text-align:right" id="pct">0%</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- PRÉ-MONTAGEM -->
+  <div class="phase-header">
+    <div class="phase-badge pre">Fase 0</div>
+    <div class="phase-title">Pré-Montagem — Verificação de Bancada</div>
+    <div class="phase-divider"></div>
+  </div>
+
+  <div class="alert alert-danger">
+    <strong>🔴 Parada Obrigatória</strong>
+    Realize TODOS os passos desta fase com a rede <strong>desenergizada</strong>. Só energize após a fase de testes.
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-card" id="s1">
+    <div class="step-header" onclick="toggleStep('s1')">
+      <div class="step-check">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="step-num">PRÉ-01</div>
+      <div class="step-main"><div class="step-title">Separar e identificar todos os componentes antes de fixar qualquer peça</div></div>
+    </div>
+    <div class="step-body" id="b-s1">
+      <div class="step-detail">
+        <strong style="color:var(--accent)">Checklist de componentes:</strong>
+        <table class="wire-table" style="margin-top:8px">
+          <tr><th>Item</th><th>Qtd</th><th>Verificar</th></tr>
+          <tr><td>Disjuntor termomagnético bipolar (força)</td><td>1</td><td>Corrente nominal compatível com 4,5CV / 440V</td></tr>
+          <tr><td>Disjuntor monofásico 6A (comando)</td><td>1</td><td>—</td></tr>
+          <tr><td>Contator K2 (Marcha)</td><td>1</td><td>Bobina <strong>220V</strong>, capacidade ≥ 10A</td></tr>
+          <tr><td>Contator K1 (Partida)</td><td>1</td><td>Bobina <strong>220V</strong>, mesma linha de K2</td></tr>
+          <tr><td>Relé térmico de sobrecarga</td><td>1</td><td>Encaixe mecânico compatível com K2</td></tr>
+          <tr><td>Relé temporizador T1 (NF, 3s)</td><td>1</td><td>Confirmar contato <strong>NF</strong> nos pinos 15-16</td></tr>
+          <tr><td>Capacitor de marcha (permanente) 440V</td><td>1</td><td>Valor µF conforme datasheet do motor</td></tr>
+          <tr><td>Capacitor de partida (eletrolítico) 440V</td><td>1</td><td>Tensão <strong>obrigatoriamente 440V</strong>, ciclo curto</td></tr>
+          <tr><td>Chave seletora 3 posições (0/1/2)</td><td>1</td><td>Blocos de saída independentes por posição</td></tr>
+          <tr><td>Pulsador duplo (botão VM/NF + VD/NA)</td><td>1</td><td>Modelo selado (IP65+)</td></tr>
+          <tr><td>Bornes de passagem (boia)</td><td>2</td><td>—</td></tr>
+        </table>
+        <div class="alert alert-warn" style="margin-top:10px">
+          <strong>⚠️ Antes de fixar no painel</strong>
+          Confirme a tensão de bobina dos contatores (A1-A2) com multímetro. Bobina errada = queima na primeira energização. <strong>Deve ser 220V AC.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-card" id="s2">
+    <div class="step-header" onclick="toggleStep('s2')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">PRÉ-02</div>
+      <div class="step-main"><div class="step-title">Medir isolamento do motor antes de conectar qualquer fio</div></div>
+    </div>
+    <div class="step-body" id="b-s2">
+      <div class="step-detail">
+        Use megôhmetro (500V DC) entre cada fio do motor e a carcaça aterrada.<br><br>
+        <strong style="color:var(--accent2)">Resultado mínimo aceitável: &gt; 1 MΩ</strong><br>
+        <strong style="color:var(--danger)">Abaixo de 1 MΩ = motor com umidade ou defeito — NÃO conecte ao painel.</strong>
+        <div class="alert alert-info" style="margin-top:10px">
+          <strong>ℹ️ Identificação dos fios do motor</strong>
+          <span class="dot dot-black"></span><strong>Preto</strong> = Bobina Principal (vai em T1 do térmico)<br>
+          <span class="dot dot-blue"></span><strong>Azul Claro</strong> = Comum (vai em T2 do térmico)<br>
+          <span class="dot dot-brown"></span><strong>Marrom</strong> = Bobina Auxiliar (vai em T3 do térmico)<br>
+          <em style="color:var(--muted);font-size:12px">Etiquete os fios imediatamente após identificar. Evita troca na hora da ligação final.</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-card" id="s3">
+    <div class="step-header" onclick="toggleStep('s3')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">PRÉ-03</div>
+      <div class="step-main"><div class="step-title">Acoplar mecanicamente o relé térmico em K2 antes de fixar no trilho</div></div>
+    </div>
+    <div class="step-body" id="b-s3">
+      <div class="step-detail">
+        O relé térmico <strong>encaixa diretamente nos terminais inferiores de K2</strong> (T1/T2/T3). Este encaixe mecânico deve ser feito <strong>fora do trilho</strong>, com os dois componentes na mão, garantindo o clique de travamento.
+        <div class="alert alert-warn" style="margin-top:10px">
+          <strong>⚠️ Erro comum de bancada</strong>
+          Fixar K2 no trilho e tentar encaixar o térmico depois. O ângulo dificulta e força os pinos. Monte o conjunto K2+Térmico na bancada e depois fixe no trilho como uma peça única.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORÇA -->
+  <div class="phase-header">
+    <div class="phase-badge">Fase 1</div>
+    <div class="phase-title">Circuito de Força — 440V</div>
+    <div class="phase-divider"></div>
+  </div>
+
+  <div class="alert alert-info">
+    <strong>ℹ️ Bitola obrigatória</strong>
+    Condutores de cobre flexível <strong>2,5 mm²</strong> (mínimo) ou <strong>4,0 mm²</strong>. Isolamento 750V/1kV. Não use fio rígido neste circuito.
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-card" id="s4">
+    <div class="step-header" onclick="toggleStep('s4')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">F-01</div>
+      <div class="step-main"><div class="step-title">Entrada de rede → Disjuntor Geral de Força</div></div>
+    </div>
+    <div class="step-body" id="b-s4">
+      <div class="step-detail">
+        Conectar as <strong>duas fases da rede 440V</strong> nos bornes <code>1</code> e <code>3</code> (terminais superiores) do disjuntor termomagnético bipolar.<br><br>
+        <em style="color:var(--muted)">Não há neutro neste circuito de força — é fase-fase puro.</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-card" id="s5">
+    <div class="step-header" onclick="toggleStep('s5')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">F-02</div>
+      <div class="step-main"><div class="step-title">Saída do Disjuntor Geral → Contatores K2 e K1 (com jumpers)</div></div>
+    </div>
+    <div class="step-body" id="b-s5">
+      <div class="step-detail">
+        <div class="seq-box">
+<span class="hl">Disjuntor Geral (saída inferior esq.)</span>
+  └──→ <span class="hl2">K2 borne L1</span> ──jumper──→ <span class="hl3">K1 borne L1</span>
+
+<span class="hl">Disjuntor Geral (saída inferior dir.)</span>
+  └──→ <span class="hl2">K2 borne L2</span> ──jumper──→ <span class="hl3">K1 borne L2</span>
+        </div>
+        <div class="alert alert-warn" style="margin-top:10px">
+          <strong>⚠️ Atenção ao jumper</strong>
+          O jumper entre K2 e K1 deve ser feito com o <strong>mesmo cabo de força 2,5mm²</strong>, preso nos dois bornes de cima (L1 de K2 para L1 de K1). Não use espinho de pressão ou fio fino — passa corrente de partida por aqui.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step-card" id="s6">
+    <div class="step-header" onclick="toggleStep('s6')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">F-03</div>
+      <div class="step-main"><div class="step-title">Capacitor de Marcha (permanente) — ligação em K2</div></div>
+    </div>
+    <div class="step-body" id="b-s6">
+      <div class="step-detail">
+        <table class="wire-table">
+          <tr><th>Terminal do Capacitor</th><th>Destino</th></tr>
+          <tr><td>Lado A</td><td><code>K2 — borne 1 (L1)</code> — superior esquerdo</td></tr>
+          <tr><td>Lado B</td><td><code>K2 — borne 5 (L3)</code> — superior direito</td></tr>
+        </table>
+        <div class="alert alert-ok" style="margin-top:10px">
+          <strong>✅ Este capacitor fica no circuito permanentemente</strong>
+          Enquanto K2 estiver fechado (motor em marcha), este capacitor está ativo. É não-polarizado (não tem + nem –).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 7 -->
+  <div class="step-card" id="s7">
+    <div class="step-header" onclick="toggleStep('s7')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">F-04</div>
+      <div class="step-main"><div class="step-title">Capacitor de Partida (eletrolítico) — ligação em K1 + jumper inter-contatores</div></div>
+    </div>
+    <div class="step-body" id="b-s7">
+      <div class="step-detail">
+        <table class="wire-table">
+          <tr><th>Terminal do Cap. Partida</th><th>Destino</th></tr>
+          <tr><td>Lado A (+)</td><td><code>K1 — terminal inferior 2/T1</code></td></tr>
+          <tr><td>Lado B (–)</td><td><code>K1 — terminal inferior 4/T2</code></td></tr>
+        </table>
+        <br>
+        <strong style="color:var(--accent)">Jumper Inter-Contatores:</strong><br>
+        Sair do <code>K1 — terminal inferior 4/T2</code> com um cabo e ligar no <code>K2 — borne 5 (L3) superior</code>.
+        <div class="alert alert-danger" style="margin-top:10px">
+          <strong>🔴 Polaridade — Eletrolítico 440V</strong>
+          Capacitor eletrolítico <strong>tem polaridade</strong>. O terminal <strong>(+) positivo</strong> obrigatoriamente em T1 de K1. Inversão causa ruptura dielétrica e explosão do capacitor na partida. Verifique a marcação impressa no corpo do capacitor.
+        </div>
+        <div class="alert alert-warn" style="margin-top:6px">
+          <strong>⚠️ Tensão nominal</strong>
+          Use EXCLUSIVAMENTE capacitor eletrolítico de partida com tensão nominal <strong>≥ 440V AC</strong>. Capacitores de 250V ou 330V explodem nesta aplicação.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 8 -->
+  <div class="step-card" id="s8">
+    <div class="step-header" onclick="toggleStep('s8')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">F-05</div>
+      <div class="step-main"><div class="step-title">Saída do Relé Térmico → Fios do motor</div></div>
+    </div>
+    <div class="step-body" id="b-s8">
+      <div class="step-detail">
+        <table class="wire-table">
+          <tr><th>Terminal Saída Térmico</th><th>Fio do Motor</th><th>Bobina</th></tr>
+          <tr><td><code>2/T1</code></td><td><span class="dot dot-black"></span><strong>Preto</strong></td><td>Principal</td></tr>
+          <tr><td><code>4/T2</code></td><td><span class="dot dot-blue"></span><strong>Azul Claro</strong></td><td>Comum</td></tr>
+          <tr><td><code>6/T3</code></td><td><span class="dot dot-brown"></span><strong>Marrom</strong></td><td>Auxiliar</td></tr>
+        </table>
+        <div class="alert alert-warn" style="margin-top:10px">
+          <strong>⚠️ Troca de fios = rotação invertida ou não parte</strong>
+          Preto e Marrom trocados = motor tenta partir mas não sai do lugar (capacitor na bobina errada). Azul trocado com qualquer outro = curto de bobinas. Confira as etiquetas feitas no PRÉ-02.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 9 — Ponto de verificação força -->
+  <div class="step-card" id="s9">
+    <div class="step-header" onclick="toggleStep('s9')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">F-CHECK</div>
+      <div class="step-main"><div class="step-title">✔ Checkpoint — Continuidade do circuito de força (sem energizar)</div></div>
+    </div>
+    <div class="step-body" id="b-s9">
+      <div class="step-detail">
+        Com multímetro em <strong>modo buzzer/continuidade</strong>, com tudo desligado:
+        <br><br>
+        <table class="wire-table">
+          <tr><th>#</th><th>Teste</th><th>Resultado esperado</th></tr>
+          <tr><td>1</td><td>L1 entrada Disj. → L1 de K2 e K1</td><td>Continuidade ✓</td></tr>
+          <tr><td>2</td><td>L2 entrada Disj. → L2 de K2 e K1</td><td>Continuidade ✓</td></tr>
+          <tr><td>3</td><td>Entre terminais do cap. marcha (mãos afastadas)</td><td>Carga/descarga ✓</td></tr>
+          <tr><td>4</td><td>T1 térmico → Fio Preto do motor</td><td>Continuidade ✓</td></tr>
+          <tr><td>5</td><td>T2 térmico → Fio Azul do motor</td><td>Continuidade ✓</td></tr>
+          <tr><td>6</td><td>T3 térmico → Fio Marrom do motor</td><td>Continuidade ✓</td></tr>
+          <tr><td>7</td><td>Entre qualquer fio do motor e carcaça da bomba</td><td>Aberto (sem bip) ✓</td></tr>
+        </table>
+        <div class="alert alert-danger" style="margin-top:10px">
+          <strong>🔴 Se o teste 7 der continuidade (bip)</strong>
+          Há falha de isolamento no motor ou no cabo de alimentação. NÃO energize. Verifique o trecho do motor.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMANDO -->
+  <div class="phase-header">
+    <div class="phase-badge cmd">Fase 2</div>
+    <div class="phase-title">Circuito de Comando — 220V</div>
+    <div class="phase-divider"></div>
+  </div>
+
+  <div class="alert alert-info">
+    <strong>ℹ️ Bitola do comando</strong>
+    Condutores de cobre flexível <strong>0,75 mm²</strong> ou <strong>1,0 mm²</strong>. Mantenha cores distintas: fase em vermelho/preto, neutro em azul, selos em amarelo.
+  </div>
+
+  <!-- STEP 10 -->
+  <div class="step-card" id="s10">
+    <div class="step-header" onclick="toggleStep('s10')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">C-01</div>
+      <div class="step-main"><div class="step-title">Neutro 220V → A2 das bobinas K1, K2 e T1 (em paralelo)</div></div>
+    </div>
+    <div class="step-body" id="b-s10">
+      <div class="step-detail">
+        Esta é a <strong>primeira fiação a fazer no comando</strong>. Um único barramento de neutro alimenta os três retornos:
+        <div class="seq-box">
+<span class="hl">Neutro 220V</span>
+  ├──→ <span class="hl2">K1 — A2</span>  (bobina do contator de partida)
+  ├──→ <span class="hl2">K2 — A2</span>  (bobina do contator de marcha)
+  └──→ <span class="hl2">T1 — A2</span>  (bobina do relé temporizador)
+        </div>
+        <div class="alert alert-ok" style="margin-top:10px">
+          <strong>✅ Dica de montagem</strong>
+          Use um borne de distribuição (terminal em pente) para o neutro. Facilita a manutenção futura e garante que os três A2 sempre tenham retorno, independentemente da sequência de operação.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 11 -->
+  <div class="step-card" id="s11">
+    <div class="step-header" onclick="toggleStep('s11')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">C-02</div>
+      <div class="step-main"><div class="step-title">Fase 220V → Disjuntor 6A → Térmico 95-96 → Chave Seletora</div></div>
+    </div>
+    <div class="step-body" id="b-s11">
+      <div class="step-detail">
+        <div class="seq-box">
+<span class="hl">Fase 220V</span>
+  └──→ [Disjuntor Comando 6A]
+         └──→ <span class="hl2">Térmico borne 95 (NF)</span>
+                └──→ <span class="hl2">Térmico borne 96</span>
+                       └──→ <span class="hl3">Chave Seletora (entradas POS.1 e POS.2)</span>
+                              <span class="dim">(jumper interno entre os dois parafusos de entrada)</span>
+        </div>
+        <div class="alert alert-warn" style="margin-top:10px">
+          <strong>⚠️ Contato 95-96 é NF (Normalmente Fechado)</strong>
+          Em condição normal (motor frio, sem sobrecarga) este contato está <strong>fechado</strong> — deixa passar a fase. Ao disparar por sobrecarga, ele ABRE e corta o comando. Verifique com buzzer: <strong>deve dar bip em repouso</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 12 -->
+  <div class="step-card" id="s12">
+    <div class="step-header" onclick="toggleStep('s12')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">C-03</div>
+      <div class="step-main"><div class="step-title">Derivação MANUAL (Posição 1) — Botões + Selo K2</div></div>
+    </div>
+    <div class="step-body" id="b-s12">
+      <div class="step-detail">
+        <div class="seq-box">
+<span class="hl">Saída Chave POS.1</span>
+  └──→ <span class="hl2">Botão VM (NF - Desliga)</span> entrada
+         └──→ <span class="hl2">Botão VM</span> saída
+                └──→ <span class="hl3">Botão VD (NA - Liga)</span> entrada
+                       <span class="dim">+ jumper desta entrada para K2 pino 13 (NA — entrada do selo)</span>
+                └──→ <span class="hl3">Botão VD</span> saída
+                       <span class="dim">+ jumper desta saída para K2 pino 14 (NA — saída do selo)</span>
+                       └──→ <span class="hl">PONTO [A]</span>
+        </div>
+        <br>
+        <strong style="color:var(--accent)">Como funciona o selo elétrico:</strong><br>
+        Quando o botão VD é pressionado → fecha NA do botão → K2 energiza → K2 fecha seu contato auxiliar 13-14 → agora mesmo sem segurar o botão, a fase chega pelo caminho 13-14 → K2 mantém-se energizado.
+        <div class="alert alert-warn" style="margin-top:10px">
+          <strong>⚠️ Erro clássico: jumper de selo errado</strong>
+          O fio do <strong>pino 13 de K2 vai para a ENTRADA do botão VD</strong> (mesmo ponto que a saída do botão VM).<br>
+          O fio do <strong>pino 14 de K2 vai para a SAÍDA do botão VD</strong> (mesmo ponto que vai para o Ponto [A]).<br>
+          Inverter 13 e 14 = motor liga mas NÃO trava no botão, para ao soltar.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 13 -->
+  <div class="step-card" id="s13">
+    <div class="step-header" onclick="toggleStep('s13')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">C-04</div>
+      <div class="step-main"><div class="step-title">Derivação AUTOMÁTICO (Posição 2) — Boia de Nível</div></div>
+    </div>
+    <div class="step-body" id="b-s13">
+      <div class="step-detail">
+        <div class="seq-box">
+<span class="hl">Saída Chave POS.2</span>
+  └──→ <span class="hl2">Borne Boia 1</span>
+         <span class="dim">└── cabo externo vai até a boia de nível no poço</span>
+  <span class="hl2">Borne Boia 2</span> (retorno do cabo da boia)
+  └──→ <span class="hl">PONTO [A]</span>  (mesmo ponto unificado do modo manual)
+        </div>
+        <div class="alert alert-ok" style="margin-top:10px">
+          <strong>✅ Teste sem boia — jumper provisório</strong>
+          Coloque um jumper de cobre entre Borne Boia 1 e Borne Boia 2. Simula boia sempre fechada. <strong>Remover este jumper antes de entregar o painel</strong> ao cliente, ou documentar claramente se for intencional.
+        </div>
+        <div class="alert alert-info" style="margin-top:6px">
+          <strong>ℹ️ Lógica da boia</strong>
+          Boia fechada (nível baixo) = motor liga. Boia aberta (nível alto/tanque cheio) = motor para. Confirme com o cliente qual é o tipo de contato da boia usada (NA ou NF) — algumas boias funcionam invertido.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 14 -->
+  <div class="step-card" id="s14">
+    <div class="step-header" onclick="toggleStep('s14')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">C-05</div>
+      <div class="step-main"><div class="step-title">Do Ponto [A] → Bobinas K2, T1 e pino 15 de T1</div></div>
+    </div>
+    <div class="step-body" id="b-s14">
+      <div class="step-detail">
+        O Ponto [A] é o "barramento ativo" do comando — quando há fase aqui, o motor está em operação.
+        <div class="seq-box">
+<span class="hl">PONTO [A]</span>
+  ├──→ <span class="hl2">K2 — A1</span>    (ativa bobina de marcha)
+  ├──→ <span class="hl2">T1 — A1</span>    (inicia contagem do temporizador)
+  └──→ <span class="hl3">T1 — pino 15</span> (comum do contato reversível)
+        </div>
+        <div class="alert alert-ok" style="margin-top:10px">
+          <strong>✅ Use borne de distribuição no Ponto [A]</strong>
+          São 3 destinos saindo do mesmo ponto. Use um borne de junção (tipo WAGO ou parafuso duplo) para garantir contato seguro nos três ramos. Não faça emenda de fios solta dentro do painel.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 15 -->
+  <div class="step-card" id="s15">
+    <div class="step-header" onclick="toggleStep('s15')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">C-06</div>
+      <div class="step-main"><div class="step-title">Temporizador T1 → Bobina K1 (Partida Temporizada 3s)</div></div>
+    </div>
+    <div class="step-body" id="b-s15">
+      <div class="step-detail">
+        <div class="seq-box">
+<span class="hl3">T1 — pino 15</span> (comum)
+  └──→ <span class="hl3">T1 — pino 16</span> (contato NF)
+         └──→ <span class="hl2">K1 — A1</span> (bobina de partida)
+        </div>
+        <br>
+        <strong style="color:var(--accent)">Lógica temporal completa:</strong>
+        <div class="timer-visual" style="margin-top:8px">
+          <div class="tv-seg tv-k2">
+            <div class="tv-label">t = 0s</div>
+            K2 ✓ Liga<br>T1 ✓ Conta<br>K1 ✓ Liga<br><em style="font-size:10px">2 capacitores ativos</em>
+          </div>
+          <div class="tv-seg" style="background:rgba(240,180,41,.15);color:#ffd;border-right:1px solid var(--border)">
+            <div class="tv-label">t = 1s ~ 2s</div>
+            K2 ✓ Marcha<br>T1 contando...<br>K1 ✓ Partida<br><em style="font-size:10px">Motor acelerando</em>
+          </div>
+          <div class="tv-seg tv-k1">
+            <div class="tv-label">t = 3s</div>
+            K2 ✓ Marcha<br>T1 abre NF!<br>K1 ✗ Desarma<br><em style="font-size:10px">Cap. partida OFF</em>
+          </div>
+        </div>
+        <div class="alert alert-warn" style="margin-top:10px">
+          <strong>⚠️ Pino 16 de T1 DEVE ser NF (Normalmente Fechado)</strong>
+          Se usar o pino de saída NA por engano, K1 nunca energiza na partida — motor tenta partir só com capacitor de marcha (torque insuficiente para 4,5 CV). Confirme com o datasheet do T1 qual pino é NF.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 16 — Checkpoint comando -->
+  <div class="step-card" id="s16">
+    <div class="step-header" onclick="toggleStep('s16')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">C-CHECK</div>
+      <div class="step-main"><div class="step-title">✔ Checkpoint — Continuidade do circuito de comando (sem energizar)</div></div>
+    </div>
+    <div class="step-body" id="b-s16">
+      <div class="step-detail">
+        Com multímetro em <strong>modo buzzer/continuidade</strong>:
+        <table class="wire-table" style="margin-top:8px">
+          <tr><th>#</th><th>Teste</th><th>Resultado esperado</th></tr>
+          <tr><td>1</td><td>Térmico 95 → 96 (repouso)</td><td>Bip ✓ (NF fechado)</td></tr>
+          <tr><td>2</td><td>Pino 15 → 16 de T1 (repouso)</td><td>Bip ✓ (NF fechado)</td></tr>
+          <tr><td>3</td><td>Botão VM em repouso</td><td>Bip ✓ (NF fechado)</td></tr>
+          <tr><td>4</td><td>Botão VD em repouso</td><td>Sem bip ✓ (NA aberto)</td></tr>
+          <tr><td>5</td><td>K2 pino 13→14 em repouso</td><td>Sem bip ✓ (NA aberto)</td></tr>
+          <tr><td>6</td><td>A2 de K1, K2 e T1 todos no neutro</td><td>Bip em todos ✓</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALIBRAÇÃO -->
+  <div class="phase-header">
+    <div class="phase-badge pre">Fase 3</div>
+    <div class="phase-title">Calibração — Antes de Energizar</div>
+    <div class="phase-divider"></div>
+  </div>
+
+  <!-- STEP 17 -->
+  <div class="step-card" id="s17">
+    <div class="step-header" onclick="toggleStep('s17')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">CAL-01</div>
+      <div class="step-main"><div class="step-title">Calibrar relé térmico — corrente nominal do motor</div></div>
+    </div>
+    <div class="step-body" id="b-s17">
+      <div class="step-detail">
+        Consulte a placa do motor Franklin Electric 4,5 CV para a corrente nominal a 440V.<br><br>
+        <strong style="color:var(--accent)">Regra de calibração:</strong> Ajuste o relé térmico para <strong>80% a 100% da corrente nominal</strong> impressa na placa.<br><br>
+        <div class="alert alert-danger">
+          <strong>🔴 Não use corrente trifásica como referência</strong>
+          Este motor é monofásico de 3 fios (duas bobinas). A corrente que passa pelo térmico não é trifásica balanceada. Calibre pela placa e observe a primeira partida com alicate amperímetro.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 18 -->
+  <div class="step-card" id="s18">
+    <div class="step-header" onclick="toggleStep('s18')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">CAL-02</div>
+      <div class="step-main"><div class="step-title">Ajustar temporizador T1 para exatamente 3 segundos</div></div>
+    </div>
+    <div class="step-body" id="b-s18">
+      <div class="step-detail">
+        Ajuste o dial/potenciômetro do T1 para <strong>3 segundos</strong>. Confirme o tempo real com cronômetro na primeira energização de bancada (sem motor), observando o clique de abertura do contato.<br><br>
+        <div class="alert alert-warn">
+          <strong>⚠️ Tempo &gt; 3s = risco ao capacitor eletrolítico</strong>
+          Capacitores de partida são projetados para ciclos curtos (≤ 3s). Tempo acima disso causa superaquecimento e falha prematura. Tempo abaixo de 2s pode não ser suficiente para o motor atingir velocidade de sincronismo.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTES -->
+  <div class="phase-header">
+    <div class="phase-badge test">Fase 4</div>
+    <div class="phase-title">Testes de Energização — Sequência Segura</div>
+    <div class="phase-divider"></div>
+  </div>
+
+  <div class="alert alert-danger">
+    <strong>🔴 Siga ESTA ORDEM. Não pule etapas.</strong>
+    Energizar direto com motor conectado sem validar o comando separado é a principal causa de queima de contator na primeira energização.
+  </div>
+
+  <!-- STEP 19 -->
+  <div class="step-card" id="s19">
+    <div class="step-header" onclick="toggleStep('s19')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">T-01</div>
+      <div class="step-main"><div class="step-title">Teste 1 — Energizar SOMENTE o comando (220V), sem o motor</div></div>
+    </div>
+    <div class="step-body" id="b-s19">
+      <div class="step-detail">
+        Deixe o disjuntor de força <strong>aberto (desligado)</strong>. Feche apenas o disjuntor de comando 6A.<br><br>
+        <strong>Chave na posição MANUAL:</strong><br>
+        — Pressione o botão VD → K2 e K1 devem <strong>clitar</strong> (fecham) + T1 começa a contar<br>
+        — Após 3s → K1 deve <strong>soltar</strong> (abre), K2 permanece fechado<br>
+        — Pressione o botão VM → K2 deve <strong>soltar</strong><br><br>
+        <strong>Chave na posição 0:</strong><br>
+        — Pressione qualquer botão → nada deve acontecer<br><br>
+        <strong>Chave na posição AUTO (com jumper na boia):</strong><br>
+        — K2 e K1 devem fechar imediatamente → após 3s K1 solta → K2 permanece
+        <div class="alert alert-ok" style="margin-top:10px">
+          <strong>✅ Se todos esses comportamentos ocorreram</strong>
+          O circuito de comando está correto. Prossiga para o teste com motor.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 20 -->
+  <div class="step-card" id="s20">
+    <div class="step-header" onclick="toggleStep('s20')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">T-02</div>
+      <div class="step-main"><div class="step-title">Teste 2 — Primeira partida com motor, medir corrente na partida e em marcha</div></div>
+    </div>
+    <div class="step-body" id="b-s20">
+      <div class="step-detail">
+        Com alicate amperímetro posicionado no fio <strong>Preto (bobina principal)</strong>:<br><br>
+        <table class="wire-table">
+          <tr><th>Momento</th><th>Corrente esperada</th><th>Se muito alta</th></tr>
+          <tr><td>Partida (0-3s)</td><td>3× a 5× In</td><td>Normal — é corrente de partida</td></tr>
+          <tr><td>Marcha (após 3s)</td><td>≈ In da placa</td><td>Verificar carga da bomba</td></tr>
+        </table>
+        <div class="alert alert-warn" style="margin-top:10px">
+          <strong>⚠️ Se o motor não parte (zumbe mas não gira)</strong>
+          Capacitor de partida com defeito, polaridade errada ou valor µF incorreto. Desligue imediatamente (máx. 5s) para não queimar a bobina principal.
+        </div>
+        <div class="alert alert-warn">
+          <strong>⚠️ Se o térmico dispara na partida</strong>
+          Corrente de partida está ultrapassando o ajuste do térmico. Aumente levemente o ajuste (dentro dos limites da placa do motor) e repita o teste.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 21 -->
+  <div class="step-card" id="s21">
+    <div class="step-header" onclick="toggleStep('s21')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">T-03</div>
+      <div class="step-main"><div class="step-title">Teste 3 — Simular disparo do térmico e verificar proteção</div></div>
+    </div>
+    <div class="step-body" id="b-s21">
+      <div class="step-detail">
+        Com o motor em marcha, pressione o botão de <strong>teste/reset do relé térmico</strong> manualmente para simular um disparo por sobrecarga.<br><br>
+        Resultado esperado: motor para imediatamente em qualquer modo (Manual ou Auto).<br><br>
+        Após simular o disparo, pressione o botão de <strong>reset do térmico</strong> para rearmá-lo antes de nova partida.
+        <div class="alert alert-info" style="margin-top:10px">
+          <strong>ℹ️ Rearme do térmico</strong>
+          O térmico tem rearme manual — precisa de intervenção humana para religação após disparo por sobrecarga. Isso é uma proteção proposital. Informe o operador sobre esse procedimento.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 22 — Erros clássicos -->
+  <div class="phase-header">
+    <div class="phase-badge pre">Fase 5</div>
+    <div class="phase-title">Erros Clássicos — Referência Rápida</div>
+    <div class="phase-divider"></div>
+  </div>
+
+  <div class="step-card" id="s22">
+    <div class="step-header" onclick="toggleStep('s22')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">ERR-01</div>
+      <div class="step-main"><div class="step-title">Motor zumbe mas não parte</div></div>
+    </div>
+    <div class="step-body" id="b-s22">
+      <div class="step-detail">
+        <table class="wire-table">
+          <tr><th>Causa provável</th><th>Como verificar</th></tr>
+          <tr><td>K1 não fechou (T1 com saída NA)</td><td>Observar se K1 clita na partida</td></tr>
+          <tr><td>Cap. partida com polaridade invertida</td><td>Verificar + e – no corpo do capacitor</td></tr>
+          <tr><td>Cap. partida com valor µF errado</td><td>Medir com capacímetro</td></tr>
+          <tr><td>Fio Preto e Marrom trocados</td><td>Conferir etiquetas dos fios do motor</td></tr>
+          <tr><td>Tensão da rede fora do nominal</td><td>Medir 440V nas fases</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card" id="s23">
+    <div class="step-header" onclick="toggleStep('s23')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">ERR-02</div>
+      <div class="step-main"><div class="step-title">Motor não trava no botão verde (para ao soltar)</div></div>
+    </div>
+    <div class="step-body" id="b-s23">
+      <div class="step-detail">
+        Selo elétrico não está funcionando. Causas:
+        <table class="wire-table" style="margin-top:8px">
+          <tr><th>Causa</th><th>Solução</th></tr>
+          <tr><td>Pinos 13 e 14 de K2 invertidos</td><td>13 na entrada do VD; 14 na saída do VD</td></tr>
+          <tr><td>Pino 13 conectado no lugar errado</td><td>Deve ir para o mesmo nó da saída do VM</td></tr>
+          <tr><td>Contato auxiliar de K2 com defeito</td><td>Testar continuidade 13-14 com K2 fechado manualmente</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card" id="s24">
+    <div class="step-header" onclick="toggleStep('s24')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">ERR-03</div>
+      <div class="step-main"><div class="step-title">K1 não desliga após 3 segundos</div></div>
+    </div>
+    <div class="step-body" id="b-s24">
+      <div class="step-detail">
+        <table class="wire-table">
+          <tr><th>Causa</th><th>Solução</th></tr>
+          <tr><td>T1 usando pino NF errado (saída NA)</td><td>Confirmar pino 16 = NF no datasheet do T1</td></tr>
+          <tr><td>T1 não está energizando (A1/A2 sem tensão)</td><td>Verificar conexão do A1 de T1 no Ponto [A]</td></tr>
+          <tr><td>Tempo ajustado muito alto</td><td>Reajustar o dial do T1</td></tr>
+          <tr><td>T1 com defeito</td><td>Substituir o relé</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card" id="s25">
+    <div class="step-header" onclick="toggleStep('s25')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">ERR-04</div>
+      <div class="step-main"><div class="step-title">Modo Auto não funciona (manual OK)</div></div>
+    </div>
+    <div class="step-body" id="b-s25">
+      <div class="step-detail">
+        <table class="wire-table">
+          <tr><th>Causa</th><th>Solução</th></tr>
+          <tr><td>Fio da saída da Pos.2 da chave não chegou no Borne Boia 1</td><td>Rastrear o fio com buzzer</td></tr>
+          <tr><td>Cabo da boia aberto ou desconectado</td><td>Colocar jumper Boia1-Boia2 e testar</td></tr>
+          <tr><td>Retorno da boia não conectado ao Ponto [A]</td><td>Verificar Borne Boia 2 → Ponto [A]</td></tr>
+          <tr><td>Tipo de contato da boia invertido</td><td>Verificar se é NA ou NF com cliente</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card" id="s26">
+    <div class="step-header" onclick="toggleStep('s26')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">ERR-05</div>
+      <div class="step-main"><div class="step-title">Térmico dispara logo após a partida (sem sobrecarga real)</div></div>
+    </div>
+    <div class="step-body" id="b-s26">
+      <div class="step-detail">
+        <table class="wire-table">
+          <tr><th>Causa</th><th>Solução</th></tr>
+          <tr><td>Ajuste do térmico abaixo da corrente de pico de partida</td><td>Aumentar levemente o ajuste</td></tr>
+          <tr><td>Cap. partida com valor µF muito alto</td><td>Corrente de partida excessiva — verificar datasheet</td></tr>
+          <tr><td>Bomba travada mecanicamente</td><td>Verificar se o eixo gira livremente</td></tr>
+          <tr><td>Tensão da rede muito baixa (&lt;400V)</td><td>Medir tensão sob carga</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Entrega -->
+  <div class="phase-header">
+    <div class="phase-badge test">Fase 6</div>
+    <div class="phase-title">Lista de Entrega</div>
+    <div class="phase-divider"></div>
+  </div>
+
+  <div class="step-card" id="s27">
+    <div class="step-header" onclick="toggleStep('s27')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">ENT-01</div>
+      <div class="step-main"><div class="step-title">Verificações finais antes de entregar o painel</div></div>
+    </div>
+    <div class="step-body" id="b-s27">
+      <div class="step-detail">
+        <table class="wire-table">
+          <tr><th>Item</th><th>OK?</th></tr>
+          <tr><td>Jumper de teste da boia <strong>removido</strong> (ou documentado)</td><td>☐</td></tr>
+          <tr><td>Cabo do motor identificado com etiquetas (Preto/Azul/Marrom)</td><td>☐</td></tr>
+          <tr><td>Todos os bornes apertados (sem fios soltos)</td><td>☐</td></tr>
+          <tr><td>Tampas dos capacitores e bornes vedadas</td><td>☐</td></tr>
+          <tr><td>Proteção IP do painel adequada para instalação externa</td><td>☐</td></tr>
+          <tr><td>Aterramento da carcaça do painel realizado</td><td>☐</td></tr>
+          <tr><td>Operador treinado sobre rearme do térmico</td><td>☐</td></tr>
+          <tr><td>Chave seletora na posição <strong>0</strong> na entrega</td><td>☐</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card" id="s28">
+    <div class="step-header" onclick="toggleStep('s28')">
+      <div class="step-check"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-num">ENT-02</div>
+      <div class="step-main"><div class="step-title">Documentar no painel: data, montador, corrente de marcha medida, ajuste do térmico</div></div>
+    </div>
+    <div class="step-body" id="b-s28">
+      <div class="step-detail">
+        Cole internamente uma etiqueta com:
+        <ul style="margin-top:8px;padding-left:18px;line-height:2;color:#c9d1d9;font-size:13.5px">
+          <li>Data de montagem: ___/___/______</li>
+          <li>Responsável técnico: _____________</li>
+          <li>Corrente nominal do motor (placa): _______ A</li>
+          <li>Corrente de marcha medida: _______ A</li>
+          <li>Ajuste do relé térmico: _______ A</li>
+          <li>Capacitor marcha: _______ µF / 440V</li>
+          <li>Capacitor partida: _______ µF / 440V</li>
+          <li>Temporização T1: 3 s</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Done banner -->
+  <div class="done-banner" id="done-banner">
+    <h2>✅ Painel 100% concluído</h2>
+    <p>Todas as etapas verificadas — Franklin Electric 4,5 CV / 440V / K1+K2+T1</p>
+  </div>
+
+  <button class="btn-reset" onclick="resetAll()">↺ Reiniciar checklist</button>
+
+</div>
+
+<!-- Counter -->
+<div class="counter-bar">
+  <div class="big" id="cnt-done">0</div>
+  <div class="small">de 28</div>
+</div>
+
+<script>
+  const TOTAL = 28;
+
+  function toggleStep(id) {
+    const card = document.getElementById(id);
+    const body = document.getElementById('b-' + id);
+    const isOpen = body.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.step-body').forEach(b => b.classList.remove('open'));
+
+    if (!isOpen) {
+      body.classList.add('open');
+    }
+
+    // Toggle done on click when already open (second click = mark done)
+    // Actually: single click toggles expand, double-click marks done
+  }
+
+  function markDone(id, event) {
+    event.stopPropagation();
+    const card = document.getElementById(id);
+    card.classList.toggle('done');
+    updateProgress();
+  }
+
+  // Click on checkbox area marks done
+  document.querySelectorAll('.step-check').forEach(chk => {
+    chk.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const card = this.closest('.step-card');
+      card.classList.toggle('done');
+      const body = document.getElementById('b-' + card.id);
+      if (card.classList.contains('done') && body.classList.contains('open')) {
+        body.classList.remove('open');
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const done = document.querySelectorAll('.step-card.done').length;
+    const pct = Math.round((done / TOTAL) * 100);
+    document.getElementById('cnt-done').textContent = done;
+    document.getElementById('progress-text').textContent = done + ' / ' + TOTAL;
+    document.getElementById('pbar').style.width = pct + '%';
+    document.getElementById('pct').textContent = pct + '%';
+    document.getElementById('done-banner').classList.toggle('show', done === TOTAL);
+  }
+
+  function resetAll() {
+    if (!confirm('Reiniciar todo o checklist?')) return;
+    document.querySelectorAll('.step-card').forEach(c => c.classList.remove('done'));
+    document.querySelectorAll('.step-body').forEach(b => b.classList.remove('open'));
+    updateProgress();
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>
