@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPDA — Torre Reservatório 20.000L</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --copper: #b87333;
+    --copper-light: #d4956a;
+    --steel: #8b9cb0;
+    --steel-light: #c0cdd8;
+    --pvc: #e8e0c8;
+    --ground: #6b4226;
+    --accent: #f0a500;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --green: #3fb950;
+    --red: #f85149;
+    --blue: #58a6ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Code Pro', monospace;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 520px 1fr;
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  /* ---- SVG ILLUSTRATION ---- */
+  .illustration {
+    grid-column: 2;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    position: relative;
+  }
+
+  /* ---- LEGEND PANELS ---- */
+  .legend-left, .legend-right {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .legend-item {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .legend-item:hover { border-left-color: var(--blue); }
+
+  .legend-item .label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .legend-item .qty {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.68rem;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-top: 3px;
+  }
+
+  .legend-item .desc {
+    color: var(--text-dim);
+    font-size: 0.68rem;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+
+  /* ---- BOTTOM TABLE ---- */
+  .table-wrap {
+    grid-column: 1 / -1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+
+  .table-title {
+    background: var(--accent);
+    color: #000;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 8px 16px;
+    text-transform: uppercase;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.72rem;
+  }
+
+  th {
+    background: #1c2128;
+    color: var(--accent);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 8px 12px;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  td {
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  tr:hover td { background: #1c2128; }
+
+  td.qty-cell {
+    font-weight: 700;
+    color: var(--green);
+    font-size: 0.85rem;
+  }
+
+  td.alert { color: var(--red); }
+
+  .tag {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .tag-captacao { background: #1f3a5f; color: var(--blue); }
+  .tag-descida { background: #3a2200; color: var(--copper-light); }
+  .tag-pvc { background: #2a2a1a; color: #d4d080; }
+  .tag-aterr { background: #1a3a1a; color: var(--green); }
+
+  .nbr-note {
+    grid-column: 1 / -1;
+    background: #1c2a1c;
+    border: 1px solid #2d4a2d;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 0.72rem;
+    color: var(--green);
+    letter-spacing: 0.5px;
+  }
+
+  .nbr-note strong { color: #7ee87e; }
+</style>
+</head>
+<body>
+
+<h1>SPDA — Reservatório Torre</h1>
+<p class="subtitle">20.000 Litros · 20m Altura · Ø1,13m · NBR 5419:2015</p>
+
+<div class="main">
+
+  <!-- LEFT LEGEND -->
+  <div class="legend-left">
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#f0a500"></span>Kit Franklin</span>
+      <span class="desc">Mastro 2m + Captor + Sinaleiro Visual</span>
+      <span class="qty">1 KIT</span>
+    </div>
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#58a6ff"></span>Ground Plane</span>
+      <span class="desc">Barra Chata Al 7/8"×1/8"×300mm no topo da torre</span>
+      <span class="qty">12 BARRAS</span>
+    </div>
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#b87333"></span>Cabo Cobre NU 50mm²</span>
+      <span class="desc">2 descidas × 20m + anel enterrado ~14m + folga</span>
+      <span class="qty">~58m TOTAL</span>
+    </div>
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#e8e0c8"></span>Tubo PVC Rígido Ø32mm</span>
+      <span class="desc">Proteção mecânica: 2,5m acima + 0,5m abaixo do solo</span>
+      <span class="qty">2 BARRAS 3m</span>
+    </div>
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#d4d080"></span>Curva 90° PVC Ø32mm</span>
+      <span class="desc">Entrada do tubo PVC no solo — 1 por descida</span>
+      <span class="qty">2 UNID</span>
+    </div>
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#9b59b6"></span>Abraçadeira Ø1" DN32</span>
+      <span class="desc">Fixação a cada 1,00m (NBR 5419) · 20 por descida</span>
+      <span class="qty">40 UNID</span>
+    </div>
+  </div>
+
+  <!-- CENTER SVG -->
+  <div class="illustration">
+    <svg viewBox="0 0 520 780" xmlns="http://www.w3.org/2000/svg" width="100%">
+      <defs>
+        <linearGradient id="towerGrad" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%" stop-color="#5a6a7a"/>
+          <stop offset="40%" stop-color="#8b9cb0"/>
+          <stop offset="100%" stop-color="#4a5a6a"/>
+        </linearGradient>
+        <linearGradient id="groundGrad" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#4a3020"/>
+          <stop offset="100%" stop-color="#2a1a10"/>
+        </linearGradient>
+        <linearGradient id="skyGrad" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#0d1117"/>
+          <stop offset="100%" stop-color="#161b22"/>
+        </linearGradient>
+        <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="6" stroke="#3a4a5a" stroke-width="1"/>
+        </pattern>
+      </defs>
+
+      <!-- Background -->
+      <rect width="520" height="780" fill="url(#skyGrad)"/>
+
+      <!-- Grid lines subtle -->
+      <g stroke="#1e2a38" stroke-width="0.5" opacity="0.5">
+        <line x1="0" y1="100" x2="520" y2="100"/>
+        <line x1="0" y1="200" x2="520" y2="200"/>
+        <line x1="0" y1="300" x2="520" y2="300"/>
+        <line x1="0" y1="400" x2="520" y2="400"/>
+        <line x1="0" y1="500" x2="520" y2="500"/>
+        <line x1="0" y1="600" x2="520" y2="600"/>
+      </g>
+
+      <!-- GROUND -->
+      <rect x="0" y="620" width="520" height="160" fill="url(#groundGrad)"/>
+      <rect x="0" y="620" width="520" height="8" fill="#5a4030"/>
+
+      <!-- Ground hatch -->
+      <rect x="0" y="628" width="520" height="152" fill="url(#hatch)" opacity="0.3"/>
+
+      <!-- TOWER BASE PEDESTAL -->
+      <rect x="200" y="580" width="120" height="50" fill="#5a6a7a" rx="3"/>
+      <rect x="180" y="595" width="160" height="10" fill="#4a5a6a" rx="2"/>
+
+      <!-- TOWER BODY -->
+      <rect x="215" y="80" width="90" height="510" fill="url(#towerGrad)" rx="4"/>
+      <!-- Tower highlight -->
+      <rect x="220" y="80" width="15" height="510" fill="white" opacity="0.08" rx="2"/>
+      <!-- Tower shadow -->
+      <rect x="285" y="80" width="20" height="510" fill="black" opacity="0.15"/>
+      <!-- Tank rings -->
+      <rect x="212" y="160" width="96" height="5" fill="#4a5a6a" rx="1"/>
+      <rect x="212" y="240" width="96" height="5" fill="#4a5a6a" rx="1"/>
+      <rect x="212" y="320" width="96" height="5" fill="#4a5a6a" rx="1"/>
+      <rect x="212" y="400" width="96" height="5" fill="#4a5a6a" rx="1"/>
+      <rect x="212" y="480" width="96" height="5" fill="#4a5a6a" rx="1"/>
+
+      <!-- TOWER TOP CAP -->
+      <ellipse cx="260" cy="82" rx="48" ry="10" fill="#6a7a8a"/>
+      <rect x="212" y="72" width="96" height="14" fill="#6a7a8a" rx="2"/>
+
+      <!-- GROUND PLANE RING at top -->
+      <ellipse cx="260" cy="74" rx="52" ry="8" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="6,3"/>
+      <text x="260" y="60" text-anchor="middle" fill="#58a6ff" font-size="9" font-family="'Source Code Pro',monospace">GROUND PLANE</text>
+      <text x="260" y="70" text-anchor="middle" fill="#58a6ff" font-size="8" font-family="'Source Code Pro',monospace">12× barras Al 300mm</text>
+
+      <!-- MASTRO -->
+      <line x1="260" y1="74" x2="260" y2="18" stroke="#c0cdd8" stroke-width="3"/>
+      <text x="270" y="30" fill="#c0cdd8" font-size="8" font-family="'Source Code Pro',monospace">MASTRO 2m</text>
+
+      <!-- CAPTOR FRANKLIN -->
+      <polygon points="260,8 255,22 265,22" fill="#f0a500"/>
+      <circle cx="260" cy="7" r="3" fill="#f0a500"/>
+      <text x="310" y="12" fill="#f0a500" font-size="9" font-family="'Source Code Pro',monospace" font-weight="bold">CAPTOR FRANKLIN</text>
+
+      <!-- SINALEIRO -->
+      <circle cx="240" cy="78" r="5" fill="#ff4444" opacity="0.9"/>
+      <circle cx="240" cy="78" r="7" fill="none" stroke="#ff4444" stroke-width="1" opacity="0.5"/>
+      <text x="175" y="82" text-anchor="end" fill="#ff6666" font-size="8" font-family="'Source Code Pro',monospace">SINALEIRO VISUAL</text>
+
+      <!-- HEIGHT DIMENSION -->
+      <line x1="185" y1="82" x2="185" y2="590" stroke="#8b949e" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="180" y1="82" x2="190" y2="82" stroke="#8b949e" stroke-width="1"/>
+      <line x1="180" y1="590" x2="190" y2="590" stroke="#8b949e" stroke-width="1"/>
+      <text x="178" y="340" text-anchor="middle" fill="#8b949e" font-size="10" font-family="'Oswald',sans-serif" transform="rotate(-90,178,340)">ALTURA TOTAL 20,00m</text>
+
+      <!-- === DESCIDA ESQUERDA (copper cable) === -->
+      <!-- Full height cable -->
+      <line x1="212" y1="82" x2="212" y2="590" stroke="#b87333" stroke-width="2.5"/>
+
+      <!-- Abraçadeiras esquerda — a cada ~25px (≈1m) -->
+      <g fill="#9b59b6" opacity="0.9">
+        <rect x="205" y="105" width="14" height="5" rx="1"/>
+        <rect x="205" y="130" width="14" height="5" rx="1"/>
+        <rect x="205" y="155" width="14" height="5" rx="1"/>
+        <rect x="205" y="180" width="14" height="5" rx="1"/>
+        <rect x="205" y="205" width="14" height="5" rx="1"/>
+        <rect x="205" y="230" width="14" height="5" rx="1"/>
+        <rect x="205" y="255" width="14" height="5" rx="1"/>
+        <rect x="205" y="280" width="14" height="5" rx="1"/>
+        <rect x="205" y="305" width="14" height="5" rx="1"/>
+        <rect x="205" y="330" width="14" height="5" rx="1"/>
+        <rect x="205" y="355" width="14" height="5" rx="1"/>
+        <rect x="205" y="380" width="14" height="5" rx="1"/>
+        <rect x="205" y="405" width="14" height="5" rx="1"/>
+        <rect x="205" y="430" width="14" height="5" rx="1"/>
+        <rect x="205" y="455" width="14" height="5" rx="1"/>
+        <rect x="205" y="480" width="14" height="5" rx="1"/>
+        <rect x="205" y="505" width="14" height="5" rx="1"/>
+        <rect x="205" y="530" width="14" height="5" rx="1"/>
+        <rect x="205" y="555" width="14" height="5" rx="1"/>
+        <rect x="205" y="580" width="14" height="5" rx="1"/>
+      </g>
+
+      <!-- PVC tube left — from ground level up 2.5m (~62px) and down 0.5m -->
+      <rect x="207" y="558" width="10" height="70" fill="#e8e0a0" rx="2" opacity="0.85"/>
+      <!-- PVC label left -->
+      <line x1="207" y1="595" x2="160" y2="595" stroke="#d4d080" stroke-width="1" stroke-dasharray="3,2"/>
+      <text x="158" y="598" text-anchor="end" fill="#d4d080" font-size="8" font-family="'Source Code Pro',monospace">PVC Ø32mm 3m</text>
+
+      <!-- Curva 90° left -->
+      <path d="M212,628 Q212,638 222,638" fill="none" stroke="#e8e0a0" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- === DESCIDA DIREITA (copper cable) === -->
+      <line x1="308" y1="82" x2="308" y2="590" stroke="#b87333" stroke-width="2.5"/>
+
+      <!-- Abraçadeiras direita -->
+      <g fill="#9b59b6" opacity="0.9">
+        <rect x="301" y="105" width="14" height="5" rx="1"/>
+        <rect x="301" y="130" width="14" height="5" rx="1"/>
+        <rect x="301" y="155" width="14" height="5" rx="1"/>
+        <rect x="301" y="180" width="14" height="5" rx="1"/>
+        <rect x="301" y="205" width="14" height="5" rx="1"/>
+        <rect x="301" y="230" width="14" height="5" rx="1"/>
+        <rect x="301" y="255" width="14" height="5" rx="1"/>
+        <rect x="301" y="280" width="14" height="5" rx="1"/>
+        <rect x="301" y="305" width="14" height="5" rx="1"/>
+        <rect x="301" y="330" width="14" height="5" rx="1"/>
+        <rect x="301" y="355" width="14" height="5" rx="1"/>
+        <rect x="301" y="380" width="14" height="5" rx="1"/>
+        <rect x="301" y="405" width="14" height="5" rx="1"/>
+        <rect x="301" y="430" width="14" height="5" rx="1"/>
+        <rect x="301" y="455" width="14" height="5" rx="1"/>
+        <rect x="301" y="480" width="14" height="5" rx="1"/>
+        <rect x="301" y="505" width="14" height="5" rx="1"/>
+        <rect x="301" y="530" width="14" height="5" rx="1"/>
+        <rect x="301" y="555" width="14" height="5" rx="1"/>
+        <rect x="301" y="580" width="14" height="5" rx="1"/>
+      </g>
+
+      <!-- PVC tube right -->
+      <rect x="303" y="558" width="10" height="70" fill="#e8e0a0" rx="2" opacity="0.85"/>
+      <line x1="313" y1="595" x2="360" y2="595" stroke="#d4d080" stroke-width="1" stroke-dasharray="3,2"/>
+      <text x="362" y="598" fill="#d4d080" font-size="8" font-family="'Source Code Pro',monospace">PVC Ø32mm 3m</text>
+
+      <!-- Curva 90° right -->
+      <path d="M308,628 Q308,638 298,638" fill="none" stroke="#e8e0a0" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- CAIXAS DE INSPEÇÃO -->
+      <rect x="188" y="608" width="26" height="20" fill="#2a3a4a" stroke="#58a6ff" stroke-width="1.5" rx="2"/>
+      <text x="201" y="622" text-anchor="middle" fill="#58a6ff" font-size="7" font-family="'Source Code Pro',monospace">CI</text>
+      <rect x="306" y="608" width="26" height="20" fill="#2a3a4a" stroke="#58a6ff" stroke-width="1.5" rx="2"/>
+      <text x="319" y="622" text-anchor="middle" fill="#58a6ff" font-size="7" font-family="'Source Code Pro',monospace">CI</text>
+
+      <!-- ANEL ENTERRADO -->
+      <ellipse cx="260" cy="660" rx="80" ry="15" fill="none" stroke="#b87333" stroke-width="2.5" stroke-dasharray="8,4"/>
+      <text x="260" y="683" text-anchor="middle" fill="#b87333" font-size="8" font-family="'Source Code Pro',monospace">ANEL TERRA Cu NU 50mm² (~10m)</text>
+
+      <!-- HASTES DE ATERRAMENTO -->
+      <line x1="200" y1="625" x2="200" y2="755" stroke="#6b4226" stroke-width="4"/>
+      <polygon points="200,760 196,748 204,748" fill="#6b4226"/>
+      <line x1="260" y1="660" x2="260" y2="755" stroke="#6b4226" stroke-width="4"/>
+      <polygon points="260,760 256,748 264,748" fill="#6b4226"/>
+      <line x1="320" y1="625" x2="320" y2="755" stroke="#6b4226" stroke-width="4"/>
+      <polygon points="320,760 316,748 324,748" fill="#6b4226"/>
+
+      <!-- Haste labels -->
+      <text x="170" y="710" text-anchor="middle" fill="#a0724a" font-size="7" font-family="'Source Code Pro',monospace" transform="rotate(-90,170,710)">HASTE Ø3/4"×3m</text>
+      <text x="344" y="710" text-anchor="middle" fill="#a0724a" font-size="7" font-family="'Source Code Pro',monospace" transform="rotate(90,344,710)">HASTE Ø3/4"×3m</text>
+
+      <!-- Solda exotérmica symbols -->
+      <circle cx="200" cy="635" r="5" fill="#ff8c00" opacity="0.9"/>
+      <text x="200" y="638" text-anchor="middle" fill="black" font-size="7" font-weight="bold" font-family="'Source Code Pro',monospace">⚡</text>
+      <circle cx="320" cy="635" r="5" fill="#ff8c00" opacity="0.9"/>
+      <text x="320" y="638" text-anchor="middle" fill="black" font-size="7" font-weight="bold" font-family="'Source Code Pro',monospace">⚡</text>
+      <circle cx="180" cy="658" r="5" fill="#ff8c00" opacity="0.9"/>
+      <circle cx="340" cy="658" r="5" fill="#ff8c00" opacity="0.9"/>
+      <circle cx="230" cy="668" r="5" fill="#ff8c00" opacity="0.9"/>
+      <circle cx="290" cy="668" r="5" fill="#ff8c00" opacity="0.9"/>
+      <circle cx="260" cy="662" r="5" fill="#ff8c00" opacity="0.9"/>
+
+      <!-- Connectors Sapata on tower base -->
+      <rect x="206" y="588" width="12" height="8" fill="#d4956a" rx="1"/>
+      <rect x="302" y="588" width="12" height="8" fill="#d4956a" rx="1"/>
+
+      <!-- Cable down to ground ring (left) -->
+      <path d="M212,628 Q212,638 222,638 L180,658" fill="none" stroke="#b87333" stroke-width="2" stroke-dasharray="5,3"/>
+      <!-- Cable down to ground ring (right) -->
+      <path d="M308,628 Q308,638 298,638 L340,658" fill="none" stroke="#b87333" stroke-width="2" stroke-dasharray="5,3"/>
+
+      <!-- Scale bar -->
+      <line x1="390" y1="82" x2="390" y2="590" stroke="#3fb950" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="385" y1="82" x2="395" y2="82" stroke="#3fb950" stroke-width="1"/>
+      <line x1="385" y1="590" x2="395" y2="590" stroke="#3fb950" stroke-width="1"/>
+      <text x="402" y="340" text-anchor="start" fill="#3fb950" font-size="8" font-family="'Source Code Pro',monospace" transform="rotate(90,402,340)">20,00 m</text>
+
+      <!-- PVC protection zone indicator -->
+      <rect x="193" y="557" width="5" height="72" fill="#3fb950" opacity="0.3" rx="1"/>
+      <line x1="198" y1="558" x2="230" y2="540" stroke="#3fb950" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="232" y="540" fill="#3fb950" font-size="7" font-family="'Source Code Pro',monospace">2,5m ↑ solo</text>
+      <line x1="198" y1="628" x2="230" y2="636" stroke="#3fb950" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="232" y="639" fill="#3fb950" font-size="7" font-family="'Source Code Pro',monospace">0,5m ↓ solo</text>
+
+      <!-- Title block -->
+      <rect x="0" y="0" width="520" height="16" fill="#0d1117"/>
+      <text x="10" y="12" fill="#f0a500" font-size="9" font-family="'Oswald',sans-serif" letter-spacing="2">SPDA — TORRE 20.000L — NBR 5419:2015</text>
+      <text x="510" y="12" text-anchor="end" fill="#8b949e" font-size="8" font-family="'Source Code Pro',monospace">Ø1,13m · Circ. 3,55m</text>
+    </svg>
+  </div>
+
+  <!-- RIGHT LEGEND -->
+  <div class="legend-right">
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#58a6ff"></span>Caixa de Inspeção</span>
+      <span class="desc">PP anti-UV anti-chama 123×158×87mm bocal Ø1"</span>
+      <span class="qty">2 UNID</span>
+    </div>
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#6b4226"></span>Hastes de Aterramento</span>
+      <span class="desc">Ø3/4" × 3,00m — enterradas verticalmente</span>
+      <span class="qty">3 UNID</span>
+    </div>
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#ff8c00"></span>Solda Exotérmica</span>
+      <span class="desc">70×50mm² molde CDH70.50-3 cartucho Nº90</span>
+      <span class="qty">7 UNID</span>
+    </div>
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#d4956a"></span>Conector Sapata Mecânica</span>
+      <span class="desc">Ligação aço-cobre — obrigatório NBR 5419</span>
+      <span class="qty">2 UNID</span>
+    </div>
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#7ee87e"></span>Terminal Estanhado</span>
+      <span class="desc">2 Furos 1 Compressão 50mm²</span>
+      <span class="qty">4 UNID</span>
+    </div>
+    <div class="legend-item">
+      <span class="label"><span class="dot" style="background:#c0cdd8"></span>Parafuso Inox Ø4,2×32mm</span>
+      <span class="desc">Fixação das abraçadeiras + bucha nylon</span>
+      <span class="qty">80 UNID</span>
+    </div>
+  </div>
+
+  <!-- FULL TABLE -->
+  <div class="table-wrap">
+    <div class="table-title">📋 Quantitativo Completo de Materiais — SPDA</div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Grupo</th>
+          <th>Descrição do Material</th>
+          <th>Dimensão</th>
+          <th>Qtd</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>01</td><td><span class="tag tag-captacao">Captação</span></td><td>Kit Franklin — Mastro 2m, Captor, Sinaleiro Visual</td><td>3m×2"</td><td class="qty-cell">1 kit</td></tr>
+        <tr><td>02</td><td><span class="tag tag-captacao">Captação</span></td><td>Barra Chata Alumínio 7/8"×1/8"×300mm (Ground Plane)</td><td>7/8"×1/8"×300mm</td><td class="qty-cell">12 unid</td></tr>
+        <tr><td>03</td><td><span class="tag tag-captacao">Captação</span></td><td>Curva 90° Barra Chata Alumínio 7/8"×1/8"×300mm</td><td>7/8"×1/8"×300mm</td><td class="qty-cell">2 unid</td></tr>
+        <tr><td>04</td><td><span class="tag tag-descida">Descida</span></td><td>Cabo Cobre NU 50mm² — 2 descidas 20m + anel ~14m + folga</td><td>50mm²</td><td class="qty-cell">~58m</td></tr>
+        <tr><td>05</td><td><span class="tag tag-descida">Descida</span></td><td>Abraçadeira Tipo Colar Ø1" DN32 — a cada 1,00m (NBR 5419)</td><td>Ø1" DN32</td><td class="qty-cell">40 unid</td></tr>
+        <tr><td>06</td><td><span class="tag tag-descida">Descida</span></td><td>Parafuso Autoatarrachante Aço Inox Ø4,2×32mm c/ bucha nylon</td><td>Ø4,2×32mm</td><td class="qty-cell">80 unid</td></tr>
+        <tr><td>07</td><td><span class="tag tag-descida">Descida</span></td><td>Conector Sapata Mecânica — Ligação Aço-Cobre (obrigatório)</td><td>50mm²</td><td class="qty-cell">2 unid</td></tr>
+        <tr><td>08</td><td><span class="tag tag-descida">Descida</span></td><td>Terminal Estanhado 2 Furos 1 Compressão 50mm²</td><td>50mm²</td><td class="qty-cell">4 unid</td></tr>
+        <tr><td>09</td><td><span class="tag tag-pvc">PVC</span></td><td>Tubo PVC Rígido Ø32mm — proteção mecânica 3m por descida</td><td>Ø32mm × 3m</td><td class="qty-cell">2 barras</td></tr>
+        <tr><td>10</td><td><span class="tag tag-pvc">PVC</span></td><td>Curva 90° PVC Rígido Ø32mm — entrada no solo</td><td>Ø32mm</td><td class="qty-cell">2 unid</td></tr>
+        <tr><td>11</td><td><span class="tag tag-pvc">PVC</span></td><td>Luva PVC Ø32mm — união topo do tubo</td><td>Ø32mm</td><td class="qty-cell">2 unid</td></tr>
+        <tr><td>12</td><td><span class="tag tag-aterr">Aterramento</span></td><td>Haste de Aterramento Ø3/4" × 3,00m</td><td>Ø3/4"×3m</td><td class="qty-cell">3 unid</td></tr>
+        <tr><td>13</td><td><span class="tag tag-aterr">Aterramento</span></td><td>Caixa de Inspeção PP anti-UV anti-chama 123×158×87mm bocal Ø1"</td><td>123×158×87mm</td><td class="qty-cell">2 unid</td></tr>
+        <tr><td>14</td><td><span class="tag tag-aterr">Aterramento</span></td><td>Solda Exotérmica 70×50mm² — molde CDH70.50-3, cartucho Nº90, alicate Z-201</td><td>70×50mm²</td><td class="qty-cell">7 unid</td></tr>
+        <tr><td>15</td><td><span class="tag tag-captacao">Captação</span></td><td>Parafuso Cabeça Chata Ø1/4"×7/8" c/ porca sextavada (emenda barras)</td><td>Ø1/4"×7/8"</td><td class="qty-cell">32 unid</td></tr>
+        <tr><td>16</td><td><span class="tag tag-captacao">Captação</span></td><td>Parafuso Cabeça Chata Ø1/4"×5/8" (fixações menores)</td><td>Ø1/4"×5/8"</td><td class="qty-cell">8 unid</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- NBR NOTE -->
+  <div class="nbr-note">
+    ✅ <strong>NBR 5419:2015</strong> — Espaçamento de fixação: <strong>1,00m</strong> · Proteção mecânica: <strong>2,50m acima + 0,50m abaixo do solo</strong> · Mínimo de descidas: <strong>2</strong> · Soldas exotérmicas em todas as junções cabo×haste e junções do anel enterrado · Caixas de inspeção obrigatórias para manutenção e medição de resistência de aterramento.
+  </div>
+
+</div>
+</body>
+</html>
