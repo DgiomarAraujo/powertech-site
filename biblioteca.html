@@ -54,20 +54,22 @@
 
         .nav-menu {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             list-style: none;
             margin: 0;
             padding: 0;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .nav-menu a, .btn-style {
             color: var(--pure-white);
             text-decoration: none;
-            font-size: 0.75rem;
+            font-size: 0.66rem;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 10px 12px;
+            letter-spacing: 0.4px;
+            padding: 8px 9px;
             border-radius: 8px;
             border: 1px solid rgba(0, 210, 255, 0.3);
             transition: all 0.3s ease;
@@ -106,7 +108,10 @@
         }
 
         @media (min-width: 769px) {
-            .nav-header { top: 85px; }
+            .nav-header {
+                top: 85px;
+                max-width: calc(100% - 360px);
+            }
         }
 
         .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
@@ -229,7 +234,8 @@
 
         @media (max-width: 768px) {
             .nav-header { position: relative; top: 0; right: 0; padding: 20px; display: flex; justify-content: center; }
-            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 8px; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 6px; }
+            .nav-menu a, .btn-style { font-size: 0.68rem; padding: 8px 9px; }
             header { min-height: 120px; }
         }
 
@@ -268,10 +274,13 @@
     <div class="nav-menu">
         <a href="index.html">Início</a>
         <a href="https://powertechindustrial.com.br/solar">Solar</a>
+        <a href="spda.html">SPDA</a>
         <a href="cftv.html">CFTV</a>
+        <a href="dicas.html">Dicas</a>
         <a href="artigos.html">Artigos</a>
         <a href="normas.html">Normas</a>
         <a href="projetos.html">Projetos</a>
+        <a href="seguranca.html">Segurança</a>
         <a href="sobre.html">Sobre</a>
     </div>
 </nav>
@@ -354,6 +363,55 @@
                 <input type="hidden" name="_subject" value="Lead - Download Trabalhos em Campo">
                 <input type="hidden" name="_next" value="https://SEU-SITE.github.io/downloads/campo.epub">
                 <button type="submit" class="btn-transmitir">Baixar Material</button>
+            </form>
+        </div>
+
+    </div>
+
+    <h2>// Projetos em PDF</h2>
+    <p class="subtitulo">Baixe também modelos, estudos e projetos técnicos em PDF, incluindo materiais exportados dos seus projetos em AutoCAD.</p>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="capa-placeholder">PDF<br>SPDA</div>
+            <h3>Projeto SPDA em AutoCAD</h3>
+            <p>Arquivo em PDF com prancha técnica de SPDA, detalhes de captação, descidas, aterramento e observações para consulta do projeto.</p>
+            
+            <form action="https://formspree.io/f/xnjrqjro" method="POST">
+                <input type="text" name="nome" placeholder="SEU NOME" required>
+                <input type="email" name="email" placeholder="SEU E-MAIL" required>
+                <input type="hidden" name="_subject" value="Lead - Download PDF Projeto SPDA AutoCAD">
+                <input type="hidden" name="_next" value="https://powertechindustrial.com.br/downloads/projeto-spda-autocad.pdf">
+                <button type="submit" class="btn-transmitir">Baixar PDF</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="capa-placeholder">PDF<br>Elétrica</div>
+            <h3>Projeto Elétrico Predial</h3>
+            <p>Modelo de prancha em PDF para estudo de circuitos, quadros, cargas, simbologias e organização de projeto elétrico predial.</p>
+            
+            <form action="https://formspree.io/f/xnjrqjro" method="POST">
+                <input type="text" name="nome" placeholder="SEU NOME" required>
+                <input type="email" name="email" placeholder="SEU E-MAIL" required>
+                <input type="hidden" name="_subject" value="Lead - Download PDF Projeto Elétrico Predial">
+                <input type="hidden" name="_next" value="https://powertechindustrial.com.br/downloads/projeto-eletrico-predial.pdf">
+                <button type="submit" class="btn-transmitir">Baixar PDF</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="capa-placeholder">PDF<br>Aterramento</div>
+            <h3>Detalhes de Aterramento</h3>
+            <p>Material em PDF com detalhes construtivos, malha de aterramento, conexões, hastes e recomendações para documentação técnica.</p>
+            
+            <form action="https://formspree.io/f/xnjrqjro" method="POST">
+                <input type="text" name="nome" placeholder="SEU NOME" required>
+                <input type="email" name="email" placeholder="SEU E-MAIL" required>
+                <input type="hidden" name="_subject" value="Lead - Download PDF Detalhes de Aterramento">
+                <input type="hidden" name="_next" value="https://powertechindustrial.com.br/downloads/detalhes-aterramento.pdf">
+                <button type="submit" class="btn-transmitir">Baixar PDF</button>
             </form>
         </div>
 
