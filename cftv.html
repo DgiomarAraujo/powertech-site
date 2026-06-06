@@ -95,7 +95,6 @@
             background: radial-gradient(ellipse at center, rgba(0,210,255,0.07) 0%, transparent 70%);
             pointer-events: none;
         }
-        /* Scanline animated overlay */
         .hero-cftv::after {
             content: '';
             position: absolute;
@@ -395,14 +394,12 @@
             font-size: 0.6rem;
             flex-shrink: 0;
         }
-        /* ── iPHONE 16 PRO MAX MOCKUP ── */
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
         @keyframes scanline { from{transform:translateY(-100%)} to{transform:translateY(400%)} }
         @keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 0 rgba(255,60,60,0.6)} 50%{box-shadow:0 0 0 5px rgba(255,60,60,0)} }
 
         .iphone-wrap { display:flex; justify-content:center; align-items:center; padding:20px 0; }
         .iphone {
-            /* 19.5:9 ratio — width 210px → screen height ~455px */
             width: 210px;
             background: linear-gradient(160deg, #2e2e32 0%, #1c1c20 40%, #111114 100%);
             border-radius: 36px;
@@ -615,6 +612,219 @@
             .iphone-wrap { display: none; }
             .form-section { padding: 30px 20px; }
         }
+
+        /* ══════════════════════════════════════════════════
+           CALCULADORA CFTV — PowerTech Industrial
+        ══════════════════════════════════════════════════ */
+        .calc-wrapper { margin: 0 0 60px; }
+
+        .calc-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid rgba(0,210,255,0.2);
+        }
+        .calc-tab {
+            padding: 14px 28px;
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: color 0.3s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+        .calc-tab:hover { color: var(--neon-blue); }
+        .calc-tab.active {
+            color: var(--neon-blue);
+            border-bottom-color: var(--neon-blue);
+            background: rgba(0,210,255,0.04);
+        }
+        .calc-tab .tab-icon { margin-right: 8px; }
+
+        .calc-panel {
+            display: none;
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(0,210,255,0.12);
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+            padding: 40px;
+            gap: 40px;
+        }
+        .calc-panel.active { display: grid; }
+        .calc-panel.two-col { grid-template-columns: 1fr 1fr; }
+
+        @media (max-width: 768px) {
+            .calc-panel.two-col { grid-template-columns: 1fr; }
+            .calc-tab { padding: 12px 16px; font-size: 0.7rem; }
+            .calc-panel { padding: 25px 20px; }
+        }
+
+        .calc-form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+        .calc-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(0,210,255,0.7);
+        }
+        .calc-input-wrap { position: relative; display: flex; align-items: center; }
+        .calc-input {
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 14px 50px 14px 16px;
+            color: var(--pure-white);
+            font-family: inherit;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+            /* override global input styles */
+            margin-bottom: 0;
+        }
+        .calc-input::-webkit-outer-spin-button,
+        .calc-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+        .calc-input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 0 2px rgba(0,210,255,0.1);
+        }
+        .calc-input::placeholder { color: rgba(255,255,255,0.2); font-size: 0.9rem; }
+        .calc-unit {
+            position: absolute;
+            right: 14px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(0,210,255,0.5);
+            pointer-events: none;
+        }
+
+        .calc-preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+        .calc-preset-btn {
+            padding: 7px 14px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            color: var(--text-gray);
+            font-family: inherit;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .calc-preset-btn:hover,
+        .calc-preset-btn.selected {
+            background: rgba(0,210,255,0.1);
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+        }
+
+        .calc-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(90deg, #003366, #0056b3);
+            color: var(--pure-white);
+            border: 1px solid var(--neon-blue);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 5px;
+        }
+        .calc-btn:hover {
+            background: var(--neon-blue);
+            color: var(--deep-dark);
+            box-shadow: 0 0 30px rgba(0,210,255,0.4);
+        }
+
+        .calc-result-box {
+            background: rgba(0,210,255,0.04);
+            border: 1px solid rgba(0,210,255,0.18);
+            border-radius: 14px;
+            padding: 28px;
+            min-height: 170px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.4s;
+        }
+        .calc-result-box.has-result {
+            border-color: rgba(0,210,255,0.4);
+            box-shadow: 0 0 20px rgba(0,210,255,0.06);
+        }
+        .calc-result-placeholder {
+            color: rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+        .calc-result-title {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(0,210,255,0.6);
+            margin-bottom: 12px;
+        }
+        .calc-result-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--neon-blue);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .calc-result-unit {
+            font-size: 0.9rem;
+            color: rgba(0,210,255,0.6);
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+        .calc-result-breakdown {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+        .calc-result-breakdown li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+        .calc-result-breakdown li strong { color: var(--pure-white); }
+        .calc-result-breakdown li .warn { color: #ffc107; }
+
+        .calc-tip {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            text-align: center;
+            margin-top: 14px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .calc-tip strong { color: var(--neon-blue); }
+        .calc-divider { display: flex; flex-direction: column; gap: 0; }
     </style>
 </head>
 <body>
@@ -728,11 +938,9 @@
                 <li>Ideal para pequenos comércios e residências.</li>
             </ul>
         </div>
-        
         <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <h3 style="margin-top:0;">Câmeras PTZ Motorizadas</h3>
-                
                 <svg viewBox="0 0 150 100" width="70" height="50" style="overflow: visible; margin-top: -10px;">
                     <defs>
                         <linearGradient id="beamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -740,27 +948,20 @@
                             <stop offset="100%" stop-color="rgba(0, 210, 255, 0)"/>
                         </linearGradient>
                     </defs>
-                    
                     <path d="M10,20 L25,20 A5,5 0 0 1 30,25 L30,75 A5,5 0 0 1 25,80 L10,80 Z" fill="#1a2540"/>
                     <circle cx="20" cy="30" r="3" fill="#0a0e14"/>
                     <circle cx="20" cy="70" r="3" fill="#0a0e14"/>
-                    
                     <circle cx="30" cy="50" r="10" fill="#333a4e"/>
-                    
                     <g style="transform-origin: 30px 50px; animation: cameraPan 6s ease-in-out infinite;">
                         <path d="M80,50 L160,0 A100,100 0 0 1 160,100 Z" fill="url(#beamGrad)" style="animation: scanBeam 2s infinite;"/>
-                        
                         <path d="M30,38 L75,38 A10,10 0 0 1 85,48 L85,52 A10,10 0 0 1 75,62 L30,62 Z" fill="#2e3348"/>
-                        
                         <path d="M75,40 L88,43 L88,57 L75,60 Z" fill="#0a0e14"/>
                         <circle cx="81" cy="50" r="5" fill="#000"/>
                         <circle cx="82" cy="48" r="1.5" fill="#ffffff" opacity="0.4"/>
-                        
                         <circle cx="78" cy="44" r="1.5" style="animation: recBlink 1s infinite;"/>
                     </g>
                 </svg>
             </div>
-            
             <ul>
                 <li>Pan, Tilt e Zoom controlados remotamente.</li>
                 <li>Cobertura ampla com um único equipamento.</li>
@@ -771,30 +972,12 @@
 
     <h2>// Segmentos Atendidos</h2>
     <div class="segmentos-grid">
-        <div class="seg-card">
-            <span class="seg-icon">🏭</span>
-            <span>Indústrias e Galpões</span>
-        </div>
-        <div class="seg-card">
-            <span class="seg-icon">🏪</span>
-            <span>Comércio e Lojas</span>
-        </div>
-        <div class="seg-card">
-            <span class="seg-icon">🏢</span>
-            <span>Condomínios</span>
-        </div>
-        <div class="seg-card">
-            <span class="seg-icon">🏠</span>
-            <span>Residências</span>
-        </div>
-        <div class="seg-card">
-            <span class="seg-icon">🌾</span>
-            <span>Fazendas e Sítios</span>
-        </div>
-        <div class="seg-card">
-            <span class="seg-icon">🏫</span>
-            <span>Escolas e Clínicas</span>
-        </div>
+        <div class="seg-card"><span class="seg-icon">🏭</span><span>Indústrias e Galpões</span></div>
+        <div class="seg-card"><span class="seg-icon">🏪</span><span>Comércio e Lojas</span></div>
+        <div class="seg-card"><span class="seg-icon">🏢</span><span>Condomínios</span></div>
+        <div class="seg-card"><span class="seg-icon">🏠</span><span>Residências</span></div>
+        <div class="seg-card"><span class="seg-icon">🌾</span><span>Fazendas e Sítios</span></div>
+        <div class="seg-card"><span class="seg-icon">🏫</span><span>Escolas e Clínicas</span></div>
     </div>
 
     <div class="remote-section">
@@ -815,11 +998,7 @@
                 <div class="iphone-screen">
                     <div class="iphone-statusbar">
                         <span class="time">09:41</span>
-                        <div class="icons">
-                            <span>▬▬▬</span>
-                            <span>WiFi</span>
-                            <span>🔋</span>
-                        </div>
+                        <div class="icons"><span>▬▬▬</span><span>WiFi</span><span>🔋</span></div>
                     </div>
                     <div class="dynamic-island">
                         <div class="di-cam"></div>
@@ -830,36 +1009,10 @@
                         <span class="app-live"><span class="live-dot"></span> AO VIVO</span>
                     </div>
                     <div class="cam-grid">
-                        <div class="cam-cell">
-                            <div class="cam-bg"></div>
-                            <div class="cam-grid-lines"></div>
-                            <div class="cam-figure"></div>
-                            <div class="cam-rec"><div class="cam-rec-dot"></div>REC</div>
-                            <div class="cam-name">CAM 01</div>
-                            <div class="cam-time">09:41:32</div>
-                        </div>
-                        <div class="cam-cell">
-                            <div class="cam-bg"></div>
-                            <div class="cam-grid-lines"></div>
-                            <div class="cam-rec"><div class="cam-rec-dot"></div>REC</div>
-                            <div class="cam-name">CAM 02</div>
-                            <div class="cam-time">09:41:32</div>
-                        </div>
-                        <div class="cam-cell">
-                            <div class="cam-bg"></div>
-                            <div class="cam-grid-lines"></div>
-                            <div class="cam-rec"><div class="cam-rec-dot"></div>REC</div>
-                            <div class="cam-name">CAM 03</div>
-                            <div class="cam-time">09:41:32</div>
-                        </div>
-                        <div class="cam-cell">
-                            <div class="cam-bg"></div>
-                            <div class="cam-grid-lines"></div>
-                            <div class="cam-figure"></div>
-                            <div class="cam-rec"><div class="cam-rec-dot"></div>REC</div>
-                            <div class="cam-name">CAM 04</div>
-                            <div class="cam-time">09:41:32</div>
-                        </div>
+                        <div class="cam-cell"><div class="cam-bg"></div><div class="cam-grid-lines"></div><div class="cam-figure"></div><div class="cam-rec"><div class="cam-rec-dot"></div>REC</div><div class="cam-name">CAM 01</div><div class="cam-time">09:41:32</div></div>
+                        <div class="cam-cell"><div class="cam-bg"></div><div class="cam-grid-lines"></div><div class="cam-rec"><div class="cam-rec-dot"></div>REC</div><div class="cam-name">CAM 02</div><div class="cam-time">09:41:32</div></div>
+                        <div class="cam-cell"><div class="cam-bg"></div><div class="cam-grid-lines"></div><div class="cam-rec"><div class="cam-rec-dot"></div>REC</div><div class="cam-name">CAM 03</div><div class="cam-time">09:41:32</div></div>
+                        <div class="cam-cell"><div class="cam-bg"></div><div class="cam-grid-lines"></div><div class="cam-figure"></div><div class="cam-rec"><div class="cam-rec-dot"></div>REC</div><div class="cam-name">CAM 04</div><div class="cam-time">09:41:32</div></div>
                     </div>
                     <div class="app-bottom">
                         <div class="app-btn active"><span class="app-btn-icon">📹</span>Câmeras</div>
@@ -973,6 +1126,162 @@
         </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════
+         CALCULADORA DE ARMAZENAMENTO CFTV
+         Integrada ao layout original — PowerTech Industrial
+    ══════════════════════════════════════════════════ -->
+    <h2>// Calculadora de Armazenamento CFTV</h2>
+
+    <div class="calc-wrapper">
+
+        <!-- ABAS -->
+        <div class="calc-tabs" role="tablist" aria-label="Modos da calculadora">
+            <button class="calc-tab active" role="tab" aria-selected="true"
+                    onclick="calcSwitchTab('storage')" id="tab-storage">
+                <span class="tab-icon">💾</span>Armazenamento Necessário
+            </button>
+            <button class="calc-tab" role="tab" aria-selected="false"
+                    onclick="calcSwitchTab('days')" id="tab-days">
+                <span class="tab-icon">📅</span>Dias de Retenção
+            </button>
+        </div>
+
+        <!-- PAINEL 1: Quanto armazenamento preciso? -->
+        <div class="calc-panel two-col active" id="panel-storage" role="tabpanel">
+
+            <div class="calc-divider">
+                <div style="margin-bottom:20px;">
+                    <div class="calc-label" style="margin-bottom:10px;">Resolução / Qualidade da câmera</div>
+                    <div class="calc-preset-row" id="storage-presets">
+                        <button class="calc-preset-btn" data-bitrate="512"  onclick="calcSelectPreset('storage',this)">SD · 512 kbps</button>
+                        <button class="calc-preset-btn" data-bitrate="1024" onclick="calcSelectPreset('storage',this)">HD 720p · 1 Mbps</button>
+                        <button class="calc-preset-btn selected" data-bitrate="2048" onclick="calcSelectPreset('storage',this)">Full HD 1080p · 2 Mbps</button>
+                        <button class="calc-preset-btn" data-bitrate="4096" onclick="calcSelectPreset('storage',this)">2K · 4 Mbps</button>
+                        <button class="calc-preset-btn" data-bitrate="8192" onclick="calcSelectPreset('storage',this)">4K · 8 Mbps</button>
+                    </div>
+                </div>
+
+                <div class="calc-form-group">
+                    <label class="calc-label" for="s-bitrate">Bitrate por câmera</label>
+                    <div class="calc-input-wrap">
+                        <input class="calc-input" type="number" id="s-bitrate" value="2048" min="128" max="32000" placeholder="2048" oninput="calcClearStoragePresets()">
+                        <span class="calc-unit">kbps</span>
+                    </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                    <div class="calc-form-group">
+                        <label class="calc-label" for="s-cameras">Câmeras</label>
+                        <div class="calc-input-wrap">
+                            <input class="calc-input" type="number" id="s-cameras" value="" min="1" max="256" placeholder="Ex: 8">
+                            <span class="calc-unit">un.</span>
+                        </div>
+                    </div>
+                    <div class="calc-form-group">
+                        <label class="calc-label" for="s-hours">Horas gravando/dia</label>
+                        <div class="calc-input-wrap">
+                            <input class="calc-input" type="number" id="s-hours" value="24" min="1" max="24" placeholder="24">
+                            <span class="calc-unit">h</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-form-group">
+                    <label class="calc-label" for="s-days">Dias de retenção desejados</label>
+                    <div class="calc-input-wrap">
+                        <input class="calc-input" type="number" id="s-days" value="" min="1" max="365" placeholder="Ex: 30">
+                        <span class="calc-unit">dias</span>
+                    </div>
+                </div>
+
+                <button class="calc-btn" onclick="calcStorage()">⚡ Calcular armazenamento</button>
+
+                <p class="calc-tip">
+                    💡 <strong>Dica:</strong> câmeras com detecção de movimento gravam apenas quando há atividade —
+                    reduza as horas para 6–12h e economize até 70% de armazenamento.
+                </p>
+            </div>
+
+            <div>
+                <div class="calc-result-box" id="result-storage">
+                    <p class="calc-result-placeholder">
+                        📦 Preencha os campos ao lado e clique em<br>
+                        <strong>Calcular</strong> para descobrir quanto<br>
+                        armazenamento o seu projeto precisa.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAINEL 2: Quantos dias consigo gravar? -->
+        <div class="calc-panel two-col" id="panel-days" role="tabpanel">
+
+            <div class="calc-divider">
+                <div style="margin-bottom:20px;">
+                    <div class="calc-label" style="margin-bottom:10px;">Resolução / Qualidade da câmera</div>
+                    <div class="calc-preset-row" id="days-presets">
+                        <button class="calc-preset-btn" data-bitrate="512"  onclick="calcSelectPreset('days',this)">SD · 512 kbps</button>
+                        <button class="calc-preset-btn" data-bitrate="1024" onclick="calcSelectPreset('days',this)">HD 720p · 1 Mbps</button>
+                        <button class="calc-preset-btn selected" data-bitrate="2048" onclick="calcSelectPreset('days',this)">Full HD 1080p · 2 Mbps</button>
+                        <button class="calc-preset-btn" data-bitrate="4096" onclick="calcSelectPreset('days',this)">2K · 4 Mbps</button>
+                        <button class="calc-preset-btn" data-bitrate="8192" onclick="calcSelectPreset('days',this)">4K · 8 Mbps</button>
+                    </div>
+                </div>
+
+                <div class="calc-form-group">
+                    <label class="calc-label" for="d-storage">Armazenamento disponível</label>
+                    <div class="calc-input-wrap">
+                        <input class="calc-input" type="number" id="d-storage" value="" min="0.1" step="0.5" placeholder="Ex: 2">
+                        <span class="calc-unit">TB</span>
+                    </div>
+                </div>
+
+                <div class="calc-form-group">
+                    <label class="calc-label" for="d-bitrate">Bitrate por câmera</label>
+                    <div class="calc-input-wrap">
+                        <input class="calc-input" type="number" id="d-bitrate" value="2048" min="128" max="32000" placeholder="2048" oninput="calcClearDaysPresets()">
+                        <span class="calc-unit">kbps</span>
+                    </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                    <div class="calc-form-group">
+                        <label class="calc-label" for="d-cameras">Câmeras</label>
+                        <div class="calc-input-wrap">
+                            <input class="calc-input" type="number" id="d-cameras" value="" min="1" max="256" placeholder="Ex: 8">
+                            <span class="calc-unit">un.</span>
+                        </div>
+                    </div>
+                    <div class="calc-form-group">
+                        <label class="calc-label" for="d-hours">Horas gravando/dia</label>
+                        <div class="calc-input-wrap">
+                            <input class="calc-input" type="number" id="d-hours" value="24" min="1" max="24" placeholder="24">
+                            <span class="calc-unit">h</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="calc-btn" onclick="calcDays()">⚡ Calcular dias de retenção</button>
+
+                <p class="calc-tip">
+                    💡 <strong>Dica:</strong> HDs internos de NVR Intelbras estão disponíveis de 1 TB a 8 TB.
+                    Para sistemas maiores, use múltiplos HDs em RAID.
+                </p>
+            </div>
+
+            <div>
+                <div class="calc-result-box" id="result-days">
+                    <p class="calc-result-placeholder">
+                        📅 Preencha os campos ao lado e clique em<br>
+                        <strong>Calcular</strong> para descobrir quantos<br>
+                        dias o seu armazenamento suporta.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /.calc-wrapper -->
+
     <h2 id="contato">// Terminal de Atendimento</h2>
     <div class="form-section">
         <div class="info">
@@ -990,11 +1299,11 @@
             <input type="hidden" name="access_key" value="84d4796c-3ee1-459b-9ee7-a850fbde610e">
             <input type="hidden" name="subject" value="Orçamento CFTV – PowerTech Industrial">
             <input type="hidden" name="redirect" value="https://powertechindustrial.com.br/obrigado.html">
-            
+
             <input type="text" name="name" placeholder="NOME DO REQUISITANTE" required aria-label="Nome">
             <input type="email" name="email" placeholder="E-MAIL DE CONTATO" required aria-label="Email">
             <input type="tel" name="phone" placeholder="TELEFONE / WHATSAPP" aria-label="Telefone">
-            
+
             <select name="property_type" required aria-label="Tipo de Imóvel">
                 <option value="" disabled selected>TIPO DE IMÓVEL</option>
                 <option value="Residencia">RESIDÊNCIA</option>
@@ -1004,7 +1313,7 @@
                 <option value="Fazenda">FAZENDA / ÁREA RURAL</option>
                 <option value="Outro">OUTRO</option>
             </select>
-            
+
             <select name="estimated_cameras" aria-label="Quantidade de Câmeras">
                 <option value="" disabled selected>QUANTIDADE ESTIMADA DE CÂMERAS</option>
                 <option value="1-4">1 a 4 câmeras</option>
@@ -1013,9 +1322,9 @@
                 <option value="16+">Mais de 16 câmeras</option>
                 <option value="nao_sei">Não sei, preciso de orientação</option>
             </select>
-            
+
             <textarea name="message" placeholder="DESCREVA O LOCAL E NECESSIDADES..." required aria-label="Mensagem"></textarea>
-            
+
             <button type="submit" class="btn-transmitir">Transmitir Solicitação</button>
         </form>
     </div>
@@ -1033,6 +1342,137 @@
         <a href="privacidade.html">PRIVACIDADE</a>
     </p>
 </footer>
+
+<!-- ── JAVASCRIPT DA CALCULADORA ── -->
+<script>
+(function () {
+
+    window.calcSwitchTab = function (tab) {
+        ['storage', 'days'].forEach(function(t) {
+            document.getElementById('panel-' + t).classList.toggle('active', t === tab);
+            document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+            document.getElementById('tab-' + t).setAttribute('aria-selected', t === tab);
+        });
+    };
+
+    window.calcSelectPreset = function (panel, btn) {
+        var group = document.getElementById(panel + '-presets');
+        group.querySelectorAll('.calc-preset-btn').forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        var bitrateField = panel === 'storage' ? 's-bitrate' : 'd-bitrate';
+        document.getElementById(bitrateField).value = btn.dataset.bitrate;
+    };
+
+    window.calcClearStoragePresets = function () {
+        document.querySelectorAll('#storage-presets .calc-preset-btn').forEach(function(b) { b.classList.remove('selected'); });
+    };
+
+    window.calcClearDaysPresets = function () {
+        document.querySelectorAll('#days-presets .calc-preset-btn').forEach(function(b) { b.classList.remove('selected'); });
+    };
+
+    function fmtSize(gb) {
+        if (gb >= 1000) return { val: (gb / 1000).toFixed(2), unit: 'TB' };
+        return { val: Math.ceil(gb), unit: 'GB' };
+    }
+
+    function hdRecommendation(gb) {
+        var options = [500, 1000, 2000, 4000, 8000];
+        var labels  = ['500 GB', '1 TB', '2 TB', '4 TB', '8 TB'];
+        for (var i = 0; i < options.length; i++) {
+            if (options[i] >= gb) return labels[i];
+        }
+        var tbs = Math.ceil(gb / 1000);
+        return tbs + ' TB (múltiplos HDs)';
+    }
+
+    function statusColor(days) {
+        if (days >= 30) return '#00d2ff';
+        if (days >= 15) return '#ffc107';
+        return '#ff5555';
+    }
+
+    window.calcStorage = function () {
+        var bitrate = parseFloat(document.getElementById('s-bitrate').value);
+        var cameras = parseFloat(document.getElementById('s-cameras').value);
+        var hours   = parseFloat(document.getElementById('s-hours').value);
+        var days    = parseFloat(document.getElementById('s-days').value);
+        var box     = document.getElementById('result-storage');
+
+        if (!bitrate || !cameras || !hours || !days) {
+            box.innerHTML = '<p class="calc-result-placeholder" style="color:#ff5555;">⚠️ Preencha todos os campos antes de calcular.</p>';
+            box.classList.remove('has-result');
+            return;
+        }
+
+        var totalGB   = (bitrate * 1000 * 3600 * hours * cameras * days) / 8 / 1e9;
+        var perCamDay = (bitrate * 1000 * 3600 * hours) / 8 / 1e9;
+        var perDay    = perCamDay * cameras;
+        var size = fmtSize(totalGB);
+        var hd   = hdRecommendation(totalGB);
+
+        box.classList.add('has-result');
+        box.innerHTML =
+            '<div class="calc-result-title">Armazenamento total estimado</div>' +
+            '<div class="calc-result-value" style="color:var(--neon-blue);">' + size.val + '</div>' +
+            '<div class="calc-result-unit">' + size.unit + '</div>' +
+            '<ul class="calc-result-breakdown">' +
+                '<li><span>Por câmera / dia</span><strong>' + fmtSize(perCamDay).val + ' ' + fmtSize(perCamDay).unit + '</strong></li>' +
+                '<li><span>Total diário (' + cameras + ' câmeras)</span><strong>' + fmtSize(perDay).val + ' ' + fmtSize(perDay).unit + '</strong></li>' +
+                '<li><span>HD recomendado</span><strong>' + hd + '</strong></li>' +
+                '<li><span>Retenção configurada</span><strong>' + days + ' dias</strong></li>' +
+            '</ul>';
+    };
+
+    window.calcDays = function () {
+        var storageTB = parseFloat(document.getElementById('d-storage').value);
+        var bitrate   = parseFloat(document.getElementById('d-bitrate').value);
+        var cameras   = parseFloat(document.getElementById('d-cameras').value);
+        var hours     = parseFloat(document.getElementById('d-hours').value);
+        var box       = document.getElementById('result-days');
+
+        if (!storageTB || !bitrate || !cameras || !hours) {
+            box.innerHTML = '<p class="calc-result-placeholder" style="color:#ff5555;">⚠️ Preencha todos os campos antes de calcular.</p>';
+            box.classList.remove('has-result');
+            return;
+        }
+
+        var storageGB  = storageTB * 1000;
+        var perDayGB   = (bitrate * 1000 * 3600 * hours * cameras) / 8 / 1e9;
+        var totalDays  = storageGB / perDayGB;
+        var color      = statusColor(totalDays);
+        var perCamDay  = perDayGB / cameras;
+        var displayDays = totalDays >= 1 ? Math.floor(totalDays) : totalDays.toFixed(1);
+
+        var statusMsg = totalDays < 7
+            ? '⚠️ Abaixo do recomendado — considere aumentar o armazenamento.'
+            : totalDays < 30
+            ? '✅ Bom para uso residencial e pequeno comércio.'
+            : '🏆 Excelente — atende normas de segurança corporativa e industrial.';
+
+        box.classList.add('has-result');
+        box.innerHTML =
+            '<div class="calc-result-title">Dias de retenção estimados</div>' +
+            '<div class="calc-result-value" style="color:' + color + ';">' + displayDays + '</div>' +
+            '<div class="calc-result-unit" style="color:' + color + ';">dias de gravação</div>' +
+            '<ul class="calc-result-breakdown">' +
+                '<li><span>Uso diário total</span><strong>' + fmtSize(perDayGB).val + ' ' + fmtSize(perDayGB).unit + '/dia</strong></li>' +
+                '<li><span>Por câmera / dia</span><strong>' + fmtSize(perCamDay).val + ' ' + fmtSize(perCamDay).unit + '</strong></li>' +
+                '<li><span>Armazenamento usado</span><strong>' + storageTB + ' TB (' + Math.round(storageGB) + ' GB)</strong></li>' +
+                '<li><span>Avaliação</span><strong>' + statusMsg + '</strong></li>' +
+            '</ul>';
+    };
+
+    /* Enter calcula automaticamente */
+    document.querySelectorAll('#panel-storage .calc-input').forEach(function(el) {
+        el.addEventListener('keydown', function(e) { if (e.key === 'Enter') calcStorage(); });
+    });
+    document.querySelectorAll('#panel-days .calc-input').forEach(function(el) {
+        el.addEventListener('keydown', function(e) { if (e.key === 'Enter') calcDays(); });
+    });
+
+}());
+</script>
 
 </body>
 </html>
