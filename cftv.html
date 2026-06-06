@@ -825,6 +825,75 @@
         }
         .calc-tip strong { color: var(--neon-blue); }
         .calc-divider { display: flex; flex-direction: column; gap: 0; }
+
+        /* ══ ICON ANIMATIONS ══════════════════════════════════════════ */
+
+        /* --- ColorVu --- */
+        @keyframes cvuPulse { 0%,100%{opacity:0.5;transform:scale(1)} 50%{opacity:0.9;transform:scale(1.15)} }
+        @keyframes cvuRays  { 0%{opacity:0.3} 50%{opacity:1} 100%{opacity:0.3} }
+        @keyframes cvuIris  { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+        @keyframes cvuDot   { 0%,100%{opacity:0.3} 50%{opacity:1} }
+        @keyframes cvuRec   { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+        .cvu-pulse           { animation: cvuPulse 2.5s ease-in-out infinite; transform-origin:38px 38px; }
+        .cvu-rays            { animation: cvuRays  2s ease-in-out infinite; transform-origin:38px 38px; }
+        .cvu-iris-spin       { animation: cvuIris  4s linear infinite; transform-origin:36px 39px; }
+        .cvu-dot1            { animation: cvuDot   1.4s 0.0s ease-in-out infinite; }
+        .cvu-dot2            { animation: cvuDot   1.4s 0.35s ease-in-out infinite; }
+        .cvu-dot3            { animation: cvuDot   1.4s 0.7s ease-in-out infinite; }
+        .cvu-dot4            { animation: cvuDot   1.4s 1.05s ease-in-out infinite; }
+        .cvu-rec             { animation: cvuRec   1.2s step-end infinite; }
+
+        /* --- IA Neural --- */
+        @keyframes iaRing    { 0%{transform:scale(0.9);opacity:0} 50%{opacity:1} 100%{transform:scale(1.2);opacity:0} }
+        @keyframes iaScan    { from{transform:translateY(-12px);opacity:0} 50%{opacity:0.7} to{transform:translateY(12px);opacity:0} }
+        @keyframes iaNode    { 0%,100%{opacity:0.3;r:2} 50%{opacity:1;r:3} }
+        @keyframes iaBarAnim { 0%,100%{opacity:0.15} 50%{opacity:0.7} }
+        @keyframes iaRec     { 0%,49%{fill:#00d2ff} 50%,100%{fill:#003344} }
+        .ia-ring1            { animation: iaRing 2.4s 0s ease-out infinite; transform-origin:40px 36px; }
+        .ia-ring2            { animation: iaRing 2.4s 0.8s ease-out infinite; transform-origin:40px 36px; }
+        .ia-scan             { animation: iaScan 2s ease-in-out infinite; transform-origin:33px 38px; }
+        .ia-node-center      { animation: iaNode 1.6s ease-in-out infinite; }
+        .ia-n1               { animation: iaNode 1.6s 0.2s ease-in-out infinite; }
+        .ia-n2               { animation: iaNode 1.6s 0.4s ease-in-out infinite; }
+        .ia-n3               { animation: iaNode 1.6s 0.6s ease-in-out infinite; }
+        .ia-n4               { animation: iaNode 1.6s 0.8s ease-in-out infinite; }
+        .ia-n5               { animation: iaNode 1.6s 1.0s ease-in-out infinite; }
+        .ia-bar1             { animation: iaBarAnim 1.2s 0.0s ease-in-out infinite; }
+        .ia-bar2             { animation: iaBarAnim 1.2s 0.3s ease-in-out infinite; }
+        .ia-bar3             { animation: iaBarAnim 1.2s 0.6s ease-in-out infinite; }
+        .ia-bar4             { animation: iaBarAnim 1.2s 0.9s ease-in-out infinite; }
+        .ia-rec              { animation: iaRec 1.2s step-end infinite; }
+
+        /* --- IP/PoE --- */
+        @keyframes ipLens    { 0%,100%{opacity:0.3;r:2.5} 50%{opacity:0.7;r:4.5} }
+        .ip-lens-pulse       { animation: ipLens 2s ease-in-out infinite; }
+
+        /* --- DVR --- */
+        @keyframes dvrSpin   { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+        @keyframes dvrLed    { 0%,49%{opacity:1} 50%,100%{opacity:0.2} }
+        @keyframes dvrFill   { 0%{width:0} 70%{width:46px} 85%{width:44px} 100%{width:46px} }
+        @keyframes dvrPower  { 0%,100%{filter:drop-shadow(0 0 0px transparent)} 50%{filter:drop-shadow(0 0 4px #00d2ff)} }
+        .dvr-hd1-spin        { animation: dvrSpin 1.8s 0s linear infinite; transform-origin:22px 23px; }
+        .dvr-hd2-spin        { animation: dvrSpin 1.8s 0.3s linear infinite; transform-origin:42px 23px; }
+        .dvr-hd3-spin        { animation: dvrSpin 2.2s 0.6s linear infinite; transform-origin:61px 23px; }
+        .dvr-led1            { animation: dvrLed 1.4s 0s step-end infinite; }
+        .dvr-led2            { animation: dvrLed 1.4s 0.4s step-end infinite; }
+        .dvr-led3            { animation: dvrLed 2.0s 0.2s step-end infinite; }
+        .dvr-fillbar         { animation: dvrFill 3s ease-in-out infinite; }
+        .dvr-power           { animation: dvrPower 2s ease-in-out infinite; }
+
+        /* --- Cloud --- */
+        @keyframes cloudBreathe { 0%,100%{opacity:0.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.1)} }
+        @keyframes cloudUpload  { 0%,100%{transform:translateY(0);opacity:0.9} 50%{transform:translateY(-4px);opacity:1} }
+        @keyframes cloudWifi    { 0%,100%{opacity:0.4} 50%{opacity:1} }
+        .cloud-breathe       { animation: cloudBreathe 2.5s ease-in-out infinite; transform-origin:40px 32px; }
+        .cloud-upload        { animation: cloudUpload  1.5s ease-in-out infinite; }
+        .cloud-wifi-dot      { animation: cloudWifi    1.2s 0s ease-in-out infinite; }
+        .cloud-arc1          { animation: cloudWifi    1.2s 0.2s ease-in-out infinite; }
+        .cloud-arc2          { animation: cloudWifi    1.2s 0.4s ease-in-out infinite; }
+
+        /* Icon sizing tweak */
+        .card-icon svg { display:block; }
     </style>
 </head>
 <body>
@@ -894,7 +963,42 @@
     <h2>// Sistemas que Instalamos</h2>
     <div class="grid">
         <div class="card">
-            <span class="card-icon">🎨</span>
+            <span class="card-icon">
+<svg class="icon-colorvu" viewBox="0 0 80 70" width="70" height="60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="cvu-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffe060" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ff6600" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cvu-iris" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00d2ff"/>
+      <stop offset="60%" stop-color="#0056b3"/>
+      <stop offset="100%" stop-color="#001a3a"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="38" cy="38" rx="26" ry="20" fill="url(#cvu-glow)" class="cvu-pulse"/>
+  <g class="cvu-rays">
+    <line x1="38" y1="38" x2="14" y2="18" stroke="#ff3366" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+    <line x1="38" y1="38" x2="22" y2="11" stroke="#ff9900" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+    <line x1="38" y1="38" x2="34" y2="8"  stroke="#ffee00" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+    <line x1="38" y1="38" x2="48" y2="8"  stroke="#44ff88" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+    <line x1="38" y1="38" x2="60" y2="12" stroke="#00d2ff" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+    <line x1="38" y1="38" x2="66" y2="20" stroke="#aa44ff" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+  </g>
+  <rect x="12" y="26" width="44" height="26" rx="5" fill="#1a2540" stroke="rgba(0,210,255,0.5)" stroke-width="1.2"/>
+  <circle cx="36" cy="39" r="10" fill="#060e1a" stroke="rgba(0,210,255,0.4)" stroke-width="1.5"/>
+  <circle cx="36" cy="39" r="7.5" fill="url(#cvu-iris)" class="cvu-iris-spin"/>
+  <circle cx="36" cy="39" r="4" fill="#000d1a"/>
+  <circle cx="33.5" cy="36.5" r="1.5" fill="white" opacity="0.45"/>
+  <circle cx="50" cy="31" r="2.2" fill="#ff3366" class="cvu-dot1"/>
+  <circle cx="55" cy="31" r="2.2" fill="#44ff88" class="cvu-dot2"/>
+  <circle cx="50" cy="36" r="2.2" fill="#00d2ff" class="cvu-dot3"/>
+  <circle cx="55" cy="36" r="2.2" fill="#ffee00" class="cvu-dot4"/>
+  <rect x="33" y="52" width="12" height="5" rx="2" fill="#111827" stroke="rgba(0,210,255,0.3)" stroke-width="1"/>
+  <circle cx="20" cy="29" r="2.2" fill="#ff3366" class="cvu-rec"/>
+  <text x="24" y="31" font-size="4" fill="rgba(255,255,255,0.55)" font-family="monospace">REC</text>
+</svg>
+</span>
             <h3>Câmeras ColorVu (Cor 24h)</h3>
             <ul>
                 <li>Imagem colorida mesmo à noite, sem luz auxiliar.</li>
@@ -903,7 +1007,38 @@
             </ul>
         </div>
         <div class="card">
-            <span class="card-icon">🧠</span>
+            <span class="card-icon">
+<svg class="icon-ia" viewBox="0 0 80 70" width="70" height="60" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="36" r="30" fill="none" stroke="rgba(0,210,255,0.07)" stroke-width="1" class="ia-ring1"/>
+  <circle cx="40" cy="36" r="21" fill="none" stroke="rgba(0,210,255,0.1)" stroke-width="1" class="ia-ring2"/>
+  <rect x="10" y="24" width="50" height="28" rx="5" fill="#1a2540" stroke="rgba(0,210,255,0.4)" stroke-width="1.2"/>
+  <polygon points="60,29 70,24 70,48 60,44" fill="#111827" stroke="rgba(0,210,255,0.3)" stroke-width="1"/>
+  <circle cx="33" cy="38" r="12" fill="#060e1a" stroke="rgba(0,210,255,0.5)" stroke-width="1.5"/>
+  <circle cx="33" cy="38" r="2" fill="#00d2ff" class="ia-node-center"/>
+  <circle cx="28" cy="33" r="1.5" fill="#00d2ff" opacity="0.85" class="ia-n1"/>
+  <circle cx="38" cy="33" r="1.5" fill="#00d2ff" opacity="0.85" class="ia-n2"/>
+  <circle cx="26" cy="40" r="1.5" fill="#00d2ff" opacity="0.85" class="ia-n3"/>
+  <circle cx="40" cy="40" r="1.5" fill="#00d2ff" opacity="0.85" class="ia-n4"/>
+  <circle cx="33" cy="44" r="1.5" fill="#00d2ff" opacity="0.85" class="ia-n5"/>
+  <g stroke="#00d2ff" stroke-width="0.8" opacity="0.45" class="ia-lines">
+    <line x1="33" y1="38" x2="28" y2="33"/>
+    <line x1="33" y1="38" x2="38" y2="33"/>
+    <line x1="33" y1="38" x2="26" y2="40"/>
+    <line x1="33" y1="38" x2="40" y2="40"/>
+    <line x1="33" y1="38" x2="33" y2="44"/>
+    <line x1="28" y1="33" x2="38" y2="33"/>
+    <line x1="26" y1="40" x2="33" y2="44"/>
+    <line x1="40" y1="40" x2="33" y2="44"/>
+  </g>
+  <rect x="22" y="37.5" width="22" height="1" rx="0.5" fill="#00d2ff" opacity="0.5" class="ia-scan"/>
+  <rect x="47" y="28" width="8" height="2.5" rx="1" fill="#00d2ff" opacity="0.25" class="ia-bar1"/>
+  <rect x="47" y="32" width="6" height="2.5" rx="1" fill="#00d2ff" opacity="0.25" class="ia-bar2"/>
+  <rect x="47" y="36" width="9" height="2.5" rx="1" fill="#00d2ff" opacity="0.25" class="ia-bar3"/>
+  <rect x="47" y="40" width="5" height="2.5" rx="1" fill="#00d2ff" opacity="0.25" class="ia-bar4"/>
+  <rect x="31" y="52" width="12" height="4" rx="2" fill="#111827" stroke="rgba(0,210,255,0.3)" stroke-width="1"/>
+  <circle cx="16" cy="28" r="2" fill="#00d2ff" class="ia-rec"/>
+</svg>
+</span>
             <h3>Câmeras com IA Intelbras</h3>
             <ul>
                 <li>Reconhecimento facial e de placas veiculares.</li>
@@ -912,7 +1047,41 @@
             </ul>
         </div>
         <div class="card">
-            <span class="card-icon">📡</span>
+            <span class="card-icon">
+<svg class="icon-ip" viewBox="0 0 80 70" width="70" height="60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ip-cable" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d2ff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0056b3" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect x="22" y="18" width="38" height="26" rx="5" fill="#1a2540" stroke="rgba(0,210,255,0.45)" stroke-width="1.2"/>
+  <circle cx="40" cy="31" r="9" fill="#060e1a" stroke="rgba(0,210,255,0.5)" stroke-width="1.5"/>
+  <circle cx="40" cy="31" r="6" fill="#0a1628" stroke="rgba(0,210,255,0.3)" stroke-width="1"/>
+  <circle cx="40" cy="31" r="2.5" fill="#00d2ff" opacity="0.3" class="ip-lens-pulse"/>
+  <circle cx="37.5" cy="28.5" r="1.2" fill="white" opacity="0.4"/>
+  <path d="M40 44 Q40 57 28 61" stroke="url(#ip-cable)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M40 44 Q40 57 28 61" stroke="rgba(0,210,255,0.12)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <rect x="21" y="58" width="14" height="9" rx="2" fill="#1a2540" stroke="rgba(0,210,255,0.5)" stroke-width="1"/>
+  <rect x="22.5" y="59.5" width="1.5" height="4" rx="0.5" fill="#00d2ff" opacity="0.8"/>
+  <rect x="24.5" y="59.5" width="1.5" height="4" rx="0.5" fill="#00d2ff" opacity="0.8"/>
+  <rect x="26.5" y="59.5" width="1.5" height="4" rx="0.5" fill="#00d2ff" opacity="0.8"/>
+  <rect x="28.5" y="59.5" width="1.5" height="4" rx="0.5" fill="#00d2ff" opacity="0.8"/>
+  <circle r="2.5" fill="#00d2ff" opacity="0.9">
+    <animateMotion dur="1.8s" repeatCount="indefinite" begin="0s" path="M40 44 Q40 57 28 61"/>
+  </circle>
+  <circle r="2" fill="white" opacity="0.6">
+    <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.6s" path="M40 44 Q40 57 28 61"/>
+  </circle>
+  <circle r="1.5" fill="#00d2ff" opacity="0.7">
+    <animateMotion dur="1.8s" repeatCount="indefinite" begin="1.2s" path="M40 44 Q40 57 28 61"/>
+  </circle>
+  <rect x="24" y="18" width="16" height="7" rx="3" fill="rgba(0,210,255,0.1)" stroke="rgba(0,210,255,0.4)" stroke-width="0.8"/>
+  <text x="26" y="23.5" font-size="5" fill="#00d2ff" font-family="monospace" font-weight="bold">PoE</text>
+  <rect x="56" y="23" width="10" height="14" rx="3" fill="#111827" stroke="rgba(0,210,255,0.3)" stroke-width="1"/>
+  <circle cx="61" cy="30" r="3" fill="#0a0e14" stroke="rgba(0,210,255,0.3)" stroke-width="1"/>
+</svg>
+</span>
             <h3>Câmeras IP / PoE</h3>
             <ul>
                 <li>Alta resolução Full HD e 4K com cabeamento único.</li>
@@ -921,7 +1090,45 @@
             </ul>
         </div>
         <div class="card">
-            <span class="card-icon">💾</span>
+            <span class="card-icon">
+<svg class="icon-dvr" viewBox="0 0 80 70" width="70" height="60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dvr-bar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d2ff"/>
+      <stop offset="100%" stop-color="#0056b3"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="12" width="64" height="46" rx="4" fill="#111827" stroke="rgba(0,210,255,0.4)" stroke-width="1.5"/>
+  <rect x="10" y="14" width="60" height="42" rx="3" fill="#0d1421"/>
+  <rect x="13" y="17" width="18" height="12" rx="2" fill="#1a2540" stroke="rgba(0,210,255,0.25)" stroke-width="1"/>
+  <rect x="14.5" y="18.5" width="15" height="9" rx="1.5" fill="#0a0e14"/>
+  <circle cx="22" cy="23" r="3.5" fill="#0a1628" stroke="rgba(0,210,255,0.3)" stroke-width="0.8"/>
+  <circle cx="22" cy="23" r="1.8" fill="#111827" class="dvr-hd1-spin"/>
+  <circle cx="15.5" cy="19.5" r="1" fill="#00d2ff" class="dvr-led1"/>
+  <rect x="33" y="17" width="18" height="12" rx="2" fill="#1a2540" stroke="rgba(0,210,255,0.25)" stroke-width="1"/>
+  <rect x="34.5" y="18.5" width="15" height="9" rx="1.5" fill="#0a0e14"/>
+  <circle cx="42" cy="23" r="3.5" fill="#0a1628" stroke="rgba(0,210,255,0.3)" stroke-width="0.8"/>
+  <circle cx="42" cy="23" r="1.8" fill="#111827" class="dvr-hd2-spin"/>
+  <circle cx="35.5" cy="19.5" r="1" fill="#00d2ff" class="dvr-led2"/>
+  <rect x="53" y="17" width="14" height="12" rx="2" fill="#1a2540" stroke="rgba(0,210,255,0.25)" stroke-width="1"/>
+  <rect x="54.5" y="18.5" width="11" height="9" rx="1.5" fill="#0a0e14"/>
+  <circle cx="61" cy="23" r="3.5" fill="#0a1628" stroke="rgba(0,210,255,0.3)" stroke-width="0.8"/>
+  <circle cx="61" cy="23" r="1.8" fill="#111827" class="dvr-hd3-spin"/>
+  <circle cx="55.5" cy="19.5" r="1" fill="#44ff88" class="dvr-led3"/>
+  <text x="13" y="40" font-size="4.5" fill="rgba(0,210,255,0.5)" font-family="monospace">STORAGE</text>
+  <rect x="13" y="42" width="54" height="5" rx="2.5" fill="rgba(0,0,0,0.5)" stroke="rgba(0,210,255,0.2)" stroke-width="0.8"/>
+  <rect id="dvr-bar-fill" x="13" y="42" width="0" height="5" rx="2.5" fill="url(#dvr-bar)" class="dvr-fillbar"/>
+  <rect x="13" y="50" width="6" height="4" rx="1" fill="#0a0e14" stroke="rgba(0,210,255,0.3)" stroke-width="0.8"/>
+  <rect x="21" y="50" width="6" height="4" rx="1" fill="#0a0e14" stroke="rgba(0,210,255,0.3)" stroke-width="0.8"/>
+  <rect x="29" y="50" width="6" height="4" rx="1" fill="#0a0e14" stroke="rgba(0,210,255,0.3)" stroke-width="0.8"/>
+  <rect x="37" y="50" width="6" height="4" rx="1" fill="#0a0e14" stroke="rgba(0,210,255,0.3)" stroke-width="0.8"/>
+  <circle cx="62" cy="52" r="4" fill="#0a0e14" stroke="rgba(0,210,255,0.4)" stroke-width="1" class="dvr-power"/>
+  <path d="M62 49.5 L62 51.5" stroke="#00d2ff" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M59.8 50.2 A3 3 0 1 0 64.2 50.2" stroke="#00d2ff" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <rect x="44" y="49" width="13" height="7" rx="2" fill="rgba(0,210,255,0.08)" stroke="rgba(0,210,255,0.3)" stroke-width="0.8"/>
+  <text x="46" y="54.5" font-size="4.5" fill="#00d2ff" font-family="monospace" font-weight="bold">24H</text>
+</svg>
+</span>
             <h3>DVR / NVR com Gravação Local</h3>
             <ul>
                 <li>Gravação contínua 24h ou por agendamento.</li>
@@ -930,7 +1137,44 @@
             </ul>
         </div>
         <div class="card">
-            <span class="card-icon">☁️</span>
+            <span class="card-icon">
+<svg class="icon-cloud" viewBox="0 0 80 70" width="70" height="60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="cloud-glow" cx="50%" cy="55%" r="50%">
+      <stop offset="0%" stop-color="rgba(0,210,255,0.14)"/>
+      <stop offset="100%" stop-color="rgba(0,210,255,0)"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="40" cy="32" rx="28" ry="20" fill="url(#cloud-glow)" class="cloud-breathe"/>
+  <circle cx="28" cy="35" r="10" fill="#1a2e4a"/>
+  <circle cx="40" cy="29" r="13" fill="#1a2e4a"/>
+  <circle cx="52" cy="35" r="9" fill="#1a2e4a"/>
+  <rect x="19" y="35" width="42" height="10" fill="#1a2e4a"/>
+  <path d="M19 39 Q19 22 28 22 Q30 14 40 14 Q52 14 52 22 Q62 22 61 35 L19 35 Z"
+        fill="#1e3050" stroke="rgba(0,210,255,0.45)" stroke-width="1.2"/>
+  <g class="cloud-upload">
+    <line x1="40" y1="63" x2="40" y2="52" stroke="#00d2ff" stroke-width="2" stroke-linecap="round"/>
+    <polyline points="36,57 40,52 44,57" stroke="#00d2ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(34,26)">
+    <circle cx="6" cy="9" r="1.8" fill="#00d2ff" class="cloud-wifi-dot"/>
+    <path d="M2.5 6 Q6 2.5 9.5 6" stroke="#00d2ff" stroke-width="1.3" fill="none" stroke-linecap="round" class="cloud-arc1"/>
+    <path d="M0 3.5 Q6 -2 12 3.5" stroke="#00d2ff" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.55" class="cloud-arc2"/>
+  </g>
+  <circle cx="33" cy="60" r="2" fill="#00d2ff" opacity="0">
+    <animate attributeName="cy" values="63;46" dur="1.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.8;0" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="40" cy="60" r="1.5" fill="white" opacity="0">
+    <animate attributeName="cy" values="63;46" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.6;0" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="47" cy="60" r="2" fill="#00d2ff" opacity="0">
+    <animate attributeName="cy" values="63;46" dur="1.8s" begin="1.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.8;0" dur="1.8s" begin="1.2s" repeatCount="indefinite"/>
+  </circle>
+</svg>
+</span>
             <h3>CFTV em Nuvem</h3>
             <ul>
                 <li>Gravação remota sem necessidade de DVR local.</li>
