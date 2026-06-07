@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Montagem de QDC | PowerTech Industrial</title>
+<meta name="description" content="Ferramenta de montagem visual de Quadros de Distribuição de Cargas – PowerTech Industrial, Floriano-PI">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════════════════ */
+:root {
+  --deep:       #070b10;
+  --surface:    #0d1420;
+  --card:       #111927;
+  --card2:      #162030;
+  --border:     rgba(0,210,255,0.15);
+  --border2:    rgba(0,210,255,0.3);
+  --cyan:       #00d2ff;
+  --cyan-dim:   rgba(0,210,255,0.5);
+  --cyan-glow:  rgba(0,210,255,0.12);
+  --white:      #f0f6ff;
+  --gray:       #7a9ab5;
+  --red:        #ff4455;
+  --green:      #00e676;
+  --yellow:     #ffd600;
+  --orange:     #ff9100;
+  --mono-font:  'Share Tech Mono', monospace;
+  --body-font:  'Exo 2', sans-serif;
+  --module-w:   38px;
+  --module-h:   90px;
+  --rail-pad:   10px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body-font);
+  background: var(--deep);
+  color: var(--white);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+button { cursor: pointer; font-family: var(--body-font); }
+input, select { font-family: var(--body-font); }
+
+/* ═══════════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════════ */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  height: 56px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  z-index: 100;
+}
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.topbar-logo-mark {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #003366, #0056b3);
+  border: 1px solid var(--cyan);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 900; color: var(--cyan);
+  font-family: var(--mono-font);
+  box-shadow: 0 0 10px rgba(0,210,255,0.2);
+}
+.topbar-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--white);
+}
+.topbar-title span { color: var(--cyan); }
+.topbar-sep {
+  width: 1px; height: 28px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.topbar-project-name {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border2);
+  color: var(--white);
+  font-family: var(--mono-font);
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  width: 200px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.topbar-project-name:focus { border-color: var(--cyan); }
+.topbar-project-name::placeholder { color: var(--gray); }
+
+.topbar-select {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  color: var(--white);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+.topbar-select:focus { border-color: var(--cyan); }
+.topbar-select option { background: var(--surface); }
+
+.tension-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--mono-font);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--cyan);
+}
+.tension-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 6px var(--cyan);
+  animation: tdot 2s ease-in-out infinite;
+}
+@keyframes tdot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.topbar-spacer { flex: 1; }
+
+.topbar-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--white);
+  transition: all 0.25s;
+}
+.topbar-btn:hover { color: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 12px var(--cyan-glow); }
+.topbar-btn.primary {
+  background: linear-gradient(90deg, #003366, #0056b3);
+  border-color: var(--cyan);
+  color: var(--white);
+}
+.topbar-btn.primary:hover { background: var(--cyan); color: var(--deep); box-shadow: 0 0 20px rgba(0,210,255,0.4); }
+.topbar-btn svg { flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════════
+   MAIN LAYOUT
+═══════════════════════════════════════════════ */
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════
+   SIDEBAR — PALETTE
+═══════════════════════════════════════════════ */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.sidebar-section {
+  padding: 14px 14px 8px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--cyan-dim);
+  font-family: var(--mono-font);
+  border-bottom: 1px solid var(--border);
+}
+
+.palette-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: grab;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.2s;
+  user-select: none;
+  position: relative;
+}
+.palette-item:hover { background: var(--cyan-glow); }
+.palette-item:active { cursor: grabbing; }
+.palette-item.dragging-source { opacity: 0.4; }
+
+.palette-item-svg {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.palette-item-info { flex: 1; min-width: 0; }
+.palette-item-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.palette-item-spec {
+  font-size: 0.65rem;
+  color: var(--gray);
+  font-family: var(--mono-font);
+}
+.palette-item-mod {
+  font-size: 0.6rem;
+  font-family: var(--mono-font);
+  color: var(--cyan-dim);
+  background: var(--cyan-glow);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 5px;
+  flex-shrink: 0;
+}
+
+/* Sub-palette for disjuntores — pole selector */
+.sub-palette {
+  background: rgba(0,0,0,0.2);
+  border-bottom: 1px solid var(--border);
+}
+.sub-palette-row {
+  display: flex;
+  gap: 6px;
+  padding: 6px 14px 10px;
+  flex-wrap: wrap;
+}
+.sub-btn {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border2);
+  background: var(--card);
+  color: var(--gray);
+  font-size: 0.68rem;
+  font-weight: 700;
+  font-family: var(--mono-font);
+  cursor: grab;
+  transition: all 0.2s;
+  user-select: none;
+}
+.sub-btn:hover { color: var(--cyan); border-color: var(--cyan); background: var(--cyan-glow); }
+
+/* Current selector inside sidebar */
+.current-selector {
+  padding: 8px 14px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.current-selector label {
+  display: block;
+  font-size: 0.6rem;
+  font-family: var(--mono-font);
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+}
+.current-selector select {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  color: var(--white);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  outline: none;
+}
+.current-selector select option { background: var(--surface); }
+
+/* ═══════════════════════════════════════════════
+   CANVAS AREA
+═══════════════════════════════════════════════ */
+.canvas-area {
+  flex: 1;
+  overflow: auto;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(0,210,255,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(0,83,179,0.04) 0%, transparent 50%),
+    var(--deep);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 30px;
+}
+.canvas-area::-webkit-scrollbar { width: 6px; height: 6px; }
+.canvas-area::-webkit-scrollbar-track { background: transparent; }
+.canvas-area::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* ── Gabinete ── */
+.cabinet {
+  background: linear-gradient(160deg, #1e2a3a, #141e2c);
+  border: 2px solid rgba(0,210,255,0.25);
+  border-radius: 16px;
+  padding: 20px 18px 14px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 30px 80px rgba(0,0,0,0.7),
+    0 0 40px rgba(0,210,255,0.05);
+  min-width: 300px;
+  position: relative;
+}
+.cabinet::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 13px;
+  border: 1px solid rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+.cabinet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.cabinet-label {
+  font-size: 0.65rem;
+  font-family: var(--mono-font);
+  color: var(--cyan-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.cabinet-size-info {
+  font-size: 0.6rem;
+  font-family: var(--mono-font);
+  color: var(--gray);
+}
+.cabinet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Trilho ── */
+.rail-wrapper {
+  position: relative;
+}
+.rail-label {
+  font-size: 0.55rem;
+  font-family: var(--mono-font);
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+.rail {
+  background: linear-gradient(180deg, #0d1520, #080e18);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: var(--rail-pad);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-height: calc(var(--module-h) + 20px);
+  position: relative;
+  transition: border-color 0.2s;
+}
+.rail.drag-over {
+  border-color: var(--cyan);
+  box-shadow: 0 0 15px var(--cyan-glow);
+}
+/* DIN track line */
+.rail::before {
+  content: '';
+  position: absolute;
+  left: var(--rail-pad);
+  right: var(--rail-pad);
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(180,180,180,0.15), rgba(180,180,180,0.15), transparent);
+  pointer-events: none;
+}
+
+.rail-empty-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-family: var(--mono-font);
+  color: rgba(255,255,255,0.1);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.rail:not(:empty) .rail-empty-hint,
+.rail.has-components .rail-empty-hint { display: none; }
+
+/* ── Drop ghost slot ── */
+.drop-ghost {
+  width: var(--module-w);
+  height: var(--module-h);
+  border: 2px dashed rgba(0,210,255,0.4);
+  border-radius: 6px;
+  background: rgba(0,210,255,0.05);
+  flex-shrink: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: var(--cyan-dim);
+}
+.rail.drag-over .drop-ghost { display: flex; }
+
+/* ── Barramento ── */
+.busbar {
+  display: flex;
+  gap: 3px;
+  padding: 6px var(--rail-pad);
+  background: rgba(0,0,0,0.3);
+  border-radius: 0 0 4px 4px;
+  margin-top: 2px;
+}
+.busbar-seg {
+  height: 8px;
+  border-radius: 2px;
+  flex: 1;
+  transition: background 0.5s;
+}
+
+/* ── Add rail button ── */
+.add-rail-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  border: 1px dashed rgba(0,210,255,0.2);
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(0,210,255,0.4);
+  font-size: 0.7rem;
+  font-family: var(--mono-font);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.25s;
+  margin-top: 4px;
+}
+.add-rail-btn:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-glow);
+}
+
+/* ═══════════════════════════════════════════════
+   COMPONENTS ON RAIL
+═══════════════════════════════════════════════ */
+.qdc-component {
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  user-select: none;
+}
+.qdc-component:hover {
+  transform: translateY(-3px);
+  z-index: 10;
+}
+.qdc-component.selected {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  box-shadow: 0 0 12px var(--cyan-glow);
+  z-index: 10;
+}
+.qdc-component .comp-delete {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--red);
+  border: none;
+  color: white;
+  font-size: 0.55rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  line-height: 1;
+}
+.qdc-component:hover .comp-delete,
+.qdc-component.selected .comp-delete { display: flex; }
+
+.comp-label {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.5rem;
+  font-family: var(--mono-font);
+  color: var(--gray);
+  white-space: nowrap;
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════
+   RIGHT PANEL — PROPERTIES
+═══════════════════════════════════════════════ */
+.props-panel {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: transform 0.3s;
+}
+.props-panel::-webkit-scrollbar { width: 4px; }
+.props-panel::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.props-header {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.65rem;
+  font-family: var(--mono-font);
+  color: var(--cyan-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.props-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px 20px;
+  color: rgba(255,255,255,0.1);
+  font-size: 0.75rem;
+  font-family: var(--mono-font);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.props-form { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.props-group label {
+  display: block;
+  font-size: 0.6rem;
+  font-family: var(--mono-font);
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+}
+.props-group input,
+.props-group select {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  color: var(--white);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 0.82rem;
+  font-family: var(--mono-font);
+  outline: none;
+  transition: border-color 0.25s;
+}
+.props-group input:focus,
+.props-group select:focus { border-color: var(--cyan); }
+.props-group select option { background: var(--surface); }
+
+.props-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  font-family: var(--mono-font);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.props-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 2px 0;
+}
+.props-apply-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--cyan);
+  background: linear-gradient(90deg, #003366, #0056b3);
+  color: var(--white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.25s;
+  margin-top: 4px;
+}
+.props-apply-btn:hover { background: var(--cyan); color: var(--deep); box-shadow: 0 0 16px rgba(0,210,255,0.35); }
+.props-delete-btn {
+  width: 100%;
+  padding: 9px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,68,85,0.4);
+  background: transparent;
+  color: var(--red);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.25s;
+}
+.props-delete-btn:hover { background: rgba(255,68,85,0.1); border-color: var(--red); }
+
+/* ═══════════════════════════════════════════════
+   STATUSBAR
+═══════════════════════════════════════════════ */
+.statusbar {
+  height: 28px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 16px;
+  font-size: 0.62rem;
+  font-family: var(--mono-font);
+  color: var(--gray);
+  flex-shrink: 0;
+}
+.statusbar-item { display: flex; align-items: center; gap: 5px; }
+.statusbar-item strong { color: var(--cyan); }
+.status-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 4px var(--green);
+}
+
+/* ═══════════════════════════════════════════════
+   SETUP MODAL (first screen)
+═══════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,9,14,0.92);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.hidden { display: none; }
+.modal-box {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8), 0 0 30px rgba(0,210,255,0.06);
+}
+.modal-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.modal-logo-mark {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, #003366, #0056b3);
+  border: 1px solid var(--cyan);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; font-weight: 900; color: var(--cyan);
+  font-family: var(--mono-font);
+  box-shadow: 0 0 16px rgba(0,210,255,0.25);
+}
+.modal-logo-text { line-height: 1.2; }
+.modal-logo-text .t1 { font-size: 0.75rem; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 2px; }
+.modal-logo-text .t2 { font-size: 0.65rem; color: var(--cyan); font-family: var(--mono-font); }
+
+.modal-h1 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.modal-h1 span { color: var(--cyan); }
+.modal-sub {
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin-bottom: 30px;
+}
+
+.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.modal-field label {
+  display: block;
+  font-size: 0.62rem;
+  font-family: var(--mono-font);
+  color: var(--cyan-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.modal-field input,
+.modal-field select {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.modal-field input:focus,
+.modal-field select:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px rgba(0,210,255,0.1);
+}
+.modal-field select option { background: var(--surface); }
+.modal-field.full { grid-column: 1/-1; }
+
+/* Size cards */
+.size-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+.size-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.size-card:hover { border-color: var(--border2); background: var(--card2); }
+.size-card.selected {
+  border-color: var(--cyan);
+  background: var(--cyan-glow);
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+.size-card .sc-mod {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--cyan);
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.size-card .sc-label {
+  font-size: 0.6rem;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tension cards */
+.tension-cards { display: flex; flex-direction: column; gap: 8px; margin-bottom: 26px; }
+.tension-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.tension-card:hover { border-color: var(--border2); }
+.tension-card.selected { border-color: var(--cyan); background: var(--cyan-glow); }
+.tension-card .tc-phases {
+  display: flex;
+  gap: 4px;
+}
+.tc-phase {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.tension-card .tc-info { flex: 1; }
+.tension-card .tc-name { font-size: 0.82rem; font-weight: 700; color: var(--white); }
+.tension-card .tc-desc { font-size: 0.65rem; color: var(--gray); font-family: var(--mono-font); }
+.tension-card .tc-v {
+  font-size: 0.9rem;
+  font-weight: 900;
+  font-family: var(--mono-font);
+  color: var(--cyan);
+}
+
+.modal-start-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(90deg, #003366, #0056b3);
+  border: 1px solid var(--cyan);
+  border-radius: 12px;
+  color: var(--white);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  transition: all 0.3s;
+}
+.modal-start-btn:hover {
+  background: var(--cyan);
+  color: var(--deep);
+  box-shadow: 0 0 30px rgba(0,210,255,0.5);
+}
+
+/* ═══════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════ */
+.toast-container {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 0.78rem;
+  font-family: var(--mono-font);
+  color: var(--white);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  animation: toastIn 0.3s ease, toastOut 0.3s ease 2.2s forwards;
+  white-space: nowrap;
+}
+.toast.success { border-color: var(--green); color: var(--green); }
+.toast.error { border-color: var(--red); color: var(--red); }
+@keyframes toastIn  { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+@keyframes toastOut { from{opacity:1} to{opacity:0} }
+
+/* ═══════════════════════════════════════════════
+   DRAG GHOST
+═══════════════════════════════════════════════ */
+#drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.85;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .props-panel { display: none; }
+  .sidebar { width: 180px; }
+}
+@media (max-width: 640px) {
+  .sidebar { display: none; }
+  .topbar-project-name { width: 120px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── SETUP MODAL ─────────────────────────────── -->
+<div class="modal-overlay" id="setup-modal">
+  <div class="modal-box">
+    <div class="modal-logo">
+      <div class="modal-logo-mark">PT</div>
+      <div class="modal-logo-text">
+        <div class="t1">PowerTech Industrial</div>
+        <div class="t2">// qdc.designer v1.0</div>
+      </div>
+    </div>
+
+    <h1 class="modal-h1">Novo <span>Projeto</span></h1>
+    <p class="modal-sub">Configure o quadro antes de iniciar a montagem.</p>
+
+    <div class="modal-grid">
+      <div class="modal-field full">
+        <label>Nome do Projeto</label>
+        <input type="text" id="m-name" placeholder="Ex: QDC Residência – Sala principal" maxlength="60">
+      </div>
+      <div class="modal-field full">
+        <label>Cliente (opcional)</label>
+        <input type="text" id="m-client" placeholder="Nome do cliente" maxlength="50">
+      </div>
+    </div>
+
+    <div style="margin-bottom:10px;">
+      <div style="font-size:0.62rem;font-family:var(--mono-font);color:var(--cyan-dim);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Tamanho do Quadro (módulos DIN)</div>
+      <div class="size-cards">
+        <div class="size-card" data-modules="12" data-rails="1" onclick="selectSize(this)">
+          <span class="sc-mod">12</span>
+          <span class="sc-label">módulos<br>1 trilho</span>
+        </div>
+        <div class="size-card selected" data-modules="24" data-rails="2" onclick="selectSize(this)">
+          <span class="sc-mod">24</span>
+          <span class="sc-label">módulos<br>2 trilhos</span>
+        </div>
+        <div class="size-card" data-modules="36" data-rails="3" onclick="selectSize(this)">
+          <span class="sc-mod">36</span>
+          <span class="sc-label">módulos<br>3 trilhos</span>
+        </div>
+        <div class="size-card" data-modules="48" data-rails="4" onclick="selectSize(this)">
+          <span class="sc-mod">48</span>
+          <span class="sc-label">módulos<br>4 trilhos</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:0.62rem;font-family:var(--mono-font);color:var(--cyan-dim);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Sistema de Tensão</div>
+    <div class="tension-cards">
+      <div class="tension-card selected" data-tension="mono127" onclick="selectTension(this)">
+        <div class="tc-phases"><div class="tc-phase" style="background:#ffd600"></div><div class="tc-phase" style="background:#1a6aff"></div></div>
+        <div class="tc-info"><div class="tc-name">Monofásico</div><div class="tc-desc">Fase + Neutro</div></div>
+        <div class="tc-v">127V</div>
+      </div>
+      <div class="tension-card" data-tension="mono220" onclick="selectTension(this)">
+        <div class="tc-phases"><div class="tc-phase" style="background:#ff9100"></div><div class="tc-phase" style="background:#1a6aff"></div></div>
+        <div class="tc-info"><div class="tc-name">Monofásico</div><div class="tc-desc">Fase + Neutro</div></div>
+        <div class="tc-v">220V</div>
+      </div>
+      <div class="tension-card" data-tension="bi220" onclick="selectTension(this)">
+        <div class="tc-phases"><div class="tc-phase" style="background:#ff9100"></div><div class="tc-phase" style="background:#ff4455"></div></div>
+        <div class="tc-info"><div class="tc-name">Bifásico</div><div class="tc-desc">Fase + Fase</div></div>
+        <div class="tc-v">220V</div>
+      </div>
+      <div class="tension-card" data-tension="tri220" onclick="selectTension(this)">
+        <div class="tc-phases"><div class="tc-phase" style="background:#ff9100"></div><div class="tc-phase" style="background:#ff4455"></div><div class="tc-phase" style="background:#ffd600"></div><div class="tc-phase" style="background:#1a6aff"></div></div>
+        <div class="tc-info"><div class="tc-name">Trifásico</div><div class="tc-desc">3F + Neutro</div></div>
+        <div class="tc-v">220V</div>
+      </div>
+      <div class="tension-card" data-tension="tri380" onclick="selectTension(this)">
+        <div class="tc-phases"><div class="tc-phase" style="background:#ff9100"></div><div class="tc-phase" style="background:#ff4455"></div><div class="tc-phase" style="background:#ffd600"></div><div class="tc-phase" style="background:#1a6aff"></div></div>
+        <div class="tc-info"><div class="tc-name">Trifásico</div><div class="tc-desc">3F + Neutro</div></div>
+        <div class="tc-v">380V</div>
+      </div>
+    </div>
+
+    <button class="modal-start-btn" onclick="startProject()">⚡ Iniciar Montagem</button>
+  </div>
+</div>
+
+<!-- ── DRAG GHOST ──────────────────────────────── -->
+<div id="drag-ghost"></div>
+
+<!-- ── TOPBAR ──────────────────────────────────── -->
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="topbar-logo-mark">PT</div>
+    <div class="topbar-title">Power<span>Tech</span> · QDC</div>
+  </a>
+  <div class="topbar-sep"></div>
+  <input type="text" class="topbar-project-name" id="project-name-top" placeholder="Nome do projeto" maxlength="60">
+  <div class="topbar-sep"></div>
+  <div class="tension-badge">
+    <div class="tension-dot"></div>
+    <span id="tension-label-top">–</span>
+  </div>
+
+  <div class="topbar-spacer"></div>
+
+  <button class="topbar-btn" onclick="newProject()" title="Novo Projeto">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+    Novo
+  </button>
+  <button class="topbar-btn" onclick="saveProject()" title="Salvar">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17,21 17,13 7,13 7,21"/><polyline points="7,3 7,8 15,8"/></svg>
+    Salvar
+  </button>
+  <button class="topbar-btn" onclick="loadProject()" title="Carregar">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+    Carregar
+  </button>
+  <button class="topbar-btn primary" onclick="exportPDF()" title="Exportar PDF">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    PDF
+  </button>
+</div>
+
+<!-- ── APP BODY ────────────────────────────────── -->
+<div class="app-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">Proteção Geral</div>
+
+    <div class="palette-item" draggable="true"
+         data-type="dps" data-modules="3" data-label="DPS"
+         onmousedown="startDrag(event,{type:'dps',modules:3,label:'DPS',current:'',circuit:''})">
+      <div class="palette-item-svg">
+        <svg viewBox="0 0 28 60" width="18" height="38">
+          <rect x="1" y="1" width="26" height="58" rx="3" fill="#c0392b" stroke="#ff6655" stroke-width="1"/>
+          <rect x="4" y="4" width="20" height="18" rx="2" fill="#922b21"/>
+          <text x="14" y="16" text-anchor="middle" font-size="7" fill="white" font-weight="bold" font-family="monospace">DPS</text>
+          <path d="M14 25 L10 34 L13 34 L9 46 L18 32 L15 32 Z" fill="#ffd600" stroke="#ffaa00" stroke-width="0.5"/>
+          <rect x="10" y="48" width="8" height="4" rx="1" fill="#555"/>
+          <rect x="10" y="53" width="8" height="4" rx="1" fill="#555"/>
+        </svg>
+      </div>
+      <div class="palette-item-info">
+        <div class="palette-item-name">DPS</div>
+        <div class="palette-item-spec">Descarga atmosférica</div>
+      </div>
+      <div class="palette-item-mod">3M</div>
+    </div>
+
+    <div class="sidebar-section">DR — Diferencial Residual</div>
+
+    <div class="palette-item" draggable="true"
+         data-type="dr" data-modules="2" data-label="DR 25A"
+         onmousedown="startDrag(event,{type:'dr',modules:2,label:'DR 25A',current:'25',circuit:''})">
+      <div class="palette-item-svg">
+        <svg viewBox="0 0 22 60" width="16" height="40">
+          <rect x="1" y="1" width="20" height="58" rx="3" fill="#2874a6" stroke="#5dade2" stroke-width="1"/>
+          <rect x="3" y="3" width="16" height="14" rx="2" fill="#1a5276"/>
+          <text x="11" y="13" text-anchor="middle" font-size="6" fill="white" font-weight="bold" font-family="monospace">DR</text>
+          <rect x="7" y="20" width="8" height="10" rx="1" fill="#c0392b"/>
+          <text x="11" y="27.5" text-anchor="middle" font-size="5" fill="white" font-weight="bold" font-family="monospace">TEST</text>
+          <circle cx="11" cy="38" r="4" fill="#1a5276" stroke="#5dade2" stroke-width="1"/>
+          <rect x="9" y="46" width="4" height="8" rx="1" fill="#777"/>
+          <rect x="9" y="54" width="4" height="4" rx="1" fill="#555"/>
+        </svg>
+      </div>
+      <div class="palette-item-info">
+        <div class="palette-item-name">DR 25A</div>
+        <div class="palette-item-spec">30mA · 2P</div>
+      </div>
+      <div class="palette-item-mod">2M</div>
+    </div>
+
+    <div class="palette-item" draggable="true"
+         data-type="dr" data-modules="2" data-label="DR 40A"
+         onmousedown="startDrag(event,{type:'dr',modules:2,label:'DR 40A',current:'40',circuit:''})">
+      <div class="palette-item-svg">
+        <svg viewBox="0 0 22 60" width="16" height="40">
+          <rect x="1" y="1" width="20" height="58" rx="3" fill="#1a5276" stroke="#5dade2" stroke-width="1"/>
+          <rect x="3" y="3" width="16" height="14" rx="2" fill="#154360"/>
+          <text x="11" y="13" text-anchor="middle" font-size="6" fill="white" font-weight="bold" font-family="monospace">DR</text>
+          <rect x="7" y="20" width="8" height="10" rx="1" fill="#c0392b"/>
+          <text x="11" y="27.5" text-anchor="middle" font-size="5" fill="white" font-weight="bold" font-family="monospace">TEST</text>
+          <circle cx="11" cy="38" r="4" fill="#154360" stroke="#5dade2" stroke-width="1"/>
+          <rect x="9" y="46" width="4" height="8" rx="1" fill="#777"/>
+          <rect x="9" y="54" width="4" height="4" rx="1" fill="#555"/>
+        </svg>
+      </div>
+      <div class="palette-item-info">
+        <div class="palette-item-name">DR 40A</div>
+        <div class="palette-item-spec">30mA · 2P</div>
+      </div>
+      <div class="palette-item-mod">2M</div>
+    </div>
+
+    <div class="palette-item" draggable="true"
+         data-type="dr" data-modules="4" data-label="DR 63A 4P"
+         onmousedown="startDrag(event,{type:'dr4p',modules:4,label:'DR 63A 4P',current:'63',circuit:''})">
+      <div class="palette-item-svg">
+        <svg viewBox="0 0 22 60" width="16" height="40">
+          <rect x="1" y="1" width="20" height="58" rx="3" fill="#0e3460" stroke="#3498db" stroke-width="1"/>
+          <rect x="3" y="3" width="16" height="14" rx="2" fill="#0a2744"/>
+          <text x="11" y="13" text-anchor="middle" font-size="5.5" fill="white" font-weight="bold" font-family="monospace">DR4P</text>
+          <rect x="7" y="20" width="8" height="10" rx="1" fill="#c0392b"/>
+          <text x="11" y="27.5" text-anchor="middle" font-size="5" fill="white" font-weight="bold" font-family="monospace">TEST</text>
+          <circle cx="11" cy="38" r="4" fill="#0a2744" stroke="#3498db" stroke-width="1"/>
+          <rect x="9" y="46" width="4" height="8" rx="1" fill="#777"/>
+        </svg>
+      </div>
+      <div class="palette-item-info">
+        <div class="palette-item-name">DR 63A 4P</div>
+        <div class="palette-item-spec">30mA · 4P</div>
+      </div>
+      <div class="palette-item-mod">4M</div>
+    </div>
+
+    <div class="sidebar-section">Disjuntores</div>
+    <div class="current-selector">
+      <label>Corrente (A)</label>
+      <select id="disj-current">
+        <option>6</option><option>10</option><option>16</option>
+        <option selected>20</option><option>25</option><option>32</option>
+        <option>40</option><option>50</option><option>63</option>
+      </select>
+    </div>
+
+    <div style="padding:4px 14px 4px;font-size:0.6rem;font-family:var(--mono-font);color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;">Arraste o polo desejado</div>
+    <div class="sub-palette">
+      <div class="sub-palette-row">
+        <div class="sub-btn" draggable="true"
+             onmousedown="startDrag(event,{type:'disj1p',modules:1,label:'Disj 1P',current:document.getElementById('disj-current').value,circuit:''})">
+          1P
+        </div>
+        <div class="sub-btn" draggable="true"
+             onmousedown="startDrag(event,{type:'disj2p',modules:2,label:'Disj 2P',current:document.getElementById('disj-current').value,circuit:''})">
+          2P
+        </div>
+        <div class="sub-btn" draggable="true"
+             onmousedown="startDrag(event,{type:'disj3p',modules:3,label:'Disj 3P',current:document.getElementById('disj-current').value,circuit:''})">
+          3P
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section" style="margin-top:auto;">Projetos Salvos</div>
+    <div id="saved-list" style="padding:8px 10px;"></div>
+  </aside>
+
+  <!-- CANVAS -->
+  <main class="canvas-area" id="canvas-area">
+    <div class="cabinet" id="cabinet">
+      <div class="cabinet-header">
+        <span class="cabinet-label" id="cabinet-label">QDC · Novo Projeto</span>
+        <span class="cabinet-size-info" id="cabinet-size-info">24 módulos · 2 trilhos</span>
+      </div>
+      <div class="cabinet-body" id="cabinet-body">
+        <!-- Rails injected by JS -->
+      </div>
+      <button class="add-rail-btn" onclick="addRail()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Adicionar Trilho
+      </button>
+    </div>
+  </main>
+
+  <!-- PROPERTIES PANEL -->
+  <aside class="props-panel" id="props-panel">
+    <div class="props-header">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41"/></svg>
+      Propriedades
+    </div>
+    <div class="props-empty" id="props-empty">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Clique em um<br>componente
+    </div>
+    <div class="props-form" id="props-form" style="display:none;">
+      <div id="props-type-badge"></div>
+      <div class="props-divider"></div>
+      <div class="props-group">
+        <label>Corrente (A)</label>
+        <select id="p-current">
+          <option>6</option><option>10</option><option>16</option>
+          <option>20</option><option>25</option><option>32</option>
+          <option>40</option><option>50</option><option>63</option>
+        </select>
+      </div>
+      <div class="props-group" id="p-circuit-group">
+        <label>Circuito / Descrição</label>
+        <input type="text" id="p-circuit" placeholder="Ex: Tomadas sala" maxlength="30">
+      </div>
+      <div class="props-group">
+        <label>Fase</label>
+        <select id="p-phase">
+          <option value="F1">Fase 1</option>
+          <option value="F2">Fase 2</option>
+          <option value="F3">Fase 3</option>
+        </select>
+      </div>
+      <button class="props-apply-btn" onclick="applyProps()">✓ Aplicar</button>
+      <button class="props-delete-btn" onclick="deleteSelected()">✕ Remover componente</button>
+    </div>
+  </aside>
+</div>
+
+<!-- STATUSBAR -->
+<div class="statusbar">
+  <div class="statusbar-item"><div class="status-dot"></div><span>Online</span></div>
+  <div class="statusbar-item">Módulos usados: <strong id="sb-used">0</strong> / <strong id="sb-total">24</strong></div>
+  <div class="statusbar-item">Componentes: <strong id="sb-comps">0</strong></div>
+  <div class="statusbar-item">Circuitos: <strong id="sb-circuits">0</strong></div>
+  <div class="statusbar-item" style="margin-left:auto;color:rgba(255,255,255,0.2);">PowerTech Industrial · QDC Designer v1.0</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toast-container"></div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════ */
+const STATE = {
+  projectName: 'Novo Projeto',
+  client: '',
+  tension: 'mono127',
+  modules: 24,
+  rails: [],        // [{id, modules, components:[{id,type,modules,label,current,circuit,phase}]}]
+  selected: null,   // {railId, compId}
+  railsPerProject: 2,
+  railModules: 12,
+  nextId: 1,
+};
+
+const TENSION_META = {
+  mono127: { label: 'Mono 127V · 1F+N', phases: ['#ffd600','#1a6aff'], busColors: ['#ffd600','#1a6aff','#00e676'] },
+  mono220: { label: 'Mono 220V · 1F+N', phases: ['#ff9100','#1a6aff'], busColors: ['#ff9100','#1a6aff','#00e676'] },
+  bi220:   { label: 'Bifásico 220V · 2F', phases: ['#ff9100','#ff4455'], busColors: ['#ff9100','#ff4455','#1a6aff','#00e676'] },
+  tri220:  { label: 'Trifásico 220V · 3F+N', phases: ['#ff9100','#ff4455','#ffd600','#1a6aff'], busColors: ['#ff9100','#ff4455','#ffd600','#1a6aff','#00e676'] },
+  tri380:  { label: 'Trifásico 380V · 3F+N', phases: ['#ff9100','#ff4455','#ffd600','#1a6aff'], busColors: ['#ff9100','#ff4455','#ffd600','#1a6aff','#00e676'] },
+};
+
+const COMP_META = {
+  dps:    { label:'DPS', color:'#c0392b', textColor:'#fff', modules:3 },
+  dr:     { label:'DR',  color:'#2874a6', textColor:'#fff', modules:2 },
+  dr4p:   { label:'DR4P',color:'#0e3460', textColor:'#fff', modules:4 },
+  disj1p: { label:'1P',  color:'#1a3a1a', textColor:'#fff', modules:1 },
+  disj2p: { label:'2P',  color:'#1a3a1a', textColor:'#fff', modules:2 },
+  disj3p: { label:'3P',  color:'#1a3a1a', textColor:'#fff', modules:3 },
+};
+
+/* ═══════════════════════════════════════════════
+   SETUP MODAL
+═══════════════════════════════════════════════ */
+let _selectedModules = 24;
+let _selectedRails   = 2;
+let _selectedTension = 'mono127';
+
+function selectSize(el) {
+  document.querySelectorAll('.size-card').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  _selectedModules = +el.dataset.modules;
+  _selectedRails   = +el.dataset.rails;
+}
+function selectTension(el) {
+  document.querySelectorAll('.tension-card').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  _selectedTension = el.dataset.tension;
+}
+
+function startProject() {
+  const name   = document.getElementById('m-name').value.trim() || 'Novo Projeto';
+  const client = document.getElementById('m-client').value.trim();
+  STATE.projectName   = name;
+  STATE.client        = client;
+  STATE.tension       = _selectedTension;
+  STATE.modules       = _selectedModules;
+  STATE.railsPerProject = _selectedRails;
+  STATE.railModules   = _selectedModules / _selectedRails;
+  STATE.rails         = [];
+  STATE.selected      = null;
+  STATE.nextId        = 1;
+
+  document.getElementById('project-name-top').value = name;
+  document.getElementById('tension-label-top').textContent = TENSION_META[_selectedTension].label;
+  document.getElementById('setup-modal').classList.add('hidden');
+
+  buildCabinet();
+  updateStatusBar();
+  refreshSavedList();
+  showToast('Projeto iniciado! Arraste componentes para os trilhos.', 'success');
+}
+
+function newProject() {
+  document.getElementById('setup-modal').classList.remove('hidden');
+}
+
+/* ═══════════════════════════════════════════════
+   CABINET BUILDER
+═══════════════════════════════════════════════ */
+function buildCabinet() {
+  const body = document.getElementById('cabinet-body');
+  body.innerHTML = '';
+  STATE.rails = [];
+
+  for (let i = 0; i < STATE.railsPerProject; i++) {
+    const railId = 'rail-' + STATE.nextId++;
+    STATE.rails.push({ id: railId, modules: STATE.railModules, components: [] });
+    body.appendChild(createRailDOM(railId, i + 1));
+  }
+
+  document.getElementById('cabinet-label').textContent = 'QDC · ' + STATE.projectName;
+  document.getElementById('cabinet-size-info').textContent =
+    STATE.modules + ' módulos · ' + STATE.railsPerProject + ' trilhos';
+  document.getElementById('sb-total').textContent = STATE.modules;
+  updateBusbars();
+}
+
+function createRailDOM(railId, num) {
+  const wrap  = document.createElement('div');
+  wrap.className = 'rail-wrapper';
+
+  const lbl = document.createElement('div');
+  lbl.className = 'rail-label';
+  lbl.textContent = 'TRILHO ' + num + ' · ' + STATE.railModules + ' módulos';
+
+  const rail = document.createElement('div');
+  rail.className = 'rail';
+  rail.id = railId;
+
+  const hint = document.createElement('div');
+  hint.className = 'rail-empty-hint';
+  hint.textContent = '↙ arraste componentes aqui';
+  rail.appendChild(hint);
+
+  // Drag over events
+  rail.addEventListener('dragover', e => { e.preventDefault(); rail.classList.add('drag-over'); });
+  rail.addEventListener('dragleave', e => { if (!rail.contains(e.relatedTarget)) rail.classList.remove('drag-over'); });
+  rail.addEventListener('drop', e => { e.preventDefault(); rail.classList.remove('drag-over'); handleDrop(e, railId); });
+
+  // Busbar
+  const busbar = document.createElement('div');
+  busbar.className = 'busbar';
+  busbar.id = 'bus-' + railId;
+
+  wrap.appendChild(lbl);
+  wrap.appendChild(rail);
+  wrap.appendChild(busbar);
+  return wrap;
+}
+
+function addRail() {
+  const num    = STATE.rails.length + 1;
+  const railId = 'rail-' + STATE.nextId++;
+  STATE.rails.push({ id: railId, modules: STATE.railModules, components: [] });
+  STATE.modules       += STATE.railModules;
+  STATE.railsPerProject = STATE.rails.length;
+
+  const body = document.getElementById('cabinet-body');
+  body.appendChild(createRailDOM(railId, num));
+
+  document.getElementById('cabinet-size-info').textContent =
+    STATE.modules + ' módulos · ' + STATE.rails.length + ' trilhos';
+  document.getElementById('sb-total').textContent = STATE.modules;
+  updateBusbars();
+  updateStatusBar();
+  showToast('Trilho ' + num + ' adicionado.', 'success');
+}
+
+/* ═══════════════════════════════════════════════
+   BUSBARS
+═══════════════════════════════════════════════ */
+function updateBusbars() {
+  const colors = TENSION_META[STATE.tension].busColors;
+  STATE.rails.forEach(r => {
+    const busEl = document.getElementById('bus-' + r.id);
+    if (!busEl) return;
+    busEl.innerHTML = '';
+    const railEl = document.getElementById(r.id);
+    const railW  = railEl ? railEl.offsetWidth - 20 : 200;
+    const segW   = Math.floor(railW / colors.length);
+    colors.forEach(c => {
+      const seg = document.createElement('div');
+      seg.className = 'busbar-seg';
+      seg.style.background = c;
+      seg.style.boxShadow = `0 0 4px ${c}88`;
+      busEl.appendChild(seg);
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   DRAG & DROP
+═══════════════════════════════════════════════ */
+let _dragData = null;
+let _ghostEl  = document.getElementById('drag-ghost');
+
+function startDrag(e, data) {
+  _dragData = { ...data, current: data.current || document.getElementById('disj-current').value };
+  // Make native drag work too
+  if (e.currentTarget && e.currentTarget.setAttribute) {
+    e.currentTarget.setAttribute('data-drag-active', '1');
+  }
+}
+
+// Native HTML5 drag
+document.addEventListener('dragstart', e => {
+  const item = e.target.closest('[data-type]');
+  if (!item) return;
+  const type    = item.dataset.type;
+  const modules = +item.dataset.modules;
+  const label   = item.dataset.label;
+  const current = document.getElementById('disj-current').value;
+  _dragData = { type, modules, label, current, circuit: '' };
+  e.dataTransfer.effectAllowed = 'copy';
+  e.dataTransfer.setData('text/plain', type);
+  item.classList.add('dragging-source');
+  setTimeout(() => item.classList.remove('dragging-source'), 0);
+});
+
+document.addEventListener('dragend', e => {
+  document.querySelectorAll('.dragging-source').forEach(el => el.classList.remove('dragging-source'));
+});
+
+function handleDrop(e, railId) {
+  if (!_dragData) return;
+  const railObj = STATE.rails.find(r => r.id === railId);
+  if (!railObj) return;
+
+  const usedModules = railObj.components.reduce((s, c) => s + c.modules, 0);
+  const free = railObj.modules - usedModules;
+  if (_dragData.modules > free) {
+    showToast('⚠️ Sem espaço neste trilho! (' + free + ' módulos livres)', 'error');
+    return;
+  }
+
+  const comp = {
+    id:      'comp-' + STATE.nextId++,
+    type:    _dragData.type,
+    modules: _dragData.modules,
+    label:   _dragData.label,
+    current: _dragData.current || '',
+    circuit: _dragData.circuit || '',
+    phase:   'F1',
+  };
+  railObj.components.push(comp);
+  renderComponent(railId, comp);
+  updateStatusBar();
+  _dragData = null;
+}
+
+/* ═══════════════════════════════════════════════
+   RENDER COMPONENT ON RAIL
+═══════════════════════════════════════════════ */
+function renderComponent(railId, comp) {
+  const rail = document.getElementById(railId);
+  if (!rail) return;
+  rail.classList.add('has-components');
+
+  const w = comp.modules * 38 - 2;  // module width
+  const el = document.createElement('div');
+  el.className = 'qdc-component';
+  el.id = comp.id;
+  el.style.width = w + 'px';
+  el.setAttribute('data-comp-id', comp.id);
+  el.setAttribute('data-rail-id', railId);
+
+  el.innerHTML = buildCompSVG(comp, w) + buildCompLabel(comp) + `<button class="comp-delete" onclick="deleteComp(event,'${comp.id}','${railId}')">✕</button>`;
+
+  el.addEventListener('click', () => selectComp(comp.id, railId));
+  rail.appendChild(el);
+}
+
+function buildCompSVG(comp, w) {
+  const h = 90;
+  const type = comp.type;
+
+  if (type === 'dps') {
+    return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+      <rect x="1" y="1" width="${w-2}" height="${h-2}" rx="4" fill="#c0392b" stroke="#ff6655" stroke-width="1.5"/>
+      <rect x="3" y="3" width="${w-6}" height="22" rx="2" fill="#922b21"/>
+      <text x="${w/2}" y="18" text-anchor="middle" font-size="8" fill="white" font-weight="bold" font-family="monospace">DPS</text>
+      <path d="M${w/2} 30 L${w/2-5} 44 L${w/2-2} 44 L${w/2-6} 60 L${w/2+8} 42 L${w/2+3} 42 Z" fill="#ffd600" stroke="#ffaa00" stroke-width="0.5"/>
+      <rect x="${w/2-6}" y="64" width="12" height="6" rx="1.5" fill="#555"/>
+      <rect x="${w/2-6}" y="72" width="12" height="6" rx="1.5" fill="#555"/>
+      <text x="${w/2}" y="85" text-anchor="middle" font-size="6" fill="rgba(255,255,255,0.5)" font-family="monospace">${comp.current ? comp.current+'A' : ''}</text>
+    </svg>`;
+  }
+  if (type === 'dr' || type === 'dr4p') {
+    const blue = type === 'dr4p' ? '#0e3460' : '#2874a6';
+    const blue2 = type === 'dr4p' ? '#0a2744' : '#1a5276';
+    const poles = type === 'dr4p' ? '4P' : '2P';
+    return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+      <rect x="1" y="1" width="${w-2}" height="${h-2}" rx="4" fill="${blue}" stroke="#5dade2" stroke-width="1.5"/>
+      <rect x="3" y="3" width="${w-6}" height="18" rx="2" fill="${blue2}"/>
+      <text x="${w/2}" y="15" text-anchor="middle" font-size="7.5" fill="white" font-weight="bold" font-family="monospace">DR</text>
+      <rect x="${w/2-8}" y="24" width="16" height="14" rx="2" fill="#c0392b"/>
+      <text x="${w/2}" y="33.5" text-anchor="middle" font-size="6" fill="white" font-weight="bold" font-family="monospace">TEST</text>
+      <circle cx="${w/2}" cy="54" r="7" fill="${blue2}" stroke="#5dade2" stroke-width="1.2"/>
+      <text x="${w/2}" y="57" text-anchor="middle" font-size="5.5" fill="#5dade2" font-family="monospace">${poles}</text>
+      <rect x="${w/2-5}" y="65" width="10" height="10" rx="1.5" fill="#777"/>
+      <rect x="${w/2-5}" y="77" width="10" height="6" rx="1.5" fill="#555"/>
+      <text x="${w/2}" y="87" text-anchor="middle" font-size="6" fill="rgba(255,255,255,0.5)" font-family="monospace">${comp.current}A</text>
+    </svg>`;
+  }
+  if (type === 'disj1p' || type === 'disj2p' || type === 'disj3p') {
+    const poles = type === 'disj1p' ? 1 : type === 'disj2p' ? 2 : 3;
+    const bodyColor = '#1a3a1a';
+    const handleColor = '#c0392b';
+    return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+      <rect x="1" y="1" width="${w-2}" height="${h-2}" rx="4" fill="${bodyColor}" stroke="rgba(0,200,100,0.5)" stroke-width="1.5"/>
+      <rect x="3" y="3" width="${w-6}" height="14" rx="2" fill="#102810"/>
+      <text x="${w/2}" y="13" text-anchor="middle" font-size="6.5" fill="rgba(0,210,100,0.9)" font-weight="bold" font-family="monospace">${poles}P</text>
+      <rect x="${w/2-7}" y="20" width="14" height="22" rx="3" fill="${handleColor}"/>
+      <rect x="${w/2-4}" y="22" width="8" height="10" rx="2" fill="#ff6666"/>
+      <text x="${w/2}" y="50" text-anchor="middle" font-size="7" fill="rgba(255,255,255,0.4)" font-family="monospace">ON</text>
+      <rect x="${w/2-5}" y="56" width="10" height="10" rx="1.5" fill="#555"/>
+      <rect x="${w/2-5}" y="68" width="10" height="10" rx="1.5" fill="#444"/>
+      <text x="${w/2}" y="85" text-anchor="middle" font-size="7" fill="rgba(255,255,255,0.7)" font-weight="bold" font-family="monospace">${comp.current}A</text>
+    </svg>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+    <rect x="1" y="1" width="${w-2}" height="${h-2}" rx="4" fill="#333" stroke="#666" stroke-width="1"/>
+    <text x="${w/2}" y="${h/2+4}" text-anchor="middle" font-size="8" fill="#aaa" font-family="monospace">${comp.label}</text>
+  </svg>`;
+}
+
+function buildCompLabel(comp) {
+  const txt = comp.circuit || comp.label;
+  return `<div class="comp-label" title="${txt}">${txt}</div>`;
+}
+
+/* ═══════════════════════════════════════════════
+   SELECT / DESELECT
+═══════════════════════════════════════════════ */
+function selectComp(compId, railId) {
+  // Deselect previous
+  document.querySelectorAll('.qdc-component.selected').forEach(e => e.classList.remove('selected'));
+
+  const compEl = document.getElementById(compId);
+  if (compEl) compEl.classList.add('selected');
+
+  STATE.selected = { compId, railId };
+
+  // Find comp data
+  const railObj = STATE.rails.find(r => r.id === railId);
+  const comp    = railObj?.components.find(c => c.id === compId);
+  if (!comp) return;
+
+  // Populate props panel
+  document.getElementById('props-empty').style.display = 'none';
+  document.getElementById('props-form').style.display  = 'flex';
+
+  const meta  = COMP_META[comp.type] || {};
+  const badge = document.getElementById('props-type-badge');
+  badge.innerHTML = `<span class="props-type-badge" style="background:${meta.color}22;border:1px solid ${meta.color}66;color:${meta.textColor || '#fff'}">
+    ${comp.label}
+  </span>`;
+
+  // Set current
+  const curSel = document.getElementById('p-current');
+  [...curSel.options].forEach(o => o.selected = (o.value === comp.current));
+
+  document.getElementById('p-circuit').value = comp.circuit || '';
+
+  // Phase options depend on tension
+  const phaseSel = document.getElementById('p-phase');
+  phaseSel.innerHTML = '';
+  const phaseCount = TENSION_META[STATE.tension].phases.length;
+  const phaseNames = ['Fase 1','Fase 2','Fase 3','Neutro'];
+  for (let i = 0; i < phaseCount; i++) {
+    const opt = document.createElement('option');
+    opt.value = 'F' + (i+1);
+    opt.textContent = phaseNames[i] || ('Fase ' + (i+1));
+    opt.selected = (comp.phase === opt.value);
+    phaseSel.appendChild(opt);
+  }
+
+  // Hide current selector for DPS/DR (they have fixed rated)
+  const isDR = comp.type === 'dr' || comp.type === 'dr4p' || comp.type === 'dps';
+  document.getElementById('p-circuit-group').style.display = 'flex';
+}
+
+function deselectAll() {
+  document.querySelectorAll('.qdc-component.selected').forEach(e => e.classList.remove('selected'));
+  STATE.selected = null;
+  document.getElementById('props-empty').style.display = 'flex';
+  document.getElementById('props-form').style.display  = 'none';
+}
+
+document.getElementById('canvas-area').addEventListener('click', e => {
+  if (!e.target.closest('.qdc-component') && !e.target.closest('.props-panel')) {
+    deselectAll();
+  }
+});
+
+/* ═══════════════════════════════════════════════
+   APPLY PROPS
+═══════════════════════════════════════════════ */
+function applyProps() {
+  if (!STATE.selected) return;
+  const { compId, railId } = STATE.selected;
+  const railObj = STATE.rails.find(r => r.id === railId);
+  const comp    = railObj?.components.find(c => c.id === compId);
+  if (!comp) return;
+
+  comp.current = document.getElementById('p-current').value;
+  comp.circuit = document.getElementById('p-circuit').value.trim();
+  comp.phase   = document.getElementById('p-phase').value;
+
+  // Re-render component
+  const el = document.getElementById(compId);
+  if (el) {
+    const w = comp.modules * 38 - 2;
+    el.innerHTML = buildCompSVG(comp, w) + buildCompLabel(comp) +
+      `<button class="comp-delete" onclick="deleteComp(event,'${comp.id}','${railId}')">✕</button>`;
+    el.classList.add('selected');
+  }
+  updateStatusBar();
+  showToast('Propriedades aplicadas!', 'success');
+}
+
+/* ═══════════════════════════════════════════════
+   DELETE
+═══════════════════════════════════════════════ */
+function deleteComp(e, compId, railId) {
+  e.stopPropagation();
+  const railObj = STATE.rails.find(r => r.id === railId);
+  if (!railObj) return;
+  railObj.components = railObj.components.filter(c => c.id !== compId);
+  const el = document.getElementById(compId);
+  if (el) el.remove();
+
+  const railEl = document.getElementById(railId);
+  if (railEl && !railObj.components.length) railEl.classList.remove('has-components');
+
+  deselectAll();
+  updateStatusBar();
+  showToast('Componente removido.', '');
+}
+
+function deleteSelected() {
+  if (!STATE.selected) return;
+  const { compId, railId } = STATE.selected;
+  deleteComp({ stopPropagation: () => {} }, compId, railId);
+}
+
+/* ═══════════════════════════════════════════════
+   STATUSBAR UPDATE
+═══════════════════════════════════════════════ */
+function updateStatusBar() {
+  let used = 0, comps = 0, circuits = 0;
+  STATE.rails.forEach(r => {
+    r.components.forEach(c => {
+      used   += c.modules;
+      comps  += 1;
+      if (c.circuit) circuits++;
+    });
+  });
+  document.getElementById('sb-used').textContent     = used;
+  document.getElementById('sb-comps').textContent    = comps;
+  document.getElementById('sb-circuits').textContent = circuits;
+}
+
+/* ═══════════════════════════════════════════════
+   SAVE / LOAD
+═══════════════════════════════════════════════ */
+function saveProject() {
+  const key  = 'qdc_' + Date.now();
+  const data = {
+    key,
+    name:       STATE.projectName,
+    client:     STATE.client,
+    tension:    STATE.tension,
+    modules:    STATE.modules,
+    railsCount: STATE.railsPerProject,
+    railMods:   STATE.railModules,
+    rails:      STATE.rails,
+    savedAt:    new Date().toLocaleString('pt-BR'),
+  };
+  // Overwrite same name
+  const all = getSavedProjects();
+  const existing = all.find(p => p.name === STATE.projectName);
+  const saveKey  = existing ? existing.key : key;
+  localStorage.setItem(saveKey, JSON.stringify(data));
+  refreshSavedList();
+  showToast('💾 Projeto "' + STATE.projectName + '" salvo!', 'success');
+}
+
+function getSavedProjects() {
+  const projects = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && k.startsWith('qdc_')) {
+      try { projects.push(JSON.parse(localStorage.getItem(k))); } catch(e){}
+    }
+  }
+  return projects.sort((a,b) => (b.savedAt||'').localeCompare(a.savedAt||''));
+}
+
+function loadProject(key) {
+  let data;
+  if (key) {
+    data = JSON.parse(localStorage.getItem(key));
+  } else {
+    const all = getSavedProjects();
+    if (!all.length) { showToast('Nenhum projeto salvo encontrado.', 'error'); return; }
+    data = all[0];
+  }
+  if (!data) return;
+
+  STATE.projectName     = data.name;
+  STATE.client          = data.client || '';
+  STATE.tension         = data.tension;
+  STATE.modules         = data.modules;
+  STATE.railsPerProject = data.railsCount;
+  STATE.railModules     = data.railMods;
+  STATE.rails           = [];
+  STATE.nextId          = 1;
+
+  document.getElementById('project-name-top').value        = data.name;
+  document.getElementById('tension-label-top').textContent = TENSION_META[data.tension]?.label || data.tension;
+
+  // Rebuild cabinet empty
+  const body = document.getElementById('cabinet-body');
+  body.innerHTML = '';
+  data.rails.forEach((r, i) => {
+    const railId = 'rail-' + STATE.nextId++;
+    STATE.rails.push({ id: railId, modules: r.modules, components: [] });
+    body.appendChild(createRailDOM(railId, i+1));
+    r.components.forEach(c => {
+      const comp = { ...c, id: 'comp-' + STATE.nextId++ };
+      STATE.rails[STATE.rails.length - 1].components.push(comp);
+      renderComponent(railId, comp);
+    });
+  });
+
+  document.getElementById('cabinet-label').textContent = 'QDC · ' + data.name;
+  document.getElementById('cabinet-size-info').textContent = data.modules + ' módulos · ' + data.railsCount + ' trilhos';
+  document.getElementById('sb-total').textContent = data.modules;
+  updateBusbars();
+  updateStatusBar();
+  document.getElementById('setup-modal').classList.add('hidden');
+  showToast('📂 Projeto "' + data.name + '" carregado!', 'success');
+}
+
+function refreshSavedList() {
+  const list = document.getElementById('saved-list');
+  const all  = getSavedProjects();
+  if (!all.length) {
+    list.innerHTML = '<div style="font-size:0.62rem;color:var(--gray);font-family:var(--mono-font);padding:6px 4px;text-align:center;">Nenhum projeto salvo</div>';
+    return;
+  }
+  list.innerHTML = all.slice(0,5).map(p => `
+    <div style="display:flex;align-items:center;gap:6px;padding:6px 4px;border-bottom:1px solid var(--border);cursor:pointer;"
+         onclick="loadProject('${p.key}')"
+         onmouseover="this.style.background='var(--cyan-glow)'"
+         onmouseout="this.style.background=''">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13,2 13,9 20,9"/></svg>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:0.72rem;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+        <div style="font-size:0.58rem;color:var(--gray);font-family:var(--mono-font);">${p.savedAt||''}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ═══════════════════════════════════════════════
+   EXPORT PDF
+═══════════════════════════════════════════════ */
+function exportPDF() {
+  // Build BOM
+  const bom = {};
+  STATE.rails.forEach(r => {
+    r.components.forEach(c => {
+      const key = c.type + '_' + c.current;
+      if (!bom[key]) bom[key] = { label: c.label, current: c.current, qty: 0, type: c.type };
+      bom[key].qty++;
+    });
+  });
+
+  const lines = Object.values(bom);
+  const date  = new Date().toLocaleDateString('pt-BR');
+  const tension = TENSION_META[STATE.tension]?.label || STATE.tension;
+
+  // Build a printable HTML window
+  const win = window.open('', '_blank', 'width=800,height:900');
+  win.document.write(`<!DOCTYPE html><html lang="pt-br"><head>
+    <meta charset="UTF-8">
+    <title>QDC – ${STATE.projectName}</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: 'Segoe UI', sans-serif; background: #fff; color: #111; padding: 40px; }
+      .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; border-bottom: 3px solid #003366; padding-bottom: 18px; }
+      .header-left h1 { font-size: 1.5rem; color: #003366; text-transform: uppercase; letter-spacing: 2px; }
+      .header-left p { font-size: 0.8rem; color: #666; margin-top: 4px; }
+      .header-right { text-align: right; font-size: 0.75rem; color: #666; }
+      .header-right .company { font-weight: 700; color: #003366; font-size: 0.9rem; }
+      .section-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #0056b3; border-bottom: 1px solid #dde; padding-bottom: 6px; margin-bottom: 14px; margin-top: 28px; }
+      table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+      th { background: #003366; color: white; padding: 10px 14px; text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; }
+      td { padding: 9px 14px; border-bottom: 1px solid #eef; }
+      tr:nth-child(even) td { background: #f7f9fc; }
+      .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; }
+      .footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid #dde; font-size: 0.7rem; color: #999; display: flex; justify-content: space-between; }
+      @media print { body { padding: 20px; } }
+    </style>
+  </head><body>
+    <div class="header">
+      <div class="header-left">
+        <h1>Quadro de Distribuição de Cargas</h1>
+        <p>${STATE.projectName}${STATE.client ? ' · Cliente: ' + STATE.client : ''}</p>
+      </div>
+      <div class="header-right">
+        <div class="company">PowerTech Industrial</div>
+        <div>Floriano – Piauí</div>
+        <div style="margin-top:6px;">Data: ${date}</div>
+        <div>Sistema: ${tension}</div>
+        <div>${STATE.modules} módulos · ${STATE.rails.length} trilhos</div>
+      </div>
+    </div>
+
+    <div class="section-title">Diagrama por Trilho</div>
+    ${STATE.rails.map((r, i) => `
+      <div style="margin-bottom:16px;">
+        <div style="font-size:0.72rem;font-weight:700;color:#003366;margin-bottom:6px;">TRILHO ${i+1}</div>
+        <table>
+          <tr><th>#</th><th>Tipo</th><th>Corrente</th><th>Circuito / Descrição</th><th>Fase</th><th>Módulos</th></tr>
+          ${r.components.length ? r.components.map((c, j) => `
+            <tr>
+              <td>${j+1}</td>
+              <td><strong>${c.label}</strong></td>
+              <td>${c.current ? c.current+'A' : '–'}</td>
+              <td>${c.circuit || '–'}</td>
+              <td>${c.phase || 'F1'}</td>
+              <td>${c.modules}M</td>
+            </tr>
+          `).join('') : `<tr><td colspan="6" style="color:#aaa;text-align:center;font-style:italic;">Trilho vazio</td></tr>`}
+        </table>
+      </div>
+    `).join('')}
+
+    <div class="section-title">Lista de Materiais (BOM)</div>
+    <table>
+      <tr><th>Componente</th><th>Corrente</th><th>Qtd.</th></tr>
+      ${lines.length ? lines.map(l => `
+        <tr>
+          <td><strong>${l.label}</strong></td>
+          <td>${l.current ? l.current+'A' : '–'}</td>
+          <td><span class="badge" style="background:#003366;color:white;">${l.qty}×</span></td>
+        </tr>
+      `).join('') : `<tr><td colspan="3" style="color:#aaa;text-align:center;">Nenhum componente adicionado</td></tr>`}
+    </table>
+
+    <div class="footer">
+      <span>PowerTech Industrial · powertechindustrial.com.br · (89) 98104-9318</span>
+      <span>Gerado em ${new Date().toLocaleString('pt-BR')}</span>
+    </div>
+  </body></html>`);
+  win.document.close();
+  setTimeout(() => win.print(), 600);
+}
+
+/* ═══════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════ */
+function showToast(msg, type) {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast' + (type ? ' ' + type : '');
+  toast.textContent = msg;
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 2800);
+}
+
+/* ═══════════════════════════════════════════════
+   PROJECT NAME SYNC
+═══════════════════════════════════════════════ */
+document.getElementById('project-name-top').addEventListener('input', function() {
+  STATE.projectName = this.value;
+  document.getElementById('cabinet-label').textContent = 'QDC · ' + this.value;
+});
+
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
+window.addEventListener('resize', updateBusbars);
+refreshSavedList();
+</script>
+</body>
+</html>
